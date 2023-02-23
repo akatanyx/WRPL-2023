@@ -14,28 +14,51 @@
             <h1 class="font-bold font-inter text-lg">Let's Eat Merchant</h1>
             <img src="../img/uiw_notification.svg" alt="">
         </div>
-    </div>  
+    </div> 
+    <div class="py-7"></div>
 
-    <!-- Status Pesanan -->
-    <div class="flex justify-between">
-
-        <!-- Belum bisa focus -->
-        <!-- Belum terintegerasi pop up (?) -->
-        <div class="mt-14 p-4 flex">
-            <a href="#" class="focus:decoration-red-700 focus:underline focus:underline-offset-8">
-                <p class="font-inter text-mobile px-4 ">In Progress</p>
-            </a>
-            <a href="#" class="focus:decoration-red-700 focus:underline focus:underline-offset-8">
-                <p class="font-inter text-mobile px-4 ">Completed</p>
-            </a>
-            <a href="#" class="focus:decoration-red-700 focus:underline focus:underline-offset-8">
-                <p class="font-inter text-mobile px-4 ">Canceled</p>
-            </a>
+    <section>
+        <!-- Status Pesanan -->
+        <div class="flex justify-between">
+            <!-- Belum bisa focus -->
+            <!-- Belum terintegerasi pop up (?) -->
+            <div class="mt-1 p-3 flex">
+                <a href="#" class="focus:decoration-red-700 focus:underline focus:underline-offset-8">
+                    <p class="font-inter text-mobile px-4 ">In Progress</p>
+                </a>
+                <a href="#" class="focus:decoration-red-700 focus:underline focus:underline-offset-8">
+                    <p class="font-inter text-mobile px-4 ">Completed</p>
+                </a>
+                <a href="#" class="focus:decoration-red-700 focus:underline focus:underline-offset-8">
+                    <p class="font-inter text-mobile px-4 ">Canceled</p>
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
+    
+    <section class=" border-4 m-6 border-red-500 rounded-lg ">
+        <!-- Nama Pemesan dan waktu pemesanan -->
+        <div class="flex items-center justify-between p-6">
+            <h1 class="font-inter font-bold text-sm ">Your name</h1>
+            <p class="font-inter text-xmobile">2 menit lalu ></p>
+        </div>
 
-    <section class=" border-4 m-6 border-red-700 rounded-lg ">
+        <!-- List Pesanan -->
+        <div class="flex flex-col px-7">
+            <div class="border-2 border-yellow-600 mb-4 p-3 px-6 rounded-lg font-inter text-sm">
+                <p>1<span class="px-7">Fried Oni</span></p>
+            </div>
 
+            <div class="border-2 border-yellow-600 mb-4 p-3 px-6 rounded-lg font-inter text-sm">
+                <p>1<span class="px-7">Fried Oni</span></p>
+            </div>
+
+            <div class="border-2 border-yellow-600 mb-4 p-3 px-6 rounded-lg font-inter text-sm">
+                <p>1<span class="px-7">Fried Oni</span></p>
+            </div>
+        </div>
+    </section>
+    <section class=" border-4 m-6 border-red-500 rounded-lg ">
         <!-- Nama Pemesan dan waktu pemesanan -->
         <div class="flex items-center justify-between p-6">
             <h1 class="font-inter font-bold text-sm ">Your name</h1>
@@ -58,28 +81,15 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- NavBar -->
-	<section id="bottom-navigation" class="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+    <div class="py-8"></div>
+    <section id="bottom-navigation" class="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
 		<div id="tabs" class="flex justify-between px-4">
-			<a href="/code/landing_seller.html" class="font-bold flex flex-col items-center">
+			<a href="/code/landing_seller.html" class="flex flex-col items-center">
 				<img src="../img/circlenavbar.png" alt="">
-				<span class="tab tab-home block text-xmobile font-inter">Let's Eat</span>
+				<span class="font-bold tab tab-home block text-xmobile font-inter">Let's Eat</span>
 			</a>
-			<a href="#" class="flex flex-col items-center">
+			<a href="/code/transaksi_sel.html" class="flex flex-col items-center">
 				<img src="../img/circlenavbar.png" alt="">
 				<span class="tab tab-home block text-xmobile font-inter">Transaksi</span>
 			</a>
@@ -97,5 +107,4 @@
 			</a>
 		</div>
 	</section>
-</body>
 </html>
