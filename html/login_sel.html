@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Seller Page</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Gambar -->
+    <div class="flex justify-center mt mt-10">
+        <img src="../img/logo_login_sel.svg" alt="">
+    </div>
+    <!-- Login -->
+    <div class="flex flex-col items-center">
+        <div class="mt-4">
+            <div class="flex justify-center">
+                <div class="max-w-full">
+                    <!-- Isi action dengan tujuan page apabila menekan submit -->
+                    <form action="/code/letseatm_sel.html" method="POST">
+                        <!-- Form -->
+                        <!-- Email -->
+                        <div class="flex justify-center">
+                            <div class="max-w-full">
+                                <label for="email" class="font-inter block text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input type="text" id="email" class="border-2 border-yellow-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="Username"
+                                name="email">
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="flex justify-center mt-2">
+                            <div class="max-w-full">
+                                <label for="password" class="font-inter block text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input type="password" id="password" class="border-2 border-yellow-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:placeholder-gray-400 dark:text-white" placeholder="Password"
+                                name="password">
+                                <!-- Forgot Password -->
+                                <div class="text-right">
+                                    <a href="#" class="text-mobile font-bold text-yellow-600">Forgot Password</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Button Login -->
+                        <div>
+                            <button type="submit" class="flex justify-center mt-5">
+                                <img src="../img/login_button_sel.svg" alt="">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Signup -->
+            <!-- Belum ada page signup untuk seller -->
+            <div class="flex justify-center mt-4">
+                <div class="max-w-full">
+                    <p class="text-center text-mobile font-inter">Don't have an account? <a href="./signup_sel.html" class="font-inter font-semibold uppercase text-mobile text-yellow-600">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
