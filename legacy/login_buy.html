@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Gambar -->
+    <div>
+        <img src="../img/Rectangle56Login.png">
+    </div>
+
+    <!-- Login -->
+    <div class="flex flex-col items-center">
+        <div class="mt-4">
+            <div class="flex justify-center">
+                <div class="max-w-full">
+                    <form action="/login" method="POST">
+                        <!-- Form -->
+                        <!-- Email -->
+                        <div class="flex justify-center">
+                            <div class="max-w-full">
+                                <label for="email" class="font-inter block text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username"
+                                name="email">
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="flex justify-center mt-2">
+                            <div class="max-w-full">
+                                <label for="password" class="font-inter block text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password"
+                                name="password">
+                                <!-- Forgot Password -->
+                                <div class="text-right">
+                                    <a href="" class="text-mobile text-right">Forgot Password</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Button Login -->
+                        <div class="flex justify-center">
+                            <div class="max-w-full mt-4">
+                                <a href="">
+                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Login</button>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Signup -->
+            <div class="flex justify-center">
+                <div class="max-w-full">
+                    <p class="text-center text-sm font-inter">Don't have an account? <a href="./signup.html" class="font-inter font-semibold">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
