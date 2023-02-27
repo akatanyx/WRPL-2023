@@ -48,15 +48,15 @@ export default function Home() {
               {/* <!-- List Pesanan --> */}
               <div className="flex flex-col px-7">
                   <div className="border-2 border-yellow-600 mb-4 p-3 px-6 rounded-lg font-inter text-sm">
-                      <p>Fried Oni</p>
+                  <p className="font-inter text-xmobile">2 menit lalu</p>
                   </div>
 
                   <div className="border-2 border-yellow-600 mb-4 p-3 px-6 rounded-lg font-inter text-sm">
-                      <p>Fried Oni </p>
+                  <p className="font-inter text-xmobile">2 menit lalu</p>
                   </div>
 
                   <div className="border-2 border-yellow-600 mb-4 p-3 px-6 rounded-lg font-inter text-sm">
-                      <p>Fried Oni </p>
+                  <p className="font-inter text-xmobile">2 menit lalu</p>
                   </div>
               </div>
           </section>
