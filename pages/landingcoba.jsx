@@ -1,5 +1,6 @@
 import Header from 'components/Header'
 import Navletseat from 'components/Navletseat'
+import Navbar from 'components/Navbar'
 
 export default function Home () {
     return (
@@ -15,6 +16,9 @@ export default function Home () {
             {/* Content */}
             <div></div>
             {/* Navbar */}
+            <div>
+                <Navbar />
+            </div>
         </div>
     )
 }
