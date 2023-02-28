@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function ContentLetsEat() {
     return (
         <div className="relative sm:w-1/2 sm:mx-auto m-4 p-4 w-226 h-30 rounded-md border-4 border-[#D84A05] flex flex-col">
@@ -9,9 +11,9 @@ export default function ContentLetsEat() {
                     <div>
                         2 menit lalu
                     </div>
-                    <div>
+                    <Link href="a">
                         <img src="/detail.svg"></img>
-                    </div>
+                    </Link>
                 </div>
             </div>
             <div className="flex flex-col space-y-2">
@@ -36,7 +38,7 @@ export default function ContentLetsEat() {
                         <img src="/icon_pesanan.svg"></img>
                     </div>
                     <div className="m-2">
-                        Fried Onion
+                        Pedesin
                     </div>
                 </div>
             </div>
