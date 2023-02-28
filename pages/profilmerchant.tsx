@@ -1,14 +1,14 @@
 import { NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
-import Head from "next/head";
 import Router from "next/router";
 import { useEffect } from "react";
 import Header from "components/Header";
 import Navletseat from "components/Navletseat";
-import ContentLetsEat from "components/ContentLetsEat";
 import Navbar from "components/Navbar";
+import Pendapatan from "@/components/Pendapatan";
+import ProfilM from "@/components/ProfilM";
 
-const Protected: NextPage = (): JSX.Element => {
+const TambahMenu: NextPage = (): JSX.Element => {
   const { status, data } = useSession();
 
   useEffect(() => {
@@ -22,17 +22,9 @@ const Protected: NextPage = (): JSX.Element => {
         <div>
           <Header />
         </div>
-        {/* Header per bagian */}
-        <div>
-          <Navletseat />
-        </div>
         {/* Content */}
         <div>
-          <ContentLetsEat />
-          <ContentLetsEat />
-          <ContentLetsEat />
-          <ContentLetsEat />
-          <ContentLetsEat />
+          <ProfilM />
         </div>
         {/* Navbar */}
         <div>
@@ -44,4 +36,4 @@ const Protected: NextPage = (): JSX.Element => {
   return <div className="text-bold text-3xl">loading</div>;
 };
 
-export default Protected;
+export default TambahMenu;

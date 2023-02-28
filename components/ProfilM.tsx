@@ -1,11 +1,4 @@
-import { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import Router from "next/router";
-import { useEffect } from "react";
-
-const Protected: NextPage = (): JSX.Element => {
-  const session = useSession();
-  console.log(session);
+export default function ProfilM() {
   return (
     <div className="flex h-screen">
       <div className="w-1/4" />
@@ -19,6 +12,4 @@ const Protected: NextPage = (): JSX.Element => {
       </div>
     </div>
   );
-};
-
-export default Protected;
+}
