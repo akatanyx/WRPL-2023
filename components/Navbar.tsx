@@ -1,24 +1,49 @@
+import Link from 'next/link'
+
 export default function Navbar() {
     return (
-        <div className="p-2 w-226 h-30 rounded-md border-4 border-[#D84A05] flex flex-col">
-            <div className="flex justify-between">
-                <div >
-                    Kamada Tanjiro
-                </div>
-                <div>
-                    2 menit lalu
-                </div>
-                <div>
-
-                </div>
-            </div>
-            <div className="flex flex-row rounded-md border-2 border-[#E89005] ">
-                <div>
-                    1
-                </div>
-                <div>
-                    Fried Onion
-                </div>
+        <div className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+            <div className=" flex justify-around">
+                <Link href="letseat" className="p-2 flex flex-col items-center justify-center">
+                    <div>
+                    <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo.svg"></img>
+                    </div>
+                    <div>
+                        <p className="text-[9px]">Let's Eat</p>
+                    </div>
+                </Link>
+                <Link href="transaksi_sel"className="p-2 flex flex-col items-center justify-center">
+                    <div>
+                    <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo.svg"></img>
+                    </div>
+                    <div>
+                        <p className="text-[9px]">Transakri</p>
+                    </div>                    
+                </Link>
+                <Link href="a" className="p-2 flex flex-col items-center justify-center">
+                    <div>
+                    <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo.svg"></img>
+                    </div>
+                    <div>
+                        <p className="text-[9px]">Let's Eat</p>
+                    </div>
+                </Link>
+                <Link href="a" className="p-2 flex flex-col items-center justify-center">
+                    <div>
+                    <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo.svg"></img>
+                    </div>
+                    <div>
+                        <p className="text-[9px]">Let's Eat</p>
+                    </div>
+                </Link>
+                <Link href="a" className="p-2 flex flex-col items-center justify-center">
+                    <div>
+                    <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo.svg"></img>
+                    </div>
+                    <div>
+                        <p className="text-[9px]">Let's Eat</p>
+                    </div>
+                </Link>                                
             </div>
         </div>
     )

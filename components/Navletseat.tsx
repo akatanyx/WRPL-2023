@@ -1,18 +1,20 @@
+import Link from 'next/link'
+
 export default function Navletseat() {
     return (
-        <div className="sticky top-0 p-2 text-center">
-            <div className="flex justify-start space-x-4 text-[11px]">
+        <div className="bg-white block fixed inset-x-0 top-20 text-center">
+            <div className="flex justify-start space-x-4 text-[14px]">
                 {/* In progress */}
                 <div>
-                    <p>In Progress</p>
+                    <Link href="landingcoba">In Progress</Link>
                 </div>
                 {/* Completed */}
                 <div>
-                    <p>Completed</p>
+                    <Link href="completed">Completed</Link>
                 </div>
                 {/* Canceled */}
                 <div>
-                    <p>Canceled</p>
+                    <Link href="completed">Canceled</Link>
                 </div>
             </div>
         </div>

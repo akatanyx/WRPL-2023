@@ -1,6 +1,6 @@
 export default function Header(){
     return (
-        <header className="sticky top-0 p-2 text-center">
+        <header className="bg-white block fixed inset-x-0 z-10text-center shadow-lg">
             <div className="flex justify-between content-center">
                 <div className="font-bold text-[17px] ml-2 p-2">
                     Let's Eat Merchant
