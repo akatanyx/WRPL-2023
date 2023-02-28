@@ -2,7 +2,8 @@ import Link from 'next/link'
 
 export default function Navbar() {
     return (
-        <div className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+        <div>
+        <div className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow-lg">
             <div className=" flex justify-around">
                 <Link href="letseat" className="p-2 flex flex-col items-center justify-center">
                     <div>
@@ -45,6 +46,8 @@ export default function Navbar() {
                     </div>
                 </Link>                                
             </div>
+        </div>
+        <div className="py-7"></div>
         </div>
     )
 }

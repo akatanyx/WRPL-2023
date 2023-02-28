@@ -1,5 +1,6 @@
 export default function Header(){
     return (
+        <div>
         <div className="bg-white h-[100px] block fixed inset-x-0 top-0 z-10 text-center">
             <div className="bg-white shadow-lg pb-2">
                 <div className="flex justify-between content-center">
@@ -11,6 +12,8 @@ export default function Header(){
                     </div>
                 </div>
             </div>
+        </div>
+        <div className="py-6"></div>
         </div>
     )
 }
