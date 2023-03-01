@@ -16,7 +16,7 @@ export default function signup() {
           <div className="max-w-full ">
             {/* <!-- Isi action dengan tujuan page apabila menekan submit --> */}
             <form
-              action="/code/letseatm_sel.html"
+              action="/"
               method="POST"
               className="space-y-3"
             >
