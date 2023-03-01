@@ -24,7 +24,7 @@ export default function signup() {
               {/* <!-- Nama --> */}
               <div className="flex justify-center">
                 <div className="max-w-full">
-                  <p className="text-left font-bold text-sm text-[15px]">
+                  <p className="text-left font-bold text-[15px]">
                     Nama
                   </p>
                   <input
@@ -39,7 +39,7 @@ export default function signup() {
               {/* <!-- Email  --> */}
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
-                  <p className="text-left font-bold text-sm text-[15px]">
+                  <p className="text-left font-bold  text-[15px]">
                     Email
                   </p>
                   <input
@@ -54,7 +54,7 @@ export default function signup() {
               {/* <!-- Username  --> */}
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
-                  <p className="text-left font-bold text-sm text-[15px]">
+                  <p className="text-left font-bold  text-[15px]">
                     Username
                   </p>
                   <input
@@ -70,7 +70,7 @@ export default function signup() {
               {/* <!-- Nomor Telepon  --> */}
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
-                  <p className="text-left font-bold text-sm text-[15px]">
+                  <p className="text-left font-bold  text-[15px]">
                     Nomor Telepon
                   </p>
                   <input
@@ -86,7 +86,7 @@ export default function signup() {
               {/* <!-- Password --> */}
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
-                  <p className="text-left font-bold text-sm text-[15px]">
+                  <p className="text-left font-bold  text-[15px]">
                     Password
                   </p>
                   <input
@@ -101,7 +101,7 @@ export default function signup() {
               {/* <!-- Re-enter Password --> */}
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
-                  <p className="text-left font-bold text-sm text-[15px]">
+                  <p className="text-left font-bold  text-[15px]">
                     Re-enter Password
                   </p>
                   <input
