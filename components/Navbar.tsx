@@ -10,47 +10,64 @@ export default function Navbar() {
             href="/"
             className="p-2 flex flex-col items-center justify-center"
           >
-            <div>
+            <div className="grayscale hover:grayscale-0 flex flex-col items-center justify-center">
+              <div>
               <img
-                className="h-[37.5px] w-[37.5px] rounded-lg"
-                src="/logo.svg"
+                  className="h-[37.5px] w-[37.5px] rounded-lg"
+                  src="/logo.svg"
               ></img>
-            </div>
-            <div>
-              <p className="text-[9px]">Let's Eat</p>
+              </div>
+              <div>
+                <p className="text-[9px] text-[#D84A05]">Logo</p>
+              </div>
             </div>
           </Link>
           <Link
             href="transaksi_sel"
-            className="p-2 flex flex-col items-center justify-center"
+            className="p-2"
           >
-            <div>
-              <div className="h-[37.5px] w-[37.5px] rounded-full bg-gray-500 text-white  hover:bg-[#E89005]" />
-            </div>
-            <div>
-              <p className="text-[9px]">Transaksi</p>
+            <div className="grayscale hover:grayscale-0 flex flex-col items-center justify-center">
+              <div>
+              <img
+                  className="h-[37.5px] w-[37.5px] rounded-lg"
+                  src="/icon_transaksi.svg"
+              ></img>
+              </div>
+              <div>
+                <p className="text-[9px] text-[#D84A05]">Transaksi</p>
+              </div>
             </div>
           </Link>
           <Link
             href="/tambahmenu"
-            className="p-2 flex flex-col items-center justify-center"
+            className="p-2"
           >
-            <div>
-              <div className="h-[37.5px] w-[37.5px] rounded-full bg-gray-500 text-white  hover:bg-[#E89005]" />
-            </div>
-            <div>
-              <p className="text-[9px]">Menu</p>
+            <div className="grayscale hover:grayscale-0 flex flex-col items-center justify-center">
+              <div>
+              <img
+                  className="h-[37.5px] w-[37.5px] rounded-lg"
+                  src="/icon_menu.svg"
+              ></img>
+              </div>
+              <div>
+                <p className="text-[9px] text-[#D84A05]">Menu</p>
+              </div>
             </div>
           </Link>
           <Link
             href="profilmerchant"
-            className="p-2 flex flex-col items-center justify-center"
+            className="p-2"
           >
-            <div>
-              <div className="h-[37.5px] w-[37.5px] rounded-full bg-gray-500 text-white  hover:bg-[#E89005]" />
-            </div>
-            <div>
-              <p className="text-[9px]">Profil</p>
+            <div className="grayscale hover:grayscale-0 flex flex-col items-center justify-center">
+              <div>
+              <img
+                  className="h-[37.5px] w-[37.5px] rounded-lg"
+                  src="/icon_profil.svg"
+              ></img>
+              </div>
+              <div>
+                <p className="text-[9px] text-[#D84A05]">Profil</p>
+              </div>
             </div>
           </Link>
           <div
