@@ -1,0 +1,78 @@
+section {
+    position: absolute;
+    width: 100%;
+    height:170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 170px;
+    padding-top: 100px;
+    background: #E89005;
+    opacity: 50%;
+}
+
+.curve {
+    position: absolute;
+    height: 100px;
+    width: 150%;
+    bottom: 0;
+    text-align: center;
+}
+
+.curve::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    transform: translate(85%, 60%);
+    background-color:#FFFFFF;
+}
+
+.curve::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    background-color:#E89005;
+    transform: translate(-4%, 40%);
+    z-index: -1;
+}
+
+.curveflip{
+    position: absolute;
+    height: 100px;
+    width: 150%;
+    bottom: 0;
+    text-align: center;
+}
+
+.curveflip::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -50%;
+    border-radius: 50% 100% 0% 0%;
+    width: 55%;
+    height: 100%;
+    transform: translate(87%, 60%);
+    background-color:#FFFFFF;
+}
+
+.curveflip::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 50% 100%;
+    left: 50%;
+    width: 55%;
+    height: 100%;
+    background-color:#E89005;
+    transform: translate(-6%, 40%);
+    z-index: -1;
+}
+
+
