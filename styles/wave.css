@@ -6,9 +6,11 @@ section {
     flex-direction: column;
     align-items: center;
     min-height: 170px;
-    padding-top: 100px;
+    padding-top: 0px;
     background: #E89005;
-    opacity: 50%;
+    opacity: 0.5;
+    z-index: -10;
+    clip-path: inset(1000% 100%);
 }
 
 .curve {
@@ -28,6 +30,7 @@ section {
     height: 100%;
     transform: translate(85%, 60%);
     background-color:#FFFFFF;
+
 }
 
 .curve::after {
@@ -73,6 +76,73 @@ section {
     background-color:#E89005;
     transform: translate(-6%, 40%);
     z-index: -1;
+}
+
+.curvebawah{
+    position: absolute;
+    height: 150%;
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+}
+
+.curvebawah::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 0% 0% 100% 100%;
+    width: 100%;
+    height: 100%;
+    top: -60px;
+    left: -5%;
+    transform: translate(0%, 0%);
+    background-color:#FFFFFF;
+}
+
+.curvebawah::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 225% 100% 100% 100%;
+    width: 100%;
+    height: 100%;
+    top: -43px;
+    left: 92%;
+    transform: translate(0%, 0%);
+    background-color:#E89005;
+}
+
+.curvebawah2{
+    position: absolute;
+    height: 150%;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+
+.curvebawah2::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 100% 100% 100% 100%;
+    width: 100%;
+    height: 90%;
+    top: -10px;
+    left: -20%;
+    transform: translate(-10%, 10%);
+    background-color:#E89005;
+}
+.curvebawah2::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 0% 0% 50% 100%;
+    width: 100%;
+    height: 90%;
+    top: -100px;
+    left: 50%;
+    transform: translate(5%, 10%);
+    background-color:#FFFFFF;
 }
 
 
