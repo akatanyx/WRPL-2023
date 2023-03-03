@@ -1,0 +1,10 @@
+use('lesteat');
+
+db.createCollection('users');
+
+db.users.insert(id, nama, email, username, no_telp, pw);
+
+db.createCollection('users_login');
+
+db.users_login.insert(email, pw);
+

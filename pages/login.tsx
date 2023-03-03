@@ -20,6 +20,7 @@ const SignIn: NextPage = (props): JSX.Element => {
     console.log(res);
     Router.replace("/");
   };
+
   return (
     <div className="flex flex-col item-center justify-center min-h-screen py-2">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
@@ -54,7 +55,7 @@ const SignIn: NextPage = (props): JSX.Element => {
                   setUserInfo({ ...userInfo, password: target.value })
                 }
                 type="password"
-                placeholder="********"
+                placeholder="Password"
                 className="p-1 bg-white w-226 h-30 rounded-md border-2 border-[#E89005] flex"
               ></input>
               <p className="text-right text-[#D84A05] font-bold text-xs ">
