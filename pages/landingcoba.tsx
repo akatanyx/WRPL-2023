@@ -1,11 +1,9 @@
-import Header from 'components/Header'
-import Navletseat from 'components/Navletseat'
-import ContentLetsEat from 'components/ContentLetsEat'
-import Navbar from 'components/Navbar'
+import Signup from 'components/signup/Signup'
 
 export default function Home () {
     return (
         <div>
+            <Signup />
         </div>
     )
 }
