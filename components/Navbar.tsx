@@ -55,7 +55,7 @@ export default function Navbar() {
             </div>
           </Link>
           <Link
-            href="profilmerchant"
+            href="profil_sel"
             className="p-2"
           >
             <div className="grayscale hover:grayscale-0 flex flex-col items-center justify-center">

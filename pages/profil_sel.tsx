@@ -6,15 +6,19 @@ export default function profil_sel (){
     return (
         
         <div>
+            <div>
+                <img 
+                className="absolute w-full -z-10"
+                src="wave_atas1.svg"
+                ></img>
+                <img 
+                className="absolute w-full -z-10"
+                src="wave_atas2.svg"
+                ></img>
+            </div>
             <Head>
                 <title>Profil Seller Page</title>
-            </Head>
-            <section>
-                    <div className="absolute curve"></div>
-            </section>
-            <section>
-                    <div className="absolute curveflip"></div>
-            </section>            
+            </Head>           
             <div className='flex flex-col items-center font-inter'>
                 {/* Aku kasih bg supaya kelihatan, belum ada wave, kalau text putih takut
                 gak keliatan */}
@@ -73,12 +77,16 @@ export default function profil_sel (){
                     <h1 className='font-bold text-base text-white' >Edit Profile</h1>
                 </button>
             </div>
-            <section>
-                <div className="curvebawah"></div>
-            </section>
-            <section>
-                <div className="curvebawah2"></div>
-            </section>
+            <footer >
+            <img 
+                className="absolute w-full -z-10 "
+                src="wave_bawah1.svg"
+                ></img>
+                <img 
+                className="absolute w-full -z-10"
+                src="wave_bawah2.svg"
+                ></img>
+            </footer>
         </div>
     )
 }
