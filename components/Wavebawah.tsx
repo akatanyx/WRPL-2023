@@ -1,4 +1,4 @@
-export default function Wave_bg () {
+export default function Wavebawah () {
     return (
         <footer >
         <img 
