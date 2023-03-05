@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Profil_input_sel from 'components/profil_input_sel'
+import Link from 'next/link'
 
 export default function profil_sel (){
     return (
@@ -20,15 +21,17 @@ export default function profil_sel (){
                 <title>Profil Seller Page</title>
             </Head>           
             <div className='flex flex-col items-center font-inter'>
-                {/* Aku kasih bg supaya kelihatan, belum ada wave, kalau text putih takut
-                gak keliatan */}
+                {/* Header */}
                 <div className='flex items-center'>
-                    <div className='text-3xl p-4 font-bold  text-white shadow-md shadow-slate-300'>
+                    <div className='text-3xl p-4 font-bold text-white'>
                         Profil
                     </div>
                     {/* Aku belum bisa bikin dia ke kiri gitu */}
-                    <button className='absolute bg-white shadow-md shadow-slate-300 rounded-lg'>
-                        <img src="/icon_logout.svg" alt="" />
+                    <button className='absolute translate-x-48 md:right-1 md:-translate-x-20 
+                        bg-white rounded-lg'>
+                            <Link href='login'>
+                                <img src="/icon_logout.svg" alt="" />
+                            </Link>
                     </button>
                 </div>
                 
