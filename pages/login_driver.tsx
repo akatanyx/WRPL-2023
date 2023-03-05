@@ -1,9 +1,10 @@
 import Head from "next/head";
+import Wavebawah from '@/components/Wavebawah'
 
 export default function LoginDriver() {
     return (
 
-        <>
+        <>  
 
             <Head>
                 <title>Let's Eat</title>
@@ -62,12 +63,9 @@ export default function LoginDriver() {
                         SIGN UP
                     </a>
                     </h2>
-                </div>
-
-                {/* Kurang wave */}
-                {/* Insert Wave here */}
+                </div> 
             </div>
-            
+            <Wavebawah />
         </>
     )
 }
