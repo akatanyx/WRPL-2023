@@ -1,4 +1,4 @@
-section {
+.wave_atas {
     position: absolute;
     width: 100%;
     height:170px;
@@ -13,7 +13,7 @@ section {
     clip-path: inset(1000% 100%);
 }
 
-.curve {
+.wave_atas.curve {
     position: absolute;
     height: 100px;
     width: 150%;
@@ -28,6 +28,7 @@ section {
     border-radius: 100% 50%;
     width: 55%;
     height: 100%;
+    left : 0px;
     transform: translate(85%, 60%);
     background-color:#FFFFFF;
 
@@ -40,12 +41,13 @@ section {
     border-radius: 100% 50%;
     width: 55%;
     height: 100%;
+    left : 0px;
     background-color:#E89005;
     transform: translate(-4%, 40%);
     z-index: -1;
 }
 
-.curveflip{
+.wave_atas.curveflip{
     position: absolute;
     height: 100px;
     width: 150%;
@@ -78,15 +80,32 @@ section {
     z-index: -1;
 }
 
-.curvebawah{
-    position: absolute;
-    height: 150%;
+.wave_bawah{
+    position: relative;
     width: 100%;
-    bottom: 0px;
-    text-align: center;
+    height:170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 170px;
+    padding-top: 0px;
+    background: #E89005;
+    opacity: 0.5;
+    z-index: -10;
+    clip-path: inset(1000% 100%);
 }
 
-.curvebawah::before {
+.wave_bawah.curvebawah {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150%;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .curvebawah::before {
     content: '';
     display: block;
     position: absolute;
@@ -97,9 +116,9 @@ section {
     left: -5%;
     transform: translate(0%, 0%);
     background-color:#FFFFFF;
-}
-
-.curvebawah::after {
+  }
+  
+  .curvebawah::after {
     content: '';
     display: block;
     position: absolute;
@@ -110,17 +129,20 @@ section {
     left: 92%;
     transform: translate(0%, 0%);
     background-color:#E89005;
-}
-
-.curvebawah2{
+  }
+  
+  .wave_bawah.curvebawah2 {
     position: absolute;
     height: 150%;
     width: 100%;
     bottom: 0;
+    left: 0;
+    right: 0;
+    transform: scaleX(-1);
     text-align: center;
-}
-
-.curvebawah2::before {
+  }
+  
+  .curvebawah2::before {
     content: '';
     display: block;
     position: absolute;
@@ -131,8 +153,9 @@ section {
     left: -20%;
     transform: translate(-10%, 10%);
     background-color:#E89005;
-}
-.curvebawah2::after {
+  }
+  
+  .curvebawah2::after {
     content: '';
     display: block;
     position: absolute;
@@ -143,6 +166,6 @@ section {
     left: 50%;
     transform: translate(5%, 10%);
     background-color:#FFFFFF;
-}
+  }
 
 
