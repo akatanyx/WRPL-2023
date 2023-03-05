@@ -4,6 +4,7 @@ import Profil_input_sel from 'components/profil_input_sel'
 import Link from 'next/link'
 import Waveatas from '@/components/Waveatas'
 import Wavebawah from '@/components/Wavebawah'
+import Navbar_driver from '@/components/Navbar_driver'
 
 export default function profil_driver (){
     return (
@@ -14,7 +15,7 @@ export default function profil_driver (){
             <Waveatas />
             
             <Head>
-                <title>Profil Seller Page</title>
+                <title>Profil Driver</title>
             </Head>    
 
             <div className='flex flex-col items-center font-inter'>
@@ -39,21 +40,13 @@ export default function profil_driver (){
 
                 {/* Isi Profil*/}
                 <div className='flex flex-col justify-center gap-4 p-4 z-10'>
-                    {/* Nama Toko */}
-                    <div className='flex items-center gap-2'>
-                        <div className='flex items-center justify-center bg-white shadow-md shadow-slate-300 rounded-lg w-10 h-10'>
-                            <img src="/icon_toko.svg" alt="" className='w-8' />    
-                        </div>
-                        
-                        <Profil_input_sel> Nama Toko </Profil_input_sel>
-                    </div>
 
                     {/* Nama seller */}
                     <div className='flex items-center just gap-2'>
                         <div className='flex items-center justify-center bg-white shadow-md shadow-slate-300 rounded-lg w-10 h-10'>
                             <img src="/icon_profil_profile.svg" alt="" className='w-8' />
                         </div>
-                        <Profil_input_sel> Nama Seller </Profil_input_sel>
+                        <Profil_input_sel> Nama Driver </Profil_input_sel>
                     </div>
 
                     {/* Nomor Telepon */}
@@ -61,7 +54,7 @@ export default function profil_driver (){
                         <div className='flex items-center justify-center bg-white shadow-md shadow-slate-300 rounded-lg w-10 h-10'>
                             <img src="/icon_telepon.svg" alt="" className='w-8' />
                         </div>
-                        <Profil_input_sel> Nomor Telepon </Profil_input_sel>
+                        <Profil_input_sel> 087842367075 </Profil_input_sel>
                     </div>
 
                     {/* Email */}
@@ -69,7 +62,15 @@ export default function profil_driver (){
                         <div className='flex items-center justify-center bg-white shadow-md shadow-slate-300 rounded-lg w-10 h-10'>
                             <img src="/icon_email.svg" alt="" className='w-8' />
                         </div>
-                        <Profil_input_sel> Email </Profil_input_sel>
+                        <Profil_input_sel> kenkanerki123@gmail.com </Profil_input_sel>
+                    </div>
+
+                    {/* Jenis Motor */}
+                    <div className='flex items-center gap-2'>
+                        <div className='flex items-center justify-center bg-white shadow-md shadow-slate-300 rounded-lg w-10 h-10'>
+                            <img src="/icon_sepeda.svg" alt="" className='w-8' />
+                        </div>
+                        <Profil_input_sel> Sepeda Motor / AB 1234 KC </Profil_input_sel>
                     </div>
                 </div>
 
@@ -79,6 +80,8 @@ export default function profil_driver (){
             </div>
 
             <Wavebawah />
+            <Navbar_driver />
+
         </div>
     )
 }
