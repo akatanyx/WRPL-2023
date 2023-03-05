@@ -1,17 +1,27 @@
 import Link from 'next/link'
+import Modal from 'components/ModalCompletedSeller'
+import { useState } from 'react';
 
 export default function ContentLetsEat() {
+
+    const [showMyModal, setShowMyModal] = useState(false);
+
+    const closeModal = () => setShowMyModal(false);
+
     return (
-        <div className="relative sm:w-1/2 sm:mx-auto m-4 p-4 w-226 h-30 rounded-md border-4 border-[#D84A05] flex flex-col">
+
+        <>
+        {showMyModal && <Modal closeModal={closeModal} />}
+        <div className="sm:w-1/2 sm:mx-auto m-4 p-4 w-226 h-30 rounded-md border-4 border-[#D84A05] flex flex-col">
             <div className="flex justify-between space-y-2">
                 <div >
                     Kamada Tanjiro
                 </div>
-                <div className="flex flex-row items-center justify-center space-x-2 text-[11px]">
+                <div onClick = {() => setShowMyModal(true)} className="flex flex-row items-center justify-center space-x-2 text-[11px]">
                     <div>
                         2 menit lalu
                     </div>
-                    <Link href="a">
+                    <Link href="">
                         <img src="/detail.svg"></img>
                     </Link>
                 </div>
@@ -43,5 +53,6 @@ export default function ContentLetsEat() {
                 </div>
             </div>
         </div>
+    </>
     )
 }
