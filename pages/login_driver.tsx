@@ -59,7 +59,7 @@ export default function LoginDriver() {
                 <div className="flex flex-row justify-center py-2">
                     <h2 className="text-sm">
                     Doesn't have an account?{" "}
-                    <a href="signup_driver" className="text-bold text-sm font-bold">
+                    <a href="register_driver" className="text-bold text-sm font-bold">
                         SIGN UP
                     </a>
                     </h2>
