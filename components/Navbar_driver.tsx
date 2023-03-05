@@ -6,7 +6,7 @@ const Navbar_driver = () => {
     const router = useRouter();
     return (
         <nav className="block fixed inset-x-0 bottom-0 z-10 bg-white">
-            <div className="flex justify-around  shadow-lg transform -rotate-1 origin-top">
+            <div className="flex justify-around  shadow-lg transform  origin-top">
                 <ul >
                     <Link
                         href="/landing_driver"
