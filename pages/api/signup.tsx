@@ -1,5 +1,23 @@
 import Head from "next/head";
+import { addUser } from "../db";
 
+export default async function handler(req : any, res : any) {
+  if (req.method === 'POST') {
+    const { nama, email, username, no, password, repassword } = req.body;
+
+    // Validate user input
+
+    const user = { nama, email, username, no, password, repassword };
+
+    const result = await addUser(user);
+
+    res.status(201).json({ message: 'User added!', result });
+  } else {
+    res.status(405).json({ message: 'Method not allowed' });
+  }
+}
+
+/*
 export default function signup() {
   return (
     // <!-- Gambar -->
@@ -10,18 +28,18 @@ export default function signup() {
       <div className="flex justify-center mt mt-10">
         <img src="/logo.svg" alt="" />
       </div>
-      {/* <!-- Login --> */}
+      {/* <!-- Login --> }
       <div className="flex flex-col items-center justify-center">
         <div className="mt-4">
           <div className="max-w-full ">
-            {/* <!-- Isi action dengan tujuan page apabila menekan submit --> */}
+            {/* <!-- Isi action dengan tujuan page apabila menekan submit --> }
             <form
               action="/"
               method="POST"
               className="space-y-3"
             >
-              {/* <!-- Form --> */}
-              {/* <!-- Nama --> */}
+              {/* <!-- Form --> }
+              {/* <!-- Nama --> }
               <div className="flex justify-center">
                 <div className="max-w-full">
                   <p className="text-left font-bold text-[15px]">
@@ -36,7 +54,7 @@ export default function signup() {
                   />
                 </div>
               </div>
-              {/* <!-- Email  --> */}
+              {/* <!-- Email  --> }
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
                   <p className="text-left font-bold  text-[15px]">
@@ -51,7 +69,7 @@ export default function signup() {
                   />
                 </div>
               </div>
-              {/* <!-- Username  --> */}
+              {/* <!-- Username  --> }
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
                   <p className="text-left font-bold  text-[15px]">
@@ -67,7 +85,7 @@ export default function signup() {
                 </div>
               </div>
 
-              {/* <!-- Nomor Telepon  --> */}
+              {/* <!-- Nomor Telepon  -->}
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
                   <p className="text-left font-bold  text-[15px]">
@@ -83,7 +101,7 @@ export default function signup() {
                 </div>
               </div>
 
-              {/* <!-- Password --> */}
+              {/* <!-- Password --> }
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
                   <p className="text-left font-bold  text-[15px]">
@@ -98,7 +116,7 @@ export default function signup() {
                   />
                 </div>
               </div>
-              {/* <!-- Re-enter Password --> */}
+              {/* <!-- Re-enter Password --> }
               <div className="flex justify-center mt-2">
                 <div className="max-w-full">
                   <p className="text-left font-bold  text-[15px]">
@@ -113,7 +131,7 @@ export default function signup() {
                   />
                 </div>
               </div>
-              {/* <!-- Button Signup --> */}
+              {/* <!-- Button Signup --> }
               <div className="flex justify-center py-4">
                 <button className="bg-[#EC7505] text-white text-[20px] px-4 py-2 rounded font-bold">
                   SIGNUP
@@ -122,7 +140,7 @@ export default function signup() {
             </form>
           </div>
         </div>
-        {/* <!-- Signup --> */}
+        {/* <!-- Signup --> }
         <div className="flex justify-center mt-4">
           <div className="max-w-full">
             <p className="text-center text-sm font-inter">
@@ -138,3 +156,5 @@ export default function signup() {
     </div>
   );
 }
+*/
+
