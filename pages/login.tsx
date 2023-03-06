@@ -78,7 +78,7 @@ const SignIn: NextPage = (props): JSX.Element => {
           <div className="flex flex-row justify-center py-2">
             <p className="text-[12px]">
               Doesn't have an account?{" "}
-              <a href="signup" className="text-bold text-[12px] font-bold">
+              <a href="signup_page" className="text-bold text-[12px] font-bold">
                 SIGN UP
               </a>
             </p>

@@ -40,7 +40,7 @@ const Protected: NextPage = (): JSX.Element => {
         </div>
       </div>
     );
-
+    
   return <div className="text-bold text-3xl">loading</div>;
 };
 
