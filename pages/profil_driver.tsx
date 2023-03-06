@@ -10,7 +10,7 @@ export default function profil_driver (){
     return (
         
         // background masih nge bug (tidak memenuhi layar)
-        <div className='bg-[#EC7505] bg-opacity-20 top-0 h-screen'>
+        <div>
             
             <Waveatas />
             
