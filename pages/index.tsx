@@ -3,10 +3,9 @@ import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Router from "next/router";
 import { useEffect } from "react";
-import Header from "components/Header";
-import Navletseat from "components/Navletseat";
-import ContentLetsEat from "components/ContentLetsEat";
 import Navbar from "components/Navbar";
+import NavbarCust from "@/components/Navbar_Customer";
+import Header_Customer from "@/components/Header_Customer";
 
 const Protected: NextPage = (): JSX.Element => {
   const { status, data } = useSession();
@@ -20,27 +19,16 @@ const Protected: NextPage = (): JSX.Element => {
       <div>
         {/* Header1 */}
         <div>
-          <Header />
-        </div>
-        {/* Header per bagian */}
-        <div>
-          <Navletseat />
+          <Header_Customer />
         </div>
         {/* Content */}
-        <div>
-          <ContentLetsEat />
-          <ContentLetsEat />
-          <ContentLetsEat />
-          <ContentLetsEat />
-          <ContentLetsEat />
-        </div>
+        <div>welcome to letseat</div>
         {/* Navbar */}
-        <div>
-          <Navbar />
-        </div>
+        <NavbarCust />
+        <div></div>
       </div>
     );
-    
+
   return <div className="text-bold text-3xl">loading</div>;
 };
 
