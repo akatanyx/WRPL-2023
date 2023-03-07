@@ -1,11 +1,11 @@
 import Navbar_driver from 'components/Navbar_driver';
+import Content_landing_driver from 'components/Content_landing_driver';
 
 const MyPage = () => {
   return (
     <div>
       <Navbar_driver />
-      <h1>Dashboard</h1>
-      {/* ... */}
+      <Content_landing_driver />
     </div>
   );
 };

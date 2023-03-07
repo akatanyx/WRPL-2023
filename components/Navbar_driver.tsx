@@ -14,10 +14,10 @@ const Navbar_driver = () => {
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[37.5px] w-[37.5px] rounded-lg"  src="/logo.svg"/>                    
+                            <img className="h-[37.5px] w-[37.5px] rounded-lg"  src="/logo_home.svg"/>                    
                         </div>
                         <div>
-                            <p className="text-[9px] text-[#D84A05]">Dashboard</p>
+                            <p className="text-[9px] text-[#D84A05]">Home</p>
                         </div>
                         </div>
                     </Link>
@@ -29,7 +29,7 @@ const Navbar_driver = () => {
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo.svg"/>                    
+                            <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo_admin.svg"/>                    
                         </div>
                         <div>
                             <p className="text-[9px] text-[#D84A05]">Riwayat</p>
@@ -44,7 +44,7 @@ const Navbar_driver = () => {
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo.svg"/>                    
+                            <img className="h-[37.5px] w-[37.5px] rounded-lg" src="/logo_dashboard.svg"/>                    
                         </div>
                         <div>
                             <p className="text-[9px] text-[#D84A05]">Profil</p>
