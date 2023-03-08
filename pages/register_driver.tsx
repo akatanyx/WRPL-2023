@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function register_driver() {
+export default function Register_driver() {
     const [nama_driver, setDriver] = useState('');
     const [alamat, setAlamat] = useState('');
     const [kendaraan, setKendaraan] = useState('');
@@ -167,7 +167,7 @@ export default function register_driver() {
                                         className="bg-[#EC7505] hover:bg-orange-700 text-white text-[20px]
                                         px-9 py-2 rounded-lg font-bold"
                                     >
-                                    REGISTER
+                                        REGISTER
                                     </button>
                                 </Link>
                             </div>
@@ -187,6 +187,12 @@ export default function register_driver() {
                 </div>
                 {/* Kurang Wave */}
                 {/* Insert Wave here */}
+                <button onClick={() => Feedback()}
+                    className="bg-[#EC7505] hover:bg-orange-700 text-white text-[10px]
+                                mt-4 px-4 py-2 rounded-lg font-bold"
+                >
+                    Any Feedback?
+                </button>
             </div >
         </div >
     );
