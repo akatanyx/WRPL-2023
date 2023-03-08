@@ -31,25 +31,25 @@ export default function register_driver() {
 
   return (
     // {/*<!-- Gambar -->*/}
-    // <div>
-    //   <Head>
-    //     <title>LetsEAT: Sign Up</title>
-    //   </Head>
+     <div>
+       <Head>
+         <title>LetsEAT: Sign Up</title>
+       </Head>
 
-    //   {/* Header */}
-    //   <div
-    //     className="mt-6 flex flex-col items-center justify-center 0 font-bold font-inter 
-    //     text-[27px] text-[#E89005]"
-    //   >
-    //     <h1>REGISTRASI</h1>
-    //     <h1>DRIVER</h1>
-    //   </div>
+       {/* Header */}
+       <div
+         className="mt-6 flex flex-col items-center justify-center 0 font-bold font-inter 
+         text-[27px] text-[#E89005]"
+       >
+         <h1>REGISTRASI</h1>
+         <h1>DRIVER</h1>
+       </div>
 
-    //   {/*{/* <!-- Login --> */}
-    //   <div className="flex flex-col items-center justify-center">
-    //     <div className="mt-4">
-    //       <div className="max-w-full ">
-    //         {/* <!-- Isi action dengan tujuan page apabila menekan submit --> */}
+       {/*{/* <!-- Login --> */}
+       <div className="flex flex-col items-center justify-center">
+         <div className="mt-4">
+           <div className="max-w-full ">
+             {/* <!-- Isi action dengan tujuan page apabila menekan submit --> */}
             <form onSubmit={handleSubmit}
               action="/"
               method="POST"
@@ -171,23 +171,23 @@ export default function register_driver() {
                 {/* </Link> */}
               </div>
             </form>
-    //       </div>
-    //     </div>
-    //     {/* <!-- Signup --> */}
-    //     <div className="flex justify-center mt-4">
-    //       <div className="max-w-full">
-    //         <p className="text-center text-sm font-inter">
-    //           Already have an account?{" "}
-    //           <a href="login_driver" className="font-inter font-semibold">
-    //             Login
-    //           </a>
-    //         </p>
-    //       </div>
-    //     </div>
-    //     {/* Kurang Wave */}
-    //     {/* Insert Wave here */}
-    //   </div>
-    // </div>
+           </div>
+         </div>
+         {/* <!-- Signup --> */}
+         <div className="flex justify-center mt-4">
+           <div className="max-w-full">
+             <p className="text-center text-sm font-inter">
+               Already have an account?{" "}
+               <a href="login_driver" className="font-inter font-semibold">
+                 Login
+               </a>
+             </p>
+           </div>
+         </div>
+         {/* Kurang Wave */}
+         {/* Insert Wave here */}
+       </div>
+     </div>
 
   )
 }

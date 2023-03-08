@@ -3,8 +3,32 @@ import Link from "next/link";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function signup() {
-  
+export default function signup_merchant() {
+  const [nama, setNama] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [no, setNo] = useState('');
+  const [password, setPassword] = useState('');
+  const [repassword, setRepassword] = useState('');
+  //const [ktp, setKTP] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = async (event : any) => {
+    event.preventDefault();
+    const response = await fetch('/api/signup_m', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nama, email, username, no, password, repassword/*, ktp */}),
+    });
+    if (response.ok) {
+      router.push('/success');
+    } else {
+      console.error(response.statusText);
+    }
+  };
+
   return (
     // <!-- Gambar -->
     <div>
@@ -17,7 +41,10 @@ export default function signup() {
       <div className="flex flex-col items-center justify-center">
         <div className="mt-4">
           <div className="max-w-full ">
-            <form action="/" method="POST" className="space-y-3">
+              <form onSubmit={handleSubmit}
+                action="/"
+                method="POST"
+                className="space-y-3">
               <div className="flex justify-center">
                 <div className="max-w-full">
                   <p className="text-left font-bold text-[15px]">Nama</p>
@@ -27,6 +54,8 @@ export default function signup() {
                     type="nama"
                     aria-label="nama"
                     placeholder="Nama"
+                    value={nama}
+                    onChange={(event) => setNama(event.target.value)}
                   />
                 </div>
               </div>
@@ -39,6 +68,8 @@ export default function signup() {
                     type="email"
                     aria-label="email"
                     placeholder="Email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                   />
                 </div>
               </div>
@@ -51,6 +82,8 @@ export default function signup() {
                     type="Username"
                     aria-label="Username"
                     placeholder="Username"
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
                   />
                 </div>
               </div>
@@ -65,6 +98,8 @@ export default function signup() {
                     type="Nomor Telepon"
                     aria-label="Nomor Telepon"
                     placeholder="Nomor Telepon"
+                    value={no}
+                    onChange={(event) => setNo(event.target.value)}
                   />
                 </div>
               </div>
@@ -78,6 +113,8 @@ export default function signup() {
                     type="Password"
                     aria-label="Password"
                     placeholder="Password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
                   />
                 </div>
               </div>
@@ -92,29 +129,33 @@ export default function signup() {
                     type="Password"
                     aria-label="Re-enter Password"
                     placeholder="Re-enter Password"
+                    value={repassword}
+                    onChange={(event) => setRepassword(event.target.value)}
                   />
                 </div>
               </div>
-              <div className="flex justify-center mt-2">
+              {/*<div className="flex justify-center mt-2">
                 <div className="max-w-full">
                   <p className="text-left font-bold  text-[15px]">
-                   Input FOTO KTP
+                   Input Foto KTP
                   </p>
                   <input
                     className=" flex-1 w-[226px] h-[30px]"
                     id="myfile"
                     type="file"
-                    aria-label="Re-enter Password"
-                    placeholder="Re-enter Password"
+                    aria-label="Input Foto KTP"
+                    placeholder="Input Foto KTP"
+                    value={ktp}
+                    onChange={(event) => setKTP(event.target.value)}
                   />
                 </div>
-              </div>
+              </div>*/}
               <div className="flex justify-center py-4">
-                <Link href="/merchant_dashboard">
+                {/* <Link href="/merchant_dashboard"> */}
                   <button className="bg-[#EC7505] text-white text-[20px] px-4 py-2 rounded font-bold">
                     SIGNUP
                   </button>
-                </Link>
+                {/* </Link> */}
               </div>
             </form>
           </div>
@@ -132,5 +173,5 @@ export default function signup() {
         <div className="mb-7"></div>
       </div>
     </div>
-  );
+  )
 }
