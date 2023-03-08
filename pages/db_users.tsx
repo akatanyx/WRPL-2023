@@ -1,4 +1,4 @@
-import  { connectToDatabase } from '../pages/mongodb';
+import  { connectToDatabase } from './mongodb';
 
 async function addUser(user : any) {
   const db = await connectToDatabase();

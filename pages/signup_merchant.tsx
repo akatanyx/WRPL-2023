@@ -1,6 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
 export default function signup() {
+  
   return (
     // <!-- Gambar -->
     <div>
@@ -85,7 +89,21 @@ export default function signup() {
                   <input
                     className="border-2 border-[#E89005] rounded-lg p-2 flex-1 w-[226px] h-[30px]"
                     id="Re-enter Password"
-                    type="Re-enter Password"
+                    type="Password"
+                    aria-label="Re-enter Password"
+                    placeholder="Re-enter Password"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-center mt-2">
+                <div className="max-w-full">
+                  <p className="text-left font-bold  text-[15px]">
+                   Input FOTO KTP
+                  </p>
+                  <input
+                    className=" flex-1 w-[226px] h-[30px]"
+                    id="myfile"
+                    type="file"
                     aria-label="Re-enter Password"
                     placeholder="Re-enter Password"
                   />

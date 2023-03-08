@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { addUser } from "../db";
+import { addUser } from "../db_users";
 
 export default async function handler(req : any, res : any) {
   if (req.method === 'POST') {
