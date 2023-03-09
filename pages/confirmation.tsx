@@ -6,7 +6,7 @@ export default function Confirmation() {
         className="mt-20 flex flex-col items-center justify-center 0 font-bold font-inter 
         text-[27px] text-[#E89005]"
       >
-        <h1>AKUN ANDA SUDAH TERDAFTAR</h1>
+        <h1>Form Berhasil Dikirim</h1>
       </div>
       <div className="flex flex-col mt-5 items-center font-inter">
         <Link
