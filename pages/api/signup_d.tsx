@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { addDriver } from "../db_driver";
 
 export default async function handler(req : any, res : any) {

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { addMerchant } from "../db_merchant";
 
 export default async function handler(req : any, res : any) {

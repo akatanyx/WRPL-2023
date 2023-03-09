@@ -1,5 +1,7 @@
 import Link from "next/link"
+import Feedback from "@/components/Feedback"
 export default function Confirmation() {
+
   return (
     <div>
       <div
@@ -12,7 +14,7 @@ export default function Confirmation() {
         <Link
         href="/landing_driver"
         >
-          <button className="bg-[#EC7505] text-white text-[20px]
+          <button onClick={Feedback} className="bg-[#EC7505] text-white text-[20px]
            px-4 py-2 rounded font-bold">
             Masuk
           </button>
