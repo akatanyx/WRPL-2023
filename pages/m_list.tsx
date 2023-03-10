@@ -4,6 +4,7 @@ import Link from 'next/link';
 interface Post {
   _id: string;
   nama: string;
+  email: string;
   username: string;
   no: string;
   password: string;
