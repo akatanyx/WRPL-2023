@@ -4,7 +4,7 @@ import Head from "next/head";
 import Router from "next/router";
 import { useEffect } from "react";
 import Navbar from "components/Navbar";
-import NavbarCust from "@/components/Navbar_Customer";
+import NavbarCust from "@/components/Customer/Navbar";
 import Header_Customer from "@/components/Header_Customer";
 
 const Protected: NextPage = (): JSX.Element => {
