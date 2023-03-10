@@ -1,10 +1,18 @@
-import Signup from 'components/signup/Signup'
-import Wave_bg from 'components/Wave_bg'
+import NavbarCust from "@/components/Customer/Navbar";
+import Header_Customer from "@/components/Header_Customer";
 
 export default function Home () {
     return (
         <div>
-            <Wave_bg />
+          {/* Header1 */}
+          <div>
+            <Header_Customer />
+          </div>
+          {/* Content */}
+          <div>welcome to letseat</div>
+          {/* Navbar */}
+          <NavbarCust />
+          <div></div>
         </div>
-    )
+      );
 }
