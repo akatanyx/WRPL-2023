@@ -12,6 +12,7 @@ module.exports = {
       fontFamily:{
         inter: ['Inter', 'sans-serif'],
         display: ["Satisfy", "cursive"],
+        poppins: ['Poppins', 'sans-serif']
       },
 
     fontSize: {
