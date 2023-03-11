@@ -5,6 +5,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event : any) => {
     event.preventDefault();
@@ -19,7 +20,19 @@ export default function Login() {
       setIsLoggedIn(true);
       Router.push('/landingcoba');
     } else {
-      console.error('Login failed');
+      const errorMessage = 'Invalid email or password';
+      console.error('Login failed:', errorMessage);
+      setError(errorMessage);
+      if (Notification.permission === 'granted') {
+        new Notification(errorMessage);
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            new Notification(errorMessage);
+          }
+        });
+      }
+      Router.push('/signup_page');
     }
   };
 
@@ -90,28 +103,8 @@ export default function Login() {
             </p>
           </div>
         </div>
+        {error && <p>{error}</p>}
       </main>
     </div>
-
-
-  //   <form onSubmit={handleSubmit}>
-  //     <label>
-  //       Email:
-  //       <input
-  //         type="email"
-  //         value={email}
-  //         onChange={(event) => setEmail(event.target.value)}
-  //       />
-  //     </label>
-  //     <label>
-  //       Password:
-  //       <input
-  //         type="password"
-  //         value={password}
-  //         onChange={(event) => setPassword(event.target.value)}
-  //       />
-  //     </label>
-  //     <button type="submit">Login</button>
-  //   </form>
   );
 }
