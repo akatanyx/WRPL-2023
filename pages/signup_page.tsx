@@ -15,7 +15,7 @@ export default function SignupForm() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const response = await fetch('/api/signup', {
+    const response = await fetch('/api/signup_c', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export default function SignupForm() {
       body: JSON.stringify({ nama, email, username, no, password, repassword }),
     });
     if (response.ok) {
-      router.push('/success');
+      router.push('/login');
     } else {
       console.error(response.statusText);
     }
@@ -139,13 +139,13 @@ export default function SignupForm() {
       </div>
       {/* <!-- Button Signup --> */}
       <div className="flex justify-center py-4">
-        <Link
-        href="Confirmation">
+        {/* <Link
+        href="Confirmation"> */}
           <button className="bg-[#EC7505] text-white
            text-[20px] px-4 py-2 rounded font-bold">
             SIGNUP
           </button>
-        </Link>
+        {/* </Link> */}
       </div>
     </form>
   )
