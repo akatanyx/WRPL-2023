@@ -14,16 +14,16 @@ export default function SlideFavorit () {
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
-        loop={true}
+        loop={false}
         slidesPerView={'auto'}
         centeredSlides={true}
 
         // Setingan efek coverflow
         coverflowEffect={{
           rotate: 0,
-          stretch: 25,
+          stretch: 10,
           depth: 0,
-          modifier: 2.5,
+          modifier: 1,
           slideShadows: false,
           }}
     

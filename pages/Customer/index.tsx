@@ -1,10 +1,9 @@
 import Head from "next/head";
 import Promo from "components/Customer/SlidePromo";
 import Card_Kategori from "@/components/Customer/Card_Kategori";
-import Card_Favorit from "@/components/Customer/Card_Favorit"; 
-import Card_Resto_Near from "@/components/Customer/Card_Resto_Near";
 import SlideRestoNear from "@/components/Customer/SlideRestoNear";
 import SlideFavorit from "@/components/Customer/SlideFavorit";
+import C_Navbar from "@/components/Customer/C_Navbar";
 
 export default function c_landing () {
     return (
@@ -25,7 +24,7 @@ export default function c_landing () {
 
             {/* Search */}  
             <div className="flex justify-center">
-                <form className="flex items-center px-4 w-3/4 ">   
+                <form className="flex items-center px-2 w-80">   
                     <div className="relative w-full drop-shadow-2xl">
                         <div className="absolute inset-y-0 
                             left-0 flex items-center pl-3 pointer-events-none">
@@ -33,10 +32,10 @@ export default function c_landing () {
                         </div>
                         <input 
                             type="text"  
-                            placeholder="Search" 
+                            placeholder="e.g. Ayam Goreng" 
                             required 
                             className="bg-white text-black font-poppins 
-                                text-xl rounded-3xl block w-full pl-10 p-2.5 border 
+                                text-base rounded-3xl block w-full pl-10 p-2.5 border 
                                 border-black border-opacity-20 focus:outline-none"
                             />
                     </div>
@@ -50,7 +49,7 @@ export default function c_landing () {
 
             {/* Kategori */}
             <div className="flex justify-center items-center">
-                <div className="flex justify-center items-center gap-10 flex-wrap md:w-1/3 w-4/5">
+                <div className="flex justify-center items-center gap-5 flex-wrap md:w-1/3">
                     <div>
                         <Card_Kategori />
                     </div>
@@ -73,13 +72,13 @@ export default function c_landing () {
             </div>
 
             {/* Favorit Akhir ini */}
-            <div className="flex flex-col mt-4 px-10">
+            <div className="flex flex-col mt-4 px-6">
                 <h1 className="py-4 font-poppins font-semibold text-xl">Favorit akhir-akhir ini</h1>
                 <SlideFavorit />
             </div>
                 
             {/* Best For You */}
-            <div className="flex flex-col mt-3 px-10">
+            <div className="flex flex-col mt-3 px-6">
                 <h1 className="py-4 font-poppins font-semibold text-xl">Best for you</h1>
                 <div className="flex">
                     <img src="wireframe_best.svg" alt="" />
@@ -87,7 +86,7 @@ export default function c_landing () {
             </div>
 
             {/* Restaurant Near You */}
-            <div className="flex flex-col mt-3 px-10 w-full">
+            <div className="flex flex-col mt-3 px-6 w-full">
                 <h1 className="py-4 font-poppins font-semibold text-xl">Restaurant near you</h1>
                 <div>
                     <SlideRestoNear />
@@ -97,7 +96,9 @@ export default function c_landing () {
             <div className="mb-60"></div>
 
             {/* Navbar */}
-            {/* Belom */}
+            <div>
+                <C_Navbar />
+            </div>
         </>
     )
 }

@@ -14,16 +14,16 @@ export default function SlideRestoNear () {
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
-        loop={true}
+        loop={false}
         slidesPerView={'auto'}
         centeredSlides={true}
 
         // Setingan efek coverflow
         coverflowEffect={{
           rotate: 0,
-          stretch: 80,
+          stretch: 150,
           depth: 0,
-          modifier: 2.5,
+          modifier: 1,
           slideShadows: false,
           }}
     
