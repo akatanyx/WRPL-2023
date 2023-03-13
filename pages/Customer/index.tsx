@@ -3,6 +3,8 @@ import Promo from "components/Customer/SlidePromo";
 import Card_Kategori from "@/components/Customer/Card_Kategori";
 import Card_Favorit from "@/components/Customer/Card_Favorit"; 
 import Card_Resto_Near from "@/components/Customer/Card_Resto_Near";
+import SlideRestoNear from "@/components/Customer/SlideRestoNear";
+import SlideFavorit from "@/components/Customer/SlideFavorit";
 
 export default function c_landing () {
     return (
@@ -73,7 +75,7 @@ export default function c_landing () {
             {/* Favorit Akhir ini */}
             <div className="flex flex-col mt-4 px-10">
                 <h1 className="py-4 font-poppins font-semibold text-xl">Favorit akhir-akhir ini</h1>
-                <Card_Favorit />  
+                <SlideFavorit />
             </div>
                 
             {/* Best For You */}
@@ -85,10 +87,10 @@ export default function c_landing () {
             </div>
 
             {/* Restaurant Near You */}
-            <div className="flex flex-col mt-3 px-10">
+            <div className="flex flex-col mt-3 px-10 w-full">
                 <h1 className="py-4 font-poppins font-semibold text-xl">Restaurant near you</h1>
-                <div className="flex">
-                    <Card_Resto_Near />
+                <div>
+                    <SlideRestoNear />
                 </div>
             </div>
 
