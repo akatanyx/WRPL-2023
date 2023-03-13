@@ -1,9 +1,11 @@
 import Head from "next/head";
-import Promo from "components/Customer/SlidePromo";
-import Card_Kategori from "@/components/Customer/Card_Kategori";
-import SlideRestoNear from "@/components/Customer/SlideRestoNear";
-import SlideFavorit from "@/components/Customer/SlideFavorit";
-import C_Navbar from "@/components/Customer/C_Navbar";
+
+import Promo from "components/Customer/Landing/SlidePromo";
+import Card_Kategori from "@/components/Customer/Landing/Card_Kategori";
+import SlideRestoNear from "@/components/Customer/Landing/SlideRestoNear";
+import SlideFavorit from "@/components/Customer/Landing/SlideFavorit";
+import C_Navbar from "@/components/Customer/Landing/C_Navbar";
+import SlideBest from "@/components/Customer/Landing/SlideBest";
 
 export default function c_landing () {
     return (
@@ -22,7 +24,7 @@ export default function c_landing () {
                 </div>
             </div>
 
-            {/* Search */}  
+            {/* Search */}
             <div className="flex justify-center">
                 <form className="flex items-center px-2 w-80">   
                     <div className="relative w-full drop-shadow-2xl">
@@ -43,7 +45,7 @@ export default function c_landing () {
             </div>
             
             {/* Promo */}
-            <div className="px-11 py-6 md:w-3/5 md:mx-auto">
+            <div className="rounded-lg px-8 py-6 md:w-3/5 md:mx-auto">
                 <Promo /> 
             </div>
 
@@ -72,22 +74,22 @@ export default function c_landing () {
             </div>
 
             {/* Favorit Akhir ini */}
-            <div className="flex flex-col mt-4 px-6">
+            <div className="flex flex-col mt-4 px-5">
                 <h1 className="py-4 font-poppins font-semibold text-xl">Favorit akhir-akhir ini</h1>
                 <SlideFavorit />
             </div>
                 
             {/* Best For You */}
-            <div className="flex flex-col mt-3 px-6">
+            <div className="flex flex-col mt-3 px-5">
                 <h1 className="py-4 font-poppins font-semibold text-xl">Best for you</h1>
-                <div className="flex">
-                    <img src="wireframe_best.svg" alt="" />
+                <div>
+                    <SlideBest />
                 </div>
             </div>
 
             {/* Restaurant Near You */}
-            <div className="flex flex-col mt-3 px-6 w-full">
-                <h1 className="py-4 font-poppins font-semibold text-xl">Restaurant near you</h1>
+            <div className="flex flex-col mt-3 px-5 w-full">
+                <h1 className="py-4 font-poppins font-semibold text-xl">Restaurant Near You</h1>
                 <div>
                     <SlideRestoNear />
                 </div>
