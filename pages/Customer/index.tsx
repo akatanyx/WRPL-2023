@@ -96,10 +96,6 @@ export default function c_landing () {
                 </div>
             </div>
 
-            <div>
-                <Card_Seemore />
-            </div>
-
             <div className="mb-60"></div>
 
             {/* Navbar */}

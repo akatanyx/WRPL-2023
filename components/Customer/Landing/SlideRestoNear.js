@@ -37,10 +37,10 @@ export default function SlideRestoNear () {
           <Card_Resto_Near />
         </SwiperSlide>
         <SwiperSlide>
-            <Card_Resto_Near />
+          <Card_Resto_Near />
         </SwiperSlide>
         <SwiperSlide >
-            <Card_Seemore />
+          <Card_Seemore />
         </SwiperSlide>
       </Swiper>
       </div>
