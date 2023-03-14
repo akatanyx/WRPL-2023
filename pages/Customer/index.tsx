@@ -6,6 +6,7 @@ import SlideRestoNear from "@/components/Customer/Landing/SlideRestoNear";
 import SlideFavorit from "@/components/Customer/Landing/SlideFavorit";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import SlideBest from "@/components/Customer/Landing/SlideBest";
+import SearchPage from "@/components/Customer/Landing/c_search_bar"
 import Card_Seemore from "@/components/Customer/Landing/Card_Seemore";
 
 export default function c_landing () {
@@ -26,7 +27,7 @@ export default function c_landing () {
             </div>
 
             {/* Search */}
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
                 <form className="flex items-center px-2 w-80">   
                     <div className="relative w-full drop-shadow-2xl">
                         <div className="absolute inset-y-0 
@@ -43,7 +44,8 @@ export default function c_landing () {
                             />
                     </div>
                 </form>
-            </div>
+            </div> */}
+            <SearchPage />
             
             {/* Promo */}
             <div className="rounded-lg px-8 py-6 md:w-3/5 md:mx-auto">
