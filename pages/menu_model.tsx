@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function signup_merchant() {
+export default function signup_menu() {
     const [nama, setNama] = useState('');
     const [harga, setHarga] = useState('');
     const [desk, setDesk] = useState('');
