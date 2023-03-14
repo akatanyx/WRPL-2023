@@ -17,7 +17,7 @@ export default function signup_menu() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ nama, harga, desk, tag, kategori, rating, deskripsi }),
+        body: JSON.stringify({ nama, harga, desk, tag, kategori, rating}),
       });
       if (response.ok) {
         router.push('/success');

@@ -38,6 +38,7 @@ export default function resto_near_you ({posts}: PostsProps) {
                             nama_resto={post.nama}
                             jam_buka={post.jam_buka}
                             jam_tutup={post.jam_tutup}
+                            jarak={post.jarak}
                         />
                     </div>
                 ))}
