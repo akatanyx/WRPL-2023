@@ -9,8 +9,9 @@ import Card_Seemore from './Card_Seemore';
 import 'swiper/css';
 
 export default function SlideRestoNear () {
-  
+
   return (
+
     <div>
       <Swiper
         effect={'coverflow'}
@@ -38,10 +39,11 @@ export default function SlideRestoNear () {
         <SwiperSlide>
             <Card_Resto_Near />
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
             <Card_Seemore />
         </SwiperSlide>
       </Swiper>
-    </div>
+      </div>
+      
   );
 };
