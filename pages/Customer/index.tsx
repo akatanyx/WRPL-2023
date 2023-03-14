@@ -6,6 +6,7 @@ import SlideRestoNear from "@/components/Customer/Landing/SlideRestoNear";
 import SlideFavorit from "@/components/Customer/Landing/SlideFavorit";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import SlideBest from "@/components/Customer/Landing/SlideBest";
+import Card_Seemore from "@/components/Customer/Landing/Card_Seemore";
 
 export default function c_landing () {
     return (
@@ -93,6 +94,10 @@ export default function c_landing () {
                 <div>
                     <SlideRestoNear />
                 </div>
+            </div>
+
+            <div>
+                <Card_Seemore />
             </div>
 
             <div className="mb-60"></div>
