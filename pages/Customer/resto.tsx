@@ -1,7 +1,22 @@
 import Head from 'next/head';
 import Items_resto from '@/components/Customer/Resto/items_resto';
+import React from 'react';
 
-export default function resto (){
+interface Post {
+  _id: string;
+  nama: string;
+  harga: string;
+  desk: string;
+  tag: string;
+  kategori: string;
+  rating: string;
+}
+
+interface PostsProps {
+  posts: Post[];
+}
+
+export default function resto ({posts}: PostsProps){
     return (
         <>
             <Head>
@@ -32,10 +47,14 @@ export default function resto (){
             <div>
                 <h1 className='font-bold font-poppins text-xl px-5'>Promo Hari Ini</h1>
                 <div className='flex flex-wrap px-5 gap-x-10 gap-y-4'>
-                    <Items_resto />
-                    <Items_resto />
-                    <Items_resto />
-                    <Items_resto />
+                {posts.map((post) => (
+                    <div >
+                        <Items_resto key={post._id}
+                            nama={post.nama}
+                            harga={post.harga}
+                        />
+                    </div>
+                ))}
                 </div>
             </div>
 
@@ -43,4 +62,16 @@ export default function resto (){
 
         </>
     )
+}
+
+
+export async function getServerSideProps() {
+    const res = await fetch('http://localhost:3000/api/posts_menu');
+    const posts: Post[] = await res.json();
+  
+    return {
+      props: {
+        posts,
+      },
+    };
 }
