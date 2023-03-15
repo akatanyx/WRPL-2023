@@ -1,77 +1,54 @@
-import Head from 'next/head';
-import Items_resto from '@/components/Customer/Resto/items_resto';
-import React from 'react';
+import Head from 'next/head'
+import Card_Resto from '../../components/Customer/Resto/Card_Resto'
+import C_Header from '@/components/Customer/C_Header'
 
-interface Post {
-  _id: string;
-  nama: string;
-  harga: string;
-  desk: string;
-  tag: string;
-  kategori: string;
-  rating: string;
-}
-
-interface PostsProps {
-  posts: Post[];
-}
-
-export default function resto ({posts}: PostsProps){
+export default function resto () {
     return (
         <>
             <Head>
-                <title>Resto Page</title>
+                <title>Resto</title>
             </Head>
 
-            <div className='rounded-b-3xl absolute w-full bg-[#EC7505] h-82 shadow-lg'>
-                <h1 className='text-[#EC7505] text-center text-3xl'>empty</h1>
-            </div>
-
             <div>
-                <div className="relative flex rounded-lg w-[332] bg-transparent p-6">
-                    <img src="/icon_landing_restaurant.svg" alt=""/>
-                    <div className="flex-col flex translate-y-3 translate-x-6 py-3 gap-y-3">
-                        <h1 className="font-semibold font-poppins text-xl">Anteiku</h1>
-                        <h2 className="font-medium font-poppins text-[17px] text-[#666666]"
-                        >
-                            Jl.LohaLohe No.17
-                        </h2>
-                        <div className='flex'>
-                            <img src="/icon_star.svg" alt="" className="w-[18px] h-[18px]"/>
-                            <p className='font-bold text-[15px] font-poppins translate-x-1'>5.0</p>
-                        </div>
+                <C_Header />
+            </div>
+            
+            {/* Card Ingfo Toko */}
+            <div className='flex m-6 shadow-lg'>
+                <div>
+                    <img src="/icon_toko_pp.svg" alt="" className='rounded-lg'/>
+                </div>
+                <div className='flex flex-col justify-center px-6 '>
+                    {/* Masih belum bisa break-words */}
+                    <h1 className='break-words font-semibold text-[21px] font-poppins'>Anteiku</h1>
+                    {/* Nama jalan */}
+                    <p className='text-[15px] font-poppins break-words'>District 10</p>
+                    
+                    <div className='flex'>
+                        <img src="/icon_star.svg" alt="" className='w-[18px] h-[18px]'/>
+                        <p className='font-poppins font-semibold text-[15px]'>5.0</p>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <h1 className='font-bold font-poppins text-xl px-5'>Promo Hari Ini</h1>
-                <div className='flex flex-wrap px-5 gap-x-10 gap-y-4'>
-                {posts.map((post) => (
-                    <div >
-                        <Items_resto key={post._id}
-                            nama={post.nama}
-                            harga={post.harga}
-                        />
+                <div className='m-6 '>
+                    <h1 className='font-poppins font-bold text-xl'>Promo Hari Ini</h1>
+                    {/* Card List Menu */}
+                    <div className='flex flex-col gap-y-3 mt-2'>
+                        <Card_Resto />
+                        <Card_Resto />
+                        <Card_Resto />
                     </div>
-                ))}
                 </div>
+            
+            <div className='m-6 '>
+                <h1 className='font-poppins font-bold text-xl'>Makanan</h1>
             </div>
 
-            <div className='mb-96'></div>
+            <div className='m-6 '>
+                <h1 className='font-poppins font-bold text-xl'>Minuman</h1>
+            </div>
 
         </>
     )
-}
-
-
-export async function getServerSideProps() {
-    const res = await fetch('http://localhost:3000/api/posts_menu');
-    const posts: Post[] = await res.json();
-  
-    return {
-      props: {
-        posts,
-      },
-    };
 }
