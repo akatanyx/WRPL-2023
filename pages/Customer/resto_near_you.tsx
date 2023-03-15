@@ -24,7 +24,7 @@ export default function resto_near_you ({posts}: PostsProps) {
             </Head>
 
             <div className='flex items-center'>
-                <Link href='/Customer' >
+                <Link href='/customer' >
                     <img src="../icon_arrow_back.svg" alt="" />
                 </Link>
                 <h1 className='font-poppins font-bold text-[21px] -translate-x-1'>Restaurant Near You</h1>
