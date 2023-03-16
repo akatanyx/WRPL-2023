@@ -1,8 +1,25 @@
 import Head from 'next/head'
 import Card_Resto from '../../components/Customer/Resto/Card_Resto'
 import C_Header from '@/components/Customer/C_Header'
+import Dropdown_Makanan from '@/components/Customer/Resto/Dropdown_Makanan';
+import { useState } from 'react';
 
 export default function resto () {
+    // const [showMe1, setShowMe1] = useState(false);
+    // function toggle1(){
+    //   setShowMe1(!showMe1);
+    // }
+
+    const [showMe2, setShowMe2] = useState(false);
+    function toggle2(){
+      setShowMe2(!showMe2);
+    }
+
+    const [showMe3, setShowMe3] = useState(false);
+    function toggle3(){
+      setShowMe3(!showMe3);
+    }
+
     return (
         <>
             <Head>
@@ -31,22 +48,26 @@ export default function resto () {
                 </div>
             </div>
 
-                <div className='m-6 '>
-                    <h1 className='font-poppins font-bold text-xl'>Promo Hari Ini</h1>
-                    {/* Card List Menu */}
-                    <div className='flex flex-col gap-y-3 mt-2'>
-                        <Card_Resto />
-                        <Card_Resto />
-                        <Card_Resto />
-                    </div>
-                </div>
+            <div className='m-6 '>
+                
+            </div>
             
             <div className='m-6 '>
-                <h1 className='font-poppins font-bold text-xl'>Makanan</h1>
+                <Dropdown_Makanan>
+                    Promo Hari Ini
+                </Dropdown_Makanan>
             </div>
 
             <div className='m-6 '>
-                <h1 className='font-poppins font-bold text-xl'>Minuman</h1>
+                <Dropdown_Makanan>
+                    Makanan
+                </Dropdown_Makanan>
+            </div>
+
+            <div className='m-6 '>
+                <Dropdown_Makanan>
+                    Minuman
+                </Dropdown_Makanan>
             </div>
 
         </>

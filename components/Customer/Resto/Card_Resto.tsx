@@ -1,7 +1,7 @@
 export default function Card_Resto () {
     return (
         <>
-            <div className='flex shadow-lg w-[314px] rounded-lg'>
+            <div className='flex shadow-lg w-[314px] rounded-lg md:w-full'>
                     <img src="/icon_makanan.svg" alt="" className='rounded-lg'/>
                     
                 <div className='flex flex-col justify-center px-6 '>
