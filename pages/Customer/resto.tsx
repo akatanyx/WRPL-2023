@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import Card_RestoNearYou from '@/components/Customer/Resto_Near_You/Card_RestoNearYou';
 import C_Header from '@/components/Customer/C_Header'
 import Dropdown_Makanan from '@/components/Customer/Resto/Dropdown_Makanan';
+import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import { useState } from 'react';
 
 export default function resto () {
@@ -67,6 +67,10 @@ export default function resto () {
                 </Dropdown_Makanan>
             </div>
 
+            {/* Navbar */}
+            <div>
+                <C_Navbar />
+            </div>
         </>
     )
 }

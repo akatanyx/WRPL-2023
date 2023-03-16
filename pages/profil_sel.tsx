@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Profil_input_sel from "components/profil_input_sel";
 import Link from "next/link";
-import Header from "@/components/Header";
+import Header from "@/components/Merchant/Header_w_notif";
 import Navbar from "@/components/Navbar";
 
 export default function profil_sel() {

@@ -1,4 +1,4 @@
-import NavbarCust from "@/components/Customer/Navbar";
+import NavbarCust from "@/components/Customer/C_Navbar";
 import Header_Customer from "@/components/Header_Customer";
 
 export default function Home () {

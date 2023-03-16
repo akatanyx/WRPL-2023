@@ -3,7 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Router from "next/router";
 import { useEffect } from "react";
-import Header from "components/Header";
+import Header from "@/components/Merchant/Header_w_notif";
 import Navletseat from "components/Navletseat";
 import ContentLetsEat from "components/ContentLetsEat";
 import Navbar from "components/Navbar";
