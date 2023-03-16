@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Card_Resto from '../../components/Customer/Resto/Card_Resto'
+import Card_RestoNearYou from '@/components/Customer/Resto_Near_You/Card_RestoNearYou';
 import C_Header from '@/components/Customer/C_Header'
 import Dropdown_Makanan from '@/components/Customer/Resto/Dropdown_Makanan';
 import { useState } from 'react';
@@ -48,7 +48,7 @@ export default function resto () {
                 </div>
             </div>
             
-            {/* Aku lebih suka div parrent nya di page dan bukan di komponen ehe */}
+            {/* Aku lebih suka div parrent nya di page dan bukan di komponen ehe     */}
             <div className='m-6 '>
                 <Dropdown_Makanan>
                     Promo Hari Ini

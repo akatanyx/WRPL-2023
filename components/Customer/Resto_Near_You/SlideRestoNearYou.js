@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow  } from 'swiper';
 import 'swiper/swiper-bundle.css';
 
-import Card_Resto from './Card_Resto';
+import Card_Resto from './Card_RestoNearYou';
 
 // Import Swiper styles
 import 'swiper/css';

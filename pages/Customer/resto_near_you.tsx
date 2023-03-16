@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Card_Resto from '../../components/Customer/Resto_Near_You/Card_Resto'
+import Card_Resto from '../../components/Customer/Resto_Near_You/Card_RestoNearYou'
 import SlideRestoNearYou from '../../components/Customer/Resto_Near_You/SlideRestoNearYou'
 import React from 'react';
 
