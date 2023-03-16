@@ -9,13 +9,13 @@ const C_Navbar = () => {
             <div className="flex justify-between w-full transform origin-top">
                 <ul >
                     <Link
-                        href="/Customer"
+                        href="/customer"
                         className= {router.pathname === '/Customer' ? 'p-2 flex flex-col items-center justify-center' : 
                             'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[25px] w-[25px] rounded-lg"  src="/icon_nav_c_home.svg"/>                    
+                            <img className="h-[25px] w-[25px] "  src="/icon_nav_c_home.svg"/>                    
                         </div>
                         </div>
                     </Link>
@@ -28,7 +28,7 @@ const C_Navbar = () => {
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[25px] w-[25px] rounded-lg" src="/icon_nav_c_promo.svg"/>                    
+                            <img className="h-[25px] w-[25px] " src="/icon_nav_c_promo.svg"/>                    
                         </div>
                         </div>
                     </Link>
@@ -41,7 +41,7 @@ const C_Navbar = () => {
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[25px] w-[25px] rounded-lg" src="/icon_nav_c_search.svg"/>                    
+                            <img className="h-[25px] w-[25px] " src="/icon_nav_c_search.svg"/>                    
                         </div>
                         </div>
                     </Link>
@@ -54,7 +54,7 @@ const C_Navbar = () => {
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[25px] w-[25px] rounded-lg" src="/icon_nav_c_riwayat.svg"/>                    
+                            <img className="h-[25px] w-[25px] " src="/icon_nav_c_riwayat.svg"/>                    
                         </div>
                         </div>
                     </Link>
@@ -67,7 +67,7 @@ const C_Navbar = () => {
                     >
                         <div className= "flex flex-col items-center justify-center ">
                         <div>
-                            <img className="h-[25px] w-[25px] rounded-lg" src="/icon_nav_c_favorit.svg"/>                    
+                            <img className="h-[25px] w-[25px] " src="/icon_nav_c_favorit.svg"/>                    
                         </div>
                         </div>
                     </Link>
