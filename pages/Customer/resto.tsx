@@ -47,11 +47,8 @@ export default function resto () {
                     </div>
                 </div>
             </div>
-
-            <div className='m-6 '>
-                
-            </div>
             
+            {/* Aku lebih suka div parrent nya di page dan bukan di komponen ehe */}
             <div className='m-6 '>
                 <Dropdown_Makanan>
                     Promo Hari Ini
