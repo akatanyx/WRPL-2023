@@ -4,7 +4,6 @@ import Head from "next/head";
 import Router from "next/router";
 import { useEffect } from "react";
 import Navbar from "components/Navbar";
-import NavbarCust from "@/components/Customer/C_Navbar";
 import Header_Customer from "@/components/Header_Customer";
 
 const Protected: NextPage = (): JSX.Element => {
@@ -24,7 +23,6 @@ const Protected: NextPage = (): JSX.Element => {
         {/* Content */}
         <div>welcome to letseat</div>
         {/* Navbar */}
-        <NavbarCust />
         <div></div>
       </div>
     );
