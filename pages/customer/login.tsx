@@ -41,11 +41,23 @@ export default function login () {
                         />
                     </div>
 
-                    {/* Remember me */}
-                    <div className="flex items-center px-1">
-                        <input type="checkbox" className="mr-2 rounded-lg"
-                        />
-                        <p className="font-poppins text-[12px]">Remember me</p>
+                    
+                    <div className="flex items-center text-center px-1 w-72 justify-between">
+                        {/* Remember me */}
+                        <div className="flex ">
+                            <input type="checkbox" className="mr-2 rounded-lg"
+                            />
+                            <p className="font-poppins text-[12px]">Remember me</p>
+                        </div>
+                        
+                        {/* Forgot password */}
+                        <div className="">
+                            <Link href='/customer/forgotpassword'>
+                                    <p className="font-poppins text-[12px] font-medium text-[#EC7505]">
+                                        Forget password?
+                                    </p>
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Button Login */}
