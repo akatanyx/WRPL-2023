@@ -7,7 +7,7 @@ import Header from "@/components/Merchant/Header_w_notif";
 import Navletseat from "components/Navletseat";
 import ContentLetsEat from "components/ContentLetsEat";
 import Navbar from "components/Navbar";
-import NavbarCust from "@/components/Navbar_Customer";
+// import NavbarCust from "@/components/Navbar_Customer";
 
 const Protected: NextPage = (): JSX.Element => {
   const { status, data } = useSession();

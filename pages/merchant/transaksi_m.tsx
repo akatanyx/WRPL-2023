@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import Header_Toko from '../components/Header_Toko'
-import Hari from '../components/Hari'
-import Card_Transaksi from '../components/Card_Transaksi'
-import Pendapatan from '../components/Pendapatan'
+import Header_Toko from '../../components/Header_Toko'
+import Hari from '../../components/Hari'
+import Card_Transaksi from '../../components/Card_Transaksi'
+import Pendapatan from '../../components/Pendapatan'
 import Navbar from 'components/Navbar'
 
 export default function Transaksi ()

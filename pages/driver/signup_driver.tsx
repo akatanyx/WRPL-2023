@@ -16,7 +16,7 @@ export default function Register_driver() {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        const response = await fetch('/api/signup_driver', {
+        const response = await fetch('/api/signup?type=driver', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -162,14 +162,12 @@ export default function Register_driver() {
 
                             {/* <!-- Button Signup --> */}
                             <div className="flex justify-center">
-                                <Link href="confirmation">
                                     <button
                                         className="bg-[#EC7505] hover:bg-orange-700 text-white text-[20px]
                                         px-9 py-2 rounded-lg font-bold"
                                     >
                                         REGISTER
                                     </button>
-                                </Link>
                             </div>
                         </form>
                     </div>

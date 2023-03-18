@@ -10,7 +10,7 @@ export default function signup_resto() {
   
     const handleSubmit = async (event : any) => {
       event.preventDefault();
-      const response = await fetch('/api/resto_signup', {
+      const response = await fetch('/api/signup?type=resto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

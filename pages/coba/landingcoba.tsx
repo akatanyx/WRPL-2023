@@ -1,4 +1,3 @@
-import NavbarCust from "@/components/Customer/C_Navbar";
 import Header_Customer from "@/components/Header_Customer";
 
 export default function Home () {
@@ -11,7 +10,6 @@ export default function Home () {
           {/* Content */}
           <div>welcome to letseat</div>
           {/* Navbar */}
-          <NavbarCust />
           <div></div>
         </div>
       );

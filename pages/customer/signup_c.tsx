@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from "next/link";
-import Confirmation from "./confirmation";
+import Confirmation from "../coba/confirmation";
 
 export default function SignupForm() {
   const [nama, setNama] = useState('');
@@ -15,7 +15,7 @@ export default function SignupForm() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const response = await fetch('/api/signup_c', {
+    const response = await fetch('/api/signup?type=user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

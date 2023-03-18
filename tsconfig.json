@@ -29,7 +29,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/coba_login.tsx"
+    "pages/coba/coba_login.tsx"
   ],
   "exclude": [
     "node_modules"

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Profil_input_sel from "components/profil_input_sel";
-import NavbarCust from "@/components/Navbar_Customer";
+// import NavbarCust from "@/components/Navbar_Customer";
 import Header_Customer from "@/components/Header_Customer";
 
 const TambahMenu: NextPage = (): JSX.Element => {
@@ -118,7 +118,7 @@ const TambahMenu: NextPage = (): JSX.Element => {
         </div>
         {/* Navbar */}
         <div>
-          <NavbarCust />
+          {/* <NavbarCust /> */}
         </div>
       </div>
     );

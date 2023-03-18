@@ -12,7 +12,7 @@ export default function signup_menu() {
   
     const handleSubmit = async (event : any) => {
       event.preventDefault();
-      const response = await fetch('/api/menu_signup', {
+      const response = await fetch('/api/signup?type=menu', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

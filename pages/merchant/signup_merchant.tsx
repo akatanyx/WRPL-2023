@@ -15,7 +15,7 @@ export default function signup_merchant() {
 
   const handleSubmit = async (event : any) => {
     event.preventDefault();
-    const response = await fetch('/api/signup_m', {
+    const response = await fetch('/api/signup?type=merchant', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
