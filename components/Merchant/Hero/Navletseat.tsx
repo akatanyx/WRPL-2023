@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function Navletseat() {
     return (
         <div>
-        <div className="bg-white block fixed inset-x-0 top-16 z-10 text-center ml-4">
+        <div className="bg-white block inset-x-0 top-16 z-10 text-center ml-4">
             <div className="flex justify-start space-x-4 text-[14px]">
                 {/* In progress */}
                 <div>
@@ -19,7 +19,6 @@ export default function Navletseat() {
                 </div>
             </div>
         </div>
-        <div className="py-6"></div>
         </div>
     )
 }
