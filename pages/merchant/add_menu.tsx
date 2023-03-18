@@ -1,4 +1,6 @@
 import Head from "next/head"
+import Link from "next/link"
+
 import Header_TambahMenu from "@/components/Merchant/Add_Menu/Header_TambahMenu"
 import Header_w_notif from "@/components/Merchant/Header_w_notif"
 import M_Navbar from "@/components/Merchant/M_Navbar"
@@ -49,10 +51,13 @@ export default function add_menu () {
                         {/* Kategori */}
                         <div className="flex-col mt-2">
                             <h1 className="font-poppins font-bold text-[15px]">Nama Makanan</h1>
-                            <button className="w-[314px] h-[32px] border-[1px] border-[#000000] border-opacity-25
-                             rounded-lg">
-                                <h1 className="font-popins font-semibold text-[15px] text-[#000000] text-opacity-60">Pilih</h1>
-                            </button>
+                            
+                            <Link href='/merchant/add_kategori'>
+                                <button className="w-[314px] h-[32px] border-[1px] border-[#000000] border-opacity-25
+                                rounded-lg">
+                                    <h1 className="font-popins font-semibold text-[15px] text-[#000000] text-opacity-60">Pilih</h1>
+                                </button>
+                            </Link>
                         </div>
 
                         {/* Deskripsi */}
