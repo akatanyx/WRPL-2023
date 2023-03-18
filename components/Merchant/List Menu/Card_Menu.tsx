@@ -1,10 +1,17 @@
 import Link from 'next/link'
+import { useState } from 'react';
 
 import Tag_Makanan from "../../Customer/Resto/Tag_Makanan" 
+import Popup_stock from './Popup_stock';
 
 export default function Card_Menu () {
+    const [showMyModal, setShowMyModal] = useState(false);
+
+    const closeModal = () => setShowMyModal(false);
+    
     return (
         <>
+            {showMyModal && <Popup_stock closeModal={closeModal} />}
             <div className='flex shadow-lg w-[314px] rounded-lg md:w-full relative'>
 
                 {/* Foto Makanan */}
@@ -48,11 +55,11 @@ export default function Card_Menu () {
                     </div>
 
                     {/* Stock */}
-                    <div className='flex items-center gap-x-1 text-[#838080] font-poppins text-mobile 
+                    <button onClick = {() => setShowMyModal(true)} className='flex items-center gap-x-1 text-[#838080] font-poppins text-mobile 
                         font-medium'>
                         <h1>Stock :</h1>
                         <p>10</p>
-                    </div>
+                    </button>
                 </div>
 
                 {/* Edit Makanan */}

@@ -13,7 +13,7 @@ export default function add_kategori () {
                 </div>
                 
                 {/* List Kategori */}
-                <div className="bg-white h-screen  rounded-t-3xl flex-col ">
+                <div className="bg-white h-screen rounded-t-3xl flex-col ">
                     
                     <div className="px-[30px] py-4">
                         <h1 className="font-semibold text-xl">
