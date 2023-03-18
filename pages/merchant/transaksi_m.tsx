@@ -3,7 +3,7 @@ import Header_Toko from '../../components/Header_Toko'
 import Hari from '../../components/Hari'
 import Card_Transaksi from '../../components/Card_Transaksi'
 import Pendapatan from '../../components/Pendapatan'
-import Navbar from 'components/Navbar'
+import M_Navbar from '@/components/Merchant/M_Navbar'
 
 export default function Transaksi ()
 {
@@ -23,7 +23,7 @@ export default function Transaksi ()
             
             <Card_Transaksi />
 
-            <Navbar />
+            <M_Navbar />
         </div>
     )
 }

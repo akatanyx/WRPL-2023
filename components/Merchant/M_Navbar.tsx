@@ -61,7 +61,7 @@ const M_Navbar = () => {
                 </ul>
                 <ul >
                     <Link
-                        href="#"
+                        href="/merchant/profil_m"
                         className= {router.pathname === '/BELOMCOY' ? 'p-2 flex flex-col items-center justify-center' : 
                             'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                     >

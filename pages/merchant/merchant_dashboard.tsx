@@ -21,7 +21,9 @@ const Protected: NextPage = (): JSX.Element => {
       <div>
         {/* Header1 */}
         <div>
-          <Header />
+          <Header>
+            Anteiku
+          </Header>
         </div>
         <div>
           <Navletseat />

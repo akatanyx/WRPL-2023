@@ -3,7 +3,7 @@ import Head from "next/head";
 import Profil_input_sel from "components/profil_input_sel";
 import Link from "next/link";
 import Header from "@/components/Merchant/Header_w_notif";
-import Navbar from "@/components/Navbar";
+import M_Navbar from "@/components/Merchant/M_Navbar";
 
 export default function profil_sel() {
   return (
@@ -90,7 +90,7 @@ export default function profil_sel() {
         <img className="absolute w-full -z-10" src="wave_bawah2.svg"></img>
       </footer>
       <div>
-        <Navbar />
+        <M_Navbar />
       </div>
     </div>
   );
