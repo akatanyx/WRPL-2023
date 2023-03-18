@@ -1,15 +1,22 @@
 import Link from 'next/link'
+import { useState } from 'react';
+
+import Popup_keluar from './Popup_keluar';
 
 export default function Header_TambahMenu() {
+    const [showMyModal, setShowMyModal] = useState(false);
+
+    const closeModal = () => setShowMyModal(false);
+    
     return (
     <>
-        <div className='sticky top-0'>
+        {showMyModal && <Popup_keluar closeModal={closeModal} />}
         <div className="flex bg-[#EC7505] items-center px-[19px] w-full h-[59px] shadow-lg rounded-b-lg">
-            <Link href='/merchant/list_menu'>
+            <button onClick = {() => setShowMyModal(true)}>
                 <img src="/icon_head_arrow_tambahmenu.svg" alt="" />
-            </Link>
+            </button>
+                
             <h1 className="ml-3 text-white font-poppins font-bold text-[23px]">Tambah Menu</h1>
-        </div>
         </div>
     </>
     )
