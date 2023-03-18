@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import Tag_Makanan from "../../Customer/Resto/Tag_Makanan" 
 
 export default function Card_Menu () {
@@ -54,14 +56,16 @@ export default function Card_Menu () {
                 </div>
 
                 {/* Edit Makanan */}
-                <div className="absolute bottom-4 right-3">
-                    <button 
-                    className='border bg-white rounded-xl border-[#EC7505]  
-                    w-[67px] h-[18px] flex justify-center items-baseline '
-                    >
-                        <h1 className="text-[#EC7505] font-medium text-[11px] font-poppins">Edit</h1>
-                    </button>
-                </div>
+                <Link href='/merchant/edit_menu'>
+                    <div className="absolute bottom-4 right-3">
+                        <button 
+                        className='border bg-white rounded-xl border-[#EC7505]  
+                        w-[67px] h-[18px] flex justify-center items-baseline '
+                        >
+                            <h1 className="text-[#EC7505] font-medium text-[11px] font-poppins">Edit</h1>
+                        </button>
+                    </div>
+                </Link>
             </div>
         </>
     )
