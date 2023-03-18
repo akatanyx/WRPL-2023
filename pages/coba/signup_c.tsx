@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from "next/link";
-import Confirmation from "../coba/confirmation";
+import Confirmation from "./confirmation";
 
 export default function SignupForm() {
   const [nama, setNama] = useState('');
