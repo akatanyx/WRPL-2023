@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import {Image} from 'cloudinary-react';
+import {Image} from "cloudinary-react";
 
 function App() {
 
