@@ -1,11 +1,37 @@
 import Head from "next/head"
 import Link from "next/link"
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import Header_TambahMenu from "@/components/Merchant/Add_Menu/Header_TambahMenu"
 import Header_w_notif from "@/components/Merchant/Header_w_notif"
 import M_Navbar from "@/components/Merchant/M_Navbar"
 
 export default function add_menu () {
+    const [nama, setNama] = useState('');
+    const [harga, setHarga] = useState('');
+    const [desk, setDesk] = useState('');
+    const [tag, setTag] = useState('');
+    const [kategori, setKategori] = useState('');
+    const [rating, setRating] = useState('');
+    const router = useRouter();
+    
+    const handleSubmit = async (event : any) => {
+        event.preventDefault();
+        const response = await fetch('/api/signup?type=menu', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nama, harga, desk, tag, kategori, rating}),
+        });
+        if (response.ok) {
+        router.push('/merchant/list_menu');
+        } else {
+        console.error(response.statusText);
+        }
+    };
+
     return (
         <>
             <Head>
@@ -31,26 +57,33 @@ export default function add_menu () {
 
             {/* Form */}
             <div className="mx-5 mt-4">
-                <form action="/">
-                    
+                <form onSubmit={handleSubmit}
+                action="/"
+                method="POST">     
                     <div className="flex-col">
                         {/* Nama Makanan */}
                         <div className="flex-col">
                             <h1 className="font-poppins font-bold text-[15px]">Nama Makanan</h1>
                             <input type="text" className="w-[314px] h-[32px] border-[1px] border-[#000000] border-opacity-25
-                             rounded-lg" />
+                             rounded-lg" 
+                             value={nama}
+                             onChange={(event) => setNama(event.target.value)}
+                             />
                         </div>
                         
                         {/* Harga */}
                         <div className="flex-col mt-2">
                             <h1 className="font-poppins font-bold text-[15px]">Harga</h1>
                             <input type="text" className="w-[314px] h-[32px] border-[1px] border-[#000000] border-opacity-25
-                             rounded-lg" />
+                             rounded-lg" 
+                             value={harga}
+                             onChange={(event) => setHarga(event.target.value)}
+                             />
                         </div>
                         
                         {/* Kategori */}
                         <div className="flex-col mt-2">
-                            <h1 className="font-poppins font-bold text-[15px]">Nama Makanan</h1>
+                            <h1 className="font-poppins font-bold text-[15px]">Kategori</h1>
                             
                             <Link href='/merchant/add_kategori'>
                                 <button className="w-[314px] h-[32px] border-[1px] border-[#000000] border-opacity-25
@@ -64,7 +97,10 @@ export default function add_menu () {
                         <div className="flex-col mt-2">
                             <h1 className="font-poppins font-bold text-[15px]">Deskripsi Makanan</h1>
                             <input type="text" className="w-[314px] h-[142px] border-[1px] border-[#000000] border-opacity-25
-                             rounded-lg" />
+                             rounded-lg" 
+                             value={desk}
+                             onChange={(event) => setDesk(event.target.value)}
+                             />
                         </div>
 
                         {/* Save */}

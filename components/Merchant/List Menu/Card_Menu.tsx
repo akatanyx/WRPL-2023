@@ -4,7 +4,13 @@ import { useState } from 'react';
 import Tag_Makanan from "../../Customer/Resto/Tag_Makanan" 
 import Popup_stock from './Popup_stock';
 
-export default function Card_Menu () {
+interface CardMenuProps {
+    nama: string;
+    desk: string;
+    harga: string;
+  }
+
+export default function Card_Menu ({ nama, desk, harga } : CardMenuProps) {
     const [showMyModal, setShowMyModal] = useState(false);
 
     const closeModal = () => setShowMyModal(false);
@@ -36,13 +42,13 @@ export default function Card_Menu () {
                     
 
                     {/* Masih belum bisa break-words */}
-                    <h1 className='break-words font-semibold text-[15px] font-poppins'>Kopi Hitam</h1>
-                    <p className='text-mobile text-[#838080] font-poppins break-words'>Kopi Pahit</p>
+                    <h1 className='break-words font-semibold text-[15px] font-poppins'>{ nama }</h1>
+                    <p className='text-mobile text-[#838080] font-poppins break-words'>{ desk }</p>
                         
                     {/* Harga */}
                     {/* Belum bisa apply diskon hidden*/}
                     <div className='flex items-center gap-x-2'>
-                        <h1 className='font-poppins text-[12px] font-semibold'>15.000</h1>
+                        <h1 className='font-poppins text-[12px] font-semibold'>{ harga }</h1>
                         <p className='font-poppins font-semibold text-[10px] text-[#838080] line-through'>20.000</p>
                     </div>
 
