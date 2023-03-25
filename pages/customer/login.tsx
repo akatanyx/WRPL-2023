@@ -18,7 +18,7 @@ export default function login () {
             </div>
 
             {/* Login */}
-            <div className="flex flex-col mx-[37px] mt-6 gap-y-3">
+            <div className="flex flex-col mx-[37px] mt-6 gap-y-3 md:items-center">
                 <h1 className="font-poppins font-bold text-[24px]">Login</h1>
                 <form className="flex flex-col gap-y-3 mt-1">
                     {/* Email */}
@@ -52,7 +52,7 @@ export default function login () {
                         
                         {/* Forgot password */}
                         <div className="">
-                            <Link href='/customer/forgotpassword'>
+                            <Link href='/customer/forgot_password'>
                                     <p className="font-poppins text-[12px] font-medium text-[#EC7505]">
                                         Forget password?
                                     </p>
