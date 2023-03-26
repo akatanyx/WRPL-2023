@@ -5,9 +5,9 @@ import Promo from "components/Customer/Landing/SlidePromo";
 import Card_Kategori from "@/components/Customer/Landing/Card_Kategori";
 import SlideRestoNear from "@/components/Customer/Landing/SlideRestoNear";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
-import SlideBest from "@/components/Customer/Landing/SlideBest";
 import SearchPage from "@/components/Customer/Landing/c_search_bar"
 import Card_Favorit from "@/components/Customer/Landing/Card_Favorit";
+import Card_Best from "@/components/Customer/Landing/Card_Best";
 
 export default function hero () {
     return (
@@ -65,7 +65,7 @@ export default function hero () {
             </div>
 
             {/* Favorit Akhir ini */}
-            <div className="flex flex-col mt-4 px-5 relative">
+            <div className="flex flex-col mt-3 px-5 relative">
                 <div className="flex relative">
                     <h1 className="py-4 font-poppins font-semibold text-xl ">Favorit akhir-akhir ini</h1>
                     <Link href='#'>
@@ -77,7 +77,7 @@ export default function hero () {
                     </Link>
                 </div>
 
-                <div className="flex flex-col gap-y-3">
+                <div className="flex flex-wrap gap-3 md:justify-center">
                     <Card_Favorit />
                     <Card_Favorit />
                 </div>
@@ -85,19 +85,24 @@ export default function hero () {
             </div>
                 
             {/* Best For You */}
-            <div className="flex flex-col mt-3 px-5 relative">
+            <div className="flex flex-col mt-3 px-5 relative w-[390px] md:w-full">
                 <div className="flex relative">
                     <h1 className="py-4 font-poppins font-semibold text-xl ">Best for you</h1>
                     <Link href='#'>
                     <button
                     className="absolute border border-[#EC7505] w-[63px] h-[21px] flex 
-                        items-center justify-center rounded-xl p-2 right-0 translate-y-5">
+                        items-center justify-center rounded-xl p-2 right-8 translate-y-5">
                         <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">See All</h1>
                     </button>
                     </Link>
                 </div>
                 
-                    <SlideBest />
+                <div className="flex flex-wrap gap-x-6 gap-y-4 md:justify-center">
+                    <Card_Best />
+                    <Card_Best />
+                    <Card_Best />
+                    <Card_Best />
+                </div>
             </div>
 
             {/* Restaurant Near You */}
