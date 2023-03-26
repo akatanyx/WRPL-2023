@@ -5,13 +5,14 @@ import { CloudinaryImage } from "@cloudinary/url-gen";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 
 function App() {
-  // console.log("images", images);
+  //Ini tampilin file yang sudah di upload
     const myImage = new CloudinaryImage("/Letseat/logo_login_sel_x15ih9", {
       cloudName: "prema-cloud",
     }).resize(fill().width(100).height(150));
 
-    const [imageSelected, setImageSelected] = useState();
 
+  //Ini function untuk upload file
+    const [imageSelected, setImageSelected] = useState();
     const uploadImage = () => {
       // console.log(files[0]);
       const formData = new FormData();
