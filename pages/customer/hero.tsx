@@ -1,13 +1,13 @@
 import Head from "next/head";
+import Link from "next/link";
 
 import Promo from "components/Customer/Landing/SlidePromo";
 import Card_Kategori from "@/components/Customer/Landing/Card_Kategori";
 import SlideRestoNear from "@/components/Customer/Landing/SlideRestoNear";
-import SlideFavorit from "@/components/Customer/Landing/SlideFavorit";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import SlideBest from "@/components/Customer/Landing/SlideBest";
 import SearchPage from "@/components/Customer/Landing/c_search_bar"
-import Card_Seemore from "@/components/Customer/Landing/Card_Seemore";
+import Card_Favorit from "@/components/Customer/Landing/Card_Favorit";
 
 export default function hero () {
     return (
@@ -54,48 +54,66 @@ export default function hero () {
 
             {/* Kategori */}
             <div className="flex justify-center items-center">
-                <div className="flex justify-center items-center gap-5 flex-wrap md:w-1/3">
-                    <div>
+                <div className="flex justify-center items-center flex-wrap gap-5 md:w-1/3">
                         <Card_Kategori />
-                    </div>
-                    <div>
                         <Card_Kategori />
-                    </div>
-                    <div>
                         <Card_Kategori />
-                    </div>
-                    <div>
                         <Card_Kategori />
-                    </div>
-                    <div>
                         <Card_Kategori />
-                    </div>
-                    <div>
                         <Card_Kategori />
-                    </div>
                 </div>
             </div>
 
             {/* Favorit Akhir ini */}
-            <div className="flex flex-col mt-4 px-5">
-                <h1 className="py-4 font-poppins font-semibold text-xl">Favorit akhir-akhir ini</h1>
-                <SlideFavorit />
+            <div className="flex flex-col mt-4 px-5 relative">
+                <div className="flex relative">
+                    <h1 className="py-4 font-poppins font-semibold text-xl ">Favorit akhir-akhir ini</h1>
+                    <Link href='#'>
+                    <button
+                    className="absolute border border-[#EC7505] w-[63px] h-[21px] flex 
+                        items-center justify-center rounded-xl p-2 right-0 translate-y-5">
+                        <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">See All</h1>
+                    </button>
+                    </Link>
+                </div>
+
+                <div className="flex flex-col gap-y-3">
+                    <Card_Favorit />
+                    <Card_Favorit />
+                </div>
+                
             </div>
                 
             {/* Best For You */}
-            <div className="flex flex-col mt-3 px-5">
-                <h1 className="py-4 font-poppins font-semibold text-xl">Best for you</h1>
-                <div>
-                    <SlideBest />
+            <div className="flex flex-col mt-3 px-5 relative">
+                <div className="flex relative">
+                    <h1 className="py-4 font-poppins font-semibold text-xl ">Best for you</h1>
+                    <Link href='#'>
+                    <button
+                    className="absolute border border-[#EC7505] w-[63px] h-[21px] flex 
+                        items-center justify-center rounded-xl p-2 right-0 translate-y-5">
+                        <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">See All</h1>
+                    </button>
+                    </Link>
                 </div>
+                
+                    <SlideBest />
             </div>
 
             {/* Restaurant Near You */}
-            <div className="flex flex-col mt-3 px-5 w-full">
-                <h1 className="py-4 font-poppins font-semibold text-xl">Restaurant Near You</h1>
-                <div>
-                    <SlideRestoNear />
+            <div className="flex flex-col mt-3 px-5 w-full ">
+                <div className="flex relative">
+                    <h1 className="py-4 font-poppins font-semibold text-xl ">Restaurant Near You</h1>
+                    <Link href='#'>
+                    <button
+                    className="absolute border border-[#EC7505] w-[63px] h-[21px] flex 
+                        items-center justify-center rounded-xl p-2 right-0 translate-y-5">
+                        <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">See All</h1>
+                    </button>
+                    </Link>
                 </div>
+                
+                    <SlideRestoNear />
             </div>
 
             <div className="mb-60"></div>

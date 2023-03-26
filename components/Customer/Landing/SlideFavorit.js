@@ -16,7 +16,7 @@ export default function SlideFavorit () {
         grabCursor={true}
         loop={false}
         slidesPerView={'auto'}
-        centeredSlides={true}
+        centeredSlides={false}
 
         // Setingan efek coverflow
         coverflowEffect={{
