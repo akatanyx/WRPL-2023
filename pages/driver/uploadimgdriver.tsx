@@ -6,9 +6,9 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 
 function App() {
   //Ini tampilin file yang sudah di upload
-    const myImage = new CloudinaryImage("/Letseat/logo_login_sel_x15ih9", {
+    const myImage = new CloudinaryImage("jgeoz0cjgypfkguitmi3.jpg", {
       cloudName: "prema-cloud",
-    }).resize(fill().width(100).height(150));
+    });
 
 
   //Ini function untuk upload file
@@ -19,6 +19,7 @@ function App() {
       if (imageSelected) {
         formData.append("file", imageSelected);
         formData.append("upload_preset", "prema_upload123");
+        formData.append('folder', 'Letseat');
       }
 
       Axios.post(

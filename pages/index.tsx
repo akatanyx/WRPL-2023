@@ -43,11 +43,11 @@ const IndexPage = () => {
 
   useEffect(() => {
     if (status === "authenticated" && session?.user?.name) {
-      router.push("/customer/landing");
+      router.push("/customer/hero");
     } else if (status === "loading") {
       // Don't return anything while session is being fetched
     } else {
-      router.push("/login");
+      router.push("/customer/landing");
     }
   }, [session, status, router]);
 
