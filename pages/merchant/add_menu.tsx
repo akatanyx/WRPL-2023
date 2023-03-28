@@ -135,7 +135,9 @@ import M_Navbar from "@/components/Merchant/M_Navbar";
 import Axios from "axios";
 import Image from "next/image";
 
-export default function Add_menu() {
+export default function Add_menu({ images }:any) {
+  // console.log('images',images);
+  const imgURL = "";
   const [nama, setNama] = useState("");
   const [harga, setHarga] = useState("");
   const [desk, setDesk] = useState("");
@@ -143,40 +145,59 @@ export default function Add_menu() {
   const [kategori, setKategori] = useState("");
   const [rating, setRating] = useState("");
   const router = useRouter();
-  const [imageSelected, setImageSelected] = useState();
+  const [imageSelected, setImageSelected] = useState<File | undefined>();
 
   const HandleSubmit = async (event: any) => {
-    event.preventDefault();
-    const response = await fetch("/api/signup?type=menu", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ nama, harga, desk, tag, kategori, rating }),
-    });
-    if (response.ok) {
-      router.push("/merchant/list_menu");
-    } else {
-      console.error(response.statusText);
-    }
-
-    //Ini daerah fungsi untuk upload image
     // console.log(files[0]);
-
+    // Membuat formdata untuk upload image
     const formData = new FormData();
+    {
+      /* Jika image true maka masukkan ke formdata
+  dan tambahkan preset upload cloudinary*/
+    }
     if (imageSelected) {
       formData.append("file", imageSelected);
       formData.append("upload_preset", "prema_upload123");
+      // Preset untuk ke folder tertentu
       // formData.append("folder", "Letseat");
     }
-    // This function will be triggered when the file field change
 
+    //  Middleware Axios untuk menangani upload image.
+    //  Responnya diterima sudah dalam bentuk JSON
     Axios.post(
       `https://api.cloudinary.com/v1_1/prema-cloud/image/upload`,
       formData
     ).then((response) => {
       console.log(response);
+      // Meyimpan url cloudinaray dari gambar ke dalam ke variabel
+      let imgURL = response.data.secure_url;
+      // Memanggil fungsi upload data dan menyertakan url gambar
+      uploadData(imgURL);
     });
+
+    event.preventDefault();
+    async function uploadData(imgURL: string) {
+      const response = await fetch("/api/signup?type=menu", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nama,
+          harga,
+          desk,
+          tag,
+          kategori,
+          rating,
+          imgURL,
+        }),
+      });
+      if (response.ok) {
+        router.push("/merchant/list_menu");
+      } else {
+        console.error(response.statusText);
+      }
+    }
   };
 
   return (
@@ -198,61 +219,39 @@ export default function Add_menu() {
       {/* Form */}
       <div className="mx-5 mt-4">
         <form onSubmit={HandleSubmit} action="/" method="POST">
-          {/* Input Gambar */}
           <div className="mx-[78px] mt-6  md:flex md:justify-center">
+            {/* Gambar berlaku sebagai tombol input karena 'htmlFor' mmerujuk ke id input */}
             <label htmlFor="file-input">
-              <img
+              <Image
                 src="/icon_m_inputimage.svg"
+                priority
                 alt=""
-                className="shadow-lg rounded-lg w-[203px]"
+                width={203}
+                height={203}
+                className="shadow-lg rounded-lg"
               />
             </label>
+            {/* Mengatur input file, tombolnya di sembunyikan dari user */}
             <input
               id="file-input"
               type="file"
               accept=".png, .jpg, .jpeg"
               className="invisible"
               onChange={(event) => {
-                setImageSelected(event.target.files[0]);
+                setImageSelected(event.target!.files[0]);
               }}
             />
+            {/* Menampilkan preview gambar sebelum di upload */}
             {imageSelected && (
-                <img
-                  src={URL.createObjectURL(imageSelected)}
-                  className="shadow-lg rounded-lg w-[203px]"
-                  alt="Thumb"
-                />
+              <img
+                src={URL.createObjectURL(imageSelected)}
+                width={203}
+                height={203}
+                className="shadow-lg rounded-lg w-auto h-auto"
+                alt="Thumb"
+              />
             )}
-            {/* <input
-              type="image"
-              src="/icon_m_inputimage.svg"
-              alt=""
-              className="shadow-lg rounded-lg w-[203px]"
-            /> */}
           </div>
-
-          {/* <h1 className="form__title">Image Preview in Reactjs</h1>
-            <div className="form__img-input-container">
-                <input 
-                    type="file" 
-                    accept=".png, .jpg, .jpeg" 
-                    id="photo" 
-                    className="visually-hidden"
-                    onChange={(event) => {
-                        setImageSelected(event.target.files[0]);
-                    }}
-
-                />
-                <label htmlFor="photo" className="form-img__file-label">
-                    <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#56ceef" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
-                        <circle cx="12" cy="10" r="3" />
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                </label>
-                {imageSelected && (<img src={URL.createObjectURL(imageSelected)} alt="thumb" className="form-img img-preview"/>)}
-            </div> */}
-
           <div className="flex-col">
             {/* Nama Makanan */}
             <div className="flex-col">

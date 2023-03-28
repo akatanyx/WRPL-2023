@@ -58,7 +58,7 @@ export default async function handler(req: any, res: any) {
             tag: req.body.tag, 
             kategori: req.body.kategori, 
             rating: req.body.rating, 
-            deskripsi: req.body.deskripsi 
+            imgURL: req.body.imgURL 
           };
           break;
         default:

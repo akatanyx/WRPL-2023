@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link'
 import { useState } from 'react';
 
@@ -7,10 +8,11 @@ import Popup_stock from './Popup_stock';
 interface CardMenuProps {
     nama: string;
     desk: string;
-    harga: string;
+    harga: number;
+    imgUrl: string;
   }
 
-export default function Card_Menu ({ nama, desk, harga } : CardMenuProps) {
+export default function Card_Menu ({ nama, desk, harga, imgUrl} : CardMenuProps) {
     const [showMyModal, setShowMyModal] = useState(false);
 
     const closeModal = () => setShowMyModal(false);
@@ -21,7 +23,7 @@ export default function Card_Menu ({ nama, desk, harga } : CardMenuProps) {
             <div className='flex shadow-lg w-[314px] rounded-lg md:w-full relative'>
 
                 {/* Foto Makanan */}
-                <img src="/icon_makanan.svg" alt="" className='rounded-lg p-4 w-[130px] h-[130px]'/>
+                <Image priority src={imgUrl} height={130} width={130} alt="" className='rounded-lg p-4 w-auto h-auto'/>
                     
                 <div className='flex flex-col justify-center relative -translate-y-3'>
                     
@@ -55,9 +57,9 @@ export default function Card_Menu ({ nama, desk, harga } : CardMenuProps) {
                     {/* Like */}
                     <div className='flex items-center gap-x-1'>
                         <button>
-                            <img src="/icon_like_menu.svg" alt="" />
+                            <Image src="/icon_like_menu.svg" alt="" width={20} height={20} />
                         </button>
-                        <p className='font-semibold font-poppins text-[10px] text-[#EC7505]'>50000</p>
+                        <p className='font-semibold font-poppins text-[10px] text-[#EC7505]'>100</p>
                     </div>
 
                     {/* Stock */}

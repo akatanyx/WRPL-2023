@@ -3,7 +3,7 @@ import Axios from "axios";
 import Image from "next/image";
 
 function App({images, next_cursor}) {
-  // console.log("images", images);
+  console.log("images", images);
   // console.log("next_cursor", next_cursor);
 
   //Ini function untuk upload file

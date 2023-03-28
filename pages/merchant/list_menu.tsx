@@ -1,64 +1,68 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-import Card_Menu from "../../components/Merchant/List Menu/Card_Menu" 
-import M_Navbar from "../../components/Merchant/M_Navbar"
-import Header_w_notif from "../../components/Merchant/Header_w_notif"
-import Tambah_Menu from "@/components/Merchant/List Menu/Tambah_Menu"
+import Card_Menu from "../../components/Merchant/List Menu/Card_Menu";
+import M_Navbar from "../../components/Merchant/M_Navbar";
+import Header_w_notif from "../../components/Merchant/Header_w_notif";
+import Tambah_Menu from "@/components/Merchant/List Menu/Tambah_Menu";
 
 interface Post {
-    nama: string;
-    desk : string;
-    harga : string;
-  }
-  
-  interface PostsProps {
-    posts: Post[];
-  }
-  
+  _id: string;
+  nama: string;
+  desk: string;
+  harga: number;
+  imgURL: string;
+}
 
-export default function list_menu ({ posts }: PostsProps) {
-    return (
-        <>
-            <div>
-                <Header_w_notif>
-                    List Menu
-                </Header_w_notif>
-            </div>
+interface PostsProps {
+  posts: Post[];
+}
 
-            <div className="mx-5 mt-4">
-                <h1 className=" font-poppins font-semibold text-[23px]">
-                    Makanan
-                </h1>
 
-                <div className="flex flex-col gap-y-3">
-                {posts.map((post) => (
-                    <Card_Menu nama={post.nama} desk={post.desk} harga={post.harga} />
-                ))}
-                </div>
-            </div>
+export default function list_menu({ posts }:PostsProps) {;
+  return (
+    <>
+      <div>
+        <Header_w_notif>List Menu</Header_w_notif>
+      </div>
 
-            <div>
-                <M_Navbar />
-            </div>
+      <div className="mx-5 mt-4">
+        <h1 className=" font-poppins font-semibold text-[23px]">Makanan</h1>
 
-            <div>
-                <Tambah_Menu />
-            </div>
-        </>
-    )
+        <div className="flex flex-col gap-y-3">
+            {posts.map((post)=>(
+            <Card_Menu
+              key={post._id}
+              nama={post.nama}
+              desk={post.desk}
+              harga={post.harga}
+              imgUrl={post.imgURL}
+            />
+            ))}    
+        </div>
+      </div>
+
+      <div>
+        <M_Navbar />
+      </div>
+
+      <div>
+        <Tambah_Menu />
+      </div>
+    </>
+  );
 }
 
 export async function getServerSideProps() {
-    const res = await fetch('http://localhost:3000/api/posts?type=menus');
-    const posts: Post[] = await res.json();
-  
-    return {
-      props: {
-        posts,
-      },
-    };
-  }
+  const res = await fetch("http://localhost:3000/api/posts?type=menus");
+  const posts: Post[] = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+  };
+}
 
 // import React from 'react';
 // import Link from 'next/link';
