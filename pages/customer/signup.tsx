@@ -1,6 +1,26 @@
 import Link from 'next/link'
 
 export default function signup () {
+    const [imageSelected, setImageSelected] = useState();
+    const uploadImage = () => {
+      // console.log(files[0]);
+      const formData = new FormData();
+      if (imageSelected) {
+        formData.append("file", imageSelected);
+        formData.append("upload_preset", "prema_upload123");
+        formData.append('folder', 'Letseat');
+      }
+
+      Axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
+        formData
+      ).then((response) => {
+        if (response.status=='200'){
+            window.location.href = "/customer/hero";
+        }
+        else console.log(response);
+      });
+    };
     return (
         <>
             {/* Navigasi Back To Index */}
@@ -62,15 +82,17 @@ export default function signup () {
                         placeholder="Re-enter Password"
                         />
                     </div>
+                    <input
+                        type="file"
+                        className='flex justify-center items-center w-[290px] h-[44px] 
+                                bg-[#EC7505] rounded-lg shadow-lg mt-2'
+                        onChange={(event) => {
+                        setImageSelected(event.target.files[0]);
+                        }}
+                    />
+                    <button onClick={uploadImage}> Register</button>
 
                     {/* Button Regsiter */}
-                    <Link href='/customer/login' 
-                    className='flex justify-center items-center w-[290px] h-[44px] 
-                                bg-[#EC7505] rounded-lg shadow-lg mt-2'>
-                            <button className="text-white font-semibold font-poppins text-[19px]">
-                                    Register
-                            </button>
-                    </Link>
                 </form>
 
                 {/* tidak punya akun */}
