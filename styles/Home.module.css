@@ -300,3 +300,8 @@
   background-color: white;
   padding: 20px;
 }
+
+.image-upload>input {
+  display: none;
+  visibility: hidden;
+}
