@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import router from 'next/router';
 
 export default function signup () {
     const [imageSelected, setImageSelected] = useState();
@@ -15,11 +16,11 @@ export default function signup () {
         `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
         formData
       ).then((response) => {
-        if (response.status=='200'){
-            window.location.href = "/customer/hero";
-        }
-        else console.log(response);
-      });
+        if (response.ok) {
+            router.push('/success');
+          } else {
+            console.error(response.statusText);
+          }});
     };
     return (
         <>
