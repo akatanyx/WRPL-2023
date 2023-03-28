@@ -21,11 +21,13 @@ export default function resto () {
                 <Image
                 src={ bg }
                 width={ 500 }
-                height={ 500 }
+                height={ 30 }
                 alt="Picture of the author"
                 ></Image>
 
-                <h1>memek</h1>
+                <div>
+                
+                </div>
             </div>
 
             {/* <div className='' 
