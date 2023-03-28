@@ -25,6 +25,8 @@ function App({images, next_cursor}) {
     });
   };
 
+  
+
   return (
     <div>
       <input
@@ -41,7 +43,7 @@ function App({images, next_cursor}) {
         {images.map((image) => {
           return (
             <div key={image.id}>
-              <a href={image.link} rel="noerferrer">
+              <a href={image.link} rel="preload">
                 <div>
                   <Image
                     width={image.width}
