@@ -2,12 +2,29 @@ import React, { useState } from "react";
 import Axios from "axios";
 import Image from "next/image";
 
-function App({images, next_cursor}) {
+interface CloudinaryResource {
+  asset_id: string;
+  public_id: string;
+  secure_url: string;
+  width: number;
+  height: number;
+}
+
+interface Image {
+  id: string;
+  link: string;
+  width: number;
+  height: number;
+  image: string;
+  title: string;
+}
+
+function App({images, next_cursor}: { images:  Image[], next_cursor: string }) {
   // console.log("images", images);
   // console.log("next_cursor", next_cursor);
 
   //Ini function untuk upload file
-  const [imageSelected, setImageSelected] = useState();
+  const [imageSelected, setImageSelected] = useState<File | undefined>();
   const uploadImage = () => {
     // console.log(files[0]);
     const formData = new FormData();
@@ -32,7 +49,9 @@ function App({images, next_cursor}) {
       <input
         type="file"
         onChange={(event) => {
-          setImageSelected(event.target.files[0]);
+          if (event.target.files && event.target.files.length > 0) {
+            setImageSelected(event.target.files[0]);
+          }
         }}
       />
       <button onClick={uploadImage}> Upload Image</button>
@@ -61,6 +80,7 @@ function App({images, next_cursor}) {
     </div>
   );
 }
+
 export default App;
 
 export async function getStaticProps() {
@@ -72,7 +92,7 @@ export async function getStaticProps() {
 
   const { resources, next_cursor:nextCursor } = results;
 
-  const images = resources.map(resource=>{
+  const images = resources.map((resource: CloudinaryResource)=>{
     const { width, height } = resource;
     return{
       id: resource.asset_id,
