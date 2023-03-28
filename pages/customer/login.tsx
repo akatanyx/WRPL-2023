@@ -89,18 +89,18 @@ export default function Login() {
           </div>
 
           {/* Button Login */}
-          <div
-            className="flex justify-center items-center w-[290px] h-[44px] 
-                                bg-[#EC7505] rounded-lg shadow-lg mt-2"
-          >
             <button
               type="submit"
               value="Login"
-              className="text-white font-semibold font-poppins text-[19px]"
+              className="flex justify-center items-center w-[290px] h-[44px] 
+              bg-[#EC7505] rounded-lg shadow-lg mt-2"
             >
-              Login
+              <h1
+                className="text-white font-semibold font-poppins text-[19px]"
+              >
+                Login
+              </h1>
             </button>
-          </div>
         </form>
 
         {/* tidak punya akun */}

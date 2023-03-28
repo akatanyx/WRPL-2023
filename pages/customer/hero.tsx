@@ -54,7 +54,7 @@ export default function hero () {
 
             {/* Kategori */}
             <div className="flex justify-center items-center">
-                <div className="flex justify-center items-center flex-wrap gap-5 lg:w-full">
+                <div className="grid grid-cols-3 gap-5 lg:flex lg:justify-center lg:w-full">
                         <Card_Kategori />
                         <Card_Kategori />
                         <Card_Kategori />

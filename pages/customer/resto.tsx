@@ -1,8 +1,11 @@
 import Head from 'next/head'
-import C_Header from '@/components/Customer/C_Header'
 import Dropdown_Makanan from '@/components/Customer/Resto/Dropdown_Makanan';
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import { useState } from 'react';
+import Image from 'next/image'
+
+import bg from '/public/banner_toko.svg'
+import card from '/public/card.svg'
 
 export default function resto () {
 
@@ -11,47 +14,51 @@ export default function resto () {
             <Head>
                 <title>Resto</title>
             </Head>
-
-            <div>
-                <C_Header />
-            </div>
             
             {/* Card Ingfo Toko */}
-            <div className='flex m-6 shadow-lg'>
-                <div>
-                    <img src="/icon_toko_pp.svg" alt="" className='rounded-lg'/>
-                </div>
-                <div className='flex flex-col justify-center px-6 '>
-                    {/* Masih belum bisa break-words */}
-                    <h1 className='break-words font-semibold text-[21px] font-poppins'>Anteiku</h1>
-                    {/* Nama jalan */}
-                    <p className='text-[15px] font-poppins break-words'>District 10</p>
-                    
-                    <div className='flex'>
-                        <img src="/icon_star.svg" alt="" className='w-[18px] h-[18px]'/>
-                        <p className='font-poppins font-semibold text-[15px]'>5.0</p>
-                    </div>
-                </div>
+
+            <div className='relative'>
+                <Image
+                src={ bg }
+                width={ 500 }
+                height={ 500 }
+                alt="Picture of the author"
+                ></Image>
+
+                <h1>memek</h1>
             </div>
+
+            {/* <div className='' 
+            style={{
+                backgroundImage: "url('/banner_toko.svg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                minHeight: "100vh",
+            }}>
+
+            </div> */}
+
+            <div>
+                <div className='m-6 '>
+                    <Dropdown_Makanan>
+                        Promo Hari Ini
+                    </Dropdown_Makanan>
+                </div>
+
+                <div className='m-6 '>
+                    <Dropdown_Makanan>
+                        Makanan
+                    </Dropdown_Makanan>
+                </div>
+
+                <div className='m-6 '>
+                    <Dropdown_Makanan>
+                        Minuman
+                    </Dropdown_Makanan>
+                </div>
+            </div>            
             
-            {/* Aku lebih suka div parrent nya di page dan bukan di komponen ehe     */}
-            <div className='m-6 '>
-                <Dropdown_Makanan>
-                    Promo Hari Ini
-                </Dropdown_Makanan>
-            </div>
-
-            <div className='m-6 '>
-                <Dropdown_Makanan>
-                    Makanan
-                </Dropdown_Makanan>
-            </div>
-
-            <div className='m-6 '>
-                <Dropdown_Makanan>
-                    Minuman
-                </Dropdown_Makanan>
-            </div>
 
             {/* Navbar */}
             <div>
