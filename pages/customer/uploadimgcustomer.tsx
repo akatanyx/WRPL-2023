@@ -1,30 +1,10 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import { CloudinaryImage } from "@cloudinary/url-gen";
-import { mapImageResources, search } from "@/src/lib/cloudinary";
 import Image from "next/image";
 
-// interface Gambar {
-//   id: string;
-//   title: string;
-//   image: string;
-//   link:string;
-//   width: number;
-//   height: number;
-// }
-
-// interface GambarProps {
-//   gambars:Gambar[];
-// }
-
 function App({images, next_cursor}) {
-  //Ini tampilin file yang sudah di upload
-  // const myImage = new CloudinaryImage("jgeoz0cjgypfkguitmi3.jpg", {
-  //   cloudName: "prema-cloud",
-  // });
-
-  console.log("images", images);
-  console.log("next_cursor", next_cursor);
+  // console.log("images", images);
+  // console.log("next_cursor", next_cursor);
 
   //Ini function untuk upload file
   const [imageSelected, setImageSelected] = useState();
@@ -34,11 +14,11 @@ function App({images, next_cursor}) {
     if (imageSelected) {
       formData.append("file", imageSelected);
       formData.append("upload_preset", "prema_upload123");
-      formData.append("folder", "Letseat");
+      // formData.append("folder", "Letseat");
     }
 
     Axios.post(
-      `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
+      `https://api.cloudinary.com/v1_1/prema-cloud/image/upload`,
       formData
     ).then((response) => {
       console.log(response);
@@ -60,7 +40,7 @@ function App({images, next_cursor}) {
         <h1>My images</h1>
         {images.map((image) => {
           return (
-            <li key={image.id}>
+            <div key={image.id}>
               <a href={image.link} rel="noerferrer">
                 <div>
                   <Image
@@ -72,7 +52,7 @@ function App({images, next_cursor}) {
                 </div>
                 <h3>{image.title}</h3>
               </a>
-            </li>
+            </div>
           );
         })}
       </div>
@@ -101,7 +81,6 @@ export async function getStaticProps() {
     } 
 });
   // const gambars:Gambar[] = await results.json();
-
   return {
     props: {
       images,
