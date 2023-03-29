@@ -73,15 +73,17 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Card_Menu from '@/components/Merchant/List Menu/Card_Menu';
 
 interface Result {
   _id: string;
   nama: string;
-  harga: string;
+  harga: number;
   desk: string;
   tag: string;
   kategori: string;
   rating: string;
+  imgURL: string;
 }
 
 export default function SearchPage() {
@@ -108,37 +110,42 @@ export default function SearchPage() {
     const results = await response.json();
     setSearchResults(results);
   }
-  
 
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
         <form className="flex items-center px-2 w-80" onSubmit={handleSearch}>
-          <div className="relative w-full drop-shadow-2xl">
+          <div className="relative w-full drop-shadow">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <img src="icon_search.svg" alt="" />
             </div>
+            <div 
+              className="bg-white flex text-black font-poppins
+              text-base rounded-3xl block w-full pl-10 p-2.5 border
+              border-black border-opacity-20 focus:outline-none">
             <input
               type="text"
               placeholder="e.g. Ayam Goreng"
               required
-              className="bg-white text-black font-poppins text-base rounded-3xl block w-full pl-10 p-2.5 border border-black border-opacity-20 focus:outline-none"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
             />
-          </div>
-          <button className="bg-white text-black font-poppins" type="submit">
-            Search
+            <button className="bg-white text-black font-poppins" type="submit">
+          <img className="h-[25px] w-[25px] " src="/icon_nav_c_search.svg"/> 
           </button>
+          </div>
+          </div>
+          
         </form>
         <ul>
           {searchResults.map((result) => (
-            <li key={result._id}>
-              <div>{result.nama}</div>
-              <div>{result.harga}</div>
-              <div>{result.desk}</div>
-              <div>{result.rating}</div>
-            </li>
+            <Card_Menu 
+            key={result._id}  
+            nama={result.nama}
+            harga={result.harga}
+            desk={result.desk}
+            imgURL={result.imgURL}
+            />
           ))}
         </ul>
       </div>

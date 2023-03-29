@@ -11,7 +11,7 @@ const C_Navbar = () => {
                 <div className="flex justify-between transform origin-top">
                     <ul >
                         <Link
-                            href="/customer"
+                            href="/customer/hero"
                             className= {router.pathname === '/Customer' ? 'p-2 flex flex-col items-center justify-center' : 
                                 'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
