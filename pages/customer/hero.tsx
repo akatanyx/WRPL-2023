@@ -96,7 +96,7 @@ export default function hero({posts}: PostsProps) {
           </Link>
         </div>
 
-        <div className=" flex flex-wrap gap-3 justify-between lg:justify-center lg:gap-x-4">
+        <div className=" flex flex-wrap gap-3 justify-evenly lg:justify-center lg:gap-x-4">
           
             {posts.map((post, index)=> index < 2 && ( 
                 <Card_Favorit

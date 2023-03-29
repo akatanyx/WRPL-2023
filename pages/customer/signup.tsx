@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function signup() {
+export default function Signup() {
     const [nama, setNama] = useState('');
     const [email, setEmail] = useState('');
     const phone = null; // set phone to null
@@ -44,7 +44,7 @@ export default function signup() {
             </div>
 
             {/* Signup*/}
-            <div className="flex flex-col mx-[37px] mt-6 gap-y-3">
+            <div className="flex flex-col mx-[37px] mt-6 gap-y-3 justify-content items-center h-screen w-full">
                 <h1 className="font-poppins font-bold text-[24px]">Register</h1>
 
                 <form className="flex flex-col gap-y-3 mt-1" onSubmit={handleSubmit}>
