@@ -18,7 +18,6 @@ interface PostsProps {
   posts: Post[];
 }
 
-
 export default function list_menu({ posts }:PostsProps) {;
   return (
     <>
@@ -36,7 +35,7 @@ export default function list_menu({ posts }:PostsProps) {;
               nama={post.nama}
               desk={post.desk}
               harga={post.harga}
-              imgUrl={post.imgURL}
+              imgURL={post.imgURL}
             />
             ))}    
         </div>

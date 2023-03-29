@@ -23,8 +23,7 @@ export default function Card_Menu ({ nama, desk, harga, imgURL} : CardMenuProps)
             <div className='flex shadow-lg w-[314px] rounded-lg md:w-full relative'>
 
                 {/* Foto Makanan */}
-                <Image priority src={imgURL} height={130} width={130} alt="" className='rounded-lg p-4 w-auto h-auto'/>
-                    
+                <Image src={imgURL} alt="" height={130} width={130} className='rounded-lg p-4'/>                    
                 <div className='flex flex-col justify-center relative -translate-y-3'>
                     
                     {/* Tag */}

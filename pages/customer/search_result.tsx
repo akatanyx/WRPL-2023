@@ -71,9 +71,9 @@
 //   );
 // }
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Card_Menu from '@/components/Merchant/List Menu/Card_Menu';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Card_Menu from "@/components/Merchant/List Menu/Card_Menu";
 
 interface Result {
   _id: string;
@@ -90,7 +90,7 @@ export default function SearchPage() {
   const router = useRouter();
   const { query } = router;
 
-  const [searchQuery, setSearchQuery] = useState(query.query?.toString() || '');
+  const [searchQuery, setSearchQuery] = useState(query.query?.toString() || "");
   const [searchResults, setSearchResults] = useState<Result[]>([]);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function SearchPage() {
     fetchData();
     router.push(`/customer/search_result?query=${searchQuery}`);
   }
-  
+
   async function fetchData() {
     const response = await fetch(`/api/search?query=${searchQuery}`);
     const results = await response.json();
@@ -119,32 +119,39 @@ export default function SearchPage() {
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <img src="icon_search.svg" alt="" />
             </div>
-            <div 
+            <div
               className="bg-white flex text-black font-poppins
               text-base rounded-3xl block w-full pl-10 p-2.5 border
-              border-black border-opacity-20 focus:outline-none">
-            <input
-              type="text"
-              placeholder="e.g. Ayam Goreng"
-              required
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-            />
-            <button className="bg-white text-black font-poppins" type="submit">
-          <img className="h-[25px] w-[25px] " src="/icon_nav_c_search.svg"/> 
-          </button>
+              border-black border-opacity-20 focus:outline-none"
+            >
+              <button
+                className="bg-white text-black font-poppins"
+                type="submit"
+              >
+                <img
+                  className="h-[25px] w-[25px] "
+                  src="/icon_nav_c_search.svg"
+                />
+              </button>
+              <input
+                type="text"
+                placeholder="e.g. Ayam Goreng"
+                required
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+              />
+              
+            </div>
           </div>
-          </div>
-          
         </form>
         <ul>
           {searchResults.map((result) => (
-            <Card_Menu 
-            key={result._id}  
-            nama={result.nama}
-            harga={result.harga}
-            desk={result.desk}
-            imgURL={result.imgURL}
+            <Card_Menu
+              key={result._id}
+              nama={result.nama}
+              harga={result.harga}
+              desk={result.desk}
+              imgURL={result.imgURL}
             />
           ))}
         </ul>
@@ -152,4 +159,3 @@ export default function SearchPage() {
     </div>
   );
 }
-
