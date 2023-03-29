@@ -7,13 +7,13 @@ const C_Navbar = () => {
     return (
         <>
             <div className="mt-20"></div>
-            <nav className="block fixed inset-x-0 bottom-0 z-10 bg-white px-8 w-screen">
-                <div className="flex justify-between transform origin-top">
+            <nav className="block fixed inset-x-0 bottom-0 shadow-lg z-10 bg-white px-[35px] py-[18px] w-screen">
+                <div className="flex justify-center gap-x-[41px] transform origin-top">
                     <ul >
                         <Link
                             href="/customer/hero"
-                            className= {router.pathname === '/customer/hero' ? 'p-2 flex flex-col items-center justify-center' : 
-                                'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
+                            className= {router.pathname === '/customer/hero' ? ' flex flex-col items-center justify-center' : 
+                                'grayscale  flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">
                             <div>
@@ -25,8 +25,8 @@ const C_Navbar = () => {
                     <ul >
                         <Link
                             href="#"
-                            className= {router.pathname === '/BELOMCOY' ? 'p-2 flex flex-col items-center justify-center' : 
-                                'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
+                            className= {router.pathname === '/BELOMCOY' ? ' flex flex-col items-center justify-center' : 
+                                'grayscale  flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">
                             <div>
@@ -38,8 +38,8 @@ const C_Navbar = () => {
                     <ul >
                         <Link
                             href="#"
-                            className= {router.pathname === '/BELOMCOY' ? 'p-2 flex flex-col items-center justify-center' : 
-                                'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
+                            className= {router.pathname === '/BELOMCOY' ? ' flex flex-col items-center justify-center' : 
+                                'grayscale  flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">
                             <div>
@@ -51,8 +51,8 @@ const C_Navbar = () => {
                     <ul >
                         <Link
                             href="#"
-                            className= {router.pathname === '/BELOMCOY' ? 'p-2 flex flex-col items-center justify-center' : 
-                                'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
+                            className= {router.pathname === '/BELOMCOY' ? ' flex flex-col items-center justify-center' : 
+                                'grayscale  flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">
                             <div>
@@ -64,8 +64,8 @@ const C_Navbar = () => {
                     <ul >
                         <Link
                             href="/customer/profilcust"
-                            className= {router.pathname === '/customer/profilcust' ? 'p-2 flex flex-col items-center justify-center' : 
-                                'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
+                            className= {router.pathname === '/customer/profilcust' ? ' flex flex-col items-center justify-center' : 
+                                'grayscale  flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">
                             <div>

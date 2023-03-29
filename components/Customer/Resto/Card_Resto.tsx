@@ -1,8 +1,18 @@
+import { useState } from "react";
 import Tag_Makanan from "./Tag_Makanan"
 
+import Popup_addcart from "./Popup_addcart"
+
 export default function Card_Resto () {
+
+    const [showMyModal, setShowMyModal] = useState(false);
+
+    const closeModal = () => setShowMyModal(false);
+
+    
     return (
         <>
+            {showMyModal && <Popup_addcart closeModal={closeModal} />}
             <div className='flex shadow-lg w-[314px] rounded-lg md:w-full relative'>
 
                 {/* Foto Makanan */}
@@ -47,6 +57,7 @@ export default function Card_Resto () {
                 {/* Add to Cart */}
                 <div className="absolute bottom-4 right-3">
                     <button 
+                    onClick = {() => setShowMyModal(true)}
                     className='border bg-white rounded-xl border-[#EC7505]  
                     w-[67px] h-[18px] flex justify-center items-baseline '
                     >

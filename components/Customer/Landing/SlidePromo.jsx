@@ -30,8 +30,8 @@ export default function SlidePromo () {
         // Setingan efek coverflow
         coverflowEffect={{
           rotate: 0,
-          stretch: 10,
-          depth: 100,
+          stretch: 23,
+          depth: 0,
           modifier: 1,
           slideShadows: false,
           }}

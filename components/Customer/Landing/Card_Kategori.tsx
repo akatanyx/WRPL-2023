@@ -5,8 +5,13 @@ export default function Card_Kategori () {
         <>
             <Link href="#" >
                     <div className="flex flex-col items-center">
-                        <img src="/icon_kategori.svg" alt=""/>
-                        <h1 className="font-poppins font-semibold text-[12px] -translate-y-1"
+                        {/* Gambar Kategori */}
+                        <img 
+                        src="/icon_kategori.svg" 
+                        className='w-[93px] h-[93px]'/>
+
+                        {/* Nama Kategori */}
+                        <h1 className="font-poppins font-semibold text-[15px] -translate-y-1"
                         >
                         Dessert
                         </h1>
