@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function signup_resto() {
+export default function Signup_resto() {
     const [nama, setNama] = useState('');
     const [jam_buka, setBuka] = useState('');
     const [jam_tutup, setTutup] = useState('');

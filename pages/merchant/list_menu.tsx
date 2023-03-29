@@ -18,7 +18,7 @@ interface PostsProps {
   posts: Post[];
 }
 
-export default function list_menu({ posts }:PostsProps) {;
+export default function list_menu({ posts }:PostsProps) {
   return (
     <>
       <div>
