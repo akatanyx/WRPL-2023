@@ -74,6 +74,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Card_Menu from "@/components/Merchant/List Menu/Card_Menu";
+import Image from "next/image";
 
 interface Result {
   _id: string;
@@ -117,7 +118,7 @@ export default function SearchPage() {
         <form className="flex items-center px-2 w-80" onSubmit={handleSearch}>
           <div className="relative w-full drop-shadow">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <img src="icon_search.svg" alt="" />
+              <Image src="icon_search.svg" alt="" width={20} height={20} />
             </div>
             <div
               className="bg-white flex text-black font-poppins
@@ -128,9 +129,11 @@ export default function SearchPage() {
                 className="bg-white text-black font-poppins"
                 type="submit"
               >
-                <img
-                  className="h-[25px] w-[25px] "
+                <Image
+                  height={25}
+                  width={25}
                   src="/icon_nav_c_search.svg"
+                  alt=""
                 />
               </button>
               <input
