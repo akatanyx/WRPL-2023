@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 export default function signup() {
     const [nama, setNama] = useState('');
     const [email, setEmail] = useState('');
+    const phone = null; // set phone to null
+    const imgURL = null;
     const [password, setPassword] = useState('');
     const [repassword, setRepassword] = useState('');
     const router = useRouter();
@@ -16,7 +18,7 @@ export default function signup() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ nama, email, password, repassword }),
+            body: JSON.stringify({ nama, email, phone, imgURL, password, repassword}),
         });
         if (response.ok) {
             router.push('/customer/login');

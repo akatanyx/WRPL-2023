@@ -49,7 +49,8 @@ interface User {
   id: string;
   name: string;
   email: string;
-  role: string;
+  phone: string;
+  imgURL: string;
 }
 
 const authOptions: NextAuthOptions = {
@@ -75,8 +76,10 @@ const authOptions: NextAuthOptions = {
           // if everything is fine
           return {
             id: user._id.toHexString(),
-            name: user.name,
+            name: user.nama,
             email: user.email,
+            phone: user.phone,
+            imgURL: user.imgURL,
           } as User;
         } else {
           return null;

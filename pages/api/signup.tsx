@@ -17,6 +17,8 @@ export default async function handler(req: any, res: any) {
           data = { 
             nama: req.body.nama, 
             email: req.body.email,
+            phone: req.body.phone,
+            imgURL: req.body.imgURL,
             password: req.body.password, 
             repassword: req.body.repassword 
           };
