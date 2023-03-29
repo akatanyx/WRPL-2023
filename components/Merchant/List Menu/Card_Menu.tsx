@@ -9,10 +9,10 @@ interface CardMenuProps {
     nama: string;
     desk: string;
     harga: number;
-    imgUrl: string;
+    imgURL: string;
   }
 
-export default function Card_Menu ({ nama, desk, harga, imgUrl} : CardMenuProps) {
+export default function Card_Menu ({ nama, desk, harga, imgURL} : CardMenuProps) {
     const [showMyModal, setShowMyModal] = useState(false);
 
     const closeModal = () => setShowMyModal(false);
@@ -23,7 +23,7 @@ export default function Card_Menu ({ nama, desk, harga, imgUrl} : CardMenuProps)
             <div className='flex shadow-lg w-[314px] rounded-lg md:w-full relative'>
 
                 {/* Foto Makanan */}
-                <Image priority src={imgUrl} height={130} width={130} alt="" className='rounded-lg p-4 w-auto h-auto'/>
+                <Image priority src={imgURL} height={130} width={130} alt="" className='rounded-lg p-4 w-auto h-auto'/>
                     
                 <div className='flex flex-col justify-center relative -translate-y-3'>
                     

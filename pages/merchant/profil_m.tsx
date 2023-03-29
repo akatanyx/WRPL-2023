@@ -76,7 +76,7 @@ export default function profil_sel() {
           <h1 className="font-bold text-base text-white">Edit Profile</h1>
         </button>
         <div className="p-2">
-          <Link href="/">
+          <Link href="/customer/hero">
             <button className="bg-[#D84A05] p-2 rounded-lg shadow-md shadow-slate-300">
               <h1 className="font-bold text-base text-white">
                 Kembali ke Customer
