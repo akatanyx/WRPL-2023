@@ -16,7 +16,7 @@ export default function SearchPage() {
         <form className="flex items-center px-2 w-80" onSubmit={handleSearch}>
           <div className="relative w-full drop-shadow-2xl">
             <div
-              className="bg-white flex text-black font-poppins
+              className="bg-white text-black font-poppins
                 text-base rounded-3xl block w-full pl-4 p-2.5 border
                 border-black border-opacity-20 focus:outline-none"
             >
