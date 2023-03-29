@@ -12,7 +12,7 @@ const C_Navbar = () => {
                     <ul >
                         <Link
                             href="/customer/hero"
-                            className= {router.pathname === '/Customer' ? 'p-2 flex flex-col items-center justify-center' : 
+                            className= {router.pathname === '/customer/hero' ? 'p-2 flex flex-col items-center justify-center' : 
                                 'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">
@@ -63,8 +63,8 @@ const C_Navbar = () => {
                     </ul>
                     <ul >
                         <Link
-                            href="#"
-                            className= {router.pathname === '/BELOMCOY' ? 'p-2 flex flex-col items-center justify-center' : 
+                            href="/customer/profilcust"
+                            className= {router.pathname === '/customer/profilcust' ? 'p-2 flex flex-col items-center justify-center' : 
                                 'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">

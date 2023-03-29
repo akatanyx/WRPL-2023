@@ -121,7 +121,7 @@ export default function SearchPage() {
             </div>
             <div 
               className="bg-white flex text-black font-poppins
-              text-base rounded-3xl block w-full pl-10 p-2.5 border
+              text-base rounded-3xl w-full pl-10 p-2.5 border
               border-black border-opacity-20 focus:outline-none">
             <input
               type="text"
