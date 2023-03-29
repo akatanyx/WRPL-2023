@@ -16,9 +16,7 @@ export default async function handler(req: any, res: any) {
         case 'user':
           data = { 
             nama: req.body.nama, 
-            email: req.body.email, 
-            username: req.body.username, 
-            no: req.body.no, 
+            email: req.body.email,
             password: req.body.password, 
             repassword: req.body.repassword 
           };
