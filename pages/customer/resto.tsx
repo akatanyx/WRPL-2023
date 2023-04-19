@@ -20,14 +20,14 @@ export default function resto () {
                     {/* Back to resto near you page */}
                     <Link href='/customer/resto_near_you'>
                         <img src="/icon_c_toko_back.svg " 
-                        className='absolute z-10 left-4 translate-y-4'/>
+                        className='absolute z-10 left-[19px] translate-y-[22px]'/>
                     </Link>
                     
                     {/* Share Button */}
                     {/* Nothing Happened */}
                     <button>
                         <img src="/icon_c_toko_share.svg" 
-                        className='absolute z-10 right-4 translate-y-4' />
+                        className='absolute z-10 right-[19px] translate-y-[22px]' />
                     </button>               
                 </div>       
             </div>
@@ -38,7 +38,7 @@ export default function resto () {
                 
                 <div className='w-[287px] h-[127px] bg-white rounded-xl shadow-lg
                 flex flex-col items-center justify-center z-10
-                absolute -translate-x-1/2 translate-y-[168px] left-1/2 top-1/2'>
+                absolute -translate-x-1/2 translate-y-[170px] left-1/2 top-1/2'>
                     
                     {/* Logo Resto */}
                     <img 
@@ -71,27 +71,27 @@ export default function resto () {
             </div>
 
             {/* Content */}
-            <div className='translate-y-64 rounded-t-xl bg-white w-full'>
+            <div className='translate-y-[258px] rounded-t-xl bg-white w-full '>
                 <div className='py-2 text-white'>a</div>
-                <div className='m-6 '>
+                <div className='mb-[13px] mt-[25px] mx-[22px] m'>
                     <Dropdown_Makanan>
                         Promo Hari Ini
                     </Dropdown_Makanan>
                 </div>
 
-                <div className='m-6 '>
+                <div className='my-[13px] mx-[22px]'>
                     <Dropdown_Makanan>
                         Best Seller
                     </Dropdown_Makanan>
                 </div>
 
-                <div className='m-6 '>
+                <div className='my-[13px] mx-[22px]'>
                     <Dropdown_Makanan>
                         Makanan
                     </Dropdown_Makanan>
                 </div>
 
-                <div className='m-6 '>
+                <div className='my-[13px] mx-[22px]'>
                     <Dropdown_Makanan>
                         Minuman
                     </Dropdown_Makanan>

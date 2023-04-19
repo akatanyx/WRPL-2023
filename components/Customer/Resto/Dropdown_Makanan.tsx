@@ -23,7 +23,7 @@ export default function Dropdown_Makanan ({ children }: any) {
                 }}>
                 {/* Card List Menu */}
                 
-                    <div className='flex flex-col gap-y-3 mt-2'>
+                    <div className='flex flex-col gap-y-[17px] mt-2'>
                         <Card_Resto />
                         <Card_Resto />
                         <Card_Resto />

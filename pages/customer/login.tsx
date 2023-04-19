@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <>
       {/* Navigasi Back To Index */}
-      <div className="mx-[27px] my-[27px]">
+      <div className="m-[27px]">
         <Link href="/customer">
           <button>
             <img src="/icon_login_arrow_back.svg" alt="" />
@@ -44,7 +44,7 @@ export default function Login() {
       {/* Login */}
       <div className="flex flex-col mx-[37px] mt-6 gap-y-3 md:items-center">
         <h1 className="font-poppins font-bold text-[24px]">Login</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-y-3 mt-1">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-y-5 mt-1">
           {/* Email */}
           <div >
             <input
@@ -73,7 +73,7 @@ export default function Login() {
 
           <div className="flex items-center text-center px-1 w-72 justify-between">
             {/* Remember me */}
-            <div className="flex ">
+            <div className="flex">
               <input type="checkbox" className="mr-2 rounded-lg" />
               <p className="font-poppins text-[12px]">Remember me</p>
             </div>
@@ -92,8 +92,8 @@ export default function Login() {
             <button
               type="submit"
               value="Login"
-              className="flex justify-center items-center w-[290px] h-[44px] 
-              bg-[#EC7505] rounded-lg shadow-lg mt-2"
+              className="flex justify-center items-center w-[290px] h-[53px] 
+              bg-[#EC7505] rounded-lg shadow-lg mt-[19px]"
             >
               <h1
                 className="text-white font-semibold font-poppins text-[19px]"
@@ -104,7 +104,7 @@ export default function Login() {
         </form>
 
         {/* tidak punya akun */}
-        <div className="flex flex-row justify-center font-poppins ">
+        <div className="flex flex-row justify-center font-poppins mt-[12px] ">
           <h2 className="text-sm">
             Don't have an account?{" "}
             <Link href="/customer/signup">

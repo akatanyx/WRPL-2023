@@ -16,9 +16,11 @@ export default function Card_Resto () {
             <div className='flex shadow-lg w-[314px] rounded-lg md:w-full relative'>
 
                 {/* Foto Makanan */}
-                <img src="/icon_makanan.svg" alt="" className='rounded-lg p-4 w-[130px] h-[130px]'/>
+                <img src="/icon_makanan.svg" alt="" 
+                className='rounded-lg px-4 py-[19px] w-[130px] h-[130px]'
+                />
                     
-                <div className='flex flex-col justify-center relative -translate-y-3'>
+                <div className='flex flex-col justify-center relative'>
                     
                     {/* Tag */}
                     <div className="flex mb-1 gap-x-1">
@@ -47,15 +49,15 @@ export default function Card_Resto () {
                         <p className='font-poppins font-semibold text-[10px] text-[#838080] line-through'>20.000</p>
                     </div>
 
-                    {/* Like */}
-                    <div className='flex items-center gap-x-1'>
-                        <img src="/icon_like_menu.svg" alt="" />
-                        <p className='font-semibold font-poppins text-[10px] text-[#EC7505]'>50000</p>
+                    {/* Rating */}
+                    <div className='flex items-start'>
+                        <img src="/icon_star.svg" className="w-[12px]" alt="" />
+                        <p className='font-semibold font-poppins text-[10px] translate-x-0.5'>4.7</p>
                     </div>
                 </div>
 
                 {/* Add to Cart */}
-                <div className="absolute bottom-4 right-3">
+                <div className="absolute bottom-4 right-4">
                     <button 
                     onClick = {() => setShowMyModal(true)}
                     className='border bg-white rounded-xl border-[#EC7505]  
