@@ -20,7 +20,7 @@ export default function resto_near_you({ posts }: PostsProps) {
   return (
     <>
     <div>
-    <Head>
+      <Head>
         <title>Restaurant Near You</title>
       </Head>
 

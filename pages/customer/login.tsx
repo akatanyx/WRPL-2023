@@ -104,7 +104,7 @@ export default function Login() {
         </form>
 
         {/* tidak punya akun */}
-        <div className="flex flex-row justify-center font-poppins mt-[12px] ">
+        <div className="flex flex-row justify-center font-poppins">
           <h2 className="text-sm">
             Don't have an account?{" "}
             <Link href="/customer/signup">
@@ -114,6 +114,8 @@ export default function Login() {
             </Link>
           </h2>
         </div>
+
+        <div className="mb-[58px]"/>
       </div>
     </>
   );

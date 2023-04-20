@@ -51,8 +51,8 @@ export default function Card_Resto () {
 
                     {/* Rating */}
                     <div className='flex items-start'>
-                        <img src="/icon_star.svg" className="w-[12px]" alt="" />
-                        <p className='font-semibold font-poppins text-[10px] translate-x-0.5'>4.7</p>
+                        <img src="/icon_star.svg" className="w-[14px]" alt="" />
+                        <p className='font-semibold font-poppins text-[12px] translate-x-0.5'>4.7</p>
                     </div>
                 </div>
 

@@ -30,7 +30,7 @@ export default function Signup() {
     return (
         <>
             {/* Navigasi Back To Index */}
-            <div className="mx-[27px] my-[27px]">
+            <div className="mx-[27px] my-[29px]">
                 <Link href='/customer'>
                     <button>
                         <img src="/icon_login_arrow_back.svg" alt="" />
@@ -38,23 +38,26 @@ export default function Signup() {
                 </Link>
             </div>
 
-            {/* Image */}
-            <div className="flex justify-center">
-                <img src="/signup_c_image.svg" alt="" />
-            </div>
+            {/* Image */}           
+            <img src="/signup_c_image.svg" alt="" 
+            className='mx-auto'/>
 
             {/* Signup*/}
-            <div className="flex flex-col mx-[37px] mt-6 gap-y-3 justify-content items-center h-screen w-full">
-                <h1 className="font-poppins font-bold text-[24px]">Register</h1>
+            <div className="flex flex-col mt-10 gap-y-3 w-full">
+                <h1 className="mx-[37px] font-poppins font-bold text-[24px]
+                sm:mx-auto
+                ">
+                    Register
+                </h1>
 
-                <form className="flex flex-col gap-y-3 mt-1" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-y-5 mt-4 items-center" onSubmit={handleSubmit}>
 
                     {/* Nama */}
                     <div>
                         <input
                             type="text"
-                            className=" border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins 
-                                    text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
+                            className=" border border-[#9A9A9A] rounded-lg h-[53px] font-poppins 
+                                    w-[290px] text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
                             placeholder="Nama"
                             value={nama}
                             onChange={(e) => setNama(e.target.value)}
@@ -65,7 +68,7 @@ export default function Signup() {
                     <div>
                         <input
                             type="text"
-                            className=" border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins 
+                            className=" border border-[#9A9A9A] rounded-lg w-[290px] h-[53px] font-poppins 
                                     text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
                             placeholder="Email"
                             value={email}
@@ -77,7 +80,7 @@ export default function Signup() {
                     <div>
                         <input
                             type="password"
-                            className=" border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins
+                            className=" border border-[#9A9A9A] rounded-lg w-[290px] h-[53px] font-poppins
                                     text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
                             placeholder="Password"
                             value={password}
@@ -89,7 +92,7 @@ export default function Signup() {
                     <div>
                         <input
                             type="password"
-                            className=" border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins
+                            className=" border border-[#9A9A9A] rounded-lg w-[290px] h-[53px] font-poppins
                                     text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
                             placeholder="Re-enter Password"
                             value={repassword}
@@ -117,6 +120,8 @@ export default function Signup() {
                         </Link>
                     </h2>
                 </div>
+
+                <div className='mb-5'/>
             </div>
         </>
     )

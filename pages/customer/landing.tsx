@@ -16,13 +16,18 @@ export default function landing () {
                     Pesan makanan dari restoran terbaik dengan satu sentuhan di aplikasi kami
                 </p>
             </div>
-
-            <Link href='/customer/login' className='flex justify-center items-center w-[314px] h-[44px] 
-                                    bg-[#EC7505] bottom-10 absolute rounded-lg shadow-lg'>
-                <button className="text-white font-poppins text-[19px]">
-                        Login Sekarang
+            
+            <div className='mt-[78px] mb-[39px]'>
+                <button
+                className='flex justify-center items-center w-[314px] h-[44px] 
+                bg-[#EC7505] rounded-lg shadow-lg
+                '>
+                    <Link href='/customer/login' 
+                        className="text-white font-poppins text-[19px]">
+                                Login Sekarang
+                    </Link>
                 </button>
-            </Link>
+            </div>
         </div>
     </>
   )
