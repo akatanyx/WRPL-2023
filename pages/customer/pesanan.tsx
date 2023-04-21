@@ -1,8 +1,23 @@
 import Head from "next/head";
 import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
+import { useState } from "react";
 
-export default function pesanan () {
+export default function Pesanan () {
+  // State for keeping track of the quantity in the parent component
+  const [quantity, setQuantity] = useState(1);
+
+  // Callback function to handle updating the quantity in the parent component
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+  };
+
+  // Item price
+  const itemPrice = 15000; // Update this with the actual item price
+  const biayaPengiriman = 30000;
+  const biayaAplikasi = 5000;
+  // Calculate total price based on quantity
+  const totalPrice = quantity * itemPrice + biayaPengiriman + biayaAplikasi;
     return (
         <>
             <Head>
@@ -15,11 +30,7 @@ export default function pesanan () {
 
             {/* Card Pesanan */}
             <div className="flex flex-col gap-y-[14px] mt-[27px] mx-[23px]">
-                <Card_Pesanan />
-                <Card_Pesanan />
-                <Card_Pesanan />
-                <Card_Pesanan />
-                <Card_Pesanan />
+                <Card_Pesanan onQuantityChange={handleQuantityChange}/>
             </div>
             
             {/* Apply Promo */}
@@ -36,7 +47,7 @@ export default function pesanan () {
                 {/* Total Harga */}
                 <div className="bg-[#EC7505] h-[46px] rounded-lg flex items-center pl-[17px]">
                     <h1 className="text-white font-semibold text-[25px]">
-                        Rp.120.000
+                        {totalPrice}
                     </h1>
                 </div>
 
@@ -48,7 +59,7 @@ export default function pesanan () {
                         {/* Nama Menu dan Jumlah Menu */}
                         <div className="flex justify-between w-[281px]">
                             <h1 className="text-[#7C3D02] font-medium text-[16px]  ">Kopi Hitam</h1>
-                            <p className="text-[#7C3D02] font-medium text-[16px]">x 2</p>
+                            <p className="text-[#7C3D02] font-medium text-[16px]">x {quantity}</p>
                         </div>
                         {/* Harga Menu Total */}
                         <p className="text-[#E4740B] font-semibold text-[14px] -translate-y-1">
