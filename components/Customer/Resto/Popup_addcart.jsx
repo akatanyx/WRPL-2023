@@ -12,11 +12,13 @@ const Popup_addcart = ({closeModal}) => {
             </div>
 
             
-            <div className="z-20 absolute
-              flex flex-col items-center justify-center -translate-x-[22px]">
+            <div className="z-20 absolute 
+              flex flex-col items-center justify-center -translate-x-[22px]
+              md:w-[360px] md:-translate-x-1/2 md:left-1/2
+              ">
               
               {/* Nama Makanan */}
-              <h1 className="bg-[#EC7505] rounded-t-lg w-screen h-[68px] translate-y-[10px]
+              <h1 className="bg-[#EC7505] rounded-t-lg w-full h-[68px] translate-y-[10px]
               text-white font-poppins font-semibold text-[24px] flex justify-center items-center">
                 Ayam Goreng
               </h1>
