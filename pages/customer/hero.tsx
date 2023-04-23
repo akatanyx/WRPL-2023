@@ -166,7 +166,7 @@ export default function hero({posts}: PostsProps) {
           <h1 className=" font-poppins font-semibold text-xl w-[221px] ">
             Restaurant Near You
           </h1>
-          <Link href="#">
+          <Link href="/customer/resto_near_you">
             <button
               className=" border border-[#EC7505] w-[63px] h-[21px] flex
                         items-center justify-center rounded-xl p-2 translate-y-1"
