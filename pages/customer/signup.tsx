@@ -101,12 +101,12 @@ export default function Signup() {
                     </div>
 
                     {/* Button Regsiter */}
-                    <div className='flex justify-center items-center w-[290px] h-[44px] 
+                    <button className='flex justify-center items-center w-[290px] h-[44px] 
                                 bg-[#EC7505] rounded-lg shadow-lg mt-2'>
-                        <button className="text-white font-semibold font-poppins text-[19px]">
+                        <h1 className="text-white font-semibold font-poppins text-[19px]">
                             Register
-                        </button>
-                    </div>
+                        </h1>
+                    </button>
                 </form>
 
                 {/* tidak punya akun */}
