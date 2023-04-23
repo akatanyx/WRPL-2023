@@ -17,7 +17,9 @@ export default function C_Header ({ children }: any) {
                 </div>
                 
                 
-                <div className='-translate-x-[14px]'>
+                <div className='-translate-x-[14px]
+                md:-translate-x-[30px]
+                '>
                     <Link href='#'>
                         <img src="/icon_c_akun.svg" alt="" className='w-[43px] '/>
                     </Link>  
