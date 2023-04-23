@@ -34,8 +34,11 @@ export default function Pesanan () {
             </div>
             
             {/* Apply Promo */}
-            <div className="mt-[13px] ml-[23px] mr-[19px]">
+            <div className="mt-[13px] ml-[23px] mr-[19px]
+            md:flex md:justify-center
+            ">
                 <img src="/apply_promo.svg" alt="" />
+                
             </div>
 
             {/* List Harga */}
@@ -43,6 +46,7 @@ export default function Pesanan () {
             mt-[21px] ml-[23px] mr-[19px] w-[316px] 
             border border-1 border-black border-opacity-25 rounded-lg
             font-poppins
+            md:mx-auto
             ">
                 {/* Total Harga */}
                 <div className="bg-[#EC7505] h-[46px] rounded-lg flex items-center pl-[17px]">
@@ -96,6 +100,7 @@ export default function Pesanan () {
             mt-[27px] ml-[23px] mr-[19px] w-[318px] 
             border border-1 border-black border-opacity-25 rounded-lg
             font-poppins
+            md:mx-auto
             ">
                 <div className="bg-[#EC7505] h-[36px] rounded-lg flex items-center pl-[17px]">
                     <h1 className="text-white font-semibold text-[20px]">
