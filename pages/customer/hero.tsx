@@ -65,9 +65,13 @@ export default function hero({posts}: PostsProps) {
       </div>
 
 
-      <div className="mx-4 w-[328px] mb-36"> 
+      <div className="mx-4 w-[328px] mb-36
+      md:mx-auto
+      "> 
       {/* Kategori */}
-      <div className="flex flex-col">
+      <div className="flex flex-col
+      md:items-center
+      ">
 
         <h1 className="font-poppins font-semibold text-xl mb-[10px]">Kategori</h1>
 
@@ -188,8 +192,9 @@ export default function hero({posts}: PostsProps) {
         <button 
         className="fixed bottom-[70px] z-10 w-[335px] h-[54px] mx-[13px]
                   bg-[#EC7505] rounded-xl 
-                  flex items-center justify-between px-[32px]"
-        
+                  flex items-center justify-between px-[32px]
+                  md:left-1/2 md:-translate-x-1/2
+                  "
         >
           {/* Jumlah Item */}
           <h1 className="font-poppins font-semibold text-[17px] text-white">1 item</h1>
