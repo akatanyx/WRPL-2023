@@ -20,31 +20,35 @@ export default function resto () {
                     {/* Back to resto near you page */}
                     <Link href='/customer/resto_near_you'>
                         <img src="/icon_c_toko_back.svg " 
-                        className='absolute z-10 left-[19px] translate-y-[22px]'/>
+                        className='absolute left-[19px] translate-y-[22px]'/>
                     </Link>
                     
                     {/* Share Button */}
                     {/* Nothing Happened */}
                     <button>
                         <img src="/icon_c_toko_share.svg" 
-                        className='absolute z-10 right-[19px] translate-y-[22px]' />
+                        className='absolute right-[19px] translate-y-[22px]' />
                     </button>               
                 </div>       
             </div>
             
-            {/* Card Ingfo Toko */}
-            <div className='relative font-poppins'>
-                <img src="/banner_toko.svg" className='w-full h-[274px] absolute top-0'/>
+            
+            <div className='font-poppins'>
+                {/* Banner Toko */}
+                <img src="/banner_toko.svg" className='w-screen h-[274px]'/>
                 
+                <div className='flex justify-center -translate-y-20'>
+                {/* Card Ingfo Toko */}
                 <div className='w-[287px] h-[127px] bg-white rounded-xl shadow-lg
-                flex flex-col items-center justify-center z-10
-                absolute -translate-x-1/2 translate-y-[170px] left-1/2 top-1/2'>
-                    
+                '>
+                    <div className='-translate-y-36
+                    flex flex-col items-center justify-center'>
                     {/* Logo Resto */}
-                    <img 
+                    <img
                     src="/icon_c_resto_logo.svg" 
                     className='w-[144px] h-[144px] rounded-xl 
-                    absolute -translate-x-1/2 -translate-y-24 left-1/2'/>
+                    translate-y-6
+                    '/>
                     
                     {/* Nama Resto */}
                     <h1 className='pt-7 font-bold text-xl'>Anteiku Coffee</h1>
@@ -67,11 +71,14 @@ export default function resto () {
                             <p className='font-semibold text-[13px]'>300</p>
                         </div>              
                     </div>
+                    </div>
                 </div>
+                </div>
+                
             </div>
 
             {/* Content */}
-            <div className='translate-y-[258px] rounded-t-xl bg-white w-full '>
+            <div className='rounded-t-xl w-full -translate-y-28 '>
                 <div className='py-2 text-white'>a</div>
                 <div className='mb-[13px] mt-[25px] mx-[22px] m'>
                     <Dropdown_Makanan>
@@ -96,8 +103,6 @@ export default function resto () {
                         Minuman
                     </Dropdown_Makanan>
                 </div>
-
-                <div className='mb-96'></div>
             </div>            
             
 
