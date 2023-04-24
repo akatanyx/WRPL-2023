@@ -1,6 +1,22 @@
+import React, { useState, useEffect } from "react";
 import Tag_Makanan_Popup from "./Tag_Makanan_Popup";
 
-const Popup_addcart = ({closeModal}) => {
+const Popup_addcart = ({closeModal}:any) => {
+  const [quantity, setQuantity] = useState(1);
+
+  // Function to handle reducing the quantity
+  const handleReduceQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  // Function to handle increasing the quantity
+  const handleIncreaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  // Masih gatau cara masukin ke database cart variabel jumlahnya
     return (
         <>
             {/* <div onClick={closeModal} className="z-20 absolute h-[300vh] left-0 right-0
@@ -62,7 +78,7 @@ const Popup_addcart = ({closeModal}) => {
                   {/* Counter Makanan */}
                   <div className="flex items-center gap-x-6 ml-[38px] mt-[12px]">
                     {/* Kurangi Pesanan */}
-                    <button>
+                    <button onClick={handleReduceQuantity}>
                       <img
                         src="/icon_popup_minus_stock.svg"
                         className="w-[32px]"
@@ -70,10 +86,10 @@ const Popup_addcart = ({closeModal}) => {
                     </button>
                     {/* Jumlah Pesanan */}
                     <h1 className="text-black text-opacity-50 font-poppins font-semibold text-[26px]">
-                      1
+                      {quantity}
                     </h1>
                     {/* Tambahi Pesanan */}
-                    <button>
+                    <button onClick={handleIncreaseQuantity}>
                       <img
                         src="/icon_popup_plus_stock.svg"
                         className="w-[32px]"

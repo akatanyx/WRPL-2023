@@ -67,7 +67,7 @@ export default function Pesanan () {
                         </div>
                         {/* Harga Menu Total */}
                         <p className="text-[#E4740B] font-semibold text-[14px] -translate-y-1">
-                            30.000
+                            {itemPrice}
                         </p>
                     </div>
 
