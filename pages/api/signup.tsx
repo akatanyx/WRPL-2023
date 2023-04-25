@@ -61,6 +61,12 @@ export default async function handler(req: any, res: any) {
             imgURL: req.body.imgURL 
           };
           break;
+        case 'cart':
+          data = { 
+            id_menu: req.body.id_menu,
+            jumlah: req.body.jumlah 
+          };
+          break;
         default:
           res.status(404).json({ message: `Collection not found for type: ${type}` });
           return;
@@ -88,6 +94,8 @@ function getTypeCollectionName(type: string): string {
       return 'restos';
     case 'menu':
       return 'menus';
+    case 'cart':
+      return 'carts';
     default:
       return '';
   }

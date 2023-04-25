@@ -2,7 +2,7 @@ import M_Navbar from "@/components/Merchant/M_Navbar";
 
 import { useState } from "react";
 
-const add_kategori = () => {
+export default function Add_kategori () {
     
   const daftarKategori = ["Ayam", "Daging", "Babi", "Sayuran", "Buah", "Kopi", "Susu", "Telur", 
   "Ikan", "Bumbu", "Minuman", "Makanan Ringan", "Makanan Berat", "Makanan Sehat", "Makanan Khas", 
@@ -105,5 +105,3 @@ const add_kategori = () => {
     </>
   );
 };
-
-export default add_kategori;

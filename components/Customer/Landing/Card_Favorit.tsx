@@ -7,7 +7,7 @@ interface CardMenuProps {
   imgURL: string;
 }
 
-export default function Card_Kategori({
+export default function Card_Favorit({
   nama,
   desk,
   harga,
@@ -16,8 +16,10 @@ export default function Card_Kategori({
   return (
     <>
       <Link href="#">
-        <div className="flex bg-[#FFFFFF] w-[328px] h-[120px] shadow-lg border
-        gap-x-[14px] relative rounded-xl">
+        <div
+          className="flex bg-[#FFFFFF] w-[328px] h-[120px] shadow-lg border
+        gap-x-[14px] relative rounded-xl"
+        >
           <Image
             src={imgURL}
             alt="makanan favorit"
@@ -27,7 +29,6 @@ export default function Card_Kategori({
           />
 
           <div className="flex flex-col">
-            
             <div className="flex justify-between items-center w-[151px] mt-3">
               {/* Tag Makanan */}
               <div
@@ -41,11 +42,11 @@ export default function Card_Kategori({
 
               {/* Rating */}
               <div className="flex items-center">
-                <Image 
-                src="/icon_star.svg" 
-                alt="Rating" 
-                width={18} 
-                height={17} 
+                <Image
+                  src="/icon_star.svg"
+                  alt="Rating"
+                  width={18}
+                  height={17}
                 />
 
                 <h1
@@ -59,7 +60,7 @@ export default function Card_Kategori({
 
             {/* Nama Makanan */}
             <h1 className="font-medium font-poppins text-[19px]">{nama}</h1>
-            
+
             {/* Deskripsi Makanan*/}
             <h2 className="font-medium font-poppins text-[12px] text-[#9B8F8F] -translate-y-1">
               {desk}
