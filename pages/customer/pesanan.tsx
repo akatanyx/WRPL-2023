@@ -7,9 +7,13 @@ interface Cart {
   _id: string;
   menuId: string;
   jumlah: number;
+  harga: number;
+}
+interface CartProps {
+  carts: Cart[];
 }
 
-export default function Pesanan() {
+export default function Pesanan({ carts }: any) {
   // State for keeping track of the quantity in the parent component
   const [quantity, setQuantity] = useState(1);
 
@@ -20,12 +24,12 @@ export default function Pesanan() {
 
   // Function untuk mencari harga menu
   const findMenuPrice = (menuId: string) => {
-    const menu = menus.find((menu) => menu._id === menuId);
+    const menu = carts.find((menu:any) => menu._id === menuId);
     return menu?.harga || 0;
   };
 
   // Item price
-  const itemPrice = 15000; // Update this with the actual item price
+  const itemPrice = findMenuPrice(carts.menuId); // Update this with the actual item price
   const biayaPengiriman = 30000;
   const biayaAplikasi = 5000;
   // Calculate total price based on quantity
