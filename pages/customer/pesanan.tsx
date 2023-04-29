@@ -1,6 +1,8 @@
 import Head from "next/head";
 import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
+import Popup_diskon from "@/components/Customer/Pesanan/Popup_diskon";
+
 import { useState } from "react";
 
 interface Cart {
@@ -34,8 +36,15 @@ export default function Pesanan({ carts }: any) {
   const biayaAplikasi = 5000;
   // Calculate total price based on quantity
   const totalPrice = quantity * itemPrice + biayaPengiriman + biayaAplikasi;
+
+  // POPUP DISKON
+  const [showMyModal, setShowMyModal] = useState(false);
+
+  const closeModal = () => setShowMyModal(false);
+
   return (
     <>
+      {showMyModal && <Popup_diskon closeModal={closeModal} />}
       <Head>
         <title>Pesanan</title>
       </Head>
@@ -48,13 +57,13 @@ export default function Pesanan({ carts }: any) {
       </div>
 
       {/* Apply Promo */}
-      <div
+      <button onClick = {() => setShowMyModal(true)}
         className="mt-[13px] ml-[23px] mr-[19px]
-            md:flex md:justify-center
+            md:flex md:mx-auto
             "
       >
         <img src="/apply_promo.svg" alt="" />
-      </div>
+      </button>
 
       {/* List Harga */}
       <div
