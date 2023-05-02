@@ -1,7 +1,7 @@
 import Card_Diskon from "@/components/Customer/Pesanan/Card_Diskon"
 
-export default function diskon ({closeModal}) {
- 
+export default function diskon ({closeModal}:any) {
+    
     return (
         <div className="font-poppins">
 
