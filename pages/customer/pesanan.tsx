@@ -1,7 +1,7 @@
 import Head from "next/head";
 import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
-import Popup_diskon from "@/components/Customer/Pesanan/Popup_diskon";
+import Popup_diskon from "@/components/Customer/Pesanan/Popup_Diskon_pesanan";
 
 import { useState } from "react";
 
