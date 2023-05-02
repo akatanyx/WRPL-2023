@@ -1,5 +1,5 @@
 export default function Card_Diskon () {
-    
+
     return (
         
         <div className="font-poppins">

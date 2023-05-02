@@ -1,7 +1,7 @@
-import C_Header from "@/components/Customer/C_Header"
 import Card_Diskon from "@/components/Customer/Pesanan/Card_Diskon"
 
 export default function diskon ({closeModal}) {
+ 
     return (
         <div className="font-poppins">
 
