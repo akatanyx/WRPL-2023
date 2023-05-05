@@ -13,11 +13,12 @@ interface CardRestoProps {
 
 const Popup_addcart = (   {nama,
   desk,
-  harga,
   imgURL,
   menuId, closeModal}: any) => {
   const [quantity, setQuantity] = useState(1);
-  console.log(menuId)
+  
+  const idMenu = menuId;
+
   // Function to handle reducing the quantity
   const handleReduceQuantity = () => {
     if (quantity > 1) {
@@ -29,8 +30,6 @@ const Popup_addcart = (   {nama,
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);
   };
-
-  const id_menu = menuId;
   // Function to handle adding to cart
   const handleAddToCart = async (e: any) => {
     e.preventDefault();
@@ -39,7 +38,7 @@ const Popup_addcart = (   {nama,
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id_menu, quantity }),
+      body: JSON.stringify({ menuId, quantity }),
     });
     if (response.ok) {
       router.push("/customer/pesanan");
