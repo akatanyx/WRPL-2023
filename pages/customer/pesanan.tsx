@@ -144,6 +144,45 @@ export default function Pesanan({ carts }: any) {
           </h1>
         </div>
       </div>
+      
+      {/* Metode Pembayaran */}
+      <div className="font-poppins mt-4">
+              <h1 className="ml-[23px] font-semibold text-[23px]">
+                Metode Pembayaran
+              </h1>
+
+              {/* Layanan Dana */}
+              <div className="flex-col ml-[22px] mt-6">
+                
+                {/* lets Cash */}
+                <div className="w-[316px] flex border-2 border-opacity-25 rounded-lg h-[55px] 
+                                justify-between">
+                  <div className="flex-col ml-[14px] mt-[6px]">
+                    <div className="flex items-center">
+                      <h1 className="font-medium text-lg">Lets Cash</h1>
+                      <img src="/cart_logo_letscash.svg" className="translate-x-1"/>
+                    </div>
+                    {/* Saldo */}
+                    <h1 className="font-medium text-[12px] text-[#7E7E7E] -translate-y-1">
+                      Saldo : 100.000
+                    </h1>
+                  </div>
+                  {/* Bullet */}
+                  <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
+                </div>
+
+                {/* Cash */}
+                <div className="w-[316px] flex border-2 border-opacity-25 rounded-lg h-[55px] 
+                                justify-between mt-[18px]">
+                  <div className="flex items-center ml-[14px] mt-[6px]">
+                    <h1 className="font-medium text-lg">Cash</h1>
+                    <img src="/cart_logo_cash.svg" className="translate-x-1"/>
+                  </div>
+                  {/* Bullet */}
+                  <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
+                </div>
+              </div>
+      </div>
 
       {/* Pay Button */}
       <button
@@ -158,7 +197,7 @@ export default function Pesanan({ carts }: any) {
       <div className="mb-16" />
     </>
   );
-}
+};
 
 export async function getServerSideProps() {
   const res = await fetch("http://localhost:3000/api/posts?type=carts");
