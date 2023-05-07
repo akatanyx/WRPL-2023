@@ -152,35 +152,35 @@ export default function Pesanan({ carts }: any) {
               </h1>
 
               {/* Layanan Dana */}
-              <div className="flex-col ml-[22px] mt-6">
+              <div className="flex-col ml-[22px] mt-6 ">
                 
                 {/* lets Cash */}
-                <div className="w-[316px] flex border-2 border-opacity-25 rounded-lg h-[55px] 
-                                justify-between">
+                <button className="w-[316px] flex justify-between items-center rounded-lg h-[55px] 
+                                 border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505]">
                   <div className="flex-col ml-[14px] mt-[6px]">
                     <div className="flex items-center">
                       <h1 className="font-medium text-lg">Lets Cash</h1>
                       <img src="/cart_logo_letscash.svg" className="translate-x-1"/>
                     </div>
                     {/* Saldo */}
-                    <h1 className="font-medium text-[12px] text-[#7E7E7E] -translate-y-1">
+                    <h1 className="font-medium text-[12px] text-[#7E7E7E] -translate-x-3 -translate-y-1">
                       Saldo : 100.000
                     </h1>
                   </div>
                   {/* Bullet */}
                   <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
-                </div>
+                </button>
 
                 {/* Cash */}
-                <div className="w-[316px] flex border-2 border-opacity-25 rounded-lg h-[55px] 
-                                justify-between mt-[18px]">
+                <button className="mt-[18px] w-[316px] flex justify-between items-center rounded-lg h-[55px] 
+                                 border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505]">
                   <div className="flex items-center ml-[14px] mt-[6px]">
                     <h1 className="font-medium text-lg">Cash</h1>
                     <img src="/cart_logo_cash.svg" className="translate-x-1"/>
                   </div>
                   {/* Bullet */}
                   <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
-                </div>
+                </button>
               </div>
       </div>
 
