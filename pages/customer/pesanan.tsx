@@ -52,8 +52,35 @@ export default function Pesanan({ carts }: any) {
 
       <C_Header>Pesanan</C_Header>
 
+      {/* Alamat Pembeli */}
+      <div className="ml-[23px] mt-[25px] flex font-poppins">
+          <img src="/icon_promo_location.svg" alt="" />
+          
+          <div className="flex items-center justify-between w-[295px]">
+            {/* Nama Jalan */}
+            <h1 className="font-medium text-[15px] ml-[13px]">Jl. Owawawa No.1 Kelurahan Kota</h1>
+
+            <Link href="#">
+              <img src="/icon_promo_location_arrow.svg" />
+            </Link>
+          </div>
+      </div>
+
+      {/* Keterangan */}
+      <form action="" className="flex">
+        <img src="/icon_promo_location_keterangan.svg" className="ml-[57px]"/>
+        <input
+          className="w-[253px] text-[12px] p-1 text-[#808080] focus:outline-none"
+          placeholder="Tulis Keterangan tambahan disini" 
+          type="text"
+        />
+      </form>
+
+      {/* Border Pembatas */}
+      <div className="border-2 border-[#D9D9D9] w-[318px] mx-auto mt-[9px]"></div>
+
       {/* Card Pesanan */}
-      <div className="flex flex-col gap-y-[14px] mt-[27px] mx-[23px]">
+      <div className="flex flex-col gap-y-[14px] mt-[21px] mx-[23px]">
         <Card_Pesanan onQuantityChange={handleQuantityChange} />
       </div>
 
@@ -205,7 +232,7 @@ export default function Pesanan({ carts }: any) {
             flex justify-center items-center 
             "
       >
-        <h1 className="font-poppins text-white font-bold text-[24px]">Pay</h1>
+        <h1 className="font-poppins text-white font-bold text-[24px]">Bayar</h1>
       </button>
 
       <div className="mb-16" />
