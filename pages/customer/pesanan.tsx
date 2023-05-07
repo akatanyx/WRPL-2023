@@ -3,6 +3,7 @@ import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
 import Popup_diskon from "@/components/Customer/Pesanan/Popup_Diskon_pesanan";
 
+import Link from "next/link";
 import { useState } from "react";
 
 interface Cart {
@@ -170,6 +171,19 @@ export default function Pesanan({ carts }: any) {
                   {/* Bullet */}
                   <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
                 </button>
+
+                {/* Munculkan jika saldo kurang */}
+                <div className="flex flex-row font-poppins hidden">
+                  <h2 className="text-[12px]">
+                    Saldo anda kurang, apakah anda ingin melakukan{" "}
+                    <Link href="#">
+                      <button>
+                        <h1 className="font-bold text-[12px]">Top Up</h1>
+                      </button>
+                    </Link>
+                    ?
+                  </h2>
+                </div>
 
                 {/* Cash */}
                 <button className="mt-[18px] w-[316px] flex justify-between items-center rounded-lg h-[55px] 
