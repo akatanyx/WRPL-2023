@@ -18,8 +18,6 @@ export default function landing () {
             </h1>
 
             {/* Submit Nomor Telepon */}
-
-  
             <div className="w-[280px] mt-[31px] ml-[42px] flex items-center md:mx-auto">
                 <img src="/e_landing_bendera.svg"/>
                 <h1 className="text-[24px] ml-2">+62</h1>

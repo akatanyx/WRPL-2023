@@ -73,7 +73,7 @@ export default function hero () {
 
             {/* Fitur */}
             <div className='text-[10px] grid grid-cols-4 gap-x-5 gap-y-[13px] mt-5 w-[292px] mx-auto'>
-                <Link href="#">
+                <Link href="/ewallet/topup">
                     <div className='flex-col text-center'>
                         <img src="/e_hero_fitur_topup.svg" alt="" />
                         <h1 className='mt-[6px]'>Top Up</h1>
