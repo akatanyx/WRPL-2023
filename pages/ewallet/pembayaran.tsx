@@ -1,6 +1,14 @@
 import Link from 'next/link'
+import { useState } from 'react';
 
 export default function Pembayaran() {
+
+    const [selectedMethod, setSelectedMethod] = useState('');
+
+    const handleButtonClick = (method: string) => {
+      setSelectedMethod(method);
+    };
+    
     return (
         <div className="font-poppins bg-[#118EEA] w-screen h-screen">
 
@@ -34,43 +42,65 @@ export default function Pembayaran() {
 
             <div className="w-screen bg-white rounded-t-lg translate-y-[94px] h-full">
                 
-                <h1 className="text-[17px] text-[#263238] pl-[32px] pt-[71px] pb-[18px]">Metode Pembayaran</h1>
+                <h1 className="text-[17px] text-[#263238] pl-[32px] pt-[71px] pb-[18px]
+                                md:text-center md:pl-0">
+                    Metode Pembayaran
+                    </h1>
 
                 {/* Metode Pembayaran */}
-                <div className="">
-                    {/* Bank */}
-                    <button className="w-[294px] h-[52px] rounded-lg text-[14px] mx-auto
-                                        flex items-center ">
-                        <img src="/e_pembayaran_debit.svg" alt="" className="pl-[15px]"/>
+                <div>
+                <button
+                    className={`w-[294px] h-[52px] rounded-lg text-[14px] mx-auto flex items-center ${
+                    selectedMethod === 'bank' ? 'bg-[#118EEA] text-white' : 'bg-white'
+                    }`}
+                    onClick={() => handleButtonClick('bank')}
+                >
+                    <img 
+                        src="/e_pembayaran_debit.svg" 
+                        alt="" 
+                        className={`pl-[15px] ${selectedMethod === 'bank' ? 'fill-white' : ''}`}
+                    />
+                    <div className="flex items-center justify-between w-[235px]">
+                        <h1 className="ml-[14px]">Kredit atau Debit</h1>
+                        <img src="/e_pembayaran_circle.svg" />
+                    </div>
+                </button>
+
+
+                    <button
+                        className={`w-[294px] h-[52px] rounded-lg text-[14px] mx-auto flex items-center mt-2 ${
+                        selectedMethod === 'alfamart' ? 'bg-[#118EEA] text-white' : 'bg-white'
+                        }`}
+                        onClick={() => handleButtonClick('alfamart')}
+                    >
+                        <img 
+                            src="/e_pembayaran_alfa.svg" 
+                            alt="" 
+                            className={`pl-[15px] ${selectedMethod === 'alfamart' && 'fill-white'}`}
+                        />
                         <div className="flex items-center justify-between w-[235px]">
-                            <h1 className="ml-[14px]">Kredit atau Debit</h1>
-                            <img src="/e_pembayaran_circle.svg" />
+                        <h1 className="ml-[14px]">Alfamart</h1>
+                        <img src="/e_pembayaran_circle.svg" />
                         </div>
                     </button>
 
-                    {/* Alfamart */}
-                    <button className="w-[294px] h-[52px] rounded-lg text-[14px] mx-auto
-                                        flex items-center mt-2">
-                        <img src="/e_pembayaran_alfa.svg" alt="" className="pl-[15px]"/>
-                        <div className="flex items-center justify-between w-[235px]">
-                            <h1 className="ml-[14px]">Alfamart</h1>
-                            <img src="/e_pembayaran_circle.svg" />
-                        </div>
-                    </button>
-
-                    {/* Gopay */}
-                    <button disabled={true} className="w-[294px] h-[52px] rounded-lg text-[14px] mx-auto
-                                        flex items-center mt-2 bg-[#EFEFEF]">
+                    <button
+                        disabled={true}
+                        className={`w-[294px] h-[52px] rounded-lg text-[14px] mx-auto flex items-center mt-2 ${
+                        selectedMethod === 'gopay' ? 'bg-[#118EEA] text-white' : 'bg-[#EFEFEF]'
+                        }`}
+                        onClick={() => handleButtonClick('gopay')}
+                    >
                         <img src="/e_pembayaran_gopay.svg" alt="" className="pl-[15px]" />
                         <div className="flex items-center justify-between w-[235px]">
-                            <div className="flex-col flex items-start">
-                                <h1 className="ml-[14px]">Gopay</h1>
-                                <h1 className="ml-[14px] text-[10px] text-[#E8505B]">Belum Tersedia</h1>
-                            </div>
-                            <img src="/e_pembayaran_circle.svg" className="hidden"/>
+                        <div className="flex-col flex items-start">
+                            <h1 className="ml-[14px]">Gopay</h1>
+                            <h1 className="ml-[14px] text-[10px] text-[#E8505B]">Belum Tersedia</h1>
+                        </div>
+                        <img src="/e_pembayaran_circle.svg" className="hidden" />
                         </div>
                     </button>
-                </div>
+                    </div>
 
                 {/* Button Bayar */}
                 <button className="w-[290px] h-[53px] bg-[#118EEA] rounded-lg mx-auto
