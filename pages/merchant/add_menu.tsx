@@ -112,12 +112,14 @@ export default function Add_menu({ images }:any) {
               accept=".png, .jpg, .jpeg"
               className="invisible"
               onChange={(event) => {
-                setImageSelected(event.target!.files[0]);
+                if (event.target.files){
+                  setImageSelected(event.target.files[0]);
+                }
               }}
             />
             {/* Menampilkan preview gambar sebelum di upload */}
             {imageSelected && (
-              <img
+              <Image
                 src={URL.createObjectURL(imageSelected)}
                 width={203}
                 height={203}
