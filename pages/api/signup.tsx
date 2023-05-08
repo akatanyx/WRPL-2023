@@ -63,7 +63,7 @@ export default async function handler(req: any, res: any) {
           break;
         case 'cart':
           data = { 
-            id_menu: req.body.id_menu,
+            menuId: req.body.menuId,
             jumlah: req.body.jumlah 
           };
           break;
