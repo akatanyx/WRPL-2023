@@ -112,7 +112,7 @@ export default function Pembayaran() {
                 <Link href="/ewallet/topup">
                     <button className="w-[290px] h-[53px] border-[#118EEA] border rounded-lg mx-auto
                                         flex items-center justify-center mt-[14px]">
-                        <h1 className="text-[#118EEA] font-semibold text-[19px]">Bayar</h1>
+                        <h1 className="text-[#118EEA] font-semibold text-[19px]">Kembali</h1>
                     </button>
                 </Link>
             </div>
