@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Pin() {
     const [pin, setPin] = useState(["", "", "", "", "", ""]);
@@ -46,6 +47,16 @@ export default function Pin() {
             <button className="w-[290px] h-[53px] bg-[#118EEA] rounded-lg mx-auto flex items-center justify-center mt-[79px]">
                 <h1 className="text-white font-semibold text-[19px]">Konfirmasi</h1>
             </button>
+
+            {/* Kembali */}
+            <Link href='/ewallet/hero'>
+                <div className="w-[290px] h-[60px] mt-[14px] rounded-lg mx-auto
+                                    flex justify-center items-center border-[#118EEA] border">
+                    <h1 className="font-semibold text-[19px] text-[#118EEA]">kembali</h1>
+                </div>
+            </Link>
+
+            <div className="mb-12"></div>
         </div>
   );
 }
