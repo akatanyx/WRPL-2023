@@ -8,23 +8,21 @@ export default function Register_driver() {
     const [nama_driver, setDriver] = useState('');
     const [alamat, setAlamat] = useState('');
     const [kendaraan, setKendaraan] = useState('');
-    //const [no_kontrak, setKontrak] = useState('');
     const [plat_motor, setPlat] = useState('');
     const [password, setPassword] = useState('');
-    //const [repassword, setRepassword] = useState('');
     const router = useRouter();
 
-    const handleSubmit = async (event: any) => {
-        event.preventDefault();
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
         const response = await fetch('/api/signup?type=driver', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ nama_driver, alamat, kendaraan, /*no_kontrak,*/ plat_motor, password, /*repassword*/ }),
+            body: JSON.stringify({ nama_driver, alamat, kendaraan, plat_motor, password }),
         });
         if (response.ok) {
-            router.push('/success');
+            router.push('/driver/login_driver');
         } else {
             console.error(response.statusText);
         }
@@ -69,7 +67,7 @@ export default function Register_driver() {
                                         aria-label="nama"
                                         placeholder="Nama"
                                         value={nama_driver}
-                                        onChange={(event) => setDriver(event.target.value)}
+                                        onChange={(e) => setDriver(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -86,7 +84,7 @@ export default function Register_driver() {
                                         aria-label="alamat"
                                         placeholder="Alamat"
                                         value={alamat}
-                                        onChange={(event) => setAlamat(event.target.value)}
+                                        onChange={(e) => setAlamat(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -103,7 +101,7 @@ export default function Register_driver() {
                                         aria-label="Jenis Kendaraan"
                                         placeholder="Jenis Kendaraan"
                                         value={kendaraan}
-                                        onChange={(event) => setKendaraan(event.target.value)}
+                                        onChange={(e) => setKendaraan(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -121,7 +119,7 @@ export default function Register_driver() {
                                         aria-label="Nomor Plat kendaraan"
                                         placeholder="Nomor Plat kendaraan"
                                         value={plat_motor}
-                                        onChange={(event) => setPlat(event.target.value)}
+                                        onChange={(e) => setPlat(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -139,7 +137,7 @@ export default function Register_driver() {
                                         aria-label="Password"
                                         placeholder="Password"
                                         value={password}
-                                        onChange={(event) => setPassword(event.target.value)}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -162,12 +160,12 @@ export default function Register_driver() {
 
                             {/* <!-- Button Signup --> */}
                             <div className="flex justify-center">
-                                    <button
-                                        className="bg-[#EC7505] hover:bg-orange-700 text-white text-[20px]
+                                <button
+                                    className="bg-[#EC7505] hover:bg-orange-700 text-white text-[20px]
                                         px-9 py-2 rounded-lg font-bold"
-                                    >
-                                        REGISTER
-                                    </button>
+                                >
+                                    REGISTER
+                                </button>
                             </div>
                         </form>
                     </div>
