@@ -10,7 +10,6 @@ import Axios from "axios";
 import Image from "next/image";
 
 export default function Add_menu({ images }:any) {
-  // console.log('images',images);
   const imgURL = "";
   const [nama, setNama] = useState("");
   const [harga, setHarga] = useState("");
@@ -22,7 +21,6 @@ export default function Add_menu({ images }:any) {
   const [imageSelected, setImageSelected] = useState<File | undefined>();
 
   const HandleSubmit = async (event: any) => {
-    // console.log(files[0]);
     // Membuat formdata untuk upload image
     const formData = new FormData();
     {

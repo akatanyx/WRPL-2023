@@ -26,11 +26,10 @@ export default function Card_Resto({
     <>
       {showMyModal && (
         <Popup_addcart
-          menuId={menuId}
           nama={nama}
           desk={desk}
-          harga={harga}
           imgURL={imgURL}
+          menuId={menuId}
           closeModal={closeModal}
         />
       )}

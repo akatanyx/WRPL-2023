@@ -107,7 +107,7 @@ export default function Resto( {posts}: PostsProps ) {
           <Dropdown_Makanan posts={posts}>Promo Hari Ini</Dropdown_Makanan>
         </div>
 
-        {/* <div className="my-[13px] mx-[22px]">
+        <div className="my-[13px] mx-[22px]">
           <Dropdown_Makanan>Best Seller</Dropdown_Makanan>
         </div>
 
@@ -117,7 +117,7 @@ export default function Resto( {posts}: PostsProps ) {
 
         <div className="my-[13px] mx-[22px]">
           <Dropdown_Makanan>Minuman</Dropdown_Makanan>
-        </div> */}
+        </div>
       </div>
 
       {/* Navbar */}

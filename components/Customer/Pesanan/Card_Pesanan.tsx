@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Tag_Makanan from "../Resto/Tag_Makanan";
 
-type CardPesananProps = {
-    onQuantityChange: (quantity: number) => void;
-  };
 
-export default function Card_Pesanan({ onQuantityChange }: CardPesananProps) {
+export default function Card_Pesanan({ nama, desk, harga, imgURL, jumlah, onQuantityChange, promo }: any) {
   // State for keeping track of the quantity
   const [quantity, setQuantity] = useState(1);
+  const [diskon, setDiskon] = useState(0);
 
   // Function to handle reducing the quantity
   const handleReduceQuantity = () => {
@@ -28,10 +26,11 @@ export default function Card_Pesanan({ onQuantityChange }: CardPesananProps) {
 
   return (
     <>
+    <div className="flex flex-col gap-y-[14px] mt-[21px] mx-[23px]">
       <div className="flex shadow-lg w-[314px] rounded-lg md:w-full relative">
         {/* Foto Makanan */}
         <img
-          src="/icon_makanan.svg"
+          src={imgURL}
           alt=""
           className="rounded-lg px-4 py-[19px] w-[130px] h-[130px]"
         />
@@ -46,10 +45,10 @@ export default function Card_Pesanan({ onQuantityChange }: CardPesananProps) {
 
           {/* Masih belum bisa break-words */}
           <h1 className="break-words font-semibold text-[15px] font-poppins">
-            Kopi Hitam
+            {nama}
           </h1>
           <p className="text-mobile text-[#838080] font-poppins break-words">
-            Kopi Pahit
+            {desk}
           </p>
 
           {/* Harga */}
@@ -59,7 +58,7 @@ export default function Card_Pesanan({ onQuantityChange }: CardPesananProps) {
               15.000
             </h1>
             <p className="font-poppins font-semibold text-[10px] text-[#838080] line-through">
-              20.000
+              {harga}
             </p>
           </div>
 
@@ -84,7 +83,7 @@ export default function Card_Pesanan({ onQuantityChange }: CardPesananProps) {
           </button>
           {/* Jumlah Pesanan */}
           <h1 className="text-[#E89005] font-poppins font-semibold text-[14px]">
-            {quantity}
+            {jumlah}
           </h1>
           {/* Tambahi Pesanan */}
           <button onClick={handleIncreaseQuantity}>
@@ -95,6 +94,7 @@ export default function Card_Pesanan({ onQuantityChange }: CardPesananProps) {
             />
           </button>
         </div>
+      </div>
       </div>
     </>
   );

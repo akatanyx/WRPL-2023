@@ -2,35 +2,20 @@ import React, { useState, useEffect } from "react";
 import Tag_Makanan_Popup from "./Tag_Makanan_Popup";
 import router from "next/router";
 
-interface CardRestoProps {  
-  nama: string;
-  desk: string;
-  harga: number;
-  imgURL: string;
-  menuId: string;
-}
+const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
+  const [jumlah, setJumlah] = useState(1);
 
-
-const Popup_addcart = (   {nama,
-  desk,
-  imgURL,
-  menuId, closeModal}: any) => {
-  const [quantity, setQuantity] = useState(1);
-  
-  const idMenu = menuId;
-
-  // Function to handle reducing the quantity
-  const handleReduceQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+  const handleReduceJumlah = () => {
+    if (jumlah > 1) {
+      setJumlah(jumlah - 1);
     }
   };
 
-  // Function to handle increasing the quantity
-  const handleIncreaseQuantity = () => {
-    setQuantity(quantity + 1);
+  const handleIncreaseJumlah = () => {
+    setJumlah(jumlah + 1);
   };
-  // Function to handle adding to cart
+
+  // Masukkan ke database cart
   const handleAddToCart = async (e: any) => {
     e.preventDefault();
     const response = await fetch("/api/signup?type=cart", {
@@ -38,7 +23,7 @@ const Popup_addcart = (   {nama,
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ menuId, quantity }),
+      body: JSON.stringify({ menuId, jumlah }),
     });
     if (response.ok) {
       router.push("/customer/pesanan");
@@ -98,15 +83,15 @@ const Popup_addcart = (   {nama,
             {/* Counter Makanan */}
             <div className="flex items-center gap-x-6 ml-[38px] mt-[12px]">
               {/* Kurangi Pesanan */}
-              <button onClick={handleReduceQuantity}>
+              <button onClick={handleReduceJumlah}>
                 <img src="/icon_popup_minus_stock.svg" className="w-[32px]" />
               </button>
               {/* Jumlah Pesanan */}
               <h1 className="text-black text-opacity-50 font-poppins font-semibold text-[26px]">
-                {quantity}
+                {jumlah}
               </h1>
               {/* Tambahi Pesanan */}
-              <button onClick={handleIncreaseQuantity}>
+              <button onClick={handleIncreaseJumlah}>
                 <img src="/icon_popup_plus_stock.svg" className="w-[32px]" />
               </button>
             </div>
