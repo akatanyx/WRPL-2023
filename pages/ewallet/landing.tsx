@@ -29,7 +29,7 @@ export default function landing () {
                     type="tel"
                     placeholder="000-0000-0000"
                     className="w-[193px] ml-[11px] text-[#263238] text-[24px] caret-transparent focus:outline-none"
-                    onChange={(e) => {
+                    onChange={(e: any) => {
                         const value = e.target.value;
                         e.target.value = '';
                         e.target.value = value.charAt(0) === '-' ? '' : value.slice(0, 14);

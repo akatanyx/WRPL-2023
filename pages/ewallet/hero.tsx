@@ -80,7 +80,7 @@ export default function hero () {
                     </div>
                 </Link>
                 
-                <Link href="#">
+                <Link href="/ewallet/send">
                     <div className='flex-col text-center'>
                         <img src="/e_hero_fitur_send.svg" alt="" />
                         <h1 className='mt-[6px]'>Send</h1>
