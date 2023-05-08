@@ -101,7 +101,7 @@ export default function hero () {
                     </div>
                 </Link>
                 
-                <Link href="#">
+                <Link href="/ewallet/security">
                     <div className='flex-col text-center'>
                         <img src="/e_hero_fitur_security.svg" alt="" />
                         <h1 className='mt-[6px]'>Security</h1>
