@@ -67,6 +67,14 @@ export default async function handler(req: any, res: any) {
             jumlah: req.body.jumlah 
           };
           break;
+        case 'e-wallet':
+          data = {
+            id_wallet: req.body.id_wallet,
+            no_telp: req.body.no_telp,
+            nama: req.body.nama,
+            saldo: req.body.saldo,
+            pin_wallet: req.body.pin_wallet
+          };
         default:
           res.status(404).json({ message: `Collection not found for type: ${type}` });
           return;
@@ -96,6 +104,8 @@ function getTypeCollectionName(type: string): string {
       return 'menus';
     case 'cart':
       return 'carts';
+    case 'e-wallet':
+      return 'e-wallet';
     default:
       return '';
   }
