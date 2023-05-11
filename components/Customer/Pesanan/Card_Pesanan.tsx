@@ -1,29 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Tag_Makanan from "../Resto/Tag_Makanan";
 
 
-export default function Card_Pesanan({ nama, desk, harga, imgURL, jumlah, onQuantityChange, promo }: any) {
-  // State for keeping track of the quantity
-  const [quantity, setQuantity] = useState(1);
-  const [diskon, setDiskon] = useState(0);
-
-  // Function to handle reducing the quantity
-  const handleReduceQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  // Function to handle increasing the quantity
-  const handleIncreaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
- 
-   // Invoke the callback function with the updated quantity value
-   useEffect(() => {
-     onQuantityChange(quantity);
-   }, [quantity]);
-
+export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handleQuantityChange}:any) {
+  console.log(jumlah)
   return (
     <>
     <div className="flex flex-col gap-y-[14px] mt-[21px] mx-[23px]">
@@ -74,7 +55,8 @@ export default function Card_Pesanan({ nama, desk, harga, imgURL, jumlah, onQuan
         {/* Add Pesanan */}
         <div className="absolute bottom-4 right-4 flex items-center gap-x-3">
           {/* Kurangi Pesanan */}
-          <button onClick={handleReduceQuantity}>
+          <button
+          disabled={jumlah <= 1}>
             <img
               src="/icon_popup_minus_stock.svg"
               className="w-[18px]"
@@ -86,7 +68,7 @@ export default function Card_Pesanan({ nama, desk, harga, imgURL, jumlah, onQuan
             {jumlah}
           </h1>
           {/* Tambahi Pesanan */}
-          <button onClick={handleIncreaseQuantity}>
+          <button>
             <img
               src="/icon_popup_plus_stock.svg"
               className="w-[18px]"

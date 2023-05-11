@@ -26,3 +26,27 @@ export default async function handler(req: any, res: any) {
 
   res.status(200).json(results);
 }
+
+export async function updateCart(req: any, res: any) {
+  const { query, namainput } = req.query;
+
+  const client = await MongoClient.connect(MONGODB_URI);
+
+  const db = client.db("letseat");
+  const collection = db.collection("carts");
+
+  const queryObject = { $text: { $search: query } };
+  const options = { projection: { _id: 0 } };
+
+  const cursor = await collection.updateOne(
+    { nama: { $regex: query, $options: "i" } },
+    {
+      $set: { nama: namainput },
+    }
+  );
+  const results = cursor.acknowledged;
+
+  await client.close();
+
+  res.status(200).json(results);
+}

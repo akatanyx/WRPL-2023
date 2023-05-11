@@ -1,21 +1,23 @@
-export default function Card_Diskon () {
-
+export default function Card_Diskon ({minPembelian, maxPotongan, diskon, handleDiskon, closeModal}:any) {
+    const handlePromoClick = () => {
+        handleDiskon(diskon,minPembelian,maxPotongan);
+        closeModal();
+    }
     return (
-        
         <div className="font-poppins w-[316px] mx-auto border-2 border-opacity-25 rounded-lg">
             
             {/* Card Diskon */}
             <div className="bg-white rounded-lg flex flex-col justify-center h-[133px]">
                 {/* Nama diskon */}
                 <h1 className="pt-[13px] pl-[17px] font-semibold text-lg">
-                    Diskon 30%
+                    Diskon {diskon}%
                 </h1>
                 
                 {/* Keterangan Diskon */}
                 <ul className="text-gray-500 list-disc list-inside text-[14px] font-medium
                     ml-[17px]">
-                    <li>Minimal Pembelian Rp.50.000</li>
-                    <li>Potongan Maksimal Rp.20.000</li>
+                    <li>Minimal Pembelian Rp.{minPembelian}</li>
+                    <li>Potongan Maksimal Rp.{maxPotongan}</li>
                 </ul>
                 
 
@@ -28,9 +30,11 @@ export default function Card_Diskon () {
                     </div>
                     
                     {/* Tombol Apply */}
-                    <button className="flex justify-center items-center bg-[#EC7505] 
-                            rounded-xl mr-[14px] w-16 h-[22px]">
-                            <p className="text-white font-semibold text-[12px]">Pakai</p>
+                    <button 
+                    onClick={handlePromoClick}
+                    className="flex justify-center items-center bg-[#EC7505] 
+                            rounded-xl mr-[14px] w-16 h-[22px]" >
+                            <p className="text-white font-semibold text-[12px]" >Pakai</p>
                     </button> 
                 </div>
             </div>

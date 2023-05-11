@@ -1,8 +1,8 @@
 import React from 'react';
-import InputMask from 'react-input-mask';
 import Link from 'next/link';
 
 export default function landing () {
+    const InputMask = require("react-input-mask")
     return (
         <div className="font-poppins">
             <img src="/e_logo_lets_cash.svg" className="mx-auto mt-9"/>
