@@ -231,8 +231,8 @@ export default function Pesanan({ carts, posts }: any) {
             <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
           </button>
 
-          {/* Munculkan jika saldo kurang */}
-          <div className="flex flex-row font-poppins hidden">
+          {/* Munculkan jika saldo kurang menggunakan hidden dan unhidden pada classname*/}
+          <div className="flex flex-row font-poppins ">
             <h2 className="text-[12px]">
               Saldo anda kurang, apakah anda ingin melakukan{" "}
               <Link href="#">

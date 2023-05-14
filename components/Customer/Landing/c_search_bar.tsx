@@ -13,26 +13,25 @@ export default function SearchPage() {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
-        <form className="flex items-center px-2 w-80" onSubmit={handleSearch}>
+        <form className="flex items-center px-2 w-[329px]" onSubmit={handleSearch}>
           <div className="relative w-full drop-shadow-2xl">
             <div
               className="bg-white text-black font-poppins
-                text-base rounded-3xl block w-full pl-4 p-2.5 border
-                border-black border-opacity-20 focus:outline-none"
+                text-base rounded-3xl w-full pl-4 h-[44px] flex items-center
+                border-black border-opacity-25 border-2"
             >
               <button
                 className="bg-white text-black font-poppins mr-2"
                 type="submit"
               >
                 <img
-                  className="h-[25px] w-[25px] "
+                  className="h-[21px] w-[22px]"
                   src="/icon_nav_c_search.svg"
                 />
               </button>
               <input
                 type="text"
-                placeholder="e.g. Ayam Goreng"
-                className="w-[220px] h-[32px] rounded-lg pl-4 pr-2"
+                className="w-[220px] rounded-lg pl-1 pr-1 focus:outline-none font-poppins"
                 required
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
