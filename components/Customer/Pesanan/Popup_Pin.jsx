@@ -16,7 +16,7 @@ export default function Popup_Pin ({closeModal1}) {
     return (
         <div>
             <div className="font-poppins ">
-                <h1 className="font-semibold text-[25px] text-center mt-[49px]">Buat PIN Baru</h1>
+                <h1 className="font-semibold text-[25px] text-center mt-[49px]">Masukan Pin</h1>
 
                 <div className="flex w-[263px] justify-between mx-auto mt-[31px]">
                     {[...Array(6)].map((_, index) => (
