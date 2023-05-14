@@ -175,7 +175,7 @@ export default function hero({posts}: PostsProps) {
       </div>
       
       {/* Item Cart */}
-      <Link href='#'>
+      <Link href='/customer/pesanan'>
         <button 
         className="fixed bottom-[70px] z-10 w-[335px] h-[54px] mx-[13px]
                   bg-[#EC7505] rounded-xl 
