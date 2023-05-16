@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import router from 'next/router';
 
 export default function Topup() {
   const [selectedAmount, setSelectedAmount] = useState('');
@@ -10,6 +11,22 @@ export default function Topup() {
 
   const handleButtonClick = (amount: number) => {
     setSelectedAmount(amount.toString());
+  };
+
+  const handleConfirm = async () => {
+    const saldoBaru = parseInt(selectedAmount);
+    const response = await fetch('/api/update', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ saldo: saldoBaru }),
+    });
+    if (response.ok) {
+      router.push('/ewallet/hero');
+    } else {
+      console.error(response);
+    }
   };
 
   return (
@@ -81,7 +98,7 @@ export default function Topup() {
         </div>
 
         {/* Konfirmasi */}
-        <button className="w-[290px] h-[60px] mt-[98px] rounded-lg mx-auto
+        <button onClick={handleConfirm} className="w-[290px] h-[60px] mt-[98px] rounded-lg mx-auto
                             flex justify-center items-center bg-[#118EEA]">
             <h1 className="font-semibold text-[19px] text-white">Konfirmasi</h1>
         </button>
