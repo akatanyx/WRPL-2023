@@ -8,6 +8,10 @@ import SearchPage from "@/components/Customer/Landing/c_search_bar";
 import Card_Favorit from "@/components/Customer/Landing/Card_Favorit";
 import Card_Best from "@/components/Customer/Landing/Card_Best";
 import Card_Resto_Near from "@/components/Customer/Landing/Card_Resto_Near";
+import Ewallet from "@/components/Customer/Landing/ewallet";
+import Alamat from "@/components/Customer/Landing/Alamat";
+import Landing_Header from "@/components/Customer/Landing/Landing_Header";
+import ItemCart from "@/components/Customer/ItemCart";
 
 interface Post {
   _id: string;
@@ -28,36 +32,20 @@ export default function hero({posts}: PostsProps) {
         <title>Customer Landing Page</title>
       </Head>
 
-      {/* Alamat */}
-      <div className="lg:items-center font-poppins p-7 font-semibold text-lg flex flex-col">
-        <div>
-          <h1 className="text-[#EC7505]">Delivery to</h1>
-        </div>
-        <div>
-          <h1 className="text-[#848484]">FMIPA UGM</h1>
-        </div>
-      </div>
+      {/* Header */}
+      <Landing_Header />
+
+      {/* Alamat Pembeli */}
+      <Alamat />
+
+      {/* Border Pembatas */}
+      <div className="border-2 border-[#D9D9D9] w-[318px] mx-auto mt-[9px] mb-4"></div>
 
       {/* Search */}
-      {/* <div className="flex justify-center">
-                <form className="flex items-center px-2 w-80">   
-                    <div className="relative w-full drop-shadow-2xl">
-                        <div className="absolute inset-y-0 
-                            left-0 flex items-center pl-3 pointer-events-none">
-                            <img src="icon_search.svg" alt="" />
-                        </div>
-                        <input 
-                            type="text"  
-                            placeholder="e.g. Ayam Goreng" 
-                            required 
-                            className="bg-white text-black font-poppins 
-                                text-base rounded-3xl block w-full pl-10 p-2.5 border 
-                                border-black border-opacity-20 focus:outline-none"
-                            />
-                    </div>
-                </form>
-            </div> */}
       <SearchPage />
+      
+      {/* Lets Cash Ewallet */}
+      <Ewallet />
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -188,26 +176,7 @@ export default function hero({posts}: PostsProps) {
       </div>
       
       {/* Item Cart */}
-      <Link href='#'>
-        <button 
-        className="fixed bottom-[70px] z-10 w-[335px] h-[54px] mx-[13px]
-                  bg-[#EC7505] rounded-xl 
-                  flex items-center justify-between px-[32px]
-                  md:left-1/2 md:-translate-x-1/2
-                  "
-        >
-          {/* Jumlah Item */}
-          <h1 className="font-poppins font-semibold text-[17px] text-white">1 item</h1>
-          
-          <div className="flex w-[101px] justify-between items-center">
-            {/* Jumlah Harga */}
-            <h1 className="font-poppins font-semibold text-[17px] text-white">20.000</h1>
-            <img src="/icon_cart.svg" 
-            className="" 
-            />
-          </div>
-        </button>
-      </Link>
+      <ItemCart />
 
 
       {/* Navbar */}

@@ -2,6 +2,7 @@ import Head from "next/head";
 import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
 import Popup_diskon from "@/components/Customer/Pesanan/Popup_Diskon_pesanan";
+import Popup_Pin from "@/components/Customer/Pesanan/Popup_Pin";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -74,8 +75,13 @@ export default function Pesanan({ carts, posts }: any) {
         <title>Pesanan</title>
       </Head>
 
+      {/* Biar Kalau Popup Muncul, semua selain popup bakal hidden */}
+      {showMyModal || showMyModal1 ? null : (
+      <div>
+        
+      {/* Header */}
       <C_Header>Pesanan</C_Header>
-
+      
       {/* Alamat Pembeli */}
       <div className="ml-[23px] mt-[25px] flex font-poppins">
         <img src="/icon_promo_location.svg" alt="" />
@@ -188,39 +194,20 @@ export default function Pesanan({ carts, posts }: any) {
         </div>
       </div>
 
-      {/* Balance */}
-      <div
-        className="bg-[#E89005] bg-opacity-[14%] 
-            mt-[27px] ml-[23px] mr-[19px] w-[318px] 
-            border border-1 border-black border-opacity-25 rounded-lg
-            font-poppins
-            md:mx-auto
-            "
-      >
-        <div className="bg-[#EC7505] h-[36px] rounded-lg flex items-center pl-[17px]">
-          <h1 className="text-white font-semibold text-[20px]">Your Balance</h1>
-        </div>
-
-        {/* Jumlah Balance */}
-        <div className="rounded-b-lg ml-[17px] shadow-lg py-[6px]">
-          <h1 className="text-[#7C3D02] font-semibold text-[25px]">
-            Rp. 420.420
-          </h1>
-        </div>
-      </div>
-
       {/* Metode Pembayaran */}
-      <div className="font-poppins mt-4">
-        <h1 className="ml-[23px] font-semibold text-[23px]">
+      <div className="font-poppins mt-4 ">
+        <h1 className="ml-[23px] font-semibold text-[23px] md:text-center md:ml-0">
           Metode Pembayaran
         </h1>
 
         {/* Layanan Dana */}
-        <div className="flex-col ml-[22px] mt-6 ">
+        <div className="flex-col ml-[22px] mt-6 md:justify-center md:ml-0">
           {/* lets Cash */}
           <button
             className="w-[316px] flex justify-between items-center rounded-lg h-[55px] 
-                                 border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505]"
+                                 border-2 border-opacity-25 active:border-[#EC7505] 
+                                 focus:border-[#EC7505] 
+                                 md:mx-auto"
           >
             <div className="flex-col ml-[14px] mt-[6px]">
               <div className="flex items-center">
@@ -236,8 +223,8 @@ export default function Pesanan({ carts, posts }: any) {
             <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
           </button>
 
-          {/* Munculkan jika saldo kurang */}
-          <div className="flex flex-row font-poppins hidden">
+          {/* Munculkan jika saldo kurang menggunakan hidden dan unhidden pada classname*/}
+          <div className="flex flex-row font-poppins md:justify-center">
             <h2 className="text-[12px]">
               Saldo anda kurang, apakah anda ingin melakukan{" "}
               <Link href="#">
@@ -252,7 +239,9 @@ export default function Pesanan({ carts, posts }: any) {
           {/* Cash */}
           <button
             className="mt-[18px] w-[316px] flex justify-between items-center rounded-lg h-[55px] 
-                                 border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505]"
+                                 border-2 border-opacity-25 active:border-[#EC7505] 
+                                 focus:border-[#EC7505]
+                                 md:mx-auto"
           >
             <div className="flex items-center ml-[14px] mt-[6px]">
               <h1 className="font-medium text-lg">Cash</h1>
@@ -265,8 +254,8 @@ export default function Pesanan({ carts, posts }: any) {
       </div>
 
       {/* Pay Button */}
-      <button
-        className="bg-[#EC7505] w-[172px] h-[56px]
+      <button onClick={() => setShowMyModal1(true)}
+        className=" bg-[#EC7505] w-[172px] h-[56px]
             rounded-lg mt-[34px] mx-auto
             flex justify-center items-center 
             "
@@ -275,7 +264,9 @@ export default function Pesanan({ carts, posts }: any) {
       </button>
 
       <div className="mb-16" />
-    </>
+      </div>
+      )}
+    </div>
   );
 }
 

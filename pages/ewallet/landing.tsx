@@ -1,8 +1,8 @@
 import React from 'react';
+import InputMask from 'react-input-mask';
 import Link from 'next/link';
 
 export default function landing () {
-    const InputMask = require("react-input-mask")
     return (
         <div className="font-poppins">
             <img src="/e_logo_lets_cash.svg" className="mx-auto mt-9"/>
@@ -13,7 +13,7 @@ export default function landing () {
                 Mudah, Cepat, Aman
             </h1>
 
-            <h1 className="text-[15px] w-[290px] mt-6 mx-auto">
+            <h1 className="text-[15px] w-[290px] mt-6 mx-auto">npm 
                 Daftar ke LetsCash sekarang dengan memasukkan nomor telepon anda
             </h1>
 
