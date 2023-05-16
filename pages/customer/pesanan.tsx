@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
@@ -23,12 +21,6 @@ interface Post {
 }
 
 export default function Pesanan({ carts, posts }: any) {
-  // // map menuId dari carts
-  // console.log(carts)
-  // console.log(posts)
-  // carts.map((cart) => {
-  //   console.log(cart.menuId);
-  // });
 
   // Merge carts dan posts berdasarkan menuId
   const mergeById = (carts: Cart[], posts: Post[]) =>
@@ -36,9 +28,6 @@ export default function Pesanan({ carts, posts }: any) {
       ...posts.find((item2) => item1.menuId === item2._id),
       ...item1,
     }));
-
-  // console.log(mergeById(carts, posts));
-  // console.log(mergeById.length);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -49,10 +38,10 @@ export default function Pesanan({ carts, posts }: any) {
 
   const initialValue = 0;
   // Hitung total harga
-  const itemPrice = mergeById(carts, posts).reduce(
-    (accumulator, current) => accumulator + current.harga * current.jumlah,
+  const [itemPrice, setItemPrice] = useState(mergeById(carts, posts).reduce(
+    (accumulator, current:any) => accumulator + current.harga * current.jumlah,
     initialValue
-  );
+  ));
   const deliPrice = 30000; // Biaya pengiriman dihitung dari jarak?
   const appPrice = 5000; // Aplikasi
   // To locale untuk format Rupiah
@@ -62,9 +51,25 @@ export default function Pesanan({ carts, posts }: any) {
   const [showMyModal, setShowMyModal] = useState(false);
   const closeModal = () => setShowMyModal(false);
 
+  const handleDiskon = (diskon: number, minPembelian: number, maxPotongan: number) => {
+    if (itemPrice >= minPembelian) {
+      const newPrice = itemPrice - (itemPrice * diskon / 100);
+      if (newPrice > maxPotongan) {
+        const newPrice = itemPrice - maxPotongan;
+        setItemPrice(newPrice);
+      }
+      else  {
+        setItemPrice(newPrice);
+      }
+    }
+    else {
+      return totalPrice;
+    }
+  }
+
   return (
     <>
-      {showMyModal && <Popup_diskon closeModal={closeModal} />}
+      {showMyModal && <Popup_diskon closeModal={closeModal} handleDiskon={handleDiskon}/>}
       <Head>
         <title>Pesanan</title>
       </Head>
@@ -140,7 +145,7 @@ export default function Pesanan({ carts, posts }: any) {
         <div className="rounded-b-lg ml-[17px] shadow-lg">
           {/* Biaya Menu */}
           <div className="pt-[9px]">
-            {mergeById(carts, posts).map((post) => (
+            {mergeById(carts, posts).map((post:any) => (
               <>
                 {/* Nama Menu dan Jumlah Menu */}
                 <div key={post._id} className="flex justify-between w-[281px]">

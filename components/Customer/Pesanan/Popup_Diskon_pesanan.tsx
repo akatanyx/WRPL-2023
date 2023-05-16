@@ -2,7 +2,7 @@ import Card_Diskon from "@/components/Customer/Pesanan/Card_Diskon";
 import { useState } from "react";
 
 export default function Diskon({ closeModal, handleDiskon }: any) {
-  const [promos, setPromo] = useState([
+  const [promos, setPromo] = useState([ // Dummy data
     {
       id: 1,
       minPembelian: 50000,
