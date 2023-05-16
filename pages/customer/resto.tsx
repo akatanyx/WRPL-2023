@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import Dropdown_Makanan from "@/components/Customer/Resto/Dropdown_Makanan";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
+import ItemCart from "@/components/Customer/ItemCart";
 
 interface Post {
   _id: string;
@@ -124,6 +125,11 @@ export default function Resto( {posts}: PostsProps ) {
       <div>
         <C_Navbar />
       </div>
+
+      {/* Item Cart */}     
+      <ItemCart />
+ 
+      
     </>
   );
 }
