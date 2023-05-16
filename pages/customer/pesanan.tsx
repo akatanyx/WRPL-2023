@@ -76,7 +76,7 @@ export default function Pesanan({ carts, posts }: any) {
       </Head>
 
       {/* Biar Kalau Popup Muncul, semua selain popup bakal hidden */}
-      {showMyModal || showMyModal1 ? null : (
+      {showMyModal || showMyModal ? null : (
       <div>
         
       {/* Header */}
@@ -254,7 +254,7 @@ export default function Pesanan({ carts, posts }: any) {
       </div>
 
       {/* Pay Button */}
-      <button onClick={() => setShowMyModal1(true)}
+      <button onClick={() => setShowMyModal(true)}
         className=" bg-[#EC7505] w-[172px] h-[56px]
             rounded-lg mt-[34px] mx-auto
             flex justify-center items-center 
@@ -266,8 +266,8 @@ export default function Pesanan({ carts, posts }: any) {
       <div className="mb-16" />
       </div>
       )}
-    </div>
-  );
+    </>
+);
 }
 
 export async function getServerSideProps() {
