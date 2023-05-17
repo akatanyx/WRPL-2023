@@ -12,13 +12,18 @@ export default function pesanan_proses () {
                             <img src="/b_pesananproses_dmenujuresto.svg"/>
                             {/* IF PESANAN SUDAH DIAMBIL DRIVER */}
                             <img src="/b_pesananproses_dmenujucust.svg" className="hidden"/>
+                            {/* IF PESANAN SELESAI */}
+                            <img src="/b_pesananproses_selesai.svg" className="hidden"/>
                             
                             <div className="flex flex-col pl-[9px]">
                                 <h1 className="font-semibold text-[16px]">Driver menuju restoran</h1>
+                                
                                 {/* IF PESANAN SUDAH DIAMBIL DRIVER */}
                                 <h1 className="font-semibold text-[16px] hidden">Driver menuju tempatmu</h1>    
+                                {/* IF PESANAN SELESAI */}
+                                <h1 className="font-semibold text-[16px] hidden">Driver sudah sampai</h1>
                                 
-                                
+                                {/* Hidden ini ketika pesanan selesai */}
                                 <h1 className="text-[15px] text-[#838080]">
                                     Estimasi tiba 20 menit
                                 </h1>
