@@ -5,12 +5,14 @@ export default function ewallet() {
             <div className="bg-[#118EEA] h-[98px] w-[314px] mt-4  rounded-lg font-poppins
                       flex text-[12px] mx-auto">
             {/* Saldo */}
+            <Link href="/ewallet/hero">
             <div className="bg-white w-[103px] h-[67px] rounded-lg ml-[18px] mt-[15px] flex-col">
             <img src="/e_hero_logoletscash.svg" className="mt-4 mx-auto" />
             <h1 className="font-medium text-center">
                 Rp. <span>1.000.000</span>
             </h1>
             </div>
+            </Link>
 
             {/* TopUp */}
             <Link href="/ewallet/topup">
