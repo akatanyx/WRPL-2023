@@ -82,13 +82,17 @@ export default function Pesanan({ carts, posts, wallet }: any) {
     }
   };
 
-  const saldo = 10000;
+  const saldo = 1000;
   const [saldoKurang, setSaldoKurang] = useState(false);
   useEffect(() => {
     if (saldo < totalPrice) {
       setSaldoKurang(true);
     }
   }, [saldo, totalPrice]);
+
+  const className = saldoKurang
+    ? 'bg-black bg-opacity-25 w-[316px] flex justify-between items-center rounded-lg h-[55px] border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505] md:mx-auto' // warna saat saldo kurang
+    : 'w-[316px] flex justify-between items-center rounded-lg h-[55px] border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505] md:mx-auto'; // warna saat saldo cukup atau pada hover
 
   return (
     <>
@@ -230,11 +234,7 @@ export default function Pesanan({ carts, posts, wallet }: any) {
             <div className="flex-col ml-[22px] mt-6 md:justify-center md:ml-0">
               {/* lets Cash */}
               <button
-                className="w-[316px] flex justify-between items-center rounded-lg h-[55px] 
-                                 border-2 border-opacity-25 active:border-[#EC7505] 
-                                 focus:border-[#EC7505] 
-                                 md:mx-auto"
-              >
+                className={className}>
                 <div className="flex-col ml-[14px] mt-[6px]">
                   <div className="flex items-center">
                     <h1 className="font-medium text-lg">Lets Cash</h1>
@@ -251,12 +251,9 @@ export default function Pesanan({ carts, posts, wallet }: any) {
                 {/* Bullet */}
                 <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
               </button>
-
-              {saldoKurang ? (
-                <>
                   {/* Munculkan jika saldo kurang menggunakan hidden dan unhidden pada classname*/}
-                  <div className="flex flex-row font-poppins md:justify-center">
-                    <h2 className="text-[12px]">
+                  <div className= "flex flex-row font-poppins md:justify-center">
+                    <h2 className="text-[12px] w-80">
                       Saldo anda kurang, apakah anda ingin melakukan{" "}
                       <Link href="../ewallet/topup">
                         <button>
@@ -266,9 +263,6 @@ export default function Pesanan({ carts, posts, wallet }: any) {
                       ?
                     </h2>
                   </div>
-                </>
-              ):null}
-
               {/* Cash */}
               <button
                 className="mt-[18px] w-[316px] flex justify-between items-center rounded-lg h-[55px] 
