@@ -1,7 +1,12 @@
+import Header_w_notif from "@/components/Merchant/Header_w_notif"
+
 export default function index () {
     return (
         <div>
-            <h1>Merchant</h1>
+            {/* Nama Toko */}
+            <Header_w_notif> Anteiku </Header_w_notif>
+
+            
         </div>
     )
 }
