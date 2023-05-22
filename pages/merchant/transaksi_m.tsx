@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Header_Toko from '../../components/Header_Toko'
 import Hari from '../../components/Hari'
-import Card_Transaksi from '../../components/Card_Transaksi'
+import Card_Transaksi from '../../components/Merchant/Riwayat_Pesanan/Card_Transaksi'
 import Pendapatan from '../../components/Pendapatan'
 import M_Navbar from '@/components/Merchant/M_Navbar'
 
