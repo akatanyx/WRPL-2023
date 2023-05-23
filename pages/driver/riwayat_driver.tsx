@@ -1,4 +1,4 @@
-import Navbar_driver from 'components/Navbar_driver';
+import Navbar_driver from '@/components/Driver/Navbar_driver';
 
 const MyPage = () => {
   return (

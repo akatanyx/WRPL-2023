@@ -4,7 +4,7 @@ import Profil_input_sel from "components/profil_input_sel";
 import Link from "next/link";
 import Waveatas from "@/components/Waveatas";
 import Wavebawah from "@/components/Wavebawah";
-import Navbar_driver from "@/components/Navbar_driver";
+import Navbar_driver from "@/components/Driver/Navbar_driver";
 
 export default function profil_driver() {
   return (
