@@ -4,7 +4,7 @@ import Tag_Makanan from "../Resto/Tag_Makanan";
 
 
 export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handleQuantityChange}:any) {
-  console.log(jumlah)
+  const [quantity, setQuantity] = useState(()=>jumlah);
   return (
     <>
     <div className="flex flex-col gap-y-[14px] mt-[21px] mx-[23px]">
@@ -56,7 +56,8 @@ export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handl
         <div className="absolute bottom-4 right-4 flex items-center gap-x-3">
           {/* Kurangi Pesanan */}
           <button
-          disabled={jumlah <= 1}>
+            onClick={() => setQuantity(quantity - 1)}
+          disabled={quantity <= 1}>
             <img
               src="/icon_popup_minus_stock.svg"
               className="w-[18px]"
@@ -65,10 +66,10 @@ export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handl
           </button>
           {/* Jumlah Pesanan */}
           <h1 className="text-[#E89005] font-poppins font-semibold text-[14px]">
-            {jumlah}
+            {quantity}
           </h1>
           {/* Tambahi Pesanan */}
-          <button>
+          <button onClick={() => setQuantity(quantity + 1)}>
             <img
               src="/icon_popup_plus_stock.svg"
               className="w-[18px]"

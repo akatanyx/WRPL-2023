@@ -234,6 +234,7 @@ export default function Pesanan({ carts, posts, wallet }: any) {
             <div className="flex-col ml-[22px] mt-6 md:justify-center md:ml-0">
               {/* lets Cash */}
               <button
+              disabled={saldoKurang}
                 className={className}>
                 <div className="flex-col ml-[14px] mt-[6px]">
                   <div className="flex items-center">
