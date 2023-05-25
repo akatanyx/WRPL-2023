@@ -27,8 +27,8 @@ import { MongoClient } from "mongodb";
 
 export default async function updateSaldo(req: any, res: any) {
   if (req.method === "PUT") {
-    const { saldo } = req.query;
-
+    const { saldo } = req.body;
+  
     const db = await connectToDatabase();
     const collection = db.collection("e-wallet");
 
