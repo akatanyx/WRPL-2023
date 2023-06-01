@@ -13,7 +13,7 @@ import Alamat from "@/components/Customer/Landing/Alamat";
 import Landing_Header from "@/components/Customer/Landing/Landing_Header";
 import ItemCart from "@/components/Customer/ItemCart";
 
-interface Post {
+interface Menu {
   _id: string;
   nama: string;
   desk: string;
@@ -21,11 +21,18 @@ interface Post {
   imgURL: string;
 }
 
-interface PostsProps {
-  posts: Post[];
+interface Wallet {
+  id_wallet: string;
+  saldo: number;
+  no_telp: string;
+  nama: string;
 }
 
-export default function hero({posts}: PostsProps) {
+export default function hero({menus, wallets}: any) {
+  const wallet = wallets.filter((wallet:Wallet) => wallet.id_wallet === "1");
+  const saldo:number = wallet[0].saldo;
+
+  
   return (
     <>
       <Head>
@@ -45,7 +52,7 @@ export default function hero({posts}: PostsProps) {
       <SearchPage />
       
       {/* Lets Cash Ewallet */}
-      <Ewallet />
+      <Ewallet saldo={saldo}/>
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -102,13 +109,13 @@ export default function hero({posts}: PostsProps) {
 
         <div className=" flex flex-wrap gap-y-[18px]">
           
-            {posts.map((post, index)=> index < 2 && ( 
+            {menus.map((menu:Menu, index:number)=> index < 2 && ( 
                 <Card_Favorit
-                  key={post._id}
-                  nama={post.nama}
-                  desk={post.desk}
-                  harga={post.harga}
-                  imgURL={post.imgURL}
+                  key={menu._id}
+                  nama={menu.nama}
+                  desk={menu.desk}
+                  harga={menu.harga}
+                  imgURL={menu.imgURL}
                 />
                 ))}   
         </div>
@@ -176,7 +183,7 @@ export default function hero({posts}: PostsProps) {
       </div>
       
       {/* Item Cart */}
-      <ItemCart />
+      <ItemCart totalPrice={56789} />
 
 
       {/* Navbar */}
@@ -190,11 +197,15 @@ export default function hero({posts}: PostsProps) {
 
 export async function getServerSideProps() {
     const res = await fetch("http://localhost:3000/api/posts?type=menus");
-    const posts: Post[] = await res.json();
+    const menus: Menu[] = await res.json();
+
+    const res2 = await fetch("http://localhost:3000/api/posts?type=wallets");
+    const wallets: Wallet[] = await res2.json();
   
     return {
       props: {
-        posts,
+        menus,
+        wallets,
       },
     };
   }

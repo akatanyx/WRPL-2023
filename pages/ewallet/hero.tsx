@@ -14,13 +14,16 @@ interface WalletProps {
   wallets: Wallet[];
 }
 
+
 export default function Hero({ wallets }: WalletProps) {
-  console.log(wallets);
   const [showSaldo, setShowSaldo] = useState(true);
 
   const toggleSaldo = () => {
     setShowSaldo(!showSaldo);
   };
+  //User id = 1 = wallet id
+  const wallet = wallets.filter((wallet) => wallet.id_wallet === "1");
+  const saldo = wallet[0].saldo;
 
   return (
     <div className="font-poppins">
@@ -33,7 +36,7 @@ export default function Hero({ wallets }: WalletProps) {
           {/* Nama*/}
           <div className="flex">
             <h1 className="font-medium text-[#263238] text-[17px]">
-              Halo, {wallets[0].nama} !
+              Halo, {wallet[0].nama} !
             </h1>
             <img src="/e_hero_centang.svg" className="translate-x-1" />
           </div>
@@ -56,7 +59,7 @@ export default function Hero({ wallets }: WalletProps) {
           <h1 className="font-semibold">Saldo</h1>
           <p>-</p>
           {/* Nomor Telepon */}
-          <h1>{wallets[0].no_telp}</h1>
+          <h1>{wallet[0].no_telp}</h1>
         </div>
 
         {/* Border Pembatas */}
@@ -67,9 +70,9 @@ export default function Hero({ wallets }: WalletProps) {
           <div className="flex items-center gap-x-[3px] ml-[16px] font-semibold text-white">
             <h1 className="text-[21px]">Rp</h1>
             <h1 className={`text-[25px] ${showSaldo ? "" : "hidden"}`}>
-              {wallets[0].saldo},<span className="text-[16px]">00</span>
+              {saldo.toLocaleString()}
             </h1>
-            <h1 className={`text-[25px] ${showSaldo ? "hidden" : ""}`}>
+            <h1 className={`text-[25px] tracking-wide ${showSaldo ? " hidden" : ""}`}>
               &bull;&bull;&bull;&bull;&bull;&bull;
             </h1>
           </div>
@@ -109,7 +112,7 @@ export default function Hero({ wallets }: WalletProps) {
         <Link href="#">
           <div className="flex-col text-center">
             <img src="/e_hero_fitur_letsgift.svg" alt="" />
-            <h1 className="mt-[6px]">Let's Gift</h1>
+            <h1 className="mt-[6px]">Let&apos;s Gift</h1>
           </div>
         </Link>
 
@@ -163,7 +166,7 @@ export default function Hero({ wallets }: WalletProps) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=e-wallet");
+  const res = await fetch("http://localhost:3000/api/posts?type=wallets");
   const wallets: Wallet[] = await res.json();
 
   return {

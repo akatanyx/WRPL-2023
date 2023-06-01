@@ -1,5 +1,7 @@
+import { getServerSideProps } from '@/pages/coba/m_list'
 import Link from 'next/link'
-export default function ewallet() {
+
+export default function ewallet({saldo}:any) {
     return (
         <div>
             <div className="bg-[#118EEA] h-[98px] w-[314px] mt-4  rounded-lg font-poppins
@@ -7,9 +9,9 @@ export default function ewallet() {
             {/* Saldo */}
             <Link href="/ewallet/hero">
             <div className="bg-white w-[103px] h-[67px] rounded-lg ml-[18px] mt-[15px] flex-col">
-            <img src="/e_hero_logoletscash.svg" className="mt-4 mx-auto" />
+            <img src="/e_hero_logoletscash.svg" className="mt-4 p-2 mx-auto" />
             <h1 className="font-medium text-center">
-                Rp. <span>1.000.000</span>
+                Rp. <span>{saldo.toLocaleString()}</span>
             </h1>
             </div>
             </Link>

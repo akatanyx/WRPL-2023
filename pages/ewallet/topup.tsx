@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import router from 'next/router';
+import Image from 'next/image';
 
 export default function Topup() {
   const [selectedAmount, setSelectedAmount] = useState('');
@@ -13,14 +14,16 @@ export default function Topup() {
     setSelectedAmount(amount.toString());
   };
 
+  let id_wallet = "1"; //hardcode -> id wallet user saat ini
+
   const handleConfirm = async () => {
     const saldoBaru = parseInt(selectedAmount);
-    const response = await fetch('/api/update', {
+    const response = await fetch('/api/updatewallet?type=add', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ saldo: saldoBaru }),
+      body: JSON.stringify({ idwallet:id_wallet, saldo: saldoBaru }),
     });
     if (response.ok) {
       router.push('/ewallet/hero');
@@ -40,7 +43,7 @@ export default function Topup() {
 
       {/* Nominal Topup */}
       <div className="flex ml-[35px] md:justify-center md:-translate-x-1">
-        <img src="/e_topup_wallet.svg" alt="" />
+        <Image src="/e_topup_wallet.svg" height={31} width={26} alt="" />
         <span className="text-[20px] translate-x-2.5">Rp</span>
         <input
           type="text"

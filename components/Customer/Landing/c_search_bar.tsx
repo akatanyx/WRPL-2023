@@ -32,7 +32,6 @@ export default function SearchPage() {
               <input
                 type="text"
                 className="w-[220px] rounded-lg pl-1 pr-1 focus:outline-none font-poppins"
-                required
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
               />

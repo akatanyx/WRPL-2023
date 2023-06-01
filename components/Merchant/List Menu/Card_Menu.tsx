@@ -20,12 +20,11 @@ export default function Card_Menu ({ nama, desk, harga, imgURL} : CardMenuProps)
     return (
         <>
             {showMyModal && <Popup_stock closeModal={closeModal} />}
-            <div className='flex shadow-lg w-[314px] rounded-lg md:w-full relative'>
+            <div className='flex shadow-lg w-[314px] rounded-lg m-4 transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110'>
 
                 {/* Foto Makanan */}
-                <Image src={imgURL} alt="" height={130} width={130} className='rounded-lg p-4'/>                    
-                <div className='flex flex-col justify-center relative -translate-y-3'>
-                    
+                <Image src={imgURL} alt="" height={80} width={80} className='rounded-l-lg mr-2 w-32 h-32'/>                    
+                <div className='flex flex-col justify-center'>
                     {/* Tag */}
                     <div className="flex mb-1 gap-x-1">
                         <Tag_Makanan>
