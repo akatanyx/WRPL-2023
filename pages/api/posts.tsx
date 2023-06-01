@@ -1,17 +1,20 @@
-import { MongoClient } from 'mongodb';
+import { connectToDatabase } from "../mongodb";
 
+// API untuk read data dari database
 export default async function handler(req: any, res: any) {
-  const collectionName = req.query.type as string;
-  const uri: string = process.env.MONGODB_URI as string;
-  const client = new MongoClient(uri, {});
+  const collectionName:string = req.query.type as string;
+  let client;
   try {
-    await client.connect();
-    const collection = client.db('letseat').collection(collectionName);
+    client = await connectToDatabase();
+    const collection = client.db("letseat").collection(collectionName);
     const result = await collection.find().toArray();
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ error: 'error' });
+    console.error('Error occurred:', error);
+    res.status(500).json({ error: "Error occurred" });
   } finally {
-    await client.close();
+    if (client) {
+      client.close();
+    }
   }
 }

@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import { useState } from 'react'
 
-export default function ItemCart () {
+export default function ItemCart ({totalPrice}:any) {
+    const  [jumlahItem, setJumlahItem] = useState(12)
+    const  [harga, setHarga] = useState(totalPrice)
     return (
         <>
         <Link href='/customer/pesanan'>
@@ -12,11 +15,11 @@ export default function ItemCart () {
                     "
             >
             {/* Jumlah Item */}
-            <h1 className="font-poppins font-semibold text-[17px] text-white">1 item</h1>
+            <h1 className="font-poppins font-semibold text-[17px] text-white">{jumlahItem} item</h1>
             
             <div className="flex w-[101px] justify-between items-center">
                 {/* Jumlah Harga */}
-                <h1 className="font-poppins font-semibold text-[17px] text-white">20.000</h1>
+                <h1 className="font-poppins font-semibold text-[17px] text-white">{harga?.toLocaleString()}</h1>
                 <img src="/icon_cart.svg" 
                 className="" 
                 />

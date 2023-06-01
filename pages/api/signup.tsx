@@ -2,14 +2,14 @@ import { connectToDatabase } from '../mongodb';
 
 export default async function handler(req: any, res: any) {
   if (req.method === 'POST') {
-    const db = await connectToDatabase();
+    const client = await connectToDatabase();
 
     let result = {};
     const { type } = req.query;
     const collectionName = getTypeCollectionName(type);
 
     if (collectionName) {
-      const collection = db.collection(collectionName);
+      const collection = client.db("letseat").collection(collectionName);
       let data = {};
 
       switch (type) {
@@ -67,7 +67,7 @@ export default async function handler(req: any, res: any) {
             jumlah: req.body.jumlah 
           };
           break;
-        case 'e-wallet':
+        case 'wallet':
           data = {
             id_wallet: req.body.id_wallet,
             no_telp: req.body.no_telp,
@@ -104,8 +104,8 @@ function getTypeCollectionName(type: string): string {
       return 'menus';
     case 'cart':
       return 'carts';
-    case 'e-wallet':
-      return 'e-wallet';
+    case 'wallet':
+      return 'wallets';
     default:
       return '';
   }
