@@ -1,8 +1,13 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
-export default function ItemCart ({totalPrice}:any) {
-    const  [jumlahItem, setJumlahItem] = useState(12)
+type ItemCartProps = {
+    totalItem: number,
+    totalPrice: number
+}
+
+export default function ItemCart ({totalItem, totalPrice}: ItemCartProps) {
+    const  [jumlahItem, setJumlahItem] = useState(totalItem)
     const  [harga, setHarga] = useState(totalPrice)
     return (
         <>
@@ -19,7 +24,7 @@ export default function ItemCart ({totalPrice}:any) {
             
             <div className="flex w-[101px] justify-between items-center">
                 {/* Jumlah Harga */}
-                <h1 className="font-poppins font-semibold text-[17px] text-white">{harga?.toLocaleString()}</h1>
+                <h1 className="font-poppins font-semibold text-[17px] text-white">{harga?.toLocaleString("de-DE")}</h1>
                 <img src="/icon_cart.svg" 
                 className="" 
                 />

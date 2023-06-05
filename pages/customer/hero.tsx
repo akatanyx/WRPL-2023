@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import Promo from "@/components/Customer/Landing/SlidePromo"
+import Promo from "@/components/Customer/Landing/SlidePromo";
 import Card_Kategori from "@/components/Customer/Landing/Card_Kategori";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import SearchPage from "@/components/Customer/Landing/c_search_bar";
@@ -14,6 +14,8 @@ import Landing_Header from "@/components/Customer/Landing/Landing_Header";
 import ItemCart from "@/components/Customer/ItemCart";
 import cardKategoriItems from "./kategori";
 import cardBestRestosItems from "./bestrestos";
+import cardRestoNearItems from "./restonear";
+import cardFavoritItems from "./makananfavorit";
 
 interface Menu {
   _id: string;
@@ -34,18 +36,38 @@ export type CardKategoriProps = {
   id: string;
   namaKategori: string;
   gambarKategori: string;
-}
+};
 
 export type CardBestRestoProps = {
   id: string;
   namaResto: string;
   gambarResto: string;
-}
+};
 
-export default function hero({menus, wallets}: any) {
-  const wallet = wallets.filter((wallet:Wallet) => wallet.id_wallet === "1");
-  const saldo:number = wallet[0].saldo;
-  
+export type CardRestoNearProps = {
+  id: string;
+  namaResto: string;
+  gambarResto: string;
+  alamatResto: string;
+  jarakResto: string;
+  ratingResto: string;
+};
+
+export type CardFavoritFoodProps = {
+  id: string;
+  namaFood: string;
+  gambarFood: string;
+  resto: string;
+  hargaFood: string;
+  kategoriFood: string;
+  ratingFood: string;
+};
+
+
+export default function hero({ menus, wallets }: any) {
+  const wallet = wallets.filter((wallet: Wallet) => wallet.id_wallet === "1");
+  const saldo: number = wallet[0].saldo;
+
   return (
     <>
       <Head>
@@ -63,163 +85,192 @@ export default function hero({menus, wallets}: any) {
 
       {/* Search */}
       <SearchPage />
-      
+
       {/* Lets Cash Ewallet */}
-      <Ewallet saldo={saldo}/>
+      <Ewallet saldo={saldo} />
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
         <Promo />
       </div>
 
-
-      <div className="mx-4 w-[328px] mb-36
+      <div
+        className="mx-4 w-[328px] mb-36
       md:mx-auto
-      "> 
-      {/* Kategori */}
-      <div className="flex flex-col
+      "
+      >
+        {/* Kategori */}
+        <div
+          className="flex flex-col
       md:items-center
-      ">
+      "
+        >
+          <h1 className="font-poppins font-semibold text-xl mb-[10px]">
+            Kategori
+          </h1>
 
-        <h1 className="font-poppins font-semibold text-xl mb-[10px]">Kategori</h1>
-
-        <div 
-        className="rounded-xl
+          <div
+            className="rounded-xl
                   flex flex-wrap gap-x-[18px] gap-y-[12px]
-                  lg:flex lg:justify-center lg:w-full">
-         {( cardKategoriItems.map((item:CardKategoriProps) => (
-          <div key={item.id}>
-            <Card_Kategori id={item.id} namaKategori={item.namaKategori} gambarKategori={item.gambarKategori}/>
+                  lg:flex lg:justify-center lg:w-full"
+          >
+            {cardKategoriItems.map((item: CardKategoriProps) => (
+              <div key={item.id}>
+                <Card_Kategori
+                  id={item.id}
+                  namaKategori={item.namaKategori}
+                  gambarKategori={item.gambarKategori}
+                />
+              </div>
+            ))}
           </div>
-          )))}
         </div>
 
-      </div>
-
-      {/* Favorit Akhir ini */}
-      <div className="flex flex-col mt-10
-                      lg:w-full ">
-
-        {/* Favorit and See All */}
-        <div className="flex justify-between mb-[10px]
-                        lg:justify-center">
-          <h1 className=" font-poppins font-semibold text-xl w-[221px] ">
-            Favorit akhir-akhir ini
-          </h1>
-          <Link href="#">
-            <button
-              className=" border border-[#EC7505] w-[63px] h-[21px] flex
+        {/* Favorit Akhir ini */}
+        <div
+          className="flex flex-col mt-10
+                      lg:w-full "
+        >
+          {/* Favorit and See All */}
+          <div
+            className="flex justify-between mb-[10px]
+                        lg:justify-center"
+          >
+            <h1 className=" font-poppins font-semibold text-xl w-[221px] ">
+              Favorit akhir-akhir ini
+            </h1>
+            <Link href="#">
+              <button
+                className=" border border-[#EC7505] w-[63px] h-[21px] flex
                         items-center justify-center rounded-xl p-2 translate-y-1
                         "
-            >
-              <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">
-                See All
-              </h1>
-            </button>
-          </Link>
-        </div>
-
-        <div className=" flex flex-wrap gap-y-[18px]">
-          
-            {menus.map((menu:Menu, index:number)=> index < 2 && ( 
-                <Card_Favorit
-                  key={menu._id}
-                  nama={menu.nama}
-                  desk={menu.desk}
-                  harga={menu.harga}
-                  imgURL={menu.imgURL}
-                />
-                ))}   
-        </div>
-      </div>
-
-      {/* Restoran Ternama */}
-      <div className="flex flex-col mt-10
-                      lg:w-full ">
-
-        {/* Restoran Ternama and See All */}
-        <div className="flex justify-between mb-[10px]
-                        lg:justify-center">
-          <h1 className=" font-poppins font-semibold text-xl w-[221px] ">
-            Restoran Ternama
-          </h1>
-          <Link href="#">
-            <button
-              className=" border border-[#EC7505] w-[63px] h-[21px] flex
-                        items-center justify-center rounded-xl p-2 translate-y-1"
               >
-              <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">
-                See All
-              </h1>
-            </button>
-          </Link>
-        </div>
-
-        <div className="flex flex-wrap gap-x-6 gap-y-4 justify-between">
-        {( cardBestRestosItems.map((item:CardBestRestoProps) => (
-          <div key={item.id}>
-            <Card_Best id={item.id} namaResto={item.namaResto} gambarResto={item.gambarResto}/>
+                <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">
+                  See All
+                </h1>
+              </button>
+            </Link>
           </div>
-          )))}
+
+          <div className=" flex flex-wrap gap-y-[18px]">
+            {cardFavoritItems.map((item, index:number) => index < 2 && (
+              <div key={item.id}>
+                <Card_Favorit
+                  id={item.id}
+                  namaFood={item.namaFood}
+                  gambarFood={item.gambarFood}
+                  resto={item.resto}
+                  hargaFood={item.hargaFood}
+                  kategoriFood={item.kategoriFood}
+                  ratingFood={item.ratingFood}
+                />
+              </div>
+))}
+          </div>
         </div>
-      </div>
 
-      {/* Restaurant Near You */}
-      <div className="flex flex-col mt-10
-                      lg:w-full ">
-
-        {/* Restaurant Near You and See All */}
-        <div className="flex justify-between mb-[10px]
-                        lg:justify-center">
-          <h1 className=" font-poppins font-semibold text-xl w-[221px] ">
-            Restaurant Near You
-          </h1>
-          <Link href="/customer/resto_near_you">
-            <button
-              className=" border border-[#EC7505] w-[63px] h-[21px] flex
+        {/* Restoran Ternama */}
+        <div
+          className="flex flex-col mt-10
+                      lg:w-full "
+        >
+          {/* Restoran Ternama and See All */}
+          <div
+            className="flex justify-between mb-[10px]
+                        lg:justify-center"
+          >
+            <h1 className=" font-poppins font-semibold text-xl w-[221px] ">
+              Restoran Ternama
+            </h1>
+            <Link href="#">
+              <button
+                className=" border border-[#EC7505] w-[63px] h-[21px] flex
                         items-center justify-center rounded-xl p-2 translate-y-1"
               >
-              <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">
-                See All
-              </h1>
-            </button>
-          </Link>
+                <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">
+                  See All
+                </h1>
+              </button>
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap gap-x-6 gap-y-4 justify-between">
+            {cardBestRestosItems.map((item: CardBestRestoProps) => (
+              <div key={item.id}>
+                <Card_Best
+                  id={item.id}
+                  namaResto={item.namaResto}
+                  gambarResto={item.gambarResto}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-x-[18px] gap-y-[18px] justify-between">
-          <Card_Resto_Near />
-          <Card_Resto_Near />
-          <Card_Resto_Near />
-          <Card_Resto_Near />
+        {/* Restaurant Near You */}
+        <div
+          className="flex flex-col mt-10
+                      lg:w-full "
+        >
+          {/* Restaurant Near You and See All */}
+          <div
+            className="flex justify-between mb-[10px]
+                        lg:justify-center"
+          >
+            <h1 className=" font-poppins font-semibold text-xl w-[221px] ">
+              Restaurant Near You
+            </h1>
+            <Link href="/customer/resto_near_you">
+              <button
+                className=" border border-[#EC7505] w-[63px] h-[21px] flex
+                        items-center justify-center rounded-xl p-2 translate-y-1"
+              >
+                <h1 className="text-[13px] font-poppins text-[#EC7505] font-medium">
+                  See All
+                </h1>
+              </button>
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap gap-x-[18px] gap-y-[18px] justify-between">
+            {cardRestoNearItems.map((item: CardRestoNearProps) => (
+              <div key={item.id}>
+                <Card_Resto_Near
+                  id={item.id}
+                  namaResto={item.namaResto}
+                  gambarResto={item.gambarResto}
+                  jarakResto={item.jarakResto}
+                  ratingResto={item.ratingResto}
+                  alamatResto={item.alamatResto}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      </div>
-      
+
       {/* Item Cart */}
-      <ItemCart totalPrice={56789} />
-
+      <ItemCart totalItem={1} totalPrice={15000} />
 
       {/* Navbar */}
       <div>
         <C_Navbar />
       </div>
-      
     </>
   );
 }
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/api/posts?type=menus");
-    const menus: Menu[] = await res.json();
+  const res = await fetch("http://localhost:3000/api/posts?type=menus");
+  const menus: Menu[] = await res.json();
 
-    const res2 = await fetch("http://localhost:3000/api/posts?type=wallets");
-    const wallets: Wallet[] = await res2.json();
-  
-    return {
-      props: {
-        menus,
-        wallets,
-      },
-    };
-  }
-  
+  const res2 = await fetch("http://localhost:3000/api/posts?type=wallets");
+  const wallets: Wallet[] = await res2.json();
+
+  return {
+    props: {
+      menus,
+      wallets,
+    },
+  };
+}

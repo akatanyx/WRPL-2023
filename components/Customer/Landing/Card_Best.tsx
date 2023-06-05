@@ -11,7 +11,7 @@ export default function Card_Best ({namaResto, gambarResto}: CardBestRestoProps)
                             <img src={gambarResto} alt="" />
                         </div>
                         <div>
-                            <h1 className='pl-3 font-poppins font-semibold text-[19px] translate-y-1'>
+                            <h1 className='pl-3 font-poppins font-semibold text-[19px] translate-y-1 truncate'>
                                 {namaResto}
                             </h1>
                         </div>

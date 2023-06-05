@@ -1,18 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-interface CardMenuProps {
-  nama: string;
-  desk: string;
-  harga: number;
-  imgURL: string;
-}
+import { CardFavoritFoodProps } from "@/pages/customer/hero";
 
-export default function Card_Favorit({
-  nama,
-  desk,
-  harga,
-  imgURL,
-}: CardMenuProps) {
+export default function Card_Favorit({namaFood, gambarFood, resto, hargaFood, kategoriFood, ratingFood}: CardFavoritFoodProps) {
   return (
     <>
       <Link href="#">
@@ -21,7 +11,7 @@ export default function Card_Favorit({
         gap-x-[14px] relative rounded-xl"
         >
           <Image
-            src={imgURL}
+            src={gambarFood}
             alt="makanan favorit"
             className="rounded-xl"
             width={130}
@@ -36,7 +26,7 @@ export default function Card_Favorit({
                           border-[#EC7505] bg-[#EC7505] px-2 rounded-xl"
               >
                 <h1 className="text-white font-poppins font-semibold text-[10px]">
-                  Ayam
+                  {kategoriFood}
                 </h1>
               </div>
 
@@ -53,21 +43,21 @@ export default function Card_Favorit({
                   className="font-poppins font-semibold text-[13px]
                                     translate-x-1"
                 >
-                  4.7
+                  {ratingFood}
                 </h1>
               </div>
             </div>
 
             {/* Nama Makanan */}
-            <h1 className="font-medium font-poppins text-[19px]">{nama}</h1>
+            <h1 className="font-medium font-poppins text-[19px]">{namaFood}</h1>
 
             {/* Deskripsi Makanan*/}
             <h2 className="font-medium font-poppins text-[12px] text-[#9B8F8F] -translate-y-1">
-              {desk}
+              {resto}
             </h2>
 
             {/* Harga Makanan */}
-            <p className="font-semibold font-poppins text-[13px]">Rp {harga}</p>
+            <p className="font-semibold font-poppins text-[13px]">Rp {hargaFood}</p>
           </div>
         </div>
       </Link>

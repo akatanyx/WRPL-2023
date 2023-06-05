@@ -8,10 +8,10 @@ export default function ewallet({saldo}:any) {
                       flex text-[12px] mx-auto">
             {/* Saldo */}
             <Link href="/ewallet/hero">
-            <div className="bg-white w-[103px] h-[67px] rounded-lg ml-[18px] mt-[15px] flex-col">
-            <img src="/e_hero_logoletscash.svg" className="mt-4 p-2 mx-auto" />
+            <div className="bg-white w-[103px] h-[67px] rounded-lg ml-[18px] mt-[15px] flex-col align-center">
+            <img src="/e_hero_logoletscash.svg" className="mx-auto pt-4" />
             <h1 className="font-medium text-center">
-                Rp. <span>{saldo.toLocaleString()}</span>
+                Rp. <span>{saldo.toLocaleString("de-DE")}</span>
             </h1>
             </div>
             </Link>
