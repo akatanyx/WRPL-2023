@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Voucher } from "../api/discount";
 import vouchers from "./vouchers";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Pesanan() {
   const [cartItems, setCartItems] = useState([
@@ -108,6 +109,16 @@ export default function Pesanan() {
 
   const handleOpenPopup = () => {
     setIsPopupVisible(true);
+  };
+
+  const router = useRouter();
+  const handlePay = () => {
+    if (totalHarga > saldo) {
+      alert("Saldo tidak cukup");
+    } else {
+      alert("Pembayaran berhasil");
+      router.push("pembayaran_berhasil");
+    }
   };
 
   return (
@@ -286,8 +297,6 @@ export default function Pesanan() {
                 </div>
               )}
 
-              {/* Border Pembatas */}
-
               {/* Cash */}
               <button
                 className="mt-[18px] w-[316px] flex justify-between items-center rounded-lg h-[55px] 
@@ -307,6 +316,7 @@ export default function Pesanan() {
 
           {/* Pay Button */}
           <button
+            onClick={handlePay}
             className=" bg-[#EC7505] w-[172px] h-[56px]
             rounded-lg mt-[34px] mx-auto
             flex justify-center items-center 
