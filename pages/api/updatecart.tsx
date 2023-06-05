@@ -4,11 +4,11 @@ import { connectToDatabase } from "../mongodb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const collectionName:string = "carts"
-    let client;
+    let db;
   
   try {
-    client = await connectToDatabase();
-    const collection = client.db("letseat").collection(collectionName);
+    db = await connectToDatabase();
+    const collection = db.collection(collectionName);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error" });

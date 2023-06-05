@@ -3,8 +3,8 @@ import { connectToDatabase } from "../mongodb";
 export default async function handler(req: any, res: any) {
   if (req.method === "PUT" && req.query.type === "add") {
     const { idwallet, saldo } = req.body;
-    const client = await connectToDatabase();
-    const collection = client.db("letseat").collection("wallets");
+    const db = await connectToDatabase();
+    const collection = db.collection("wallets");
 
     // Menambah saldo e-wallet
     const cursor = await collection.updateOne(
@@ -19,8 +19,8 @@ export default async function handler(req: any, res: any) {
     res.status(200).json(results);
   } else if (req.method === "PUT" && req.query.type === "sub") {
     const { idwallet, saldo } = req.body;
-    const client = await connectToDatabase();
-    const collection = client.db("letseat").collection("wallets");
+    const db = await connectToDatabase();
+    const collection = db.collection("wallets");
 
     // Mengurangi saldo e-wallet
     const cursor = await collection.updateOne(

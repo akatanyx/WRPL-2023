@@ -2,12 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../mongodb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const collectionName:string = "carts"
+    const collectionName:string = "carts";
     let client;
-  
   try {
     client = await connectToDatabase();
-    const collection = client.db("letseat").collection(collectionName);
+    const collection = client.collection(collectionName);
     const result = await collection.aggregate([
       {
         $addFields: {

@@ -2,14 +2,14 @@ import { connectToDatabase } from '../mongodb';
 
 export default async function handler(req: any, res: any) {
   if (req.method === 'POST') {
-    const client = await connectToDatabase();
+    const db = await connectToDatabase();
 
     let result = {};
     const { type } = req.query;
     const collectionName = getTypeCollectionName(type);
 
     if (collectionName) {
-      const collection = client.db("letseat").collection(collectionName);
+      const collection = db.collection(collectionName);
       let data = {};
 
       switch (type) {
