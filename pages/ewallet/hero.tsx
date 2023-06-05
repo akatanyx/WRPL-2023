@@ -36,7 +36,7 @@ export default function Hero({ wallets }: WalletProps) {
           {/* Nama*/}
           <div className="flex">
             <h1 className="font-medium text-[#263238] text-[17px]">
-              Halo, {wallet[0].nama} !
+              Halo, {wallet[0].nama}!
             </h1>
             <img src="/e_hero_centang.svg" className="translate-x-1" />
           </div>

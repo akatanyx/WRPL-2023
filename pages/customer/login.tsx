@@ -106,7 +106,7 @@ export default function Login() {
         {/* tidak punya akun */}
         <div className="flex flex-row justify-center font-poppins">
           <h2 className="text-sm">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/customer/signup">
               <button>
                 <h1 className="font-bold text-sm">SIGN UP</h1>

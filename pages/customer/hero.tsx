@@ -12,6 +12,7 @@ import Ewallet from "@/components/Customer/Landing/ewallet";
 import Alamat from "@/components/Customer/Landing/Alamat";
 import Landing_Header from "@/components/Customer/Landing/Landing_Header";
 import ItemCart from "@/components/Customer/ItemCart";
+import cardKategoriItems from "./kategori";
 
 interface Menu {
   _id: string;
@@ -28,10 +29,15 @@ interface Wallet {
   nama: string;
 }
 
+export type CardKategoriProps = {
+  id: string;
+  namaKategori: string;
+  gambarKategori: string;
+}
+
 export default function hero({menus, wallets}: any) {
   const wallet = wallets.filter((wallet:Wallet) => wallet.id_wallet === "1");
   const saldo:number = wallet[0].saldo;
-
   
   return (
     <>
@@ -74,12 +80,11 @@ export default function hero({menus, wallets}: any) {
         className="rounded-xl
                   flex flex-wrap gap-x-[18px] gap-y-[12px]
                   lg:flex lg:justify-center lg:w-full">
-          <Card_Kategori />
-          <Card_Kategori />
-          <Card_Kategori />
-          <Card_Kategori />
-          <Card_Kategori />
-          <Card_Kategori />
+         {( cardKategoriItems.map((item:CardKategoriProps) => (
+          <div key={item.id}>
+            <Card_Kategori id={item.id} namaKategori={item.namaKategori} gambarKategori={item.gambarKategori}/>
+          </div>
+          )))}
         </div>
 
       </div>
