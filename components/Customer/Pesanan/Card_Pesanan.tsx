@@ -2,16 +2,47 @@
 import React, { useEffect, useState } from "react";
 import Tag_Makanan from "../Resto/Tag_Makanan";
 
+interface CartItemProps {
+  cartItem: {
+    _id: string;
+    menuId: string;
+    jumlah: number;
+    menuItems: {
+      nama: string;
+      harga: number;
+      desk: string;
+      tag: string;
+      kategori: string;
+      rating: string;
+      imgURL: string;
+    };
+  };
+  onUpdateJumlah: (itemId: string, newJumlah: number) => void;
+}
 
-export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handleQuantityChange}:any) {
-  const [quantity, setQuantity] = useState(()=>jumlah);
+const Card_Pesanan:React.FC<CartItemProps> = ({ cartItem, onUpdateJumlah }) => {
+
+  const [jumlah, setJumlah] = useState(cartItem.jumlah);
+
+  const handleIncrement = () => {
+    const newJumlah = jumlah + 1;
+    setJumlah(newJumlah);
+    onUpdateJumlah(cartItem._id, newJumlah);
+  };
+
+  const handleDecrement = () => {
+    const newJumlah = jumlah > 0 ? jumlah - 1 : 0;
+    setJumlah(newJumlah);
+    onUpdateJumlah(cartItem._id, newJumlah);
+  };
+
   return (
     <>
     <div className="flex flex-col gap-y-[14px] mt-[21px] mx-[23px]">
       <div className="flex shadow-lg w-[314px] rounded-lg md:w-full relative">
         {/* Foto Makanan */}
         <img
-          src={imgURL}
+          src={cartItem.menuItems.imgURL}
           alt=""
           className="rounded-lg px-4 py-[19px] w-[130px] h-[130px]"
         />
@@ -26,20 +57,20 @@ export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handl
 
           {/* Masih belum bisa break-words */}
           <h1 className="break-words font-semibold text-[15px] font-poppins">
-            {nama}
+            {cartItem.menuItems.nama}
           </h1>
           <p className="text-mobile text-[#838080] font-poppins break-words">
-            {desk}
+            {cartItem.menuItems.desk}
           </p>
 
           {/* Harga */}
           {/* Belum bisa apply diskon hidden*/}
           <div className="flex items-center gap-x-2">
             <h1 className="font-poppins text-[12px] font-semibold">
-              15.000
+              {cartItem.menuItems.harga}
             </h1>
             <p className="font-poppins font-semibold text-[10px] text-[#838080] line-through">
-              {harga}
+              {cartItem.menuItems.harga * 1.8}
             </p>
           </div>
 
@@ -55,9 +86,7 @@ export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handl
         {/* Add Pesanan */}
         <div className="absolute bottom-4 right-4 flex items-center gap-x-3">
           {/* Kurangi Pesanan */}
-          <button
-            onClick={() => setQuantity(quantity - 1)}
-          disabled={quantity <= 1}>
+          <button onClick={handleDecrement}>
             <img
               src="/icon_popup_minus_stock.svg"
               className="w-[18px]"
@@ -66,10 +95,10 @@ export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handl
           </button>
           {/* Jumlah Pesanan */}
           <h1 className="text-[#E89005] font-poppins font-semibold text-[14px]">
-            {quantity}
+            {cartItem.jumlah}
           </h1>
           {/* Tambahi Pesanan */}
-          <button onClick={() => setQuantity(quantity + 1)}>
+          <button onClick={handleIncrement}>
             <img
               src="/icon_popup_plus_stock.svg"
               className="w-[18px]"
@@ -82,3 +111,5 @@ export default function Card_Pesanan ({ nama, desk, harga, imgURL, jumlah, handl
     </>
   );
 }
+
+export default Card_Pesanan;

@@ -1,4 +1,4 @@
-import VoucherContext from "./discount";
+import VoucherContext, {Voucher} from "./discount";
 import { useState } from "react";
 
 function MyApp({ Component, pageProps }:any) {

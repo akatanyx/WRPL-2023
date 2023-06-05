@@ -1,53 +1,31 @@
 import Card_Diskon from "@/components/Customer/Pesanan/Card_Diskon";
 import { useState } from "react";
+import { Voucher } from "@/pages/api/discount";
 
-export default function Diskon({ closeModal, handleDiskon }: any) {
-  const [promos, setPromo] = useState([ // Dummy data
-    {
-      id: 1,
-      minPembelian: 50000,
-      maxPotongan: 20000,
-      diskon: 50,
-    },
-    {
-      id: 2,
-      minPembelian: 40000,
-      maxPotongan: 10000,
-      diskon: 40,
-    },
-    {
-      id: 3,
-      minPembelian: 30000,
-      maxPotongan: 5000,
-      diskon: 30,
-    },
-    {
-      id: 4,
-      minPembelian: 20000,
-      maxPotongan: 4000,
-      diskon: 20,
-    },
-    {
-      id: 5,
-      minPembelian: 20000,
-      maxPotongan: 4000,
-      diskon: 20,
-    },
-    {
-      id: 6,
-      minPembelian: 20000,
-      maxPotongan: 4000,
-      diskon: 20,
-    },
-  ]);
+type PopupDiskonProps = {
+  vouchers: Voucher[];
+  appliedVoucher: string;
+  applyVoucher: (voucherId: string) => void;
+  onClose: () => void;
+};
 
+export default function PopupDiskon({vouchers, appliedVoucher, applyVoucher, onClose }: PopupDiskonProps) {
+  const handleApplyVoucher = (voucherId: string) => {
+    applyVoucher(voucherId);
+  };
+
+  const handleBack = () => {
+    onClose(); // Call the onClose function when the back button is clicked
+  };
+  
   return (
     <div className="font-poppins absolute bg-white z-10">
       {/* Header */}
       <div>
         <div className="flex justify-between items-center w-screen mt-[28px] ml-[22px]">
           <div className="flex items-center">
-            <button onClick={closeModal}>
+            <button
+            onClick={handleBack}>
               <img src="/icon_c_promo_back.svg" />
             </button>
 
@@ -63,14 +41,12 @@ export default function Diskon({ closeModal, handleDiskon }: any) {
 
       {/* Diskon */}
       <div className="flex flex-col gap-y-4">
-        {promos.map(({ id, minPembelian, maxPotongan, diskon }) => (
+        {vouchers.map((voucher) => (
           <Card_Diskon
-            key={id}
-            minPembelian={minPembelian}
-            maxPotongan={maxPotongan}
-            diskon={diskon}
-            handleDiskon={handleDiskon}
-            closeModal={closeModal}
+            key={voucher.id}
+            voucher={voucher}
+            isApplied={voucher.id === appliedVoucher}
+            applyVoucher={handleApplyVoucher}
           />
         ))}
       </div>

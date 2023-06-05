@@ -6,105 +6,125 @@ import Popup_Pin from "@/components/Customer/Pesanan/Popup_Pin";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Voucher } from "../api/discount";
+import vouchers from "./vouchers";
+import Image from "next/image";
 
-interface Cart {
-  _id: string;
-  menuId: string;
-  jumlah: number;
-}
+export default function Pesanan() {
+  const [cartItems, setCartItems] = useState([
+    {
+      _id: "6458fa323c85fe763543d4c5",
+      menuId: "6423315d79140f65b09049c0",
+      jumlah: 8,
+      menuItems: {
+        nama: "Ayam Betutu",
+        harga: 41500,
+        desk: "Ayam sudah muak dengan error",
+        tag: "",
+        kategori: "",
+        rating: "",
+        imgURL:
+          "https://res.cloudinary.com/prema-cloud/image/upload/v1680027994/yidcskeine6f8kmkqafq.jpg",
+      },
+    },
+    {
+      _id: "645902533c85fe763543d4c6",
+      menuId: "642338a279140f65b09049c1",
+      jumlah: 10,
+      menuItems: {
+        nama: "Pecel Encim",
+        harga: 20000,
+        desk: "Pecel aku ketemu error mulu",
+        tag: "",
+        kategori: "",
+        rating: "",
+        imgURL:
+          "https://res.cloudinary.com/prema-cloud/image/upload/v1680029855/xfpffwlrv4awjp7zk7kw.jpg",
+      },
+    },
+  ]);
 
-interface Post {
-  _id: string;
-  nama: string;
-  desk: string;
-  harga: number;
-  imgURL: string;
-}
-
-interface Wallet {
-  _id: string;
-  id_wallet: string;
-  no_telp: string;
-  nama: string;
-  saldo: number;
-}
-
-export default function Pesanan({ carts, posts, wallet }: any) {
-  // console.log(wallet[0]);
-  // Merge carts dan posts berdasarkan menuId
-  const mergeById = (carts: Cart[], posts: Post[]) =>
-    carts.map((item1) => ({
-      ...posts.find((item2) => item1.menuId === item2._id),
-      ...item1,
-    }));
-
-  const [quantity, setQuantity] = useState(1);
-
-  // Callback function to handle updating the quantity in the parent component
-  const handleQuantityChange = (newQuantity: number) => {
-    setQuantity(newQuantity);
-  };
-
-  const initialValue = 0;
-  // Hitung total harga
-  const [itemPrice, setItemPrice] = useState(
-    mergeById(carts, posts).reduce(
-      (accumulator, current: any) =>
-        accumulator + current.harga * current.jumlah,
-      initialValue
-    )
-  );
-  const deliPrice = 30000; // Biaya pengiriman dihitung dari jarak?
-  const appPrice = 5000; // Aplikasi
-  // To locale untuk format Rupiah
-  const totalPrice = itemPrice + deliPrice + appPrice; // Total harga
-
-  // POPUP DISKON
-  const [showMyModal, setShowMyModal] = useState(false);
-  const closeModal = () => setShowMyModal(false);
-
-  const handleDiskon = (
-    diskon: number,
-    minPembelian: number,
-    maxPotongan: number
-  ) => {
-    if (itemPrice >= minPembelian) {
-      const newPrice = itemPrice - (itemPrice * diskon) / 100;
-      if (newPrice > maxPotongan) {
-        const newPrice = itemPrice - maxPotongan;
-        setItemPrice(newPrice);
-      } else {
-        setItemPrice(newPrice);
+  const handleUpdateJumlah = (itemId: string, newJumlah: number) => {
+    const updatedItems = cartItems.map((item) => {
+      if (item._id === itemId) {
+        return { ...item, jumlah: newJumlah };
       }
-    } else {
-      console.log("Minimal pembelian tidak terpenuhi");
-      return totalPrice;
-    }
+      return item;
+    });
+    setCartItems(updatedItems);
   };
 
-  const saldo = 1000;
-  const [saldoKurang, setSaldoKurang] = useState(false);
-  useEffect(() => {
-    if (saldo < totalPrice) {
-      setSaldoKurang(true);
-    }
-  }, [saldo, totalPrice]);
+  const calculateTotalPrice = (): number => {
+    let totalPrice = 0;
 
-  const className = saldoKurang
-    ? 'bg-black bg-opacity-25 w-[316px] flex justify-between items-center rounded-lg h-[55px] border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505] md:mx-auto' // warna saat saldo kurang
-    : 'w-[316px] flex justify-between items-center rounded-lg h-[55px] border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505] md:mx-auto'; // warna saat saldo cukup atau pada hover
+    cartItems.forEach((item) => {
+      const itemPrice = Number(item.menuItems.harga) * item.jumlah;
+      totalPrice += itemPrice;
+    });
+
+    return totalPrice;
+  };
+
+  const [totalHarga, setTotalHarga] = useState(() => calculateTotalPrice());
+  const deliPrice = 30000;
+  const appPrice = 5000;
+  let saldo = 1000000;
+
+  const className =
+    calculateTotalPrice() + deliPrice + appPrice > saldo
+      ? "bg-black bg-opacity-25 w-[316px] flex justify-between items-center rounded-lg h-[55px] border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505] md:mx-auto" // warna saat saldo kurang
+      : "w-[316px] flex justify-between items-center rounded-lg h-[55px] border-2 border-opacity-25 active:border-[#EC7505] focus:border-[#EC7505] md:mx-auto"; // warna saat saldo cukup atau pada hover
+
+  const [appliedVoucher, setAppliedVoucher] = useState<string>("");
+  const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
+
+  const applyVoucher = (voucherId: string) => {
+    // Find the selected voucher based on voucherId
+    const selectedVoucher = vouchers.find(
+      (voucher) => voucher.id === voucherId
+    );
+
+    if (selectedVoucher) {
+      const totalPrice = calculateTotalPrice();
+      if (totalPrice > selectedVoucher.minPurchase) {
+        const discount = totalPrice * selectedVoucher.amount/100;
+        if (discount > selectedVoucher.maxDiscount) {
+          setTotalHarga(totalPrice - selectedVoucher.maxDiscount);
+        } else {
+          setTotalHarga(totalPrice - discount);
+        }
+      } else {
+        alert("Total harga belum mencapai minimum pembelian");
+      }
+    }
+
+    setAppliedVoucher(voucherId);
+    handleClosePopup();
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false);
+  };
+
+  const handleOpenPopup = () => {
+    setIsPopupVisible(true);
+  };
 
   return (
     <>
-      {showMyModal && (
-        <Popup_diskon closeModal={closeModal} handleDiskon={handleDiskon} />
+      {isPopupVisible && (
+        <Popup_diskon
+          vouchers={vouchers}
+          appliedVoucher={appliedVoucher}
+          applyVoucher={applyVoucher}
+          onClose={handleClosePopup}
+        />
       )}
       <Head>
         <title>Pesanan</title>
       </Head>
 
-      {/* Biar Kalau Popup Muncul, semua selain popup bakal hidden */}
-      {showMyModal || showMyModal ? null : (
+      {!isPopupVisible && (
         <div>
           {/* Header */}
           <C_Header>Pesanan</C_Header>
@@ -141,25 +161,22 @@ export default function Pesanan({ carts, posts, wallet }: any) {
           {/* Border Pembatas */}
           <div className="border-2 border-[#D9D9D9] w-[318px] mx-auto mt-[9px]"></div>
 
-          {mergeById(carts, posts).map((post) => (
+          {cartItems.map((item) => (
             <Card_Pesanan
-              key={post._id}
-              nama={post.nama}
-              desk={post.desk}
-              harga={post.harga}
-              imgURL={post.imgURL}
-              jumlah={post.jumlah}
-              onQuantityChange={handleQuantityChange}
+              key={item._id}
+              cartItem={item}
+              onUpdateJumlah={handleUpdateJumlah}
             />
           ))}
+
           {/* Apply Promo */}
           <button
-            onClick={() => setShowMyModal(true)}
+            onClick={handleOpenPopup}
             className="mt-[13px] ml-[23px] mr-[19px]
             md:flex md:mx-auto
             "
           >
-            <img src="/apply_promo.svg" alt="" />
+            <Image src={appliedVoucher !== "" ? "/apply_promo_applied.svg" : "/apply_promo.svg"} alt="" width={316} height={51} />
           </button>
 
           {/* List Harga */}
@@ -174,27 +191,27 @@ export default function Pesanan({ carts, posts, wallet }: any) {
             {/* Total Harga */}
             <div className="bg-[#EC7505] h-[46px] rounded-lg flex items-center pl-[17px]">
               <h1 className="text-white font-semibold text-[25px]">
-                Rp. {totalPrice}
+                Rp. {totalHarga+deliPrice+appPrice}
               </h1>
             </div>
             {/* List Pesanan dan Harga */}
             <div className="rounded-b-lg ml-[17px] shadow-lg">
               {/* Biaya Menu */}
               <div className="pt-[9px]">
-                {mergeById(carts, posts).map((post: any) => (
-                  <div key={post._id}>
+                {cartItems.map((item) => (
+                  <div key={item._id}>
                     {/* Nama Menu dan Jumlah Menu */}
                     <div className="flex justify-between w-[281px]">
                       <h1 className="text-[#7C3D02] font-medium text-[16px]  ">
-                        {post.nama}
+                        {item.menuItems.nama}
                       </h1>
                       <p className="text-[#7C3D02] font-medium text-[16px]">
-                        x {post.jumlah}
+                        x {item.jumlah}
                       </p>
                     </div>
                     {/* Harga Menu Total */}
                     <p className="text-[#E4740B] font-semibold text-[14px] -translate-y-1">
-                      {post.harga * post.jumlah}
+                      {item.menuItems.harga * item.jumlah}
                     </p>
                   </div>
                 ))}
@@ -234,8 +251,9 @@ export default function Pesanan({ carts, posts, wallet }: any) {
             <div className="flex-col ml-[22px] mt-6 md:justify-center md:ml-0">
               {/* lets Cash */}
               <button
-              disabled={saldoKurang}
-                className={className}>
+                disabled={saldo < calculateTotalPrice() + deliPrice + appPrice}
+                className={className}
+              >
                 <div className="flex-col ml-[14px] mt-[6px]">
                   <div className="flex items-center">
                     <h1 className="font-medium text-lg">Lets Cash</h1>
@@ -252,18 +270,24 @@ export default function Pesanan({ carts, posts, wallet }: any) {
                 {/* Bullet */}
                 <img src="/cart_logo_bullet.svg" className="w-[27px] mr-4" />
               </button>
-                  {/* Munculkan jika saldo kurang menggunakan hidden dan unhidden pada classname*/}
-                  <div className= "flex flex-row font-poppins md:justify-center">
-                    <h2 className="text-[12px] w-80">
-                      Saldo anda kurang, apakah anda ingin melakukan{" "}
-                      <Link href="../ewallet/topup">
-                        <button>
-                          <h1 className="font-bold text-[12px]">Top Up</h1>
-                        </button>
-                      </Link>
-                      ?
-                    </h2>
-                  </div>
+
+              {/* Saldo Kurang */}
+              {saldo < calculateTotalPrice() + deliPrice + appPrice && (
+                <div className="flex flex-row font-poppins md:justify-center">
+                  <h2 className="text-[12px] w-80">
+                    Saldo anda kurang, apakah anda ingin melakukan{" "}
+                    <Link href="../ewallet/topup">
+                      <button>
+                        <h1 className="font-bold text-[12px]">Top Up</h1>
+                      </button>
+                    </Link>
+                    ?
+                  </h2>
+                </div>
+              )}
+
+              {/* Border Pembatas */}
+
               {/* Cash */}
               <button
                 className="mt-[18px] w-[316px] flex justify-between items-center rounded-lg h-[55px] 
@@ -283,7 +307,6 @@ export default function Pesanan({ carts, posts, wallet }: any) {
 
           {/* Pay Button */}
           <button
-            onClick={() => setShowMyModal(true)}
             className=" bg-[#EC7505] w-[172px] h-[56px]
             rounded-lg mt-[34px] mx-auto
             flex justify-center items-center 
@@ -299,23 +322,4 @@ export default function Pesanan({ carts, posts, wallet }: any) {
       )}
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=carts");
-  const carts: Cart[] = await res.json();
-
-  const res2 = await fetch("http://localhost:3000/api/posts?type=menus");
-  const posts: Post[] = await res2.json();
-
-  const res3 = await fetch("http://localhost:3000/api/posts?type=e-wallet");
-  const wallet: Wallet[] = await res3.json();
-
-  return {
-    props: {
-      carts,
-      posts,
-      wallet,
-    },
-  };
 }

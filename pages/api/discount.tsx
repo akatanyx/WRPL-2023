@@ -1,9 +1,11 @@
 import React from "react";
 
-type Voucher = {
+export type Voucher = {
   id: string;
   name: string;
   amount: number;
+  minPurchase: number;
+  maxDiscount: number;
   isApplied: boolean;
 };
 
