@@ -13,6 +13,7 @@ import Alamat from "@/components/Customer/Landing/Alamat";
 import Landing_Header from "@/components/Customer/Landing/Landing_Header";
 import ItemCart from "@/components/Customer/ItemCart";
 import cardKategoriItems from "./kategori";
+import cardBestRestosItems from "./bestrestos";
 
 interface Menu {
   _id: string;
@@ -33,6 +34,12 @@ export type CardKategoriProps = {
   id: string;
   namaKategori: string;
   gambarKategori: string;
+}
+
+export type CardBestRestoProps = {
+  id: string;
+  namaResto: string;
+  gambarResto: string;
 }
 
 export default function hero({menus, wallets}: any) {
@@ -149,10 +156,11 @@ export default function hero({menus, wallets}: any) {
         </div>
 
         <div className="flex flex-wrap gap-x-6 gap-y-4 justify-between">
-          <Card_Best />
-          <Card_Best />
-          <Card_Best />
-          <Card_Best />
+        {( cardBestRestosItems.map((item:CardBestRestoProps) => (
+          <div key={item.id}>
+            <Card_Best id={item.id} namaResto={item.namaResto} gambarResto={item.gambarResto}/>
+          </div>
+          )))}
         </div>
       </div>
 
