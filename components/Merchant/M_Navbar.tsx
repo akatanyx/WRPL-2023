@@ -22,7 +22,7 @@ const M_Navbar = () => {
                 </ul>
                 <ul >
                     <Link
-                        href="#"
+                        href="/merchant/riwayat_pesanan"
                         className= {router.pathname === '/BELOMCOY' ? 'p-2 flex flex-col items-center justify-center' : 
                             'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                     >
@@ -61,8 +61,8 @@ const M_Navbar = () => {
                 </ul>
                 <ul >
                     <Link
-                        href="/merchant/profil_m"
-                        className= {router.pathname === '/BELOMCOY' ? 'p-2 flex flex-col items-center justify-center' : 
+                        href="/merchant/profil"
+                        className= {router.pathname === '/merchant/profil' ? 'p-2 flex flex-col items-center justify-center' : 
                             'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                     >
                         <div className= "flex flex-col items-center justify-center ">

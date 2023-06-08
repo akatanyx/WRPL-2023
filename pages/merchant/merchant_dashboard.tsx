@@ -11,7 +11,7 @@ const Protected: NextPage = (): JSX.Element => {
   const { status, data } = useSession();
 
   useEffect(() => {
-    if (status === "unauthenticated") Router.replace("/login"); //direct ke login
+    if (status === "unauthenticated") Router.replace("/merchant/profil"); //direct ke login
   }, [status]);
 
   if (status === "authenticated")
