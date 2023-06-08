@@ -59,7 +59,7 @@ export default function Pesanan_diterima() {
             <MapContainer />
 
             {/* Content */}
-            <div className="rounded-t-3xl mx-auto shadow-lg fixed w-[360px] -translate-y-[50px] bg-white pt-[17px] pb-[44px]">          
+            <div className="rounded-t-3xl mx-auto shadow-lg fixed w-[360px] -translate-y-[165px] bg-white pt-[17px] pb-[44px]">          
                 
                 {/* Nama Pemesan */}
                 <div className="flex pl-[35px] pt-[20px] items-center w-[320px] justify-between">
@@ -72,25 +72,21 @@ export default function Pesanan_diterima() {
                 {/* Isi Pesanan */}
                 <div className="flex flex-col ml-[31px] gap-y-[13px] mt-[17px]">
                     
-                    {/* Nama dan Alamat */}
-                    <div className="flex items-center gap-x-2">
-                        <img src="/d_pesananditerima_makanan.svg" alt="" />
-                        <div className="flex-col flex">
-                            
-                            {/* Nama Toko */}
-                            <h1 className="font-semibold text-[14px] translate-y-0.5">
-                                Anteiku Coffee
-                            </h1>
-
-                            {/* Alamat Toko */}
-                            <p className="text-[14px] text-[#737373] -translate-y-1">
-                                Jl. Lowalah No 123, Kotabaru
-                            </p>
-                        </div>
+                    {/* Alamat Customer*/}
+                    <div className="flex items-center gap-x-2 translate-x-1">
+                        <img src="/d_profil_location.svg" />
+                        <h1 className="font-medium text-[14px]">
+                            Jl. Lowalah No 123, Kotabaru
+                        </h1>
                     </div>
 
+                    {/* Catatan Pembeli */}
+                    <h1 className="bg-[#FAE5DB] text-[14px] w-[288px] -translate-y-[5px] py-[14px] px-3 rounded-md">
+                        Esnya jangan terlalu banyak, gulanya juga jangan terlalu banyak
+                    </h1>
+
                     {/* Pendapatan */}
-                    <div className="flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2 -translate-y-[5px]">
                         <img src="/d_pesananditerima_gaji.svg" alt="" />
                         <h1 className="font-semibold text-[14px]">
                             Rp.50.000
@@ -98,6 +94,16 @@ export default function Pesanan_diterima() {
                     </div>
                 </div>
                 
+                {/* Terima */}
+                <Link href="/driver/pesanan_selesai">
+                    <button className="w-[288px] h-[45px] bg-[#D84A05] rounded-lg
+                                        flex justify-center items-center mx-auto mt-[5px]"
+                    >
+                        <h1 className="font-semibold text-[18px] text-white">
+                            Pesanan Selesai
+                        </h1>
+                    </button>
+                </Link>
             </div>
 
             <Navbar_driver />
