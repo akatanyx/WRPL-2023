@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Wavebawah from '@/components/Wavebawah'
 
 export default function LoginDriver() {
     return (
@@ -7,7 +6,7 @@ export default function LoginDriver() {
         <>  
 
             <Head>
-                <title>Let's Eat</title>
+                <title>Let's Eat Driver</title>
             </Head>
 
             <div className="flex flex-col justify-center items-center font-inter">
@@ -65,7 +64,6 @@ export default function LoginDriver() {
                     </h2>
                 </div> 
             </div>
-            <Wavebawah />
         </>
     )
 }
