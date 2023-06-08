@@ -10,7 +10,7 @@ const M_Navbar = () => {
                 <ul >
                     <Link
                         href="/merchant/merchant_dashboard"
-                        className= {router.pathname === '/merchant' ? 'p-2 flex flex-col items-center justify-center' : 
+                        className= {router.pathname === '/merchant/merchant_dashboard' ? 'p-2 flex flex-col items-center justify-center' : 
                             'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                     >
                         <div className= "flex flex-col items-center justify-center ">

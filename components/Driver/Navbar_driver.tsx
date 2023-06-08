@@ -9,8 +9,8 @@ const Navbar_driver = () => {
             <div className="flex justify-center items-center gap-x-[92px] h-[64px]">
                 <ul>
                     <Link
-                        href="/driver/landing_driver"
-                        className= {router.pathname === '/landing_driver' ? '' : 'grayscale hover:grayscale-0'} 
+                        href="/driver/pesanan_baru"
+                        className= {router.pathname === '/driver/pesanan_baru' ? '' : 'grayscale hover:grayscale-0'} 
                     >
                         <img src="/d_navbar_home.svg"/>                    
                     </Link>
@@ -18,16 +18,16 @@ const Navbar_driver = () => {
                 
                 <ul >
                     <Link
-                        href="/riwayat_driver"
-                        className= {router.pathname === '/riwayat_driver' ? '' : 'grayscale hover:grayscale-0'} 
+                        href="/driver/riwayat_driver"
+                        className= {router.pathname === '/driver/riwayat_driver' ? '' : 'grayscale hover:grayscale-0'} 
                     >
                         <img src="/d_navbar_riwayat.svg"/> 
                     </Link>
                 </ul>
                 <ul >
                     <Link
-                        href="/profil_driver"
-                        className= {router.pathname === '/profil_driver' ? ' justify-center' : 'grayscale hover:grayscale-0'} 
+                        href="/driver/profil"
+                        className= {router.pathname === '/driver/profil' ? ' justify-center' : 'grayscale hover:grayscale-0'} 
                     >
                         <img src="/d_navbar_akun.svg"/>
                     </Link>
