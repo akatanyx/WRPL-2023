@@ -2,6 +2,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 import Navbar_driver from "@/components/Driver/Navbar_driver";
+import MapContainer from "@/components/Customer/testmap/MapContainer"
+
 
 export default function Pesanan_baru() {
     // Untuk Merubah Status
@@ -53,10 +55,10 @@ export default function Pesanan_baru() {
             </div>
 
             {/* Map */}
-            <img src="/d_pesananbaru_map.svg" />
+            <MapContainer />
 
             {/* Pesanan Baru */}
-            <div className="rounded-t-3xl mx-auto shadow-lg fixed w-[360px] -translate-y-11 bg-white pt-[17px] py-[19px]">          
+            <div className="rounded-t-3xl mx-auto shadow-lg fixed w-[360px] -translate-y-[88px] bg-white pt-[17px] py-[19px]">          
                 <div className="flex-col flex justify-center">
                     <h1 className="text-[24px] font-semibold text-center">Pesanan Baru</h1>
                     
