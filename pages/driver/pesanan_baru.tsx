@@ -93,7 +93,7 @@ export default function Pesanan_baru() {
                 
                 {/* Terima */}
                 <div className="flex w-[297px] mx-auto mt-[27px] ">
-                    <Link href="#">
+                    <Link href="/driver/pesanan_diterima">
                         <button className="w-[142px] h-[53px] bg-[#D84A05] rounded-[10px]
                                         flex justify-center items-center"
                         >
