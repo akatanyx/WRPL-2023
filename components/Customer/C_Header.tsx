@@ -20,7 +20,7 @@ export default function C_Header ({ children }: any) {
                 <div className='-translate-x-[14px]
                 md:-translate-x-[30px]
                 '>
-                    <Link href='#'>
+                    <Link href='/customer/profil'>
                         <img src="/icon_c_akun.svg" alt="" className='w-[43px] '/>
                     </Link>  
                 </div>

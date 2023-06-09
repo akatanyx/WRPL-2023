@@ -63,8 +63,8 @@ const C_Navbar = () => {
                     </ul>
                     <ul >
                         <Link
-                            href="/customer/profilcust"
-                            className= {router.pathname === '/customer/profilcust' ? ' flex flex-col items-center justify-center' : 
+                            href="/customer/profil"
+                            className= {router.pathname === '/customer/profil' ? ' flex flex-col items-center justify-center' : 
                                 'grayscale  flex flex-col items-center justify-center hover:grayscale-0'} 
                         >
                             <div className= "flex flex-col items-center justify-center ">
