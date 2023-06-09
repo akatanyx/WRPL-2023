@@ -5,7 +5,7 @@ export default function C_Header ({ children }: any) {
         <>
             <div className='flex justify-between items-center h-[62px] w-screen shadow-lg'>
                 <div className='flex items-center'>
-                <Link href='/customer' >
+                <Link href='/customer/hero' >
                     <img src="../icon_arrow_back.svg" alt=""/>
                 </Link>
 

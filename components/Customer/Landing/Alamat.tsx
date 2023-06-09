@@ -12,7 +12,7 @@ export default function Alamat () {
                     Jl. Owawawa No.1 Kelurahan Kota
                 </h1>
 
-                <Link href="/customer/resto_near_you">
+                <Link href="#">
                     <img src="/icon_promo_location_arrow.svg" />
                 </Link>
                 </div>

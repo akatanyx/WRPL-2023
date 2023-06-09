@@ -109,15 +109,15 @@ export default function Resto( {posts}: PostsProps ) {
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan>Best Seller</Dropdown_Makanan>
+          <Dropdown_Makanan posts={posts}>Best Seller</Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan>Makanan</Dropdown_Makanan>
+          <Dropdown_Makanan posts={posts}>Makanan</Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan>Minuman</Dropdown_Makanan>
+          <Dropdown_Makanan posts={posts}>Minuman</Dropdown_Makanan>
         </div>
       </div>
 
@@ -126,8 +126,8 @@ export default function Resto( {posts}: PostsProps ) {
         <C_Navbar />
       </div>
 
-      {/* Item Cart */}     
-      <ItemCart />
+      {/* Item Cart */}
+      <ItemCart totalItem={1} totalPrice={15000} />
  
       
     </>

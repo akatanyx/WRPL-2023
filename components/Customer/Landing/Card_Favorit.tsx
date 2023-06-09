@@ -57,7 +57,7 @@ export default function Card_Favorit({namaFood, gambarFood, resto, hargaFood, ka
             </h2>
 
             {/* Harga Makanan */}
-            <p className="font-semibold font-poppins text-[13px]">Rp {hargaFood}</p>
+            <p className="font-semibold font-poppins text-[13px]">{hargaFood}</p>
           </div>
         </div>
       </Link>
