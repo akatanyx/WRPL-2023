@@ -5,9 +5,8 @@ import Popup_diskon from "@/components/Customer/Pesanan/Popup_Diskon_pesanan";
 import Popup_Pin from "@/components/Customer/Pesanan/Popup_Pin";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Voucher } from "../api/discount";
-import vouchers from "./vouchers";
+import { useState } from "react";
+import vouchers from "./datas/vouchers";
 import Image from "next/image";
 import { useRouter } from "next/router";
 

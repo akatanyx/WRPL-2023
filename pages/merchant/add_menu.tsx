@@ -30,20 +30,14 @@ export default function Add_menu({ images }:any) {
     if (imageSelected) {
       formData.append("file", imageSelected);
       formData.append("upload_preset", "prema_upload123");
-      // Preset untuk ke folder tertentu
-      // formData.append("folder", "Letseat");
+      formData.append("folder", "Letseat");
     }
-
-    //  Middleware Axios untuk menangani upload image.
-    //  Responnya diterima sudah dalam bentuk JSON
     Axios.post(
       `https://api.cloudinary.com/v1_1/prema-cloud/image/upload`,
       formData
     ).then((response) => {
       console.log(response);
-      // Meyimpan url cloudinaray dari gambar ke dalam ke variabel
       let imgURL = response.data.secure_url;
-      // Memanggil fungsi upload data dan menyertakan url gambar
       uploadData(imgURL);
     });
 

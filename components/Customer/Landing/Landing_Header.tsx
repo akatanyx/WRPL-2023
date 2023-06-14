@@ -1,13 +1,17 @@
 import Link from "next/link"
 
-export default function Landing_Header () {
+type imgURLProps = {
+    imgURL: string;
+}
+
+export default function Landing_Header ({imgURL}:imgURLProps) {
     return (
         <div>
             <div className='flex justify-between items-center h-[62px] w-screen shadow-lg'>
                 <div className='flex items-center'>
                     <img src="/b_hero_logo.svg" className="pl-[20px]"/>
                     <h1 className='pl-[10px] font-bold font-poppins text-[21px] text-[#EC7505]'>
-                    Let's Eat
+                    Let&apos;s Eat
                     </h1>
                 </div>
                         
@@ -16,7 +20,7 @@ export default function Landing_Header () {
                         md:-translate-x-[30px]
                 '>
                 <Link href='/customer/profil'>
-                    <img src="/icon_c_akun.svg" alt="" className='w-[43px] '/>
+                    <img src={imgURL} alt="" className='w-[43px] h-[43px] rounded-full'/>
                 </Link>  
                 </div>
             </div>

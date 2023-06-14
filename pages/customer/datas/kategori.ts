@@ -1,4 +1,4 @@
-import { CardKategoriProps } from "./hero";
+import { CardKategoriProps } from "../hero";
 
 const cardKategoriItems:CardKategoriProps[] = [
     {

@@ -1,4 +1,4 @@
-import { CardFavoritFoodProps } from "./hero";
+import { CardFavoritFoodProps } from "../hero";
 
 const cardFavoritItems:CardFavoritFoodProps[] = [
     {

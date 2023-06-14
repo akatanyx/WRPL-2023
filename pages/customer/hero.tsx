@@ -12,10 +12,11 @@ import Ewallet from "@/components/Customer/Landing/ewallet";
 import Alamat from "@/components/Customer/Landing/Alamat";
 import Landing_Header from "@/components/Customer/Landing/Landing_Header";
 import ItemCart from "@/components/Customer/ItemCart";
-import cardKategoriItems from "./kategori";
-import cardBestRestosItems from "./bestrestos";
-import cardRestoNearItems from "./restonear";
-import cardFavoritItems from "./makananfavorit";
+
+import cardKategoriItems from "./datas/kategori";
+import cardBestRestosItems from "./datas/bestrestos";
+import cardRestoNearItems from "./datas/restonear";
+import cardFavoritItems from "./datas/makananfavorit";
 
 interface Menu {
   _id: string;
@@ -63,11 +64,21 @@ export type CardFavoritFoodProps = {
   ratingFood: string;
 };
 
+type User = {
+  id: string;
+  nama: string;
+  email: string;
+  phone: number | null;
+  alamat: string;
+  imgURL: string;
+};
 
-export default function hero({ menus, wallets }: any) {
+export default function hero({ users, wallets }: any) {
+  //Hardcoded, biar cepet
   const wallet = wallets.filter((wallet: Wallet) => wallet.id_wallet === "1");
   const saldo: number = wallet[0].saldo;
-
+  const user:User[] = users.filter((user: User) => user.nama === "Billy Fahd Qodama");
+  const imgURL:string = user[0].imgURL;
   return (
     <>
       <Head>
@@ -75,7 +86,7 @@ export default function hero({ menus, wallets }: any) {
       </Head>
 
       {/* Header */}
-      <Landing_Header />
+      <Landing_Header imgURL={imgURL}/>
 
       {/* Alamat Pembeli */}
       <Alamat />
@@ -261,15 +272,15 @@ export default function hero({ menus, wallets }: any) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=menus");
-  const menus: Menu[] = await res.json();
+  const res = await fetch("http://localhost:3000/api/posts?type=users");
+  const users: User[] = await res.json();
 
   const res2 = await fetch("http://localhost:3000/api/posts?type=wallets");
   const wallets: Wallet[] = await res2.json();
 
   return {
     props: {
-      menus,
+      users,
       wallets,
     },
   };

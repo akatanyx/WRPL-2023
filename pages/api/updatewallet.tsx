@@ -8,7 +8,7 @@ export default async function handler(req: any, res: any) {
 
     // Menambah saldo e-wallet
     const cursor = await collection.updateOne(
-      { id_wallet: idwallet }, //hard coded id_wallet
+      { id_wallet: idwallet }, 
       {
         $inc: { saldo: saldo },
       }

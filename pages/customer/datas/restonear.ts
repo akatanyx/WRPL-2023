@@ -1,4 +1,4 @@
-import { CardRestoNearProps } from "./hero";
+import { CardRestoNearProps } from "../hero";
 
 const restoNearItems:CardRestoNearProps[] = [
     {

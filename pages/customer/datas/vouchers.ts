@@ -1,4 +1,4 @@
-import { Voucher } from "../api/discount";
+import { Voucher } from "../../api/discount";
 
 const Vouchers: Voucher[] = [
     {
