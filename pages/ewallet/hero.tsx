@@ -27,6 +27,20 @@ export default function Hero({ wallets }: WalletProps) {
 
   return (
     <div className="font-poppins">
+
+      {/* Back to Customer Hero */}
+      <Link href="/customer/hero">
+        <div className="flex items-center ml-[27px] mt-[27px] gap-x-2">
+          <img src="/e_hero_back.png" 
+          className="w-[40px]"/>
+
+          <h1 className="font-medium text-[#118EEA] text-[17px]">
+            Kembali
+          </h1>
+        </div>        
+      </Link>
+
+
       {/* Akun */}
       <div className="flex items-center mt-[21px] md:justify-center">
         {/* Profile Picture */}
@@ -35,10 +49,12 @@ export default function Hero({ wallets }: WalletProps) {
         <div className="flex-col justify-center ml-[17px]">
           {/* Nama*/}
           <div className="flex">
-            <h1 className="font-medium text-[#263238] text-[17px]">
-              Halo, {wallet[0].nama}!
-            </h1>
-            <img src="/e_hero_centang.svg" className="translate-x-1" />
+          <h1 className="font-medium text-[#263238] text-[17px] w-[100px] 
+                          whitespace-nowrap overflow-hidden overflow-ellipsis">
+            Halo, {wallet[0].nama}!
+          </h1>
+
+            <img src="/e_hero_centang.svg" className=" w-[20px]" />
           </div>
 
           {/* Edit Profile */}
