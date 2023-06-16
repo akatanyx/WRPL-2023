@@ -1,4 +1,5 @@
 import Transaksi_terakhir from "@/components/Ewallet/Hero/Transaksi_terakhir";
+import Fitur_ewallet from "@/components/Ewallet/Hero/fitur";
 
 import Link from "next/link";
 import React, { useState } from "react";
@@ -27,20 +28,6 @@ export default function Hero({ wallets }: WalletProps) {
 
   return (
     <div className="font-poppins">
-
-      {/* Back to Customer Hero */}
-      <Link href="/customer/hero">
-        <div className="flex items-center ml-[27px] mt-[27px] gap-x-2">
-          <img src="/e_hero_back.png" 
-          className="w-[40px]"/>
-
-          <h1 className="font-medium text-[#118EEA] text-[17px]">
-            Kembali
-          </h1>
-        </div>        
-      </Link>
-
-
       {/* Akun */}
       <div className="flex items-center mt-[21px] md:justify-center">
         {/* Profile Picture */}
@@ -103,56 +90,7 @@ export default function Hero({ wallets }: WalletProps) {
       </div>
 
       {/* Fitur */}
-      <div className="text-[10px] grid grid-cols-4 gap-x-5 gap-y-[13px] mt-5 w-[292px] mx-auto">
-        <Link href="/ewallet/topup">
-          <div className="flex-col text-center">
-            <img src="/e_hero_fitur_topup.svg" alt="" />
-            <h1 className="mt-[6px]">Top Up</h1>
-          </div>
-        </Link>
-
-        <Link href="/ewallet/send">
-          <div className="flex-col text-center">
-            <img src="/e_hero_fitur_send.svg" alt="" />
-            <h1 className="mt-[6px]">Send</h1>
-          </div>
-        </Link>
-
-        <Link href="#">
-          <div className="flex-col text-center">
-            <img src="/e_hero_fitur_points.svg" alt="" />
-            <h1 className="mt-[6px]">Points</h1>
-          </div>
-        </Link>
-
-        <Link href="#">
-          <div className="flex-col text-center">
-            <img src="/e_hero_fitur_letsgift.svg" alt="" />
-            <h1 className="mt-[6px]">Let&apos;s Gift</h1>
-          </div>
-        </Link>
-
-        <Link href="/ewallet/security">
-          <div className="flex-col text-center">
-            <img src="/e_hero_fitur_security.svg" alt="" />
-            <h1 className="mt-[6px]">Security</h1>
-          </div>
-        </Link>
-
-        <Link href="#">
-          <div className="flex-col text-center">
-            <img src="/e_hero_fitur_promo.svg" alt="" />
-            <h1 className="mt-[6px]">Promo</h1>
-          </div>
-        </Link>
-
-        <Link href="#">
-          <div className="flex-col text-center">
-            <img src="/e_hero_fitur_merchant.svg" alt="" />
-            <h1 className="mt-[6px]">Merchant</h1>
-          </div>
-        </Link>
-      </div>
+      <Fitur_ewallet />
 
       {/* Border Pembatas */}
       <div className="border border-opacity-25 border-black w-[307px] mx-auto mt-[22px] mb-[14px]"></div>
