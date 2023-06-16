@@ -49,10 +49,12 @@ export default function Card_Resto({
 
         <div className="flex flex-col justify-center relative">
           {/* Masih belum bisa break-words */}
-          <h1 className="break-words font-semibold text-[16px] font-poppins">
+          <h1 className="font-semibold text-[16px] font-poppins w-[100px]
+                          whitespace-nowrap overflow-hidden overflow-ellipsis">
             {nama}
           </h1>
-          <p className="text-[#838080] text-[12px] font-poppins break-words">
+          <p className="text-[#838080] text-[12px] font-poppins w-[100px]
+                        whitespace-nowrap overflow-hidden overflow-ellipsis">
             Kopi Pahit
           </p>
 
