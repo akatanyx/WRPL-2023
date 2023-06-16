@@ -19,22 +19,18 @@ export default function Card_Kategori({ nama_resto, jam_buka, jam_tutup, jarak }
           <img src="/icon_landing_restaurant.svg" alt="" className='w-[100px]' />
           
           <div className='flex flex-col justify-center relative mx-2'>
+            
             {/* Tag */}
-            <div className="flex mb-[2px] gap-x-1">
-              <Tag_Makanan>
-                Kopi 
-              </Tag_Makanan>
-
-              <Tag_Makanan>
-                Halal 
-               </Tag_Makanan>
-
-              <Tag_Makanan>
-                Babi 
-              </Tag_Makanan>
+            <div className='absolute translate-x-[130px] top-5'>
+              <div className=" h-[19px] bg-[#D84A05] rounded-xl flex justify-center items-center">
+                  <h1 className=" px-[13px] text-white text-[12px] font-semibold font-poppins"
+                  >
+                      Western
+                  </h1>
+              </div>
             </div>
 
-            <h1 className='text-ellipsis overflow-hidden font-semibold text-[17px] font-poppins block'>
+            <h1 className='w-[120px] font-semibold text-[17px] font-poppins block whitespace-nowrap overflow-hidden overflow-ellipsis'>
               {nama_resto}
             </h1>
 
