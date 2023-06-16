@@ -9,13 +9,11 @@ interface Props {
   jarak: string;
 }
 
-// MASIH NGE BUG DI BREAKWORDS ATAU NAMA RESTO YANG PANJANG
-
 export default function Card_Kategori({ nama_resto, jam_buka, jam_tutup, jarak }: Props) {
   return (
     <>
       <Link href='/customer/resto'>
-        <div className="flex rounded-lg w-[328] h-[100px] bg-white drop-shadow-lg">
+        <div className="flex rounded-lg w-[328] h-[100px] bg-white drop-shadow-md">
           <img src="/icon_landing_restaurant.svg" alt="" className='w-[100px]' />
           
           <div className='flex flex-col justify-center relative mx-2'>
