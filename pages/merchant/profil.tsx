@@ -1,6 +1,8 @@
 import Header_w_notif from "@/components/Merchant/Header_w_notif"
 import M_Navbar from "@/components/Merchant/M_Navbar"
 
+import Link from "next/link";
+
 export default function profil_sel() {
     return (
         <div className="font-poppins bg-[#E89005] max-h-screen">
@@ -11,8 +13,10 @@ export default function profil_sel() {
 
             <div className="mt-[254px] rounded-t-lg bg-white">
                 {/* Content */}
-                <div className="w-[294px] h-[585px] -translate-y-[196px] bg-white mx-auto 
-                                rounded-[23px] shadow-lg relative">
+                <div
+                    className="w-[294px] h-[635px] -translate-y-[210px] bg-white mx-auto 
+                                rounded-[23px] shadow-lg relative"
+                >
                     
                     {/* Logout Button */}
                     <button className="absolute right-0 translate-x-6 -translate-y-6">
@@ -67,9 +71,23 @@ export default function profil_sel() {
                         </div>
                     </div>
 
+                    {/* Ganti Mode */}
+                    <h1 className="text-[#A9A9A9] text-center font-medium text-[16px] mt-[18px]">
+                        Ganti Mode
+                    </h1>
+                    <div className="flex justify-center gap-x-[21px]">
+                        <Link href="/customer/hero">
+                            <img src="/b_profil_customer.svg" alt="" />
+                        </Link>
+                        
+                        <Link href="/driver/signup">
+                            <img src="/b_profil_driver.svg" alt="" />
+                        </Link>
+                    </div>
+
                     {/* Button Edit Profil */}
                     <button className="w-[168px] h-[46px] bg-[#EC7505] rounded-[10px] mx-auto
-                            flex justify-center items-center mt-[90px]
+                            flex justify-center items-center mt-[45px]
                         ">
                             <h1 className="text-white text-lg font-semibold">
                                 Edit Profil

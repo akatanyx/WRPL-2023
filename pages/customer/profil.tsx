@@ -28,7 +28,7 @@ export default function Profil_sel({ users }: UserProps) {
       <div className="mt-[254px] bg-white">
         {/* Content */}
         <div
-          className="w-[294px] h-[585px] -translate-y-[196px] bg-white mx-auto 
+          className="w-[294px] h-[635px] -translate-y-[210px] bg-white mx-auto 
                                 rounded-[23px] shadow-lg relative"
         >
           {/* Logout Button */}
@@ -78,11 +78,25 @@ export default function Profil_sel({ users }: UserProps) {
             </div>
           </div>
 
+          {/* Ganti Mode */}
+          <h1 className="text-[#A9A9A9] text-center font-medium text-[16px] mt-[18px]">
+            Ganti Mode
+          </h1>
+          <div className="flex justify-center gap-x-[21px]">
+            <Link href="/merchant/signup_merchant">
+              <img src="/b_profil_merchant.svg" alt="" />
+            </Link>
+
+            <Link href="/driver/signup">
+              <img src="/b_profil_driver.svg" alt="" />
+            </Link>
+          </div>
+
           {/* Button Edit Profil */}
           <Link
             href="/customer/profil_update"
             className="w-[168px] h-[46px] bg-[#EC7505] rounded-[10px] mx-auto
-                            flex justify-center items-center mt-[70px]
+                            flex justify-center items-center mt-[25px]
                             "
           >
             <h1 className="text-white text-lg font-semibold">Edit Profil</h1>

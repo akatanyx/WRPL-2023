@@ -31,13 +31,62 @@ export default function signup_merchant() {
 
   return (
     // <!-- Gambar -->
-    <div>
+    <div className="font-poppins">
       <Head>
-        <title>LetsEAT: Sign Up</title>
+        <title>LetsEAT Merchant: Sign Up</title>
       </Head>
+
       <div className="flex justify-center mt mt-10">
-        <img src="/logo.svg" alt="" />
+        <img src="/m_signup_image.svg" alt="" />
       </div>
+
+      <h1 className="font-bold text-[24px] ml-[39px] mt-[25px] w-[290px]"
+      >
+        Pendaftaran Merchant
+      </h1>
+
+      <form className="flex flex-col gap-y-5 mt-4 items-center">
+        {/* Nama Toko */}
+        <div>
+          <input
+            type="text"
+            className=" border border-[#9A9A9A] rounded-lg w-[290px] h-[53px] font-poppins 
+                          text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
+            placeholder="Nama Toko"
+          />
+        </div>
+
+        {/* Alamat Toko */}
+        <div>
+          <input
+            type="text"
+            className=" border border-[#9A9A9A] rounded-lg w-[290px] h-[53px] font-poppins
+                        text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
+            placeholder="Alamat Toko"
+          />
+        </div>
+
+        {/* Deskripsi Singkat */}
+        <div>
+          <input
+            type="text"
+            className="border border-[#9A9A9A] rounded-lg w-[290px] h-[172px] font-poppins
+                        text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
+            placeholder="Deskripsi Singkat"
+          />
+        </div>
+
+      </form>
+
+      {/* Register */}
+      <Link href='/merchant/merchant_dashboard'>
+        <div className="w-[290px] h-[53px] mt-[71px] mb-[50px] rounded-lg mx-auto
+                        flex justify-center items-center bg-[#EC7505]">
+          <h1 className="font-semibold text-[19px] text-white">Register</h1>
+        </div>
+      </Link>
+
+{/* 
       <div className="flex flex-col items-center justify-center">
         <div className="mt-4">
           <div className="max-w-full ">
@@ -134,7 +183,7 @@ export default function signup_merchant() {
                   />
                 </div>
               </div>
-              {/*<div className="flex justify-center mt-2">
+              <div className="flex justify-center mt-2">
                 <div className="max-w-full">
                   <p className="text-left font-bold  text-[15px]">
                    Input Foto KTP
@@ -149,13 +198,13 @@ export default function signup_merchant() {
                     onChange={(event) => setKTP(event.target.value)}
                   />
                 </div>
-              </div>*/}
+              </div>
               <div className="flex justify-center py-4">
-                {/* <Link href="/merchant_dashboard"> */}
+                <Link href="/merchant_dashboard">
                   <button className="bg-[#EC7505] text-white text-[20px] px-4 py-2 rounded font-bold">
                     SIGNUP
                   </button>
-                {/* </Link> */}
+                </Link>
               </div>
             </form>
           </div>
@@ -171,7 +220,7 @@ export default function signup_merchant() {
           </div>
         </div>
         <div className="mb-7"></div>
-      </div>
+      </div> */}
     </div>
   )
 }
