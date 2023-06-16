@@ -70,9 +70,13 @@ export default function Resto( {posts}: PostsProps ) {
               />
 
               {/* Nama Resto */}
-              <h1 className="pt-7 font-bold text-xl">Anteiku Coffee</h1>
+              <h1 className="pt-7 font-bold text-xl w-[200px] text-center
+                            whitespace-nowrap overflow-hidden overflow-ellipsis">
+                Anteiku Coffee
+              </h1>
               {/* Alamat Resto */}
-              <p className="text-[#8F8D8D] font-medium text-[12px]">
+              <p className="text-[#8F8D8D] font-medium text-[12px] w-[200px] text-center
+                            whitespace-nowrap overflow-hidden overflow-ellipsis">
                 Jl. LohaLohe No.178
               </p>
 
