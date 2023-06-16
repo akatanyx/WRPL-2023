@@ -4,7 +4,6 @@ import { connectToDatabase } from "../mongodb";
 export default async function login(req: any, res: any) {
   if (req.method === "POST") {
     const { email, password } = req.body;
-
     const client = await connectToDatabase();
 
     const user = await client

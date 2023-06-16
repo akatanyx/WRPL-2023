@@ -18,7 +18,7 @@ export default async function handler(req: any, res: any) {
 
     res.status(200).json(results);
   } else if (req.method === "PUT" && req.query.type === "sub") {
-    const { idwallet, saldo } = req.body;
+    const { idwallet, total } = req.body;
     const db = await connectToDatabase();
     const collection = db.collection("wallets");
 
@@ -26,7 +26,7 @@ export default async function handler(req: any, res: any) {
     const cursor = await collection.updateOne(
       { id_wallet: idwallet },
       {
-        $inc: { saldo: -saldo },
+        $inc: { saldo: -total },
       }
     );
   

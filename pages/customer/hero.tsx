@@ -17,8 +17,8 @@ import cardKategoriItems from "./datas/kategori";
 import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
-
-interface Menu {
+import cartItem from "./pesanan"
+interface MenuItem {
   _id: string;
   nama: string;
   desk: string;
@@ -26,11 +26,26 @@ interface Menu {
   imgURL: string;
 }
 
-interface Wallet {
+interface WalletItem {
   id_wallet: string;
   saldo: number;
   no_telp: string;
   nama: string;
+}
+
+interface CartItem {
+  _id: string;
+  menuId: string;
+  jumlah: number;
+  menuItems: {
+    nama: string;
+    harga: number;
+    desk: string;
+    tag: string;
+    kategori: string;
+    rating: string;
+    imgURL: string;
+  };
 }
 
 export type CardKategoriProps = {
@@ -73,12 +88,19 @@ type User = {
   imgURL: string;
 };
 
-export default function hero({ users, wallets }: any) {
+export default function hero({ users, wallets, cartItems}: any) {
   //Hardcoded, biar cepet
-  const wallet = wallets.filter((wallet: Wallet) => wallet.id_wallet === "1");
+  const wallet = wallets.filter((wallet: WalletItem) => wallet.id_wallet === "1");
   const saldo: number = wallet[0].saldo;
+
   const user:User[] = users.filter((user: User) => user.nama === "Billy Fahd Qodama");
   const imgURL:string = user[0].imgURL;
+
+  const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
+  const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
+  const totalQty = HitungQtyCart(cartItems);
+  const totalHarga = HitungHargaCart(cartItems);
+
   return (
     <>
       <Head>
@@ -261,7 +283,7 @@ export default function hero({ users, wallets }: any) {
       </div>
 
       {/* Item Cart */}
-      <ItemCart totalItem={1} totalPrice={15000} />
+      <ItemCart totalItem={totalQty} totalPrice={totalHarga} />
 
       {/* Navbar */}
       <div>
@@ -272,16 +294,20 @@ export default function hero({ users, wallets }: any) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=users");
-  const users: User[] = await res.json();
+  const resUsers = await fetch("http://localhost:3000/api/posts?type=users");
+  const users: User[] = await resUsers.json();
 
-  const res2 = await fetch("http://localhost:3000/api/posts?type=wallets");
-  const wallets: Wallet[] = await res2.json();
+  const resWallets = await fetch("http://localhost:3000/api/posts?type=wallets");
+  const wallets: WalletItem[] = await resWallets.json();
+
+  const resCarts = await fetch("http://localhost:3000/api/searchcart");
+  const cartItems: CartItem[] = await resCarts.json();
 
   return {
     props: {
       users,
       wallets,
+      cartItems,
     },
   };
 }

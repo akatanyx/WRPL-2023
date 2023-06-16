@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
-export default function Pembayaran_berhasil() {
+interface CartItem {
+  _id: string;
+  jumlah: number;
+  menuItems: {
+    nama: string;
+    harga: number;
+  };
+}
+
+export default function Pembayaran_berhasil({cartItems}: {cartItems: CartItem[]}) {
   const current = new Date();
 
   function getDate(): string {
@@ -9,7 +18,7 @@ export default function Pembayaran_berhasil() {
     const month = current.toLocaleString("nl-NL", { month: "long" });
     const year = current.getFullYear();
 
-    const minutes = current.getMinutes();
+    const minutes = ('0'+current.getMinutes()).slice(-2);
     const hours = current.getHours();
     const date = `${day} ${month} ${year} ${hours}:${minutes}`;
     return date;
@@ -51,15 +60,17 @@ export default function Pembayaran_berhasil() {
             </h1>
 
             {/* Menu */}
-            <div className="flex-col">
+            {cartItems.map((cartItem: CartItem) => (
+            <div key={cartItem._id} className="flex-col">
               <div className="flex justify-between text-[16px] text-[#9A9A9A] pl-[33px] pr-[32px]">
                 {/* Nama Makanan */}
-                <h1>Kopi Hitam</h1>
+                <h1>{cartItem.menuItems.nama}</h1>
 
                 {/* Jumlah Makanan */}
-                <p>2</p>
+                <p>{cartItem.jumlah}</p>
               </div>
             </div>
+            ))}
 
             {/* Lanjutkan */}
 
@@ -78,4 +89,15 @@ export default function Pembayaran_berhasil() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const response = await fetch("http://localhost:3000/api/searchcart");
+  const cartItems: CartItem[] = await response.json();
+
+  return {
+    props: {
+      cartItems,
+    },
+  };
 }

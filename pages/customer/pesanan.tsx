@@ -9,42 +9,33 @@ import { useState } from "react";
 import vouchers from "./datas/vouchers";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function Pesanan() {
-  const [cartItems, setCartItems] = useState([
-    {
-      _id: "6458fa323c85fe763543d4c5",
-      menuId: "6423315d79140f65b09049c0",
-      jumlah: 8,
-      menuItems: {
-        nama: "Ayam Betutu",
-        harga: 41500,
-        desk: "Ayam sudah muak dengan error",
-        tag: "",
-        kategori: "",
-        rating: "",
-        imgURL:
-          "https://res.cloudinary.com/prema-cloud/image/upload/v1680027994/yidcskeine6f8kmkqafq.jpg",
-      },
-    },
-    {
-      _id: "645902533c85fe763543d4c6",
-      menuId: "642338a279140f65b09049c1",
-      jumlah: 10,
-      menuItems: {
-        nama: "Pecel Encim",
-        harga: 20000,
-        desk: "Pecel aku ketemu error mulu",
-        tag: "",
-        kategori: "",
-        rating: "",
-        imgURL:
-          "https://res.cloudinary.com/prema-cloud/image/upload/v1680029855/xfpffwlrv4awjp7zk7kw.jpg",
-      },
-    },
-  ]);
+interface CartItem {
+  _id: string;
+  menuId: string;
+  jumlah: number;
+  menuItems: {
+    nama: string;
+    harga: number;
+    desk: string;
+    tag: string;
+    kategori: string;
+    rating: string;
+    imgURL: string;
+  };
+}
+interface PesananProps {
+  cartItems: CartItem[];
+}
 
+export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
+  const [cartItems, setCartItems] = useState<CartItem[]>(
+    () => initialCartItems
+  );
   const handleUpdateJumlah = (itemId: string, newJumlah: number) => {
+    // Update di frontend (instan)
     const updatedItems = cartItems.map((item) => {
       if (item._id === itemId) {
         return { ...item, jumlah: newJumlah };
@@ -52,6 +43,23 @@ export default function Pesanan() {
       return item;
     });
     setCartItems(updatedItems);
+    // Buat delay API request untuk Efisiensi
+    setTimeout(async () => {
+      try {
+        // API untuk update jumlah cart
+        await fetch(`/api/updatecart`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ itemId: itemId, jumlah: newJumlah }),
+        });
+        toast.success("Berhasil update cart di database.");
+      } catch (error) {
+        console.error("Gagal update cart di database:", error);
+        toast.error("Gagal update cart");
+      }
+    }, 1000); // Delay 1 detik
   };
 
   const calculateTotalPrice = (): number => {
@@ -65,7 +73,7 @@ export default function Pesanan() {
     return totalPrice;
   };
 
-  const [totalHarga, setTotalHarga] = useState(() => calculateTotalPrice());
+  const [totalHarga, setTotalHarga] = useState(calculateTotalPrice());
   const deliPrice = 30000;
   const appPrice = 5000;
   let saldo = 1000000;
@@ -79,7 +87,7 @@ export default function Pesanan() {
   const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
 
   const applyVoucher = (voucherId: string) => {
-    // Find the selected voucher based on voucherId
+    // Mencari voucher berdasarkan voucherID
     const selectedVoucher = vouchers.find(
       (voucher) => voucher.id === voucherId
     );
@@ -87,7 +95,7 @@ export default function Pesanan() {
     if (selectedVoucher) {
       const totalPrice = calculateTotalPrice();
       if (totalPrice > selectedVoucher.minPurchase) {
-        const discount = totalPrice * selectedVoucher.amount/100;
+        const discount = (totalPrice * selectedVoucher.amount) / 100;
         if (discount > selectedVoucher.maxDiscount) {
           setTotalHarga(totalPrice - selectedVoucher.maxDiscount);
         } else {
@@ -111,12 +119,29 @@ export default function Pesanan() {
   };
 
   const router = useRouter();
-  const handlePay = () => {
-    if (totalHarga > saldo) {
+  const handlePay = async () => {
+    if (totalHarga + deliPrice + appPrice > saldo) {
       alert("Saldo tidak cukup");
     } else {
-      alert("Pembayaran berhasil");
-      router.push("pembayaran_berhasil");
+      // API untuk update saldo
+      let id_wallet = "1"; //hardcode -> id wallet user saat ini
+
+      const response = await fetch("/api/updatewallet?type=sub", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idwallet: id_wallet,
+          total: totalHarga + deliPrice + appPrice,
+        }),
+      });
+      if (response.ok) {
+        alert("Pembayaran berhasil");
+        router.push("pembayaran_berhasil");
+      } else {
+        console.error(response);
+      }
     }
   };
 
@@ -179,6 +204,8 @@ export default function Pesanan() {
             />
           ))}
 
+          <ToastContainer />
+
           {/* Apply Promo */}
           <button
             onClick={handleOpenPopup}
@@ -186,7 +213,16 @@ export default function Pesanan() {
             md:flex md:mx-auto
             "
           >
-            <Image src={appliedVoucher !== "" ? "/apply_promo_applied.svg" : "/apply_promo.svg"} alt="" width={316} height={51} />
+            <Image
+              src={
+                appliedVoucher !== ""
+                  ? "/apply_promo_applied.svg"
+                  : "/apply_promo.svg"
+              }
+              alt=""
+              width={316}
+              height={51}
+            />
           </button>
 
           {/* List Harga */}
@@ -201,7 +237,7 @@ export default function Pesanan() {
             {/* Total Harga */}
             <div className="bg-[#EC7505] h-[46px] rounded-lg flex items-center pl-[17px]">
               <h1 className="text-white font-semibold text-[25px]">
-                Rp. {totalHarga+deliPrice+appPrice}
+                Rp. {totalHarga + deliPrice + appPrice}
               </h1>
             </div>
             {/* List Pesanan dan Harga */}
@@ -331,4 +367,15 @@ export default function Pesanan() {
       )}
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const response = await fetch("http://localhost:3000/api/searchcart");
+  const cartItems: CartItem[] = await response.json();
+
+  return {
+    props: {
+      cartItems,
+    },
+  };
 }
