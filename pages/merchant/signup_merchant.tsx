@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function signup_merchant() {
+export default function Signup_merchant() {
   const [nama, setNama] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');

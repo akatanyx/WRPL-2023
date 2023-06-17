@@ -3,16 +3,16 @@ import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import Image from "next/image";
 import Link from "next/link";
 
-type User = {
+export type User = {
   _id: string;
   nama: string;
   email: string;
-  phone: number | null;
+  phone: number;
   imgURL: string;
-  alamat: string | null;
+  alamat: string;
 };
 
-type UserProps = {
+export type UserProps = {
   users: User[];
 };
 
@@ -29,7 +29,7 @@ export default function Profil_sel({ users }: UserProps) {
         {/* Content */}
         <div
           className="w-[294px] h-[635px] -translate-y-[210px] bg-white mx-auto 
-                                rounded-[23px] shadow-lg relative"
+                                rounded-[23px] pt-[17px] shadow-lg relative"
         >
           {/* Logout Button */}
           <button className="absolute right-0 translate-x-6 -translate-y-6">
@@ -37,13 +37,15 @@ export default function Profil_sel({ users }: UserProps) {
           </button>
 
           {/* Profile Picture */}
+          <div className="flex h-[130px]">
           <Image
             src={imgURL}
-            className="mx-auto pt-[17px] rounded-full border border-gray-100 shadow-sm"
+            className="mx-auto rounded-full border border-gray-100 shadow-sm"
             alt="Profile Pic"
             width={130}
             height={130}
           />
+          </div>
 
           {/* Nama*/}
           <div className="flex flex-col justify-center items-center mt-[17px]">
@@ -120,3 +122,4 @@ export async function getServerSideProps() {
     },
   };
 }
+  
