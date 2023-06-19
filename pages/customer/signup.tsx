@@ -3,22 +3,27 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Signup() {
-    const [nama, setNama] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const phone = null; // set phone to null
-    const imgURL = null;
     const [password, setPassword] = useState('');
     const [repassword, setRepassword] = useState('');
+
     const router = useRouter();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+
+        if (password !== repassword) {
+            alert('Password tidak sama');
+            return;
+        }
+
         const response = await fetch('/api/signup?type=user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ nama, email, phone, imgURL, password, repassword}),
+            body: JSON.stringify({ name, email, password}),
         });
         if (response.ok) {
             router.push('/customer/login');
@@ -59,8 +64,8 @@ export default function Signup() {
                             className=" border border-[#9A9A9A] rounded-lg h-[53px] font-poppins 
                                     w-[290px] text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
                             placeholder="Nama"
-                            value={nama}
-                            onChange={(e) => setNama(e.target.value)}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </div>
 
@@ -92,8 +97,8 @@ export default function Signup() {
                     <div>
                         <input
                             type="password"
-                            className=" border border-[#9A9A9A] rounded-lg w-[290px] h-[53px] font-poppins
-                                    text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
+                            className={`border ${password == repassword ? "border-[#9A9A9A]" : "border-red-200"} rounded-lg w-[290px] h-[53px] font-poppins
+                                    text-[19px] p-3 px-4 text-[#838080] focus:outline-none`}
                             placeholder="Re-enter Password"
                             value={repassword}
                             onChange={(e) => setRepassword(e.target.value)}

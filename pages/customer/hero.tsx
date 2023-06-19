@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { getSession } from "next-auth/react";
 
 import Promo from "@/components/Customer/Landing/SlidePromo";
 import Card_Kategori from "@/components/Customer/Landing/Card_Kategori";
@@ -17,20 +18,13 @@ import cardKategoriItems from "./datas/kategori";
 import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
-import cartItem from "./pesanan"
+import { GetServerSidePropsContext } from "next";
 interface MenuItem {
   _id: string;
   nama: string;
   desk: string;
   harga: number;
   imgURL: string;
-}
-
-interface WalletItem {
-  id_wallet: string;
-  saldo: number;
-  no_telp: string;
-  nama: string;
 }
 
 interface CartItem {
@@ -79,27 +73,12 @@ export type CardFavoritFoodProps = {
   ratingFood: string;
 };
 
-type User = {
-  id: string;
-  nama: string;
-  email: string;
-  phone: number | null;
-  alamat: string;
-  imgURL: string;
-};
+export default function hero({ user, wallet } :any) {
 
-export default function hero({ users, wallets, cartItems}: any) {
-  //Hardcoded, biar cepet
-  const wallet = wallets.filter((wallet: WalletItem) => wallet.id_wallet === "1");
-  const saldo: number = wallet[0].saldo;
-
-  const user:User[] = users.filter((user: User) => user.nama === "Billy Fahd Qodama");
-  const imgURL:string = user[0].imgURL;
-
-  const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
-  const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
-  const totalQty = HitungQtyCart(cartItems);
-  const totalHarga = HitungHargaCart(cartItems);
+  // const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
+  // const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
+  // const totalQty = HitungQtyCart(cartItems);
+  // const totalHarga = HitungHargaCart(cartItems);
 
   return (
     <>
@@ -108,7 +87,7 @@ export default function hero({ users, wallets, cartItems}: any) {
       </Head>
 
       {/* Header */}
-      <Landing_Header imgURL={imgURL}/>
+      <Landing_Header imgURL={""}/>
 
       {/* Alamat Pembeli */}
       <Alamat />
@@ -120,7 +99,7 @@ export default function hero({ users, wallets, cartItems}: any) {
       <SearchPage />
 
       {/* Lets Cash Ewallet */}
-      <Ewallet saldo={saldo} />
+      <Ewallet saldo={wallet.saldo} />
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -283,7 +262,7 @@ export default function hero({ users, wallets, cartItems}: any) {
       </div>
 
       {/* Item Cart */}
-      <ItemCart totalItem={totalQty} totalPrice={totalHarga} />
+      <ItemCart totalItem={2} totalPrice={100000} />
 
       {/* Navbar */}
       <div>
@@ -293,21 +272,24 @@ export default function hero({ users, wallets, cartItems}: any) {
   );
 }
 
-export async function getServerSideProps() {
-  const resUsers = await fetch("http://localhost:3000/api/posts?type=users");
-  const users: User[] = await resUsers.json();
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
 
-  const resWallets = await fetch("http://localhost:3000/api/posts?type=wallets");
-  const wallets: WalletItem[] = await resWallets.json();
+  // If the user is not authenticated, redirect them to the login page
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  }
 
-  const resCarts = await fetch("http://localhost:3000/api/searchcart");
-  const cartItems: CartItem[] = await resCarts.json();
-
+  const walletData = await fetch(`http://localhost:3000/api/walletuser?id=${session.user.email}`);
+  const wallet = await walletData.json();
   return {
     props: {
-      users,
-      wallets,
-      cartItems,
+      wallet,
     },
   };
 }

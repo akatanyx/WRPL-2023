@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import Tag_Makanan from "../Resto/Tag_Makanan";
 
-export interface CartItemProps {
+interface CartItemProps {
   cartItem: {
     _id: string;
-    menuId: string;
+    id_user: string;
+    id_menu: string;
     jumlah: number;
     menuItems: {
       nama: string;

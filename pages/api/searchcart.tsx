@@ -2,15 +2,19 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../mongodb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const collectionName:string = "carts";
     let client;
   try {
     client = await connectToDatabase();
-    const collection = client.collection(collectionName);
+    const collection = client.collection('carts');
     const result = await collection.aggregate([
       {
+        $match: {
+          id_user: req.query.id_user
+        }
+      },
+      {
         $addFields: {
-          menuIdObj: { $toObjectId: "$menuId" }
+          menuIdObj: { $toObjectId: "$id_menu" }
         }
       },
       {
@@ -27,7 +31,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       {
         $project: {
           "_id": 1,
-          "menuId": 1,
+          "id_user": 1,
+          "id_menu": 1,
           "jumlah": 1,
           "menuItems.nama": 1,
           "menuItems.harga": 1,

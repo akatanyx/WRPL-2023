@@ -5,7 +5,8 @@ import Header_EditMenu from "@/components/Merchant/Edit_Menu/Header_EditMenu"
 import Header_w_notif from "@/components/Merchant/Header_w_notif"
 import M_Navbar from "@/components/Merchant/M_Navbar"
 
-export default function add_menu () {
+export default function edit_menu () {
+
     return (
         <>
             <Head>

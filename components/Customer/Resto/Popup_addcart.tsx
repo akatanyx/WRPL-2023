@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Tag_Makanan_Popup from "./Tag_Makanan_Popup";
 import router from "next/router";
 
-const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
+const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal, userId}: any) => {
   const [jumlah, setJumlah] = useState(1);
 
   const handleReduceJumlah = () => {
@@ -15,7 +15,7 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
     setJumlah(jumlah + 1);
   };
 
-  // Masukkan ke database cart
+  // Handle tambah menu ke cart
   const handleAddToCart = async (e: any) => {
     e.preventDefault();
     const response = await fetch("/api/signup?type=cart", {
@@ -23,7 +23,7 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ menuId, jumlah }),
+      body: JSON.stringify({ id_user: userId, id_menu: menuId, jumlah }),
     });
     if (response.ok) {
       router.push("/customer/pesanan");
@@ -32,12 +32,8 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
     }
   };
 
-  // Masih gatau cara masukin ke database cart variabel jumlahnya
   return (
     <>
-      {/* <div onClick={closeModal} className="z-20 absolute h-[300vh] left-0 right-0
-            top-0 
-            bg-black bg-opacity-10 backdrop-blur-sm"></div> */}
       <div
         onClick={closeModal}
         className="absolute z-20 h-[350vh] w-[100vw]

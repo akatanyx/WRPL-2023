@@ -11,10 +11,13 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getSession } from "next-auth/react";
+import { connectToDatabase } from "../mongodb";
 
 interface CartItem {
   _id: string;
-  menuId: string;
+  id_user: string;
+  id_menu: string;
   jumlah: number;
   menuItems: {
     nama: string;
@@ -369,10 +372,24 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
   );
 }
 
-export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/searchcart");
-  const cartItems: CartItem[] = await response.json();
+export async function getServerSideProps(context:any) {
+  const session = await getSession(context);
 
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const db = await connectToDatabase();
+  const user = await db.collection("users").findOne({ email: session?.user.email });
+
+  const cartData = await fetch(`http://localhost:3000/api/searchcart?id_user=${user?._id.toString()}`);
+  const cartItems = await cartData.json();
+  
   return {
     props: {
       cartItems,

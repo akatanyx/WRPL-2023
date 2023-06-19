@@ -20,7 +20,7 @@ export default function Landing_Header ({imgURL}:imgURLProps) {
                         md:-translate-x-[30px]
                 '>
                 <Link href='/customer/profil'>
-                    <img src={imgURL} alt="" className='w-[43px] h-[43px] rounded-full'/>
+                    <img src={imgURL? imgURL:"/icon_profil.svg"} alt="" className='w-[43px] h-[43px] rounded-full'/>
                 </Link>  
                 </div>
             </div>

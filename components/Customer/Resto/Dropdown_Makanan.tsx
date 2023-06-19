@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Card_Resto from "./Card_Resto";
 
-export default function Dropdown_Makanan({posts, children}:any )  {
+export default function Dropdown_Makanan({posts, userId, children}:any )  {
   const [showMe, setShowMe] = useState(false);
   function toogle() {
     setShowMe(!showMe);
@@ -35,7 +35,7 @@ export default function Dropdown_Makanan({posts, children}:any )  {
 
           <div className="flex flex-col gap-y-[17px] mt-2">
             {posts?.map(
-              (post:any,index:any) =>
+              (post:any) =>
                 (
                   <Card_Resto
                     key={post._id}
@@ -43,7 +43,8 @@ export default function Dropdown_Makanan({posts, children}:any )  {
                     desk={post.desk}
                     harga={post.harga}
                     imgURL={post.imgURL}
-                    menuId={post._id}   
+                    menuId={post._id} 
+                    userId={userId}  
                   />
                 )
             )}

@@ -1,30 +1,17 @@
 import Transaksi_terakhir from "@/components/Ewallet/Hero/Transaksi_terakhir";
-import Fitur_ewallet from "@/components/Ewallet/Hero/fitur";
+import Fitur_ewallet from "@/components/Ewallet/Hero/Fitur";
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { connectToDatabase } from "../mongodb";
+import { getSession } from "next-auth/react";
 
-interface Wallet {
-  id_wallet: string;
-  saldo: number;
-  no_telp: string;
-  nama: string;
-}
-
-interface WalletProps {
-  wallets: Wallet[];
-}
-
-
-export default function Hero({ wallets }: WalletProps) {
+export default function Hero({user, wallet}: any) {
   const [showSaldo, setShowSaldo] = useState(true);
 
   const toggleSaldo = () => {
     setShowSaldo(!showSaldo);
   };
-  //User id = 1 = wallet id
-  const wallet = wallets.filter((wallet) => wallet.id_wallet === "1");
-  const saldo = wallet[0].saldo;
 
   return (
     <div className="font-poppins">
@@ -38,7 +25,7 @@ export default function Hero({ wallets }: WalletProps) {
           <div className="flex">
           <h1 className="font-medium text-[#263238] text-[17px] w-[100px] 
                           whitespace-nowrap overflow-hidden overflow-ellipsis">
-            Halo, {wallet[0].nama}!
+            Halo, {user.name}!
           </h1>
 
             <img src="/e_hero_centang.svg" className=" w-[20px]" />
@@ -62,7 +49,7 @@ export default function Hero({ wallets }: WalletProps) {
           <h1 className="font-semibold">Saldo</h1>
           <p>-</p>
           {/* Nomor Telepon */}
-          <h1>{wallet[0].no_telp}</h1>
+          <h1>+62 {wallet.nomor_wallet}</h1>
         </div>
 
         {/* Border Pembatas */}
@@ -73,7 +60,7 @@ export default function Hero({ wallets }: WalletProps) {
           <div className="flex items-center gap-x-[3px] ml-[16px] font-semibold text-white">
             <h1 className="text-[21px]">Rp</h1>
             <h1 className={`text-[25px] ${showSaldo ? "" : "hidden"}`}>
-              {saldo.toLocaleString()}
+              {wallet.saldo.toLocaleString("id-ID")}
             </h1>
             <h1 className={`text-[25px] tracking-wide ${showSaldo ? " hidden" : ""}`}>
               &bull;&bull;&bull;&bull;&bull;&bull;
@@ -119,13 +106,47 @@ export default function Hero({ wallets }: WalletProps) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=wallets");
-  const wallets: Wallet[] = await res.json();
 
-  return {
-    props: {
-      wallets,
-    },
-  };
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (!session?.user) {
+    // User is not authenticated, redirect to login page or show an error
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  } else {
+    // User is authenticated, check their roles in the database
+    const db = await connectToDatabase();
+    const collection = db.collection("users");
+    const user = await collection.findOne({ email: session.user.email });
+
+    if (!user || !user.roles.includes("wallet")) {
+      // User doesn't have the wallet role, redirect to signup wallet page
+      return {
+        redirect: {
+          destination: "/ewallet/landing",
+          permanent: false,
+        },
+      };
+    }
+
+    const wallet = await db.collection("wallets").findOne({ id_user: user._id.toString()})
+
+    if (!wallet) {
+      // return error message wallet not foung to page
+      return {
+        notFound: true,
+      };     
+    }
+    // User has the wallet role, continue rendering the landing wallet page
+    return {
+      props: {
+        user: JSON.parse(JSON.stringify(user)),
+        wallet: JSON.parse(JSON.stringify(wallet)),
+      },
+    };
+  }
 }

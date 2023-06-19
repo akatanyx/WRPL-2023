@@ -2,28 +2,19 @@ import Header_w_notif from "@/components/Merchant/Header_w_notif";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import Image from "next/image";
 import Link from "next/link";
+import { getSession } from "next-auth/react";
+import { connectToDatabase } from "../mongodb";
 
-export type User = {
-  _id: string;
-  nama: string;
-  email: string;
-  phone: number;
-  imgURL: string;
-  alamat: string;
-};
+export default function Profil_sel({ user }: any) {
+  const name = user?.name;
+  const phone = user?.phoneNumber?.toString() || "Belum diisi";
+  const email = user?.email;
+  const imgURL = user?.imgURL || "/m_profil_pp.svg";
+  const address = user?.address || "Belum diisi";
 
-export type UserProps = {
-  users: User[];
-};
-
-export default function Profil_sel({ users }: UserProps) {
-  const user: User[] = users.filter(
-    (user: User) => user.nama === "Billy Fahd Qodama"
-  );
-  const imgURL: string = user[0].imgURL;
   return (
     <div className="font-poppins bg-[#E89005] max-h-screen">
-      <Header_w_notif>Ahmad Santoso</Header_w_notif>
+      <Header_w_notif>{name}</Header_w_notif>
 
       <div className="mt-[254px] bg-white">
         {/* Content */}
@@ -38,19 +29,19 @@ export default function Profil_sel({ users }: UserProps) {
 
           {/* Profile Picture */}
           <div className="flex h-[130px]">
-          <Image
-            src={imgURL}
-            className="mx-auto rounded-full border border-gray-100 shadow-sm"
-            alt="Profile Pic"
-            width={130}
-            height={130}
-          />
+            <Image
+              src={imgURL}
+              className="mx-auto rounded-full border border-gray-100 shadow-sm"
+              alt=""
+              width={130}
+              height={130}
+            />
           </div>
 
           {/* Nama*/}
           <div className="flex flex-col justify-center items-center mt-[17px]">
             {/* Nama Customer */}
-            <h1 className="font-semibold text-[21px]">{user[0].nama}</h1>
+            <h1 className="font-semibold text-[21px]">{name}</h1>
           </div>
 
           {/* Border Pembatas */}
@@ -60,43 +51,39 @@ export default function Profil_sel({ users }: UserProps) {
             {/* Nomor Telepon */}
             <div className="flex gap-x-[17px] items-center">
               <img src="/m_profil_telepon.svg" alt="" />
-              <h1 className="text-[14px]">
-                {user[0].phone == null ? "Belum diisi" : user[0].phone}
-              </h1>
+              <h1 className="text-[14px]">{phone}</h1>
             </div>
 
             {/* Email */}
             <div className="flex gap-x-[17px] items-center">
               <img src="/m_profil_email.svg" alt="" />
-              <h1 className="text-[14px]">{user[0].email}</h1>
+              <h1 className="text-[14px]">{email}</h1>
             </div>
 
             {/* Lokasi */}
             <div className="flex gap-x-[17px] items-center ml-[6px]">
               <img src="/b_profil_alamat.svg" alt="" />
-              <h1 className="text-[14px]">
-                {user[0].alamat == null ? "Belum diisi" : user[0].alamat}
-              </h1>
+              <h1 className="text-[14px]">{address}</h1>
             </div>
           </div>
 
           {/* Ganti Mode */}
-          <h1 className="text-[#A9A9A9] text-center font-medium text-[16px] mt-[18px]">
+          <h1 className="text-[#A9A9A9] text-center font-medium text-[16px] mt-[40px]">
             Ganti Mode
           </h1>
           <div className="flex justify-center gap-x-[21px]">
-            <Link href="/merchant/signup_merchant">
+            <Link href="/merchant/landing_merchant">
               <img src="/b_profil_merchant.svg" alt="" />
             </Link>
 
-            <Link href="/driver/signup">
+            <Link href="/driver/landing_driver">
               <img src="/b_profil_driver.svg" alt="" />
             </Link>
           </div>
 
           {/* Button Edit Profil */}
           <Link
-            href="/customer/profil_update"
+            href="/customer/edit_profil"
             className="w-[168px] h-[46px] bg-[#EC7505] rounded-[10px] mx-auto
                             flex justify-center items-center mt-[25px]
                             "
@@ -112,14 +99,25 @@ export default function Profil_sel({ users }: UserProps) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=users");
-  const users: User[] = await res.json();
-
-  return {
-    props: {
-      users,
-    },
-  };
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+    if (!session?.user) {
+      // User is not authenticated, redirect to login page or show an error
+      return {
+        redirect: {
+          destination: "/customer/login",
+          permanent: false,
+        },
+      };
+    } else {
+      // User is authenticated get the data
+      const db = await connectToDatabase();
+      const collection = db.collection("users");
+      const user = await collection.findOne({ email: session.user.email });
+      return {
+        props: { 
+          user: JSON.parse(JSON.stringify(user)) 
+        },
+      };
+  }
 }
-  

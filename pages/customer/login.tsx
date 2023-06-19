@@ -1,4 +1,4 @@
-import { signIn, SignInResponse } from "next-auth/react";
+import { getSession, signIn, SignInResponse } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -46,10 +46,10 @@ export default function Login() {
         <h1 className="font-poppins font-bold text-[24px]">Login</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-5 mt-1">
           {/* Email */}
-          <div >
+          <div>
             <input
-            className=" border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
-            placeholder="Email" 
+              className=" border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
+              placeholder="Email"
               type="email"
               id="email"
               value={email}
@@ -58,12 +58,10 @@ export default function Login() {
           </div>
 
           {/* Password */}
-          <div
-            
-          >
+          <div>
             <input
-            className="border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
-            placeholder="Password"
+              className="border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
+              placeholder="Password"
               type="password"
               id="password"
               value={password}
@@ -89,18 +87,16 @@ export default function Login() {
           </div>
 
           {/* Button Login */}
-            <button
-              type="submit"
-              value="Login"
-              className="flex justify-center items-center w-[290px] h-[53px] 
+          <button
+            type="submit"
+            value="Login"
+            className="flex justify-center items-center w-[290px] h-[53px] 
               bg-[#EC7505] rounded-lg shadow-lg mt-[19px]"
-            >
-              <h1
-                className="text-white font-semibold font-poppins text-[19px]"
-              >
-                Login
-              </h1>
-            </button>
+          >
+            <h1 className="text-white font-semibold font-poppins text-[19px]">
+              Login
+            </h1>
+          </button>
         </form>
 
         {/* tidak punya akun */}
@@ -115,8 +111,24 @@ export default function Login() {
           </h2>
         </div>
 
-        <div className="mb-[58px]"/>
+        <div className="mb-[58px]" />
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (session?.user) {
+    // User is authenticated, redirect to hero page
+    return {
+      redirect: {
+        destination: "/customer/hero",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 }

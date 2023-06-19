@@ -9,6 +9,7 @@ interface CardRestoProps {
   harga: number;
   imgURL: string;
   menuId: string;
+  userId: string;
 }
 
 export default function Card_Resto({
@@ -16,7 +17,7 @@ export default function Card_Resto({
   desk,
   harga,
   imgURL,
-  menuId
+  menuId, userId
 }: CardRestoProps) {
   const [showMyModal, setShowMyModal] = useState(false);
 
@@ -31,6 +32,7 @@ export default function Card_Resto({
           imgURL={imgURL}
           menuId={menuId}
           closeModal={closeModal}
+          userId={userId}
         />
       )}
       <div className="flex w-[314px] h-[124px] shadow-md rounded-lg md:w-full relative">
@@ -55,14 +57,13 @@ export default function Card_Resto({
           </h1>
           <p className="text-[#838080] text-[12px] font-poppins w-[100px]
                         whitespace-nowrap overflow-hidden overflow-ellipsis">
-            Kopi Pahit
+            {desk}
           </p>
 
           {/* Harga */}
-          {/* Belum bisa apply diskon hidden*/}
           <div className="flex items-center gap-x-2">
             {/* Harga setelah diskon */}
-            <h1 className="font-poppins text-[14px] font-semibold">15.000</h1>
+            <h1 className="font-poppins text-[14px] font-semibold">{harga*4/5}</h1>
 
             {/* Harga Asli */}
             <p className="font-poppins font-semibold text-[11px] text-[#838080] line-through">
@@ -74,7 +75,7 @@ export default function Card_Resto({
           <div className="flex items-end">
             <img src="/icon_star.svg" className="w-[14px] -translate-y-1" alt="" />
             <p className="font-semibold font-poppins text-[12px] translate-x-0.5">
-              4.7
+              {(4.5 + Math.random()*0.5).toFixed(1)}
             </p>
           </div>
         </div>
