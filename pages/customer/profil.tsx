@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
+import LogoutButton from "@/components/logout/Logout";
 
 export default function Profil_sel({ user }: any) {
   const name = user?.name;
@@ -23,9 +24,9 @@ export default function Profil_sel({ user }: any) {
                                 rounded-[23px] pt-[17px] shadow-lg relative"
         >
           {/* Logout Button */}
-          <button className="absolute right-0 translate-x-6 -translate-y-6">
-            <img src="/m_profil_logout.svg" alt="" />
-          </button>
+          <div className="absolute right-0 translate-x-6 -translate-y-6">
+            <LogoutButton />
+          </div>
 
           {/* Profile Picture */}
           <div className="flex h-[130px]">
@@ -101,23 +102,23 @@ export default function Profil_sel({ user }: any) {
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-    if (!session?.user) {
-      // User is not authenticated, redirect to login page or show an error
-      return {
-        redirect: {
-          destination: "/customer/login",
-          permanent: false,
-        },
-      };
-    } else {
-      // User is authenticated get the data
-      const db = await connectToDatabase();
-      const collection = db.collection("users");
-      const user = await collection.findOne({ email: session.user.email });
-      return {
-        props: { 
-          user: JSON.parse(JSON.stringify(user)) 
-        },
-      };
+  if (!session?.user) {
+    // User is not authenticated, redirect to login page or show an error
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  } else {
+    // User is authenticated get the data
+    const db = await connectToDatabase();
+    const collection = db.collection("users");
+    const user = await collection.findOne({ email: session.user.email });
+    return {
+      props: {
+        user: JSON.parse(JSON.stringify(user)),
+      },
+    };
   }
 }

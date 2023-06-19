@@ -216,6 +216,7 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
             md:flex md:mx-auto
             "
           >
+            {/* Mekanisme Promo */}
             <Image
               src={
                 appliedVoucher !== ""
@@ -389,7 +390,7 @@ export async function getServerSideProps(context:any) {
 
   const cartData = await fetch(`http://localhost:3000/api/searchcart?id_user=${user?._id.toString()}`);
   const cartItems = await cartData.json();
-  
+
   return {
     props: {
       cartItems,
