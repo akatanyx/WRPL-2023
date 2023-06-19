@@ -33,6 +33,7 @@ export default async function handler(req: any, res: any) {
             nomor_sim: req.body.nomor_sim,
             nomor_plat: req.body.nomor_plat,
             jenis_motor: req.body.jenis_motor,
+            rating_driver: req.body.rating_driver,
           };
           break;
         case "merchant":
@@ -46,6 +47,8 @@ export default async function handler(req: any, res: any) {
             email_merchant: req.body.email_merchant,
             jam_buka: req.body.jam_buka,
             jam_tutup: req.body.jam_tutup,
+            rating_resto: req.body.rating,
+            menu_resto: req.body.menu_resto, // Array menu yang dijual merchant
           };
           break;
         case "menu":
@@ -55,7 +58,7 @@ export default async function handler(req: any, res: any) {
             deskripsi_menu: req.body.desk,
             tag: req.body.tag,
             kategori: req.body.kategori,
-            rating: req.body.rating,
+            rating_menu: req.body.rating_menu,
             imgURL_menu: req.body.imgURL_menu,
           };
           break;
@@ -72,6 +75,18 @@ export default async function handler(req: any, res: any) {
             nomor_wallet: req.body.nomor_wallet,
             saldo: req.body.saldo,
             pin: await bcrypt.hash(req.body.pin, 10),
+          };
+          break;
+        case "riwayat":
+          data = {
+            id_user: req.body.id_user,
+            id_menu: req.body.id_menu,
+            id_driver: req.body.id_driver,
+            id_merchant: req.body.id_merchant,
+            jumlah: req.body.jumlah,
+            total_harga: req.body.total_harga,
+            status: req.body.status,
+            tanggal: req.body.tanggal,
           };
           break;
         default:
