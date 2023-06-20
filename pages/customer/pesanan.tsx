@@ -366,6 +366,7 @@ export default function Pesanan({ cartItems: initialCartItems , wallet}: Pesanan
           </div>
 
           {/* Pay Button */}
+          <Link href="/customer/pembayaran_berhasil">
           <button
             onClick={handlePay}
             className=" bg-[#EC7505] w-[172px] h-[56px]
@@ -377,6 +378,7 @@ export default function Pesanan({ cartItems: initialCartItems , wallet}: Pesanan
               Bayar
             </h1>
           </button>
+          </Link>
 
           <div className="mb-16" />
         </div>

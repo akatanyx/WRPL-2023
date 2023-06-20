@@ -77,7 +77,7 @@ export default function Profil_sel({ user }: any) {
               <img src="/b_profil_merchant.svg" alt="" />
             </Link>
 
-            <Link href="/driver/landing_driver">
+            <Link href="/driver/signup_driver">
               <img src="/b_profil_driver.svg" alt="" />
             </Link>
           </div>

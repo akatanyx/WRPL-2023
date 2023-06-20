@@ -2,6 +2,7 @@ import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { connectToDatabase } from "../mongodb";
+import Link from "next/link";
 
 export default function Signup_Driver({ user }: { user: any }) {
   const [nomorSTNK, setNomorSTNK] = useState("");
@@ -127,6 +128,7 @@ export default function Signup_Driver({ user }: { user: any }) {
         </form>
 
         {/* Register */}
+        <Link href="/driver/landing_driver">
         <button
           type="submit"
           className="w-[290px] h-[53px] mt-[71px] mb-[50px] rounded-lg mx-auto
@@ -134,6 +136,7 @@ export default function Signup_Driver({ user }: { user: any }) {
         >
           <h1 className="font-semibold text-[19px] text-white">Register</h1>
         </button>
+        </Link>
       </div>
     </form>
   );
