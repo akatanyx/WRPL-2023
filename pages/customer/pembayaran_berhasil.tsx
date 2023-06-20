@@ -74,7 +74,7 @@ export default function Pembayaran_berhasil({cartItems}: {cartItems: CartItem[]}
 
             {/* Lanjutkan */}
 
-            <Link href="pesanan_proses">
+            <Link href="/customer/pesanan_proses">
               <button
                 className="mt-[60px] w-[250px] h-[56px] rounded-full mx-auto
                                                 flex justify-center items-center bg-[#EC7505]"
