@@ -14,6 +14,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
 
+interface Wallet {
+  _id: { $oid: string };
+  id_user: string;
+  nomor_wallet: string;
+  saldo: number;
+  pin: string;
+}
+
 interface CartItem {
   _id: string;
   id_user: string;
@@ -29,11 +37,15 @@ interface CartItem {
     imgURL: string;
   };
 }
+
 interface PesananProps {
   cartItems: CartItem[];
+  wallet: Wallet;
 }
 
-export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
+
+export default function Pesanan({ cartItems: initialCartItems , wallet}: PesananProps) {
+  console.log(wallet);
   const [cartItems, setCartItems] = useState<CartItem[]>(
     () => initialCartItems
   );
@@ -79,7 +91,7 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
   const [totalHarga, setTotalHarga] = useState(calculateTotalPrice());
   const deliPrice = 30000;
   const appPrice = 5000;
-  let saldo = 1000000;
+  let saldo = 100000;
 
   const className =
     calculateTotalPrice() + deliPrice + appPrice > saldo
@@ -391,9 +403,13 @@ export async function getServerSideProps(context:any) {
   const cartData = await fetch(`http://localhost:3000/api/searchcart?id_user=${user?._id.toString()}`);
   const cartItems = await cartData.json();
 
+  const walletData = await fetch(`http://localhost:3000/api/searchwallet?email=${session.user.email}`);
+  const wallet = await walletData.json();
+
   return {
     props: {
       cartItems,
+      wallet,
     },
   };
 }

@@ -285,7 +285,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const walletData = await fetch(`http://localhost:3000/api/walletuser?id=${session.user.email}`);
+  const walletData = await fetch(`http://localhost:3000/api/searchwallet?email=${session.user.email}`);
   const wallet = await walletData.json();
   return {
     props: {

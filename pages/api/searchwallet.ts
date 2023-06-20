@@ -2,7 +2,7 @@ import { connectToDatabase } from "../mongodb";
 
 // API untuk read data dari database
 export default async function handler(req: any, res: any) {
-  const email: string = req.query.id;
+  const email: string = req.query.email;
   const db = await connectToDatabase();
 
   const user = await db.collection("users").findOne({ email });
