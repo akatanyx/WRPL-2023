@@ -19,6 +19,7 @@ import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
 import { GetServerSidePropsContext } from "next";
+import { ObjectId } from "mongodb";
 interface MenuItem {
   _id: string;
   nama: string;
@@ -73,8 +74,14 @@ export type CardFavoritFoodProps = {
   ratingFood: string;
 };
 
-export default function hero({ user, wallet } :any) {
+export interface Wallet {
+  _id: { $oid: string };
+  id_user: string;
+  nomor_wallet: string;
+  saldo: number;
+}
 
+export default function hero({ user, wallet }: any) {
   // const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
   // const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
   // const totalQty = HitungQtyCart(cartItems);
@@ -87,7 +94,7 @@ export default function hero({ user, wallet } :any) {
       </Head>
 
       {/* Header */}
-      <Landing_Header imgURL={""}/>
+      <Landing_Header imgURL={""} />
 
       {/* Alamat Pembeli */}
       <Alamat />
@@ -99,7 +106,7 @@ export default function hero({ user, wallet } :any) {
       <SearchPage />
 
       {/* Lets Cash Ewallet */}
-      <Ewallet saldo={wallet.saldo} />
+      <Ewallet ewallet={wallet} />
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -165,19 +172,22 @@ export default function hero({ user, wallet } :any) {
           </div>
 
           <div className=" flex flex-wrap gap-y-[18px]">
-            {cardFavoritItems.map((item, index:number) => index < 2 && (
-              <div key={item.id}>
-                <Card_Favorit
-                  id={item.id}
-                  namaFood={item.namaFood}
-                  gambarFood={item.gambarFood}
-                  resto={item.resto}
-                  hargaFood={item.hargaFood}
-                  kategoriFood={item.kategoriFood}
-                  ratingFood={item.ratingFood}
-                />
-              </div>
-))}
+            {cardFavoritItems.map(
+              (item, index: number) =>
+                index < 2 && (
+                  <div key={item.id}>
+                    <Card_Favorit
+                      id={item.id}
+                      namaFood={item.namaFood}
+                      gambarFood={item.gambarFood}
+                      resto={item.resto}
+                      hargaFood={item.hargaFood}
+                      kategoriFood={item.kategoriFood}
+                      ratingFood={item.ratingFood}
+                    />
+                  </div>
+                )
+            )}
           </div>
         </div>
 
@@ -285,11 +295,22 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const walletData = await fetch(`http://localhost:3000/api/searchwallet?email=${session.user.email}`);
-  const wallet = await walletData.json();
-  return {
-    props: {
-      wallet,
-    },
-  };
+  const walletData = await fetch(
+    `http://localhost:3000/api/searchwallet?email=${session.user.email}`
+  );
+  if (!walletData.ok) {
+    const wallet:Wallet = await walletData.json();
+
+    return {
+      props: {
+        wallet,
+      },
+    };
+  } else {
+    return {
+      props: {
+        wallet: null,
+      },
+    };
+  }
 }
