@@ -13,16 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
-import { Wallet } from "../customer/hero";
-import { Menu } from "../merchant/index";
-interface CartItem {
-  _id: string;
-  id_user: string;
-  id_menu: string;
-  jumlah: number;
-  menuItems: Menu;
-}
-
+import { Wallet, Menu, CartItem } from "../interface";
 interface User {
   _id: { $oid: string };
   nama: string;

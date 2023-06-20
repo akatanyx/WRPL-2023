@@ -9,14 +9,6 @@ export interface User {
   roles: string[];
   // Include other fields as needed
 }
-
-export interface Wallet {
-  _id: { $oid: string };
-  id_user: string;
-  nomor_wallet: string;
-  saldo: number;
-}
-
 export interface Merchant {
   _id: string;
   id_user: string;
@@ -30,6 +22,13 @@ export interface Merchant {
   jam_tutup: string;
   rating_resto: number;
   menus: string[];
+}
+
+export interface Wallet {
+  _id: { $oid: string };
+  id_user: string;
+  nomor_wallet: string;
+  saldo: number;
 }
 
 export interface Menu {
@@ -50,4 +49,12 @@ export interface Driver {
   nomor_plat: string;
   jenis_motor: string;
   imgURL_driver: string;
+}
+
+export interface CartItem {
+  _id: string;
+  id_user: string;
+  id_menu: string;
+  jumlah: number;
+  menuItems: Menu;
 }

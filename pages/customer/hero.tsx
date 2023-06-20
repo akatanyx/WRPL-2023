@@ -19,7 +19,7 @@ import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
 import { GetServerSidePropsContext } from "next";
-import { Wallet } from "../interface";
+import { CartItem, User, Wallet } from "../interface";
 
 export type CardKategoriProps = {
   id: string;
@@ -55,8 +55,14 @@ export type CardFavoritFoodProps = {
   ratingFood: string;
 };
 
-export default function hero({ wallet }: any) {
-  console.log(wallet);
+interface HeroProps {
+  user: User;
+  wallet: Wallet;
+  cart: CartItem[];
+}
+
+export default function hero({ wallet, user, cart }: HeroProps) {
+  console.log("wallet", wallet, "user", user);
   // const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
   // const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
   // const totalQty = HitungQtyCart(cartItems);
@@ -266,9 +272,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     `http://localhost:3000/api/get?type=wallet&email=${session.user.email}`
   ).then((res) => res.json());
   if (wallet) {
+    const user: User = await fetch(
+      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+    ).then((res) => res.json());
+    const cartItems: CartItem = await fetch(
+      `http://localhost:3000/api/searchcart?email=${session?.user.email}`
+    ).then((res) => res.json());
     return {
-      props: {
+      props: {  
         wallet,
+        user,
+        cartItems,
       },
     };
   } else {
@@ -276,6 +290,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       props: {
         wallet: null,
       },
-    }
+    };
   }
 }
