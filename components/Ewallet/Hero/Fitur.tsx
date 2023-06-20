@@ -6,7 +6,7 @@ export default function Fitur_ewallet () {
             <Link href="/customer/hero">
             <div className="flex-col text-center"> 
             <img src="/e_hero_backtoletseat.svg" alt="" />
-            <h1 className="mt-[6px]">Top Up</h1>
+            <h1 className="mt-[6px]">Lets Eat</h1>
             </div>     
             </Link>
             
