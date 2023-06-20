@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { ObjectId } from "mongodb";
-
-interface User {
-  _id: ObjectId;
-  name: string;
-  email: string;
-  phoneNumber: string;
-  imgURL: string;
-  password: string;
-  address: string;
-  roles: string[];
-  // Include other fields as needed
-}
+import { User } from "../pages/interface"
 
 export function useUser(): User | null {
   const { data: session, status } = useSession();
@@ -22,12 +11,12 @@ export function useUser(): User | null {
     const fetchData = async () => {
       if (status === "authenticated" && session?.user) {
         try {
-          const res = await fetch(`/api/getuser?id=${session.user.email}`);
-          if (res.ok) {
-            const fetchedUser:User = await res.json();
+          const result = await fetch(`/api/get?type=user&email=${session.user.email}`);
+          if (result.ok) {
+            const fetchedUser:User = await result.json();
             setUser(fetchedUser);
           } else {
-            console.error("Error fetching user data:", res.statusText);
+            console.error("Error fetching user data:", result.statusText);
           }
         } catch (error) {
           console.error("Error fetching user data:", error);

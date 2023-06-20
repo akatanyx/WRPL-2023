@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wallet } from "@/pages/customer/hero";
+import { Wallet } from "@/pages/interface";
 
 interface ewalletComponentProps {
   ewallet: Wallet;
@@ -15,9 +15,9 @@ const ewalletComponent: React.FC<ewalletComponentProps> = ({ ewallet }) => {
         {/* Saldo */}
         <Link href="/ewallet/hero">
           <div className="bg-white w-[103px] h-[67px] rounded-lg ml-[18px] mt-[15px] flex-col align-center">
-            <img src="/e_hero_logoletscash.svg" className="mx-auto pt-4" />
+            <img src="/e_hero_logoletscash.svg" className="mx-auto pt-4"/>
             <h1 className="font-medium text-center">
-              Rp. <span>{ewallet ? ewallet.saldo.toLocaleString("de-DE") : 0}</span>
+              Rp. <span>{ewallet.saldo ? ewallet.saldo.toLocaleString("de-DE") : 0}</span>
             </h1>
           </div>
         </Link>

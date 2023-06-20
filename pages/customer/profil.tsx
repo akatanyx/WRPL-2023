@@ -3,19 +3,19 @@ import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
-import { connectToDatabase } from "../mongodb";
 import LogoutButton from "@/components/logout/Logout";
+import { User } from "../interface";
 
-export default function Profil_sel({ user }: any) {
-  const name = user?.name;
-  const phone = user?.phoneNumber?.toString() || "Belum diisi";
+export default function Profil_sel({ user }: { user: User }) {
+  const nama = user?.nama;
+  const nomor_hp = user?.nomor_hp?.toString() || "Belum diisi";
   const email = user?.email;
   const imgURL = user?.imgURL || "/m_profil_pp.svg";
-  const address = user?.address || "Belum diisi";
+  const alamat = user?.alamat || "Belum diisi";
 
   return (
     <div className="font-poppins bg-[#E89005] max-h-screen">
-      <Header_w_notif>{name}</Header_w_notif>
+      <Header_w_notif>{nama}</Header_w_notif>
 
       <div className="mt-[254px] bg-white">
         {/* Content */}
@@ -32,7 +32,7 @@ export default function Profil_sel({ user }: any) {
           <div className="flex h-[130px]">
             <Image
               src={imgURL}
-              className="mx-auto rounded-full border border-gray-100 shadow-sm"
+              className="mx-auto rounded-full border object-none border-gray-100 shadow-sm"
               alt=""
               width={130}
               height={130}
@@ -42,7 +42,7 @@ export default function Profil_sel({ user }: any) {
           {/* Nama*/}
           <div className="flex flex-col justify-center items-center mt-[17px]">
             {/* Nama Customer */}
-            <h1 className="font-semibold text-[21px]">{name}</h1>
+            <h1 className="font-semibold text-[21px]">{nama}</h1>
           </div>
 
           {/* Border Pembatas */}
@@ -52,7 +52,7 @@ export default function Profil_sel({ user }: any) {
             {/* Nomor Telepon */}
             <div className="flex gap-x-[17px] items-center">
               <img src="/m_profil_telepon.svg" alt="" />
-              <h1 className="text-[14px]">{phone}</h1>
+              <h1 className="text-[14px]">{nomor_hp}</h1>
             </div>
 
             {/* Email */}
@@ -64,7 +64,7 @@ export default function Profil_sel({ user }: any) {
             {/* Lokasi */}
             <div className="flex gap-x-[17px] items-center ml-[6px]">
               <img src="/b_profil_alamat.svg" alt="" />
-              <h1 className="text-[14px]">{address}</h1>
+              <h1 className="text-[14px]">{alamat}</h1>
             </div>
           </div>
 
@@ -111,13 +111,13 @@ export async function getServerSideProps(context: any) {
       },
     };
   } else {
-    // User is authenticated get the data
-    const db = await connectToDatabase();
-    const collection = db.collection("users");
-    const user = await collection.findOne({ email: session.user.email });
+    // User is authenticated, check their roles in the database
+    const user:User = await fetch(
+      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+    ).then((res) => res.json());
     return {
       props: {
-        user: JSON.parse(JSON.stringify(user)),
+        user,
       },
     };
   }

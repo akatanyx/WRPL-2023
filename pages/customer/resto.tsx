@@ -6,9 +6,15 @@ import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import ItemCart from "@/components/Customer/ItemCart";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
+import { Menu, Merchant } from "../merchant/index";
 
-export default function Resto( {posts , user, merchant}: any ) {
-  console.log(user)
+interface RestoProps {
+  menus: Menu[];
+  merchant: Merchant;
+}
+
+export default function Resto({ menus, merchant }: RestoProps) {
+  console.log("merchant", merchant, "menus", menus)
   return (
     <>
       {/* Nama resto */}
@@ -105,19 +111,19 @@ export default function Resto( {posts , user, merchant}: any ) {
       <div className="rounded-t-xl w-full -translate-y-28 ">
         <div className="py-2 text-white">a</div>
         <div className="mb-[13px] mt-[25px] mx-[22px] m">
-          <Dropdown_Makanan posts={posts} userId={user._id}>Promo Hari Ini</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Promo Hari Ini</Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan posts={posts} userId={user._id}>Best Seller</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Best Seller</Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan posts={posts} userId={user._id}>Makanan</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Makanan</Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan posts={posts} userId={user._id}>Minuman</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Minuman</Dropdown_Makanan>
         </div>
       </div>
 
@@ -135,8 +141,8 @@ export default function Resto( {posts , user, merchant}: any ) {
 }
 
 export async function getServerSideProps(context:any) {
-  const res = await fetch("http://localhost:3000/api/posts?type=menus");
-  const posts = await res.json();
+  const menusData = await fetch("http://localhost:3000/api/posts?type=menus");
+  const menus = await menusData.json();
 
   const session = await getSession(context);
 
@@ -150,13 +156,11 @@ export async function getServerSideProps(context:any) {
   }
 
   const db = await connectToDatabase();
-  const user = await db.collection("users").findOne({ email: session?.user?.email });
-  const merchant = await db.collection("merchants").findOne({ id_user: user?._id.toString() });
+  const merchant = await fetch(`http://localhost:3000/api/get?type=merchant&email=${session.user.email}`).then((res) => res.json());
 
   return {
     props: {
-      posts,
-      user: JSON.parse(JSON.stringify(user)),
+      menus,
       merchant: JSON.parse(JSON.stringify(merchant)),
     },
   };

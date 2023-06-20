@@ -13,29 +13,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
-
-interface Wallet {
-  _id: { $oid: string };
-  id_user: string;
-  nomor_wallet: string;
-  saldo: number;
-  pin: string;
-}
-
+import { Wallet } from "../customer/hero";
+import { Menu } from "../merchant/index";
 interface CartItem {
   _id: string;
   id_user: string;
   id_menu: string;
   jumlah: number;
-  menuItems: {
-    nama: string;
-    harga: number;
-    desk: string;
-    tag: string;
-    kategori: string;
-    rating: string;
-    imgURL: string;
-  };
+  menuItems: Menu;
 }
 
 interface User {
@@ -46,7 +31,7 @@ interface User {
   imgURL: string;
   password: string;
   address: string;
-  roles: Array<string>;
+  roles: string[];
 }
 
 interface PesananProps {
@@ -55,44 +40,75 @@ interface PesananProps {
   user: User;
 }
 
+export default function Pesanan({
+  cartItems: initialCartItems,
+  wallet,
+  user,
+}: PesananProps) {
+  console.log("cartItems", initialCartItems);
+  const router = useRouter();
+  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
 
-export default function Pesanan({ cartItems: initialCartItems , wallet, user }: PesananProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>(
-    () => initialCartItems
-  );
-  const handleUpdateJumlah = (itemId: string, newJumlah: number) => {
-    // Update di frontend (instan)
-    const updatedItems = cartItems.map((item) => {
-      if (item._id === itemId) {
-        return { ...item, jumlah: newJumlah };
-      }
-      return item;
-    });
-    setCartItems(updatedItems);
-    // Buat delay API request untuk Efisiensi
-    setTimeout(async () => {
-      try {
-        // API untuk update jumlah cart
-        await fetch(`/api/updatecart`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ itemId: itemId, jumlah: newJumlah }),
-        });
-        toast.success("Berhasil update cart di database.");
-      } catch (error) {
-        console.error("Gagal update cart di database:", error);
-        toast.error("Gagal update cart");
-      }
-    }, 1000); // Delay 1 detik
+  const handleUpdateJumlah = (cartItemId: string, newJumlah: number) => {
+    // Update jumlah cart di frontend (instan)
+    if (newJumlah === 0) {
+      // Hapus item jika jumlahnya 0
+      const updatedItems = cartItems.filter((item) => item._id !== cartItemId);
+      setCartItems(updatedItems);
+
+      // Update jumlah cart di backend (delay 1 detik)
+      setTimeout(async () => {
+        try {
+          // API untuk update jumlah cart
+          await fetch(`/api/updatecart`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cartItemId: cartItemId, jumlah: newJumlah }),
+          });
+          toast.success("Berhasil menghapus item dari cart.");
+          // // Refresh the page
+          // router.reload();
+        } catch (error) {
+          console.error("Gagal menghapus item dari cart:", error);
+          toast.error("Gagal menghapus item dari cart");
+        }
+      }, 1000); // Delay 1 detik
+    } else {
+      const updatedItems = cartItems.map((item) => {
+        if (item._id === cartItemId) {
+          return { ...item, jumlah: newJumlah };
+        }
+        return item;
+      });
+      setCartItems(updatedItems);
+
+      // Update jumlah cart di backend (delay 1 detik)
+      setTimeout(async () => {
+        try {
+          // API untuk update jumlah cart
+          await fetch(`/api/updatecart`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cartItemId: cartItemId, jumlah: newJumlah }),
+          });
+          toast.success("Berhasil update cart di database.");
+        } catch (error) {
+          console.error("Gagal update cart di database:", error);
+          toast.error("Gagal update cart");
+        }
+      }, 1000); // Delay 1 detik
+    }
   };
 
   const calculateTotalPrice = (): number => {
     let totalPrice = 0;
 
     cartItems.forEach((item) => {
-      const itemPrice = Number(item.menuItems.harga) * item.jumlah;
+      const itemPrice = Number(item.menuItems.harga_menu) * item.jumlah;
       totalPrice += itemPrice;
     });
 
@@ -144,12 +160,10 @@ export default function Pesanan({ cartItems: initialCartItems , wallet, user }: 
     setIsPopupVisible(true);
   };
 
-  const router = useRouter();
   const handlePay = async () => {
     if (totalHarga + deliPrice + appPrice > saldo) {
       alert("Saldo tidak cukup");
     } else {
-
       const response = await fetch("/api/updatewallet?type=sub", {
         method: "PUT",
         headers: {
@@ -274,7 +288,7 @@ export default function Pesanan({ cartItems: initialCartItems , wallet, user }: 
                     {/* Nama Menu dan Jumlah Menu */}
                     <div className="flex justify-between w-[281px]">
                       <h1 className="text-[#7C3D02] font-medium text-[16px]  ">
-                        {item.menuItems.nama}
+                        {item.menuItems.nama_menu}
                       </h1>
                       <p className="text-[#7C3D02] font-medium text-[16px]">
                         x {item.jumlah}
@@ -282,7 +296,7 @@ export default function Pesanan({ cartItems: initialCartItems , wallet, user }: 
                     </div>
                     {/* Harga Menu Total */}
                     <p className="text-[#E4740B] font-semibold text-[14px] -translate-y-1">
-                      {item.menuItems.harga * item.jumlah}
+                      {item.menuItems.harga_menu * item.jumlah}
                     </p>
                   </div>
                 ))}
@@ -376,17 +390,17 @@ export default function Pesanan({ cartItems: initialCartItems , wallet, user }: 
 
           {/* Pay Button */}
           <Link href="/customer/pembayaran_berhasil">
-          <button
-            onClick={handlePay}
-            className=" bg-[#EC7505] w-[172px] h-[56px]
+            <button
+              onClick={handlePay}
+              className=" bg-[#EC7505] w-[172px] h-[56px]
             rounded-lg mt-[34px] mx-auto
             flex justify-center items-center 
             "
-          >
-            <h1 className="font-poppins text-white font-bold text-[24px]">
-              Bayar
-            </h1>
-          </button>
+            >
+              <h1 className="font-poppins text-white font-bold text-[24px]">
+                Bayar
+              </h1>
+            </button>
           </Link>
 
           <div className="mb-16" />
@@ -396,7 +410,7 @@ export default function Pesanan({ cartItems: initialCartItems , wallet, user }: 
   );
 }
 
-export async function getServerSideProps(context:any) {
+export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
   if (!session?.user) {
@@ -409,13 +423,19 @@ export async function getServerSideProps(context:any) {
   }
 
   const db = await connectToDatabase();
-  const userData = await db.collection("users").findOne({ email: session?.user.email });
+  const userData = await db
+    .collection("users")
+    .findOne({ email: session?.user.email });
   const user = JSON.parse(JSON.stringify(userData));
 
-  const cartData = await fetch(`http://localhost:3000/api/searchcart?id_user=${userData?._id.toString()}`);
+  const cartData = await fetch(
+    `http://localhost:3000/api/searchcart?id_user=${userData?._id.toString()}`
+  );
   const cartItems = await cartData.json();
 
-  const walletData = await fetch(`http://localhost:3000/api/searchwallet?email=${session.user.email}`);
+  const walletData = await fetch(
+    `http://localhost:3000/api/searchwallet?email=${session.user.email}`
+  );
   const wallet = await walletData.json();
 
   return {

@@ -34,13 +34,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           "id_user": 1,
           "id_menu": 1,
           "jumlah": 1,
-          "menuItems.nama": 1,
-          "menuItems.harga": 1,
+          "menuItems.nama_menu": 1,
+          "menuItems.harga_menu": 1,
           "menuItems.desk": 1,
           "menuItems.tag": 1,
           "menuItems.kategori": 1,
-          "menuItems.rating": 1,
-          "menuItems.imgURL": 1
+          "menuItems.rating_menu": 1,
+          "menuItems.imgURL_menu": 1
         }
       }
     ]).toArray();

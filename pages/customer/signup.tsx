@@ -18,17 +18,17 @@ export default function Signup() {
             return;
         }
 
-        const response = await fetch('/api/signup?type=user', {
+        const responseSignUpUser = await fetch('/api/signup?type=user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ name, email, password}),
         });
-        if (response.ok) {
+        if (responseSignUpUser.ok) {
             router.push('/customer/login');
         } else {
-            console.error(response);
+            console.error(responseSignUpUser);
         }
     };
 

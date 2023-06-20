@@ -1,6 +1,6 @@
-import { CardRestoNearProps } from "../hero";
+import { CardRestoNear } from "../hero";
 
-const restoNearItems:CardRestoNearProps[] = [
+const restoNearItems:CardRestoNear[] = [
     {
         id: "1",
         namaResto: "Anteiku Coffee",

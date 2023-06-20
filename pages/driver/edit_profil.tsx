@@ -6,15 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Axios from "axios";
 import Image from "next/image";
-
-type Driver = {
-  _id: string;
-  nomor_stnk: string;
-  nomor_sim: string;
-  nomor_plat: string;
-  jenis_motor: string;
-  imgURL_driver: string;
-};
+import { Driver, User } from "../interface";
 
 export default function EditProfilePage({ driver, session }: any) {
   const name = session.user.name;
@@ -210,38 +202,25 @@ export default function EditProfilePage({ driver, session }: any) {
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-  if (!session?.user) {
-    // User is not authenticated, redirect to login page or show an error
+  const user:User = await fetch(
+    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+  ).then((res) => res.json());
+  if (!user || !user.roles.includes("driver")) {
+    // User doesn't have the driver role, redirect to signup driver page
     return {
       redirect: {
-        destination: "/customer/login",
+        destination: "/signup_driver",
         permanent: false,
       },
     };
   } else {
-    // User is authenticated, check their roles in the database
-    const db = await connectToDatabase();
-    const collection = db.collection("users");
-    const user = await collection.findOne({ email: session.user.email });
-
-    if (!user || !user.roles.includes("driver")) {
-      // User doesn't have the driver role, redirect to signup driver page
-      return {
-        redirect: {
-          destination: "/signup_driver",
-          permanent: false,
-        },
-      };
-    }
-
     // User has the driver role get the driver data
-    const driverCollection = db.collection("drivers");
-    const driver = await driverCollection.findOne({
-      id_user: user._id.toString(),
-    });
+    const driver:Driver = await fetch(
+      `http://localhost:3000/api/get?type=driver&email=${session?.user.email}`
+    ).then((res) => res.json());
     return {
       props: {
-        driver: JSON.parse(JSON.stringify(driver)),
+        driver: driver,
         session: session,
       },
     };

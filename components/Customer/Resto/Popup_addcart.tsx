@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import Tag_Makanan_Popup from "./Tag_Makanan_Popup";
 import router from "next/router";
+import { Menu } from "@/pages/merchant/index";
 
-const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal, userId}: any) => {
+interface PopUpAddCartProps {
+  menu: Menu;
+  closeModal: () => void;
+  userId: string;
+}
+
+const Popup_addcart = ({ menu, userId, closeModal }: PopUpAddCartProps) => {
   const [jumlah, setJumlah] = useState(1);
 
   const handleReduceJumlah = () => {
     if (jumlah > 1) {
       setJumlah(jumlah - 1);
+    } else {
+      closeModal();
     }
   };
 
@@ -23,7 +32,7 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal, userId}: any) =
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id_user: userId, id_menu: menuId, jumlah }),
+      body: JSON.stringify({ id_user: userId, id_menu: menu._id, jumlah }),
     });
     if (response.ok) {
       router.push("/customer/pesanan");
@@ -51,10 +60,10 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal, userId}: any) =
           className="bg-[#EC7505] rounded-t-lg w-full h-[68px] translate-y-[10px]
               text-white font-poppins font-semibold text-[24px] flex justify-center items-center"
         >
-          {nama}
+          {menu.nama_menu}
         </h1>
 
-        <img src={imgURL} alt="" className="w-screen z-20" />
+        <img src={menu.imgURL_menu} alt="" className="w-screen z-20" />
 
         <div className="bg-white w-full rounded-b-lg pt-4">
           {/* Tag Makanan */}
@@ -71,7 +80,7 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal, userId}: any) =
           {/* Deskripsi Makanan */}
           <div className="mt-[21px] ml-[27px] mr-[39px]">
             <p className="font-poppins text-[16px] text-black text-opacity-50">
-              {desk}
+              {menu.desk}
             </p>
           </div>
 

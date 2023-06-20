@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
+import LogoutButton from "@/components/logout/Logout";
 
 export default function profil_sel({ driver, user }: any) {
   const namaDriver = user.name;
@@ -27,7 +28,7 @@ export default function profil_sel({ driver, user }: any) {
         >
           {/* Logout Button */}
           <button className="absolute right-0 translate-x-6 -translate-y-6">
-            <img src="/m_profil_logout.svg" alt="" />
+            <LogoutButton />
           </button>
 
           {/* Profile Picture */}

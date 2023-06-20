@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react";
 
 import Link from "next/link";
 import { connectToDatabase } from "../mongodb";
+import LogoutButton from "@/components/logout/Logout";
 
 export default function profil_sel({ merchant }: any) {
   const namaToko = merchant.nama_resto;
@@ -27,7 +28,7 @@ export default function profil_sel({ merchant }: any) {
         >
           {/* Logout Button */}
           <button className="absolute right-0 translate-x-6 -translate-y-6">
-            <img src="/m_profil_logout.svg" alt="" />
+            <LogoutButton />
           </button>
 
           {/* Profile Picture */}

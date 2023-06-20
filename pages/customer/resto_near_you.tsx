@@ -1,60 +1,70 @@
 import Head from "next/head";
 import Link from "next/link";
-import Card_Resto from "../../components/Customer/Resto_Near_You/Card_RestoNearYou";
+import CardRestoNearYou from "../../components/Customer/Resto_Near_You/Card_RestoNearYou";
 import C_Header from "@/components/Customer/C_Header";
 import React from "react";
-
-interface Post {
-  _id: string;
-  nama: string;
-  jam_buka: string;
-  jam_tutup: string;
-  jarak: string;
+import { getSession } from "next-auth/react";
+import { connectToDatabase } from "../mongodb";
+import { Merchant } from "../merchant";
+interface RestoNearProps {
+  merchants: Merchant[];
 }
 
-interface PostsProps {
-  posts: Post[];
-}
-
-export default function resto_near_you({ posts }: PostsProps) {
+export default function resto_near_you({ merchants }: RestoNearProps) {
   return (
     <>
-    <div>
-      <Head>
-        <title>Restaurant Near You</title>
-      </Head>
+      <div>
+        <Head>
+          <title>Restaurant Near You</title>
+        </Head>
 
-      <C_Header>
-        Restoran di sekitar
-      </C_Header>
+        <C_Header>Restoran di sekitar</C_Header>
 
-      <div className="p-[20px] flex flex-col gap-y-[18px] rounded-lg ">
-        {posts.map((post) => (
-          <Card_Resto
-            key={post._id}
-            nama_resto={post.nama}
-            jam_buka={post.jam_buka}
-            jam_tutup={post.jam_tutup}
-            jarak={post.jarak}/>
-        ))}
-      </div>
+        <div className="p-[20px] flex flex-col gap-y-[18px] rounded-lg ">
+          {merchants.map((item: Merchant) => (
+            <CardRestoNearYou key={item._id} merchantItem={item} />
+          ))}
+        </div>
 
-      <div className="mb-96"></div>
+        <div className="mb-96"></div>
       </div>
     </>
-    
-      
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=restos");
-  console.log(res);
-  const posts: Post[] = await res.json();
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (!session?.user) {
+    // User is not authenticated, redirect to login page or show an error
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  } else {
+    // User is authenticated, check their roles in the database
+    const db = await connectToDatabase();
+    const collection = db.collection("users");
+    const user = await collection.findOne({ email: session.user.email });
 
-  return {
-    props: {
-      posts,
-    },
-  };
+    if (!user || !user.roles.includes("merchant")) {
+      // User doesn't have the merchant role, redirect to signup merchant page
+      return {
+        redirect: {
+          destination: "/signup_merchant",
+          permanent: false,
+        },
+      };
+    }
+
+    // User has the merchant role get the merchant data
+    const merchantCollection = db.collection("merchants");
+    const merchant = await merchantCollection.find({}); // TODO: filter by location
+    return {
+      props: {
+        merchants: JSON.parse(JSON.stringify(merchant)),
+      },
+    };
+  }
 }

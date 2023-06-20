@@ -1,23 +1,24 @@
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../mongodb";
+import { Merchant, User } from "../interface";
+import { m } from "framer-motion";
 
 export default async function handler(req: any, res: any) {
   if (req.method === "PUT" && req.query.type === "customer") {
-    const { id, imgURL, name, phone, email, address } = req.body;
+    const user:User = req.body;
     const db = await connectToDatabase();
     const collection = db.collection("users");
 
     // Mengganti profil customer
-    const userID = new ObjectId(id);
     const cursor = await collection.updateOne(
-      { _id: userID },
+      { _id: new ObjectId(user._id) },
       {
         $set: {
-          imgURL: imgURL,
-          name: name,
-          phoneNumber: phone,
-          email: email,
-          address: address,
+          imgURL: user.imgURL,
+          name: user.nama,
+          nomor_hp: user.nomor_hp,
+          email: user.email,
+          alamat: user.alamat,
         },
       }
     );
@@ -26,34 +27,23 @@ export default async function handler(req: any, res: any) {
 
     res.status(200).json(results);
   } else if (req.method === "PUT" && req.query.type === "merchant") {
-    const {
-      id,
-      imgURLToko,
-      namaToko,
-      alamatToko,
-      deskripsiToko,
-      nomorKTP,
-      emailToko,
-      jam_buka,
-      jam_tutup,
-    } = req.body;
+    const merchant:Merchant = req.body;
     const db = await connectToDatabase();
     const collection = db.collection("merchants");
 
     // Mengganti profil merchant
-    const merchantID = new ObjectId(id);
     const cursor = await collection.updateOne(
-      { _id: merchantID },
+      { id_user: merchant.id_user },
       {
         $set: {
-          nama_resto: namaToko,
-          alamat_resto: alamatToko,
-          deskripsi_resto: deskripsiToko,
-          imgURL_resto: imgURLToko,
-          nomor_ktp_merchant: nomorKTP,
-          email_merchant: emailToko,
-          jam_buka: jam_buka,
-          jam_tutup: jam_tutup,
+          nama_resto: merchant.nama_resto,
+          alamat_resto: merchant.alamat_resto,
+          deskripsi_resto: merchant.deskripsi_resto,
+          imgURL_resto: merchant.imgURL_resto,
+          nomor_ktp_merchant: merchant.nomor_ktp_merchant,
+          email_merchant: merchant.email_merchant,
+          jam_buka: merchant.jam_buka,
+          jam_tutup: merchant.jam_tutup,
         },
       }
     );

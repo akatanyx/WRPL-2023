@@ -48,7 +48,7 @@ export default async function handler(req: any, res: any) {
             jam_buka: req.body.jam_buka,
             jam_tutup: req.body.jam_tutup,
             rating_resto: req.body.rating,
-            menu_resto: req.body.menu_resto, // Array object id_menu yang dijual merchant
+            menu_resto: req.body.menu_resto, // Array id menu yang dijual merchant
           };
           break;
         case "menu":

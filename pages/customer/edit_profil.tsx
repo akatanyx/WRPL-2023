@@ -6,21 +6,21 @@ import Image from "next/image";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import Header_w_notif from "@/components/Merchant/Header_w_notif";
 import { getSession } from "next-auth/react";
-import { connectToDatabase } from "../mongodb";
+import { User } from "../interface";
 
-export default function EditProfilePage({user}: any) {
-  const name = user?.name;
-  const phone = user?.phoneNumber?.toString() || "";
+export default function EditProfilePage({ user }: { user: User }) {
+  const name = user?.nama;
+  const phone = user?.nomor_hp?.toString() || "";
   const email = user?.email || "";
   const imgURL = user?.imgURL || "/m_profil_pp.svg";
-  const address = user?.address || "";
-  
+  const address = user?.alamat || "";
+
   const [imageSelected, setImageSelected] = useState<File | undefined>();
   const [updatedName, setUpdatedName] = useState(name);
   const [updatedPhone, setUpdatedPhone] = useState(phone);
   const [updatedEmail, setUpdatedEmail] = useState(email);
   const [updatedAddress, setUpdatedAddress] = useState(address);
-  
+
   const router = useRouter();
 
   const HandleUpdateProfile = async (updatedImgURL: string) => {
@@ -32,10 +32,10 @@ export default function EditProfilePage({user}: any) {
       body: JSON.stringify({
         id: user?._id,
         imgURL: updatedImgURL,
-        name: updatedName,
-        phone: updatedPhone,
+        nama: updatedName,
+        nomor_hp: updatedPhone,
         email: updatedEmail,
-        address: updatedAddress,
+        alamat: updatedAddress,
       }),
     });
     if (response.ok) {
@@ -75,7 +75,7 @@ export default function EditProfilePage({user}: any) {
     <>
       <form onSubmit={HandleSubmit}>
         <div className="font-poppins bg-[#E89005] max-h-screen">
-          <Header_w_notif>{user?.name}</Header_w_notif>
+          <Header_w_notif>{user?.nama}</Header_w_notif>
           <div className="mt-[254px] bg-white">
             {/* Content */}
             <div
@@ -90,14 +90,18 @@ export default function EditProfilePage({user}: any) {
               <div className="flex-column h-[130px]">
                 {/* Menampilkan preview gambar sebelum di upload */}
                 <label htmlFor="file-input">
-                      <Image
-                        src={imageSelected ? URL.createObjectURL(imageSelected) : imgURL}
-                        priority
-                        alt="Profile Pic"
-                        width={130}
-                        height={130}
-                        className="mx-auto h-[130px] rounded-full border border-gray-100 shadow-sm"
-                      />
+                  <Image
+                    src={
+                      imageSelected
+                        ? URL.createObjectURL(imageSelected)
+                        : imgURL
+                    }
+                    priority
+                    alt="Profile Pic"
+                    width={130}
+                    height={130}
+                    className="mx-auto h-[130px] rounded-full border object-none border-gray-100 shadow-sm"
+                  />
                 </label>
                 {/* Mengatur input file tombol asli hidden */}
                 <input
@@ -191,23 +195,23 @@ export default function EditProfilePage({user}: any) {
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-    if (!session?.user) {
-      // User is not authenticated, redirect to login page or show an error
-      return {
-        redirect: {
-          destination: "/customer/login",
-          permanent: false,
-        },
-      };
-    } else {
-      // User is authenticated, check their roles in the database
-      const db = await connectToDatabase();
-      const collection = db.collection("users");
-      const user = await collection.findOne({ email: session.user.email });
-      return {
-        props: { 
-          user: JSON.parse(JSON.stringify(user)) 
-        },
-      };
+  if (!session?.user) {
+    // User is not authenticated, redirect to login page or show an error
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  } else {
+    // User is authenticated, check their roles in the database
+    const user:User = await fetch(
+      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+    ).then((res) => res.json());
+    return {
+      props: {
+        user,
+      },
+    };
   }
 }

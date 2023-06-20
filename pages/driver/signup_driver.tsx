@@ -1,10 +1,10 @@
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { connectToDatabase } from "../mongodb";
 import Link from "next/link";
+import { User } from "../interface";
 
-export default function Signup_Driver({ user }: { user: any }) {
+export default function Signup_Driver({ user }: any) {
   const [nomorSTNK, setNomorSTNK] = useState("");
   const [nomorSIM, setNomorSIM] = useState("");
   const [nomorPlat, setNomorPlat] = useState("");
@@ -153,19 +153,15 @@ export async function getServerSideProps(context:any) {
       },
     };
   }
-
-  const db = await connectToDatabase();
-  const email = session?.user?.email;
-  const user = await db.collection("users").findOne({email});
-
+  // Get user id 
+    const user:User = await fetch(`http://localhost:3000/api/get?type=user&email=${session?.user?.email}`).then((res) => res.json());
   // Check if user is already a driver
   try {
-    const collection = db.collection('drivers');
-    const existingDriver = await collection.findOne({ id_user: user?._id.toString() });
-    if (existingDriver) {
+    const driver = await fetch(`http://localhost:3000/api/get?type=driver&email=${session?.user?.email}`)
+    if (driver) {
       return {
         redirect: {
-          destination: '/driver/landing_driver', // Redirect to an error page or display an error message
+          destination: '/driver/landing_driver',
           permanent: false,
         },
       };
@@ -176,7 +172,7 @@ export async function getServerSideProps(context:any) {
 
   return {
     props: {
-      user: JSON.parse(JSON.stringify(user)),
+      user,
     }, // Proceed with rendering the signup page
   };
   

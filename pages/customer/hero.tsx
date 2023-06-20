@@ -19,29 +19,7 @@ import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
 import { GetServerSidePropsContext } from "next";
-import { ObjectId } from "mongodb";
-interface MenuItem {
-  _id: string;
-  nama: string;
-  desk: string;
-  harga: number;
-  imgURL: string;
-}
-
-interface CartItem {
-  _id: string;
-  menuId: string;
-  jumlah: number;
-  menuItems: {
-    nama: string;
-    harga: number;
-    desk: string;
-    tag: string;
-    kategori: string;
-    rating: string;
-    imgURL: string;
-  };
-}
+import { Wallet } from "../interface";
 
 export type CardKategoriProps = {
   id: string;
@@ -56,13 +34,16 @@ export type CardBestRestoProps = {
 };
 
 export type CardRestoNearProps = {
+  item: CardRestoNear;
+};
+export interface CardRestoNear {
   id: string;
   namaResto: string;
   gambarResto: string;
   alamatResto: string;
   jarakResto: string;
   ratingResto: string;
-};
+}
 
 export type CardFavoritFoodProps = {
   id: string;
@@ -74,14 +55,8 @@ export type CardFavoritFoodProps = {
   ratingFood: string;
 };
 
-export interface Wallet {
-  _id: { $oid: string };
-  id_user: string;
-  nomor_wallet: string;
-  saldo: number;
-}
-
-export default function hero({ user, wallet }: any) {
+export default function hero({ wallet }: any) {
+  console.log(wallet);
   // const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
   // const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
   // const totalQty = HitungQtyCart(cartItems);
@@ -106,7 +81,7 @@ export default function hero({ user, wallet }: any) {
       <SearchPage />
 
       {/* Lets Cash Ewallet */}
-      <Ewallet ewallet={wallet} />
+      {/* <Ewallet ewallet={wallet} /> */}
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -255,16 +230,9 @@ export default function hero({ user, wallet }: any) {
           </div>
 
           <div className="flex flex-wrap gap-x-[18px] gap-y-[18px] justify-between">
-            {cardRestoNearItems.map((item: CardRestoNearProps) => (
+            {cardRestoNearItems.map((item: CardRestoNear) => (
               <div key={item.id}>
-                <Card_Resto_Near
-                  id={item.id}
-                  namaResto={item.namaResto}
-                  gambarResto={item.gambarResto}
-                  jarakResto={item.jarakResto}
-                  ratingResto={item.ratingResto}
-                  alamatResto={item.alamatResto}
-                />
+                <Card_Resto_Near item={item} />
               </div>
             ))}
           </div>
@@ -284,7 +252,6 @@ export default function hero({ user, wallet }: any) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
-
   // If the user is not authenticated, redirect them to the login page
   if (!session?.user) {
     return {
@@ -295,12 +262,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const walletData = await fetch(
-    `http://localhost:3000/api/searchwallet?email=${session.user.email}`
-  );
-  if (!walletData.ok) {
-    const wallet:Wallet = await walletData.json();
-
+  const wallet: Wallet = await fetch(
+    `http://localhost:3000/api/get?type=wallet&email=${session.user.email}`
+  ).then((res) => res.json());
+  if (wallet) {
     return {
       props: {
         wallet,
@@ -311,6 +276,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       props: {
         wallet: null,
       },
-    };
+    }
   }
 }
