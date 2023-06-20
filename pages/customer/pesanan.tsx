@@ -38,14 +38,25 @@ interface CartItem {
   };
 }
 
+interface User {
+  _id: { $oid: string };
+  nama: string;
+  email: string;
+  nomor_hp: string;
+  imgURL: string;
+  password: string;
+  address: string;
+  roles: Array<string>;
+}
+
 interface PesananProps {
   cartItems: CartItem[];
   wallet: Wallet;
+  user: User;
 }
 
 
-export default function Pesanan({ cartItems: initialCartItems , wallet}: PesananProps) {
-  console.log(wallet);
+export default function Pesanan({ cartItems: initialCartItems , wallet, user }: PesananProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>(
     () => initialCartItems
   );
@@ -91,7 +102,7 @@ export default function Pesanan({ cartItems: initialCartItems , wallet}: Pesanan
   const [totalHarga, setTotalHarga] = useState(calculateTotalPrice());
   const deliPrice = 30000;
   const appPrice = 5000;
-  let saldo = 100000;
+  let saldo = wallet.saldo;
 
   const className =
     calculateTotalPrice() + deliPrice + appPrice > saldo
@@ -138,8 +149,6 @@ export default function Pesanan({ cartItems: initialCartItems , wallet}: Pesanan
     if (totalHarga + deliPrice + appPrice > saldo) {
       alert("Saldo tidak cukup");
     } else {
-      // API untuk update saldo
-      let id_wallet = "1"; //hardcode -> id wallet user saat ini
 
       const response = await fetch("/api/updatewallet?type=sub", {
         method: "PUT",
@@ -147,7 +156,7 @@ export default function Pesanan({ cartItems: initialCartItems , wallet}: Pesanan
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idwallet: id_wallet,
+          id_user: user._id.toString(),
           total: totalHarga + deliPrice + appPrice,
         }),
       });
@@ -398,9 +407,10 @@ export async function getServerSideProps(context:any) {
   }
 
   const db = await connectToDatabase();
-  const user = await db.collection("users").findOne({ email: session?.user.email });
+  const userData = await db.collection("users").findOne({ email: session?.user.email });
+  const user = JSON.parse(JSON.stringify(userData));
 
-  const cartData = await fetch(`http://localhost:3000/api/searchcart?id_user=${user?._id.toString()}`);
+  const cartData = await fetch(`http://localhost:3000/api/searchcart?id_user=${userData?._id.toString()}`);
   const cartItems = await cartData.json();
 
   const walletData = await fetch(`http://localhost:3000/api/searchwallet?email=${session.user.email}`);
@@ -410,6 +420,7 @@ export async function getServerSideProps(context:any) {
     props: {
       cartItems,
       wallet,
+      user,
     },
   };
 }
