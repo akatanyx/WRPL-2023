@@ -2,38 +2,38 @@ import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import InputMask from "react-input-mask";
-import { connectToDatabase } from "../mongodb";
+import { User, Wallet } from "../interface";
 
-export default function WalletLandingPage({user}: {user: any}) {
+export default function WalletLandingPage({ user }: { user: any }) {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const router = useRouter();
-  
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const response = await fetch('/api/signup?type=wallet', {
-      method: 'POST',
+    const response = await fetch("/api/signup?type=wallet", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id_user: user?._id,
         nomor_wallet: phoneNumber,
         saldo: 0,
-        pin: '123456',
+        pin: "123456",
       }),
     });
 
-    const responseUpdateRoles = await fetch('/api/updateroles', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            id: user?._id,
-            roles: 'wallet',
-        }),
+    const responseUpdateRoles = await fetch("/api/updateroles", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: user?._id,
+        roles: "wallet",
+      }),
     });
 
     if (response.ok && responseUpdateRoles.ok) {
@@ -100,40 +100,38 @@ export default function WalletLandingPage({user}: {user: any}) {
   );
 }
 
-export async function getServerSideProps(context:any) {
-    const session = await getSession(context);
-  
-    if (!session) {
-      return {
-        redirect: {
-          destination: "/customer/login",
-          permanent: false,
-        },
-      };
-    }
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
 
-    const db = await connectToDatabase();
-    const user = await db.collection('users').findOne({ email: session?.user?.email });
-   
-    // Check if user already has a wallet
-    try {
-        const collection = db.collection('wallets');
-        const existingDriver = await collection.findOne({ id_user: user?._id.toString() });
-        if (existingDriver) {
-          return {
-            redirect: {
-              destination: '/ewallet/hero', // Redirect to an error page or display an error message
-              permanent: false,
-            },
-          };
-        }
-      } catch (error) {
-        console.error(error);
-      }
-
+  if (!session) {
     return {
-        props: {
-            user: JSON.parse(JSON.stringify(user)),
-        },
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
     };
+  }
+
+  const user: User = await fetch(
+    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+  ).then((res) => res.json());
+
+  // Check if user already has a wallet
+  const wallet: Wallet = await fetch(
+    `http://localhost:3000/api/get?type=wallet&email=${session?.user.email}`
+  ).then((res) => res.json());
+  if (wallet.id_user) {
+    return {
+      redirect: {
+        destination: "/ewallet/hero",
+        permanent: false,
+      },
+    };
+  } 
+
+  return {
+    props: {
+      user,
+    },
+  };
 }

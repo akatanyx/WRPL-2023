@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Card_Resto from "./Card_Resto";
-import { Menu } from "@/pages/merchant/index";
+import { Menu } from "@/pages/interface";
 interface DropdownMakananProps {
   menus: Menu[];
   userId: string;

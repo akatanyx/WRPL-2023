@@ -2,7 +2,7 @@ import { useState } from "react";
 import Tag_Makanan from "./Tag_Makanan";
 
 import Popup_addcart from "./Popup_addcart";
-import { Menu } from "@/pages/merchant/index";
+import { Menu } from "@/pages/interface";
 interface CardRestoProps {
   menu: Menu;
   userId: string;

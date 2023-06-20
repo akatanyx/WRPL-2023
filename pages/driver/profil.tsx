@@ -6,6 +6,7 @@ import Link from "next/link";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
 import LogoutButton from "@/components/logout/Logout";
+import { Driver, User } from "../interface";
 
 export default function profil_sel({ driver, user }: any) {
   const namaDriver = user.name;
@@ -125,9 +126,9 @@ export async function getServerSideProps(context: any) {
     };
   } else {
     // User is authenticated, check their roles in the database
-    const db = await connectToDatabase();
-    const collection = db.collection("users");
-    const user = await collection.findOne({ email: session.user.email });
+    const user: User = await fetch(
+      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+    ).then((res) => res.json());
 
     if (!user || !user.roles.includes("driver")) {
       // User doesn't have the driver role, redirect to signup driver page
@@ -140,14 +141,13 @@ export async function getServerSideProps(context: any) {
     }
 
     // User has the driver role get the driver data
-    const driverCollection = db.collection("drivers");
-    const driver = await driverCollection.findOne({
-      id_user: user._id.toString(),
-    });
+    const driver: Driver = await fetch(
+      `http://localhost:3000/api/get?type=driver&email=${session?.user.email}`
+    ).then((res) => res.json());
     return {
       props: {
-        driver: JSON.parse(JSON.stringify(driver)),
-        user: JSON.parse(JSON.stringify(user)),
+        driver,
+        user,
       },
     };
   }

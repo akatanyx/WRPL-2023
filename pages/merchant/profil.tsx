@@ -5,6 +5,7 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { connectToDatabase } from "../mongodb";
 import LogoutButton from "@/components/logout/Logout";
+import { Merchant, User } from "../interface";
 
 export default function profil_sel({ merchant }: any) {
   const namaToko = merchant.nama_resto;
@@ -129,9 +130,9 @@ export async function getServerSideProps(context: any) {
     };
   } else {
     // User is authenticated, check their roles in the database
-    const db = await connectToDatabase();
-    const collection = db.collection("users");
-    const user = await collection.findOne({ email: session.user.email });
+    const user: User = await fetch(
+      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+    ).then((res) => res.json());
 
     if (!user || !user.roles.includes("merchant")) {
       // User doesn't have the merchant role, redirect to signup merchant page
@@ -144,14 +145,13 @@ export async function getServerSideProps(context: any) {
     }
 
     // User has the merchant role get the merchant data
-    const merchantCollection = db.collection("merchants");
-    const merchant = await merchantCollection.findOne({
-      id_user: user._id.toString(),
-    });
+    const merchant: Merchant = await fetch(
+      `http://localhost:3000/api/get?type=merchant&email=${session?.user.email}`
+    ).then((res) => res.json());
     return {
       props: {
-        merchant: JSON.parse(JSON.stringify(merchant)),
-        user: JSON.parse(JSON.stringify(user)),
+        merchant,
+        user,
       },
     };
   }

@@ -6,7 +6,7 @@ import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import ItemCart from "@/components/Customer/ItemCart";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
-import { Menu, Merchant } from "../merchant/index";
+import { Menu, Merchant } from "../interface";
 
 interface RestoProps {
   menus: Menu[];
@@ -155,7 +155,6 @@ export async function getServerSideProps(context:any) {
     };
   }
 
-  const db = await connectToDatabase();
   const merchant = await fetch(`http://localhost:3000/api/get?type=merchant&email=${session.user.email}`).then((res) => res.json());
 
   return {

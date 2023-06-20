@@ -5,8 +5,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { connectToDatabase } from "../mongodb";
 import { getSession } from "next-auth/react";
+import { User, Wallet } from "../interface";
 
-export default function Hero({user, wallet}: any) {
+interface HeroProps {
+  user: User;
+  wallet: Wallet;
+}
+
+export default function Hero({user, wallet}: HeroProps) {
   const [showSaldo, setShowSaldo] = useState(true);
 
   const toggleSaldo = () => {
@@ -25,7 +31,7 @@ export default function Hero({user, wallet}: any) {
           <div className="flex">
           <h1 className="font-medium text-[#263238] text-[17px] w-[100px] 
                           whitespace-nowrap overflow-hidden overflow-ellipsis">
-            Halo, {user.name}!
+            Halo, {user.nama}!
           </h1>
 
             <img src="/e_hero_centang.svg" className=" w-[20px]" />
@@ -119,9 +125,9 @@ export async function getServerSideProps(context: any) {
     };
   } else {
     // User is authenticated, check their roles in the database
-    const db = await connectToDatabase();
-    const collection = db.collection("users");
-    const user = await collection.findOne({ email: session.user.email });
+    const user:User = await fetch(
+      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+    ).then((res) => res.json());
 
     if (!user || !user.roles.includes("wallet")) {
       // User doesn't have the wallet role, redirect to signup wallet page
@@ -133,10 +139,11 @@ export async function getServerSideProps(context: any) {
       };
     }
 
-    const wallet = await db.collection("wallets").findOne({ id_user: user._id.toString()})
+    const wallet:Wallet = await fetch(
+      `http://localhost:3000/api/get?type=wallet&email=${session?.user.email}`
+    ).then((res) => res.json());
 
-    if (!wallet) {
-      // return error message wallet not foung to page
+    if (!wallet.id_user) {
       return {
         notFound: true,
       };     
@@ -144,8 +151,8 @@ export async function getServerSideProps(context: any) {
     // User has the wallet role, continue rendering the landing wallet page
     return {
       props: {
-        user: JSON.parse(JSON.stringify(user)),
-        wallet: JSON.parse(JSON.stringify(wallet)),
+        user,
+        wallet,
       },
     };
   }
