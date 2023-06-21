@@ -1,10 +1,16 @@
 import Link from "next/link";
-import { CardRestoNearProps } from "@/pages/customer/hero";
+import { CardRestoNear } from "@/pages/interface";
 
-const Card_Resto_Near: React.FC<CardRestoNearProps> = ({ item }) => {
+interface CardRestoNearProps {
+  item: CardRestoNear;
+}
+
+export default function Card_Resto_Near({ item }: CardRestoNearProps) {
+  // const href = `/customer/resto/${item.id}`; kalo mau pake dynamic route, karena ini static route, jadi gak perlu
+  const href = "/customer/resto" 
   return (
     <>
-      <Link href="/customer/resto">
+      <Link href={href}>
         <div className="flex-col shadow-xl rounded-lg w-[150px] h-[212px]">
           <img src={item.gambarResto} alt="" className="w-[150px] h-[150px]" />
 
@@ -12,7 +18,7 @@ const Card_Resto_Near: React.FC<CardRestoNearProps> = ({ item }) => {
             className="font-poppins font-semibold text-[14px] text-center mt-1
                         "
           >
-            {item.namaResto}
+            id={item.id} nama={item.namaResto}
           </h1>
 
           <div className="flex px-5 justify-evenly items-center -translate-x-1">
@@ -38,5 +44,3 @@ const Card_Resto_Near: React.FC<CardRestoNearProps> = ({ item }) => {
     </>
   );
 };
-
-export default Card_Resto_Near;

@@ -86,10 +86,6 @@ export type CardBestRestoProps = {
   namaResto: string;
   gambarResto: string;
 };
-
-export type CardRestoNearProps = {
-  item: CardRestoNear;
-};
 export interface CardRestoNear {
   id: string;
   namaResto: string;

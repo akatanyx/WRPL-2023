@@ -4,17 +4,16 @@ import Link from "next/link";
 import Dropdown_Makanan from "@/components/Customer/Resto/Dropdown_Makanan";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import ItemCart from "@/components/Customer/ItemCart";
-import { getSession } from "next-auth/react";
-import { connectToDatabase } from "../mongodb";
 import { Menu, Merchant } from "../interface";
+import { useMerchant } from "@/hooks/useMerchant";
 
 interface RestoProps {
   menus: Menu[];
-  merchant: Merchant;
 }
 
-export default function Resto({ menus, merchant }: RestoProps) {
-  console.log("merchant", merchant, "menus", menus)
+export default function Resto({ menus }: RestoProps) {
+  const merchant = useMerchant();
+  if (merchant == null) return null;
   return (
     <>
       {/* Nama resto */}
@@ -67,13 +66,17 @@ export default function Resto({ menus, merchant }: RestoProps) {
               />
 
               {/* Nama Resto */}
-              <h1 className="pt-7 font-bold text-xl w-[200px] text-center
-                            whitespace-nowrap overflow-hidden overflow-ellipsis">
+              <h1
+                className="pt-7 font-bold text-xl w-[200px] text-center
+                            whitespace-nowrap overflow-hidden overflow-ellipsis"
+              >
                 {merchant.nama_resto}
               </h1>
               {/* Alamat Resto */}
-              <p className="text-[#8F8D8D] font-medium text-[12px] w-[200px] text-center
-                            whitespace-nowrap overflow-hidden overflow-ellipsis">
+              <p
+                className="text-[#8F8D8D] font-medium text-[12px] w-[200px] text-center
+                            whitespace-nowrap overflow-hidden overflow-ellipsis"
+              >
                 {merchant.alamat_resto}
               </p>
 
@@ -99,9 +102,11 @@ export default function Resto({ menus, merchant }: RestoProps) {
                   <p className="font-semibold text-[13px]">300</p>
                 </div>
               </div>
-                <div className="text-[8px] flex gap-x-4">
-                  <div>Open: {merchant.jam_buka} - {merchant.jam_tutup}</div>
+              <div className="text-[8px] flex gap-x-4">
+                <div>
+                  Open: {merchant.jam_buka} - {merchant.jam_tutup}
                 </div>
+              </div>
             </div>
           </div>
         </div>
@@ -111,20 +116,28 @@ export default function Resto({ menus, merchant }: RestoProps) {
       <div className="rounded-t-xl w-full -translate-y-28 ">
         <div className="py-2 text-white">a</div>
         <div className="mb-[13px] mt-[25px] mx-[22px] m">
-          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Promo Hari Ini</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Promo Hari Ini
+          </Dropdown_Makanan>
+        </div>
+
+        {/* <div className="my-[13px] mx-[22px]">
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Best Seller
+          </Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Best Seller</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Makanan
+          </Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Makanan</Dropdown_Makanan>
-        </div>
-
-        <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>Minuman</Dropdown_Makanan>
-        </div>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Minuman
+          </Dropdown_Makanan>
+        </div> */}
       </div>
 
       {/* Navbar */}
@@ -133,34 +146,19 @@ export default function Resto({ menus, merchant }: RestoProps) {
       </div>
 
       {/* Item Cart */}
-      <ItemCart totalItem={1} totalPrice={15000} />
- 
-      
+      <ItemCart />
     </>
   );
 }
 
-export async function getServerSideProps(context:any) {
-  const menusData = await fetch("http://localhost:3000/api/posts?type=menus");
+export async function getServerSideProps(context: any) {
+  // const menusData = await fetch(`http://localhost:3000/api/getmenu_resto?id_resto=${id_resto}`); //seharusnya menu hanya untuk resto tertentu saja, belum tahu cara ambil id resto dari page sebelumnya
+  const menusData = await fetch("http://localhost:3000/api/getcollection?type=menus") // fetch menu milik semua resto
   const menus = await menusData.json();
-
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const merchant = await fetch(`http://localhost:3000/api/get?type=merchant&email=${session.user.email}`).then((res) => res.json());
 
   return {
     props: {
       menus,
-      merchant: JSON.parse(JSON.stringify(merchant)),
     },
   };
 }

@@ -2,11 +2,7 @@ import Link from 'next/link'
 
 import { Merchant } from '@/pages/interface';
 
-interface CardRestoNearYouProps {
-  merchantItem: Merchant;
-}
-
-const CardRestoNearYou:React.FC<CardRestoNearYouProps> = ({ merchantItem }) => {
+export default function CardRestoNearYou ({ merchantItem }: {merchantItem: Merchant}) {
   return (
     <>
       <Link href='/customer/resto'>
@@ -55,5 +51,3 @@ const CardRestoNearYou:React.FC<CardRestoNearYouProps> = ({ merchantItem }) => {
     </>
   )
 }
-
-export default CardRestoNearYou;

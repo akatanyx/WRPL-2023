@@ -1,10 +1,8 @@
+import { useUser } from "@/hooks/useUser"
 import Link from "next/link"
 
-type imgURLProps = {
-    imgURL: string;
-}
-
-export default function Landing_Header ({imgURL}:imgURLProps) {
+export default function Landing_Header () {
+    const user = useUser();
     return (
         <div>
             <div className='flex justify-between items-center h-[62px] w-screen shadow-lg'>
@@ -20,7 +18,7 @@ export default function Landing_Header ({imgURL}:imgURLProps) {
                         md:-translate-x-[30px]
                 '>
                 <Link href='/customer/profil'>
-                    <img src={imgURL? imgURL:"/icon_profil.svg"} alt="" className='w-[43px] h-[43px] rounded-full'/>
+                    <img src={user?.imgURL? user?.imgURL:"/icon_profil.svg"} alt="" className='w-[43px] h-[43px] rounded-full'/>
                 </Link>  
                 </div>
             </div>

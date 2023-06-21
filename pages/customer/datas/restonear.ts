@@ -1,4 +1,4 @@
-import { CardRestoNear } from "../hero";
+import { CardRestoNear } from "@/pages/interface";
 
 const restoNearItems:CardRestoNear[] = [
     {

@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { Wallet } from "@/pages/interface";
+import { useWallet } from "@/hooks/useWallet";
 
-interface ewalletComponentProps {
-  ewallet: Wallet;
-}
-
-const ewalletComponent: React.FC<ewalletComponentProps> = ({ ewallet }) => {
+export default function EwalletComponent () {
+  const ewallet = useWallet();
   return (
     <div>
       <div
@@ -17,7 +15,7 @@ const ewalletComponent: React.FC<ewalletComponentProps> = ({ ewallet }) => {
           <div className="bg-white w-[103px] h-[67px] rounded-lg ml-[18px] mt-[15px] flex-col align-center">
             <img src="/e_hero_logoletscash.svg" className="mx-auto pt-4"/>
             <h1 className="font-medium text-center">
-              Rp. <span>{ewallet.saldo ? ewallet.saldo.toLocaleString("de-DE") : 0}</span>
+              Rp. <span>{ewallet?.saldo?.toLocaleString("de-DE")}</span>
             </h1>
           </div>
         </Link>
@@ -48,6 +46,4 @@ const ewalletComponent: React.FC<ewalletComponentProps> = ({ ewallet }) => {
       </div>
     </div>
   );
-};
-
-export default ewalletComponent;
+}

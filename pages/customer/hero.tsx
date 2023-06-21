@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import { getSession } from "next-auth/react";
 
 import Promo from "@/components/Customer/Landing/SlidePromo";
 import Card_Kategori from "@/components/Customer/Landing/Card_Kategori";
@@ -18,20 +17,13 @@ import cardKategoriItems from "./datas/kategori";
 import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
-import { GetServerSidePropsContext } from "next";
 import { CardBestRestoProps, CardKategoriProps, CardRestoNear, CartItem, User, Wallet } from "../interface";
+import { useUser } from "@/hooks/useUser";
+import { useWallet } from "@/hooks/useWallet";
 
-interface HeroProps {
-  user: User;
-  wallet: Wallet;
-  cart: CartItem[];
-}
-
-export default function hero({ wallet, user, cart }: HeroProps) {
-  const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
-  const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga_menu,0);
-  const totalQty = HitungQtyCart(cart);
-  const totalHarga = HitungHargaCart(cart);
+export default function Hero() {
+  const user = useUser();
+  const wallet = useWallet();
 
   return (
     <>
@@ -40,7 +32,7 @@ export default function hero({ wallet, user, cart }: HeroProps) {
       </Head>
 
       {/* Header */}
-      <Landing_Header imgURL={""} />
+      <Landing_Header />
 
       {/* Alamat Pembeli */}
       <Alamat />
@@ -52,7 +44,7 @@ export default function hero({ wallet, user, cart }: HeroProps) {
       <SearchPage />
 
       {/* Lets Cash Ewallet */}
-      <Ewallet ewallet={wallet} />
+      <Ewallet />
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -119,6 +111,7 @@ export default function hero({ wallet, user, cart }: HeroProps) {
 
           <div className=" flex flex-wrap gap-y-[18px]">
             {cardFavoritItems.map(
+              // Batas 2 item
               (item, index: number) =>
                 index < 2 && (
                   <div key={item.id}>
@@ -211,7 +204,7 @@ export default function hero({ wallet, user, cart }: HeroProps) {
       </div>
 
       {/* Item Cart */}
-      <ItemCart totalItem={totalQty} totalPrice={totalHarga} />
+      <ItemCart />
 
       {/* Navbar */}
       <div>
@@ -219,37 +212,4 @@ export default function hero({ wallet, user, cart }: HeroProps) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
-  // If the user is not authenticated, redirect them to the login page
-  if (!session?.user) {
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const wallet: Wallet = await fetch(
-    `http://localhost:3000/api/get?type=wallet&email=${session.user.email}`
-  ).then((res) => res.json());
-
-  const user: User = await fetch(
-    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
-  ).then((res) => res.json());
-
-  const cart: CartItem[] = await fetch(
-    `http://localhost:3000/api/getcart?email=${session?.user.email}`
-  ).then((res) => res.json());
-
-  return {
-    props: {
-      wallet,
-      user,
-      cart,
-    },
-  };
 }
