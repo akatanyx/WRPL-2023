@@ -23,7 +23,8 @@ export default async function handler(req: any, res: any) {
       res.status(400).json({ message: "user not found" });
     } else {
       await db.collection("wallets").insertOne({
-        id_user: user._id,
+        id_user: user._id.toString(),
+        nomor_wallet: "0000000000000000",
         saldo: 0,
       });
     }
