@@ -114,12 +114,12 @@ export async function getServerSideProps(context: any) {
     `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
   ).then((res) => res.json());
 
-  // If user have assigned phone number to the wallet, redirect to hero page
+  // If user already have a number, redirect to hero page
   const wallet: Wallet = await fetch(
     `http://localhost:3000/api/get?type=wallet&email=${session?.user.email}`
   ).then((res) => res.json());
 
-  if (wallet.nomor_wallet !== "") {
+  if (wallet.nomor_wallet !== "null") {
     return {
       redirect: {
         destination: "/ewallet/hero",

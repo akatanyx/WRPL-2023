@@ -25,7 +25,7 @@ export interface Merchant {
 }
 
 export interface Wallet {
-  _id: { $oid: string };
+  _id: string;
   id_user: string;
   nomor_wallet: string;
   saldo: number;
@@ -74,3 +74,37 @@ export interface Order {
   total_harga: number;
   alamat: string;
 }
+
+export type CardKategoriProps = {
+  id: string;
+  namaKategori: string;
+  gambarKategori: string;
+};
+
+export type CardBestRestoProps = {
+  id: string;
+  namaResto: string;
+  gambarResto: string;
+};
+
+export type CardRestoNearProps = {
+  item: CardRestoNear;
+};
+export interface CardRestoNear {
+  id: string;
+  namaResto: string;
+  gambarResto: string;
+  alamatResto: string;
+  jarakResto: string;
+  ratingResto: string;
+}
+
+export type CardFavoritFoodProps = {
+  id: string;
+  namaFood: string;
+  gambarFood: string;
+  resto: string;
+  hargaFood: string;
+  kategoriFood: string;
+  ratingFood: string;
+};

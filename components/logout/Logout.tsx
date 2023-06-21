@@ -9,8 +9,8 @@ function LogoutButton() {
       // Sign out the user
       await signOut({ redirect: false });
   
-      // Redirect to the login page
-      router.push("/customer/login");
+      // Redirect to the landing page
+      router.push("/customer");
     };
   
     return (

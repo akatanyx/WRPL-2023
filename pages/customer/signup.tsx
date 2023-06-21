@@ -144,15 +144,18 @@ export default function Signup() {
 }
 
 export async function getServerSideProps(context: any) {
-    const session = await getSession(context);
+  const session = await getSession(context);
 
-    if (session) {
-        return {
-            redirect: {
-                destination: "/customer",
-                permanent: false,
-            },
-        };
-    }
+  if (session) {
+    return {
+      redirect: {
+        destination: "/customer",
+        permanent: false,
+      },
+    };
+  }
 
+  return {
+    props: {},
+  };
 }

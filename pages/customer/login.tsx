@@ -21,8 +21,9 @@ export default function Login() {
       redirect: false,
     })) as SignInResponse;
 
-    if (result?.error) {
-      alert("Invalid email or password");
+    if (result.error) {
+      alert("Gagal login");
+      console.error(result.error);
     } else {
       route.push("/customer/hero");
     }

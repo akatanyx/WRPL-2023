@@ -19,41 +19,7 @@ import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
 import { GetServerSidePropsContext } from "next";
-import { CartItem, User, Wallet } from "../interface";
-
-export type CardKategoriProps = {
-  id: string;
-  namaKategori: string;
-  gambarKategori: string;
-};
-
-export type CardBestRestoProps = {
-  id: string;
-  namaResto: string;
-  gambarResto: string;
-};
-
-export type CardRestoNearProps = {
-  item: CardRestoNear;
-};
-export interface CardRestoNear {
-  id: string;
-  namaResto: string;
-  gambarResto: string;
-  alamatResto: string;
-  jarakResto: string;
-  ratingResto: string;
-}
-
-export type CardFavoritFoodProps = {
-  id: string;
-  namaFood: string;
-  gambarFood: string;
-  resto: string;
-  hargaFood: string;
-  kategoriFood: string;
-  ratingFood: string;
-};
+import { CardBestRestoProps, CardKategoriProps, CardRestoNear, CartItem, User, Wallet } from "../interface";
 
 interface HeroProps {
   user: User;
@@ -62,11 +28,10 @@ interface HeroProps {
 }
 
 export default function hero({ wallet, user, cart }: HeroProps) {
-  console.log("wallet", wallet, "user", user, "cart", cart);
-  // const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
-  // const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
-  // const totalQty = HitungQtyCart(cartItems);
-  // const totalHarga = HitungHargaCart(cartItems);
+  const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
+  const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga_menu,0);
+  const totalQty = HitungQtyCart(cart);
+  const totalHarga = HitungHargaCart(cart);
 
   return (
     <>
@@ -246,7 +211,7 @@ export default function hero({ wallet, user, cart }: HeroProps) {
       </div>
 
       {/* Item Cart */}
-      <ItemCart totalItem={2} totalPrice={100000} />
+      <ItemCart totalItem={totalQty} totalPrice={totalHarga} />
 
       {/* Navbar */}
       <div>
