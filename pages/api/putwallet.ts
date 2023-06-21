@@ -29,13 +29,13 @@ export default async function handler(req: any, res: any) {
       const results = cursor.acknowledged;
       res.status(200).json(results);
     } else if (req.method === "PUT" && req.query.type === "addphone") {
-      const { id_user, phone } = req.body;
+      const { id_user, nomor_wallet } = req.body;
 
       // Menambahkan nomor hp e-wallet
       const cursor = await collection.updateOne(
         { id_user: id_user },
         {
-          $set: { nomor_wallet: phone },
+          $set: { nomor_wallet: nomor_wallet },
         }
       );
       const results = cursor.acknowledged;

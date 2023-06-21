@@ -2,12 +2,13 @@ import Transaksi_terakhir from "@/components/Ewallet/Hero/Transaksi_terakhir";
 import Fitur_ewallet from "@/components/Ewallet/Hero/Fitur";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "@/hooks/useUser";
 import { useWallet } from "@/hooks/useWallet";
-
+import { useRouter } from "next/router";
 
 export default function Hero() {
+  const router = useRouter();
   const user = useUser();
   const wallet = useWallet();
   const [showSaldo, setShowSaldo] = useState(true);
@@ -15,6 +16,12 @@ export default function Hero() {
   const toggleSaldo = () => {
     setShowSaldo(!showSaldo);
   };
+
+  useEffect(() => {
+    if(wallet?.nomor_wallet === null) {
+      router.push("/ewallet")
+    }
+  }, [wallet])
 
   return (
     <div className="font-poppins">
@@ -26,10 +33,12 @@ export default function Hero() {
         <div className="flex-col justify-center ml-[17px]">
           {/* Nama*/}
           <div className="flex">
-          <h1 className="font-medium text-[#263238] text-[17px] w-[100px] 
-                          whitespace-nowrap overflow-hidden overflow-ellipsis">
-            Halo, {user?.nama}!
-          </h1>
+            <h1
+              className="font-medium text-[#263238] text-[17px] w-[100px] 
+                          whitespace-nowrap overflow-hidden overflow-ellipsis"
+            >
+              Halo, {user?.nama.split(" ")[1]}!
+            </h1>
 
             <img src="/e_hero_centang.svg" className=" w-[20px]" />
           </div>
@@ -65,7 +74,11 @@ export default function Hero() {
             <h1 className={`text-[25px] ${showSaldo ? "" : "hidden"}`}>
               {wallet?.saldo.toLocaleString("id-ID")}
             </h1>
-            <h1 className={`text-[25px] tracking-wide ${showSaldo ? " hidden" : ""}`}>
+            <h1
+              className={`text-[25px] tracking-wide ${
+                showSaldo ? " hidden" : ""
+              }`}
+            >
               &bull;&bull;&bull;&bull;&bull;&bull;
             </h1>
           </div>

@@ -23,20 +23,11 @@ export default function WalletLandingPage() {
       }),
     });
 
-    const responseUpdateRoles = await fetch("/api/updateroles", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: user?._id,
-        roles: "wallet",
-      }),
-    });
-
-    if (response.ok && responseUpdateRoles.ok) {
+    if (response.ok) {
+      alert("Nomor telepon berhasil ditambahkan")
       router.push("/ewallet/hero");
     } else {
+      alert("Nomor telepon gagal ditambahkan")
       console.error(response);
     }
   };
@@ -56,7 +47,7 @@ export default function WalletLandingPage() {
         </h1>
 
         <h1 className="text-[15px] w-[290px] mt-6 mx-auto">
-          npm Daftar ke LetsCash sekarang dengan memasukkan nomor telepon anda
+          Daftar ke LetsCash sekarang dengan memasukkan nomor telepon anda
         </h1>
 
         {/* Submit Nomor Telepon */}
