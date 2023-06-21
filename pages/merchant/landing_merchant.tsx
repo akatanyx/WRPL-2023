@@ -1,8 +1,6 @@
-import { getSession, signOut, useSession } from "next-auth/react";
 import Header from "@/components/Merchant/Header_w_notif";
 import Card_Pesanan from "@/components/Merchant/Hero/Card_pesanan";
 import M_Navbar from "@/components/Merchant/M_Navbar";
-import { connectToDatabase } from "../mongodb";
 
 export default function LandingMerchantPage() {
   return (
@@ -37,37 +35,4 @@ export default function LandingMerchantPage() {
       <M_Navbar />
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-  if (!session?.user) {
-    // User is not authenticated, redirect to login page or show an error
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  } else {
-    // User is authenticated, check their roles in the database
-    const db = await connectToDatabase();
-    const collection = db.collection("users");
-    const user = await collection.findOne({ email: session.user.email });
-
-    if (!user || !user.roles.includes("merchant")) {
-      // User doesn't have the merchant role, redirect to signup merchant page
-      return {
-        redirect: {
-          destination: "/signup_merchant",
-          permanent: false,
-        },
-      };
-    }
-
-    // User has the merchant role, continue rendering the landing merchant page
-    return {
-      props: {},
-    };
-  }
 }

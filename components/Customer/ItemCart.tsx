@@ -22,9 +22,9 @@ export default function ItemCart ({totalItem, totalPrice}: ItemCartProps) {
             {/* Jumlah Item */}
             <h1 className="font-poppins font-semibold text-[17px] text-white">{jumlahItem} item</h1>
             
-            <div className="flex w-[101px] justify-between items-center">
+            <div className="flex items-center">
                 {/* Jumlah Harga */}
-                <h1 className="font-poppins font-semibold text-[17px] text-white">{harga?.toLocaleString("de-DE")}</h1>
+                <h1 className="font-poppins font-semibold mr-1   text-[17px] text-white">{harga?.toLocaleString("de-DE")}</h1>
                 <img src="/icon_cart.svg" 
                 className="" 
                 />

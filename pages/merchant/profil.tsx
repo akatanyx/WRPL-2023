@@ -1,22 +1,23 @@
 import Header_w_notif from "@/components/Merchant/Header_w_notif";
 import M_Navbar from "@/components/Merchant/M_Navbar";
-import { getSession } from "next-auth/react";
 
 import Link from "next/link";
-import { connectToDatabase } from "../mongodb";
 import LogoutButton from "@/components/logout/Logout";
-import { Merchant, User } from "../interface";
+import { useMerchant } from "@/hooks/useMerchant";
 
-export default function profil_sel({ merchant }: any) {
-  const namaToko = merchant.nama_resto;
-  const alamatToko = merchant.alamat_resto;
-  const dekripsiToko = merchant.deskripsi_resto;
-  const imgURLToko = merchant.imgURL_resto;
-  const nomorKTP = merchant.nomor_ktp_merchant || "Belum diisi";
-  const email = merchant.email_merchant || "Belum diisi";
-  const jam_buka = merchant.jam_buka || "Belum diisi";
-  const jam_tutup = merchant.jam_tutup || "Belum diisi";
+export default function Profil_sel() {
+  const merchant = useMerchant();
 
+  const {
+    nama_resto: namaToko = "",
+    alamat_resto: alamatToko = "",
+    deskripsi_resto: deskripsiToko = "",
+    imgURL_resto: imgURLToko = "",
+    nomor_ktp_merchant: nomorKTP = "Belum diisi",
+    email_merchant: email = "Belum diisi",
+    jam_buka = "Belum diisi",
+    jam_tutup = "Belum diisi",
+  } = merchant || {};
   return (
     <div className="font-poppins bg-[#E89005] max-h-screen">
       <Header_w_notif>{namaToko}</Header_w_notif>
@@ -54,7 +55,7 @@ export default function profil_sel({ merchant }: any) {
             <div>
               <div>Deskripsi toko:</div>
               <p className="font-medium text-[14px] text-[#808080]">
-                {dekripsiToko}
+                {deskripsiToko}
               </p>
             </div>
             {/* Nomor KTP */}
@@ -116,43 +117,4 @@ export default function profil_sel({ merchant }: any) {
       <M_Navbar />
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-  if (!session?.user) {
-    // User is not authenticated, redirect to login page or show an error
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  } else {
-    // User is authenticated, check their roles in the database
-    const user: User = await fetch(
-      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
-    ).then((res) => res.json());
-
-    if (!user || !user.roles.includes("merchant")) {
-      // User doesn't have the merchant role, redirect to signup merchant page
-      return {
-        redirect: {
-          destination: "/signup_merchant",
-          permanent: false,
-        },
-      };
-    }
-
-    // User has the merchant role get the merchant data
-    const merchant: Merchant = await fetch(
-      `http://localhost:3000/api/get?type=merchant&email=${session?.user.email}`
-    ).then((res) => res.json());
-    return {
-      props: {
-        merchant,
-        user,
-      },
-    };
-  }
 }

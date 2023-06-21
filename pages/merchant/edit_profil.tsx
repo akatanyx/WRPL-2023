@@ -268,7 +268,7 @@ export async function getServerSideProps(context: any) {
       // User doesn't have the merchant role, redirect to signup merchant page
       return {
         redirect: {
-          destination: "/signup_merchant",
+          destination: "/merchant/signup_merchant",
           permanent: false,
         },
       };

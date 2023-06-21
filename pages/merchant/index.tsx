@@ -28,7 +28,7 @@ export async function getServerSideProps(context: any) {
       if (!user || !user.roles.includes("merchant")) {
         return {
           redirect: {
-            destination: "/signup_merchant",
+            destination: "/merchant/signup_merchant",
             permanent: false,
           },
         };

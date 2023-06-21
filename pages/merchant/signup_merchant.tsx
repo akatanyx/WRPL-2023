@@ -1,10 +1,13 @@
 import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { connectToDatabase } from "../mongodb";
-import { getSession } from "next-auth/react";
+import { useUser } from "@/hooks/useUser";
 
-export default function Signup_merchant({user}: {user: any}) {
+export default function Signup_merchant() {
+  
+  const user = useUser();
+  console.log(user)
+
   const [namaResto, setNamaResto] = useState("");
   const [alamatResto, setAlamatResto] = useState("");
   const [deskripsiResto, setDeskripsiResto] = useState("");
@@ -12,20 +15,42 @@ export default function Signup_merchant({user}: {user: any}) {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const response = await fetch("/api/signup?type=merchant", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id_user: user?._id,
-        nama_resto: namaResto,
-        alamat_resto: alamatResto,
-        deskripsi_resto: deskripsiResto,
-      }),
+
+    const postData = async (url: string, data: any) => {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      return response;
+    };
+
+    const putData = async (url: string, data: any) => {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      return response;
+    };
+
+    const response = await postData("/api/signup?type=merchant", {
+      id_user: user?._id,
+      nama_resto: namaResto,
+      alamat_resto: alamatResto,
+      deskripsi_resto: deskripsiResto,
     });
-    
-    if (response.ok) {
+
+    const responseUpdateRoles = await putData("/api/updateroles", {
+      id_user: user?._id,
+      roles: "merchant",
+    });
+
+    if (response.ok && responseUpdateRoles.ok) {
       router.push("/merchant/landing_merchant");
     } else {
       console.error(response.statusText);
@@ -77,6 +102,7 @@ export default function Signup_merchant({user}: {user: any}) {
 
         {/* Deskripsi Resto */}
         <div>
+          {/* Gunakan text area untuk wilayah input yang besar */}
           <textarea
             className="border border-[#9A9A9A] rounded-lg w-[290px] h-[172px] font-poppins
                         text-[19px] p-3 px-4 text-[#838080] focus:outline-none align-text-top"
@@ -96,43 +122,4 @@ export default function Signup_merchant({user}: {user: any}) {
       </form>
     </div>
   );
-}
-
-export async function getServerSideProps(context:any) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const db = await connectToDatabase();
-  const email = session?.user?.email;
-  const user = await db.collection("users").findOne({email});
-
-  try {
-    const collection = db.collection('merchants');
-    const existingMerchant = await collection.findOne({ id_user: user?._id.toString() });
-    if (existingMerchant) {
-      return {
-        redirect: {
-          destination: '/merchant/landing_merchant', // Redirect to an error page or display an error message
-          permanent: false,
-        },
-      };
-    }
-  } catch (error) {
-    console.error(error);
-  }
-
-  return {
-    props: {
-      user: JSON.parse(JSON.stringify(user)),
-    }, // Proceed with rendering the signup page
-  };
-  
 }

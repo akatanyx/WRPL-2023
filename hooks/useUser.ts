@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { ObjectId } from "mongodb";
 import { User } from "../pages/interface"
 
 export function useUser(): User | null {

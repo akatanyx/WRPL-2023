@@ -1,10 +1,13 @@
-import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Link from "next/link";
-import { User } from "../interface";
+import { useUser } from "@/hooks/useUser";
 
-export default function Signup_Driver({ user }: any) {
+export default function Signup_Driver() {
+
+  const user = useUser();
+  console.log(user)
+
   const [nomorSTNK, setNomorSTNK] = useState("");
   const [nomorSIM, setNomorSIM] = useState("");
   const [nomorPlat, setNomorPlat] = useState("");
@@ -55,8 +58,8 @@ export default function Signup_Driver({ user }: any) {
       console.error(response.statusText);
     }
   };
+
   return (
-    <form onSubmit={handleSubmit}>
       <div className="font-poppins">
         {/* Header */}
         <img
@@ -70,7 +73,7 @@ export default function Signup_Driver({ user }: any) {
           Pendaftaran Driver
         </div>
 
-        <form className="flex flex-col gap-y-2 mt-4 items-center">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-y-2 mt-4 items-center">
           {/* Nomor STNK */}
           <div>
             <div className="text-bold">Nomor STNK</div>
@@ -138,42 +141,5 @@ export default function Signup_Driver({ user }: any) {
         </button>
         </Link>
       </div>
-    </form>
   );
-}
-
-export async function getServerSideProps(context:any) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  }
-  // Get user id 
-    const user:User = await fetch(`http://localhost:3000/api/get?type=user&email=${session?.user?.email}`).then((res) => res.json());
-  // Check if user is already a driver
-  try {
-    const driver = await fetch(`http://localhost:3000/api/get?type=driver&email=${session?.user?.email}`)
-    if (driver) {
-      return {
-        redirect: {
-          destination: '/driver/landing_driver',
-          permanent: false,
-        },
-      };
-    }
-  } catch (error) {
-    console.error(error);
-  }
-
-  return {
-    props: {
-      user,
-    }, // Proceed with rendering the signup page
-  };
-  
 }
