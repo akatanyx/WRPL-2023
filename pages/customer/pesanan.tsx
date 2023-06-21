@@ -13,6 +13,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getSession } from "next-auth/react";
 import { Wallet, CartItem } from "../interface";
+import { useUser } from "@/hooks/useUser";
+import { useWallet } from "@/hooks/useWallet";
+import { useCartItem } from "@/hooks/useCartItem";
 interface PesananProps {
   cartItems: CartItem[];
   wallet: Wallet;
@@ -22,22 +25,22 @@ interface User {
   _id: string;
 }
 
-export default function Pesanan({
-  cartItems: initialCartItems,
-  wallet,
-  user,
-}: PesananProps) {
-  console.log("cartItems", initialCartItems);
+export default function Pesanan() {
+  const user = useUser();
+  const wallet = useWallet();
+  const cart = useCartItem();
+
+  console.log("cartItems", cart);
   console.log("wallet", wallet);
   console.log("user", user);
   const router = useRouter();
-  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
+  const [cartItems, setCartItems] = useState<CartItem[] | null | undefined>(cart);
 
   const handleUpdateJumlah = (cartItemId: string, newJumlah: number) => {
     // Update jumlah cart di frontend (instan)
     if (newJumlah === 0) {
       // Hapus item jika jumlahnya 0
-      const updatedItems = cartItems.filter((item) => item._id !== cartItemId);
+      const updatedItems = cartItems?.filter((item) => item._id !== cartItemId);
       setCartItems(updatedItems);
 
       // Update jumlah cart di backend (delay 1 detik)
@@ -60,7 +63,7 @@ export default function Pesanan({
         }
       }, 1000); // Delay 1 detik
     } else {
-      const updatedItems = cartItems.map((item) => {
+      const updatedItems = cartItems?.map((item) => {
         if (item._id === cartItemId) {
           return { ...item, jumlah: newJumlah };
         }
@@ -91,7 +94,7 @@ export default function Pesanan({
   const calculateTotalPrice = (): number => {
     let totalPrice = 0;
 
-    cartItems.forEach((item) => {
+    cartItems?.forEach((item) => {
       const itemPrice = Number(item.menuItems.harga_menu) * item.jumlah;
       totalPrice += itemPrice;
     });
@@ -102,7 +105,7 @@ export default function Pesanan({
   const [totalHarga, setTotalHarga] = useState(calculateTotalPrice());
   const deliPrice = 30000;
   const appPrice = 5000;
-  let saldo = wallet.saldo;
+  const saldo = wallet?.saldo || 0;
 
   const className =
     calculateTotalPrice() + deliPrice + appPrice > saldo
@@ -154,7 +157,7 @@ export default function Pesanan({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id_user: user._id,
+          id_user: user?._id,
           total: totalHarga + deliPrice + appPrice,
         }),
       });
@@ -218,7 +221,7 @@ export default function Pesanan({
           {/* Border Pembatas */}
           <div className="border-2 border-[#D9D9D9] w-[318px] mx-auto mt-[9px]"></div>
 
-          {cartItems.map((item) => (
+          {cartItems?.map((item) => (
             <Card_Pesanan
               key={item._id}
               cartItem={item}
@@ -267,7 +270,7 @@ export default function Pesanan({
             <div className="rounded-b-lg ml-[17px] shadow-lg">
               {/* Biaya Menu */}
               <div className="pt-[9px]">
-                {cartItems.map((item) => (
+                {cartItems?.map((item) => (
                   <div key={item._id}>
                     {/* Nama Menu dan Jumlah Menu */}
                     <div className="flex justify-between w-[281px]">
@@ -392,40 +395,4 @@ export default function Pesanan({
       )}
     </>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
-  if (!session?.user) {
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const userData = await fetch(
-    `http://localhost:3000/api/get?type=user&email=${session.user.email}`
-  );
-  const user:User = await userData.json();
-
-  const cartData = await fetch(
-    `http://localhost:3000/api/getcart?email=${session.user.email}`
-  );
-  const cartItems: CartItem = await cartData.json();
-
-  const walletData = await fetch(
-    `http://localhost:3000/api/get?type=wallet&email=${session.user.email}`
-  );
-  const wallet: Wallet = await walletData.json();
-
-  return {
-    props: {
-      cartItems,
-      wallet,
-      user,
-    },
-  };
 }

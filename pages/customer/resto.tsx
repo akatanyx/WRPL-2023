@@ -4,14 +4,10 @@ import Link from "next/link";
 import Dropdown_Makanan from "@/components/Customer/Resto/Dropdown_Makanan";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import ItemCart from "@/components/Customer/ItemCart";
-import { Menu, Merchant } from "../interface";
+import { Menu } from "../interface";
 import { useMerchant } from "@/hooks/useMerchant";
 
-interface RestoProps {
-  menus: Menu[];
-}
-
-export default function Resto({ menus }: RestoProps) {
+export default function Resto({ menus }: { menus: Menu[] }) {
   const merchant = useMerchant();
   if (merchant == null) return null;
   return (

@@ -1,10 +1,10 @@
-import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import InputMask from "react-input-mask";
-import { User, Wallet } from "../interface";
+import { useUser } from "@/hooks/useUser";
 
-export default function WalletLandingPage({ user }: { user: any }) {
+export default function WalletLandingPage() {
+  const user = useUser();
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const router = useRouter();
@@ -96,41 +96,4 @@ export default function WalletLandingPage({ user }: { user: any }) {
       </div>
     </form>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const user: User = await fetch(
-    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
-  ).then((res) => res.json());
-
-  // If user already have a number, redirect to hero page
-  const wallet: Wallet = await fetch(
-    `http://localhost:3000/api/get?type=wallet&email=${session?.user.email}`
-  ).then((res) => res.json());
-
-  if (wallet.nomor_wallet !== "null") {
-    return {
-      redirect: {
-        destination: "/ewallet/hero",
-        permanent: false,
-      },
-    };
-  } 
-
-  return {
-    props: {
-      user,
-    },
-  };
 }

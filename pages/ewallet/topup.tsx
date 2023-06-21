@@ -2,15 +2,10 @@ import { useState } from "react";
 import Link from "next/link";
 import router from "next/router";
 import Image from "next/image";
-import { User } from "../interface";
-import { getSession } from "next-auth/react";
+import { useUser } from "@/hooks/useUser";
 
-interface TopUpProps {
-  user: User;
-}
-
-export default function Topup({ user }: TopUpProps) {
-  console.log(user);
+export default function Topup() {
+  const user = useUser();
   const [selectedAmount, setSelectedAmount] = useState("");
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +23,7 @@ export default function Topup({ user }: TopUpProps) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id_user: user._id, saldo: saldoBaru }),
+      body: JSON.stringify({ id_user: user?._id, saldo: saldoBaru }),
     });
     if (response.ok) {
       alert("Topup berhasil")
@@ -129,27 +124,4 @@ export default function Topup({ user }: TopUpProps) {
       </Link>
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const user: User = await fetch(
-    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
-  ).then((res) => res.json());
-
-  return {
-    props: {
-      user,
-    },
-  };
 }

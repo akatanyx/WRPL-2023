@@ -3,16 +3,13 @@ import Fitur_ewallet from "@/components/Ewallet/Hero/Fitur";
 
 import Link from "next/link";
 import React, { useState } from "react";
-import { getSession } from "next-auth/react";
-import { User, Wallet } from "../interface";
+import { useUser } from "@/hooks/useUser";
+import { useWallet } from "@/hooks/useWallet";
 
-interface HeroProps {
-  user: User;
-  wallet: Wallet;
-  session: any;
-}
 
-export default function Hero({user, wallet, session}: HeroProps) {
+export default function Hero() {
+  const user = useUser();
+  const wallet = useWallet();
   const [showSaldo, setShowSaldo] = useState(true);
 
   const toggleSaldo = () => {
@@ -31,7 +28,7 @@ export default function Hero({user, wallet, session}: HeroProps) {
           <div className="flex">
           <h1 className="font-medium text-[#263238] text-[17px] w-[100px] 
                           whitespace-nowrap overflow-hidden overflow-ellipsis">
-            Halo, {user.nama}!
+            Halo, {user?.nama}!
           </h1>
 
             <img src="/e_hero_centang.svg" className=" w-[20px]" />
@@ -55,7 +52,7 @@ export default function Hero({user, wallet, session}: HeroProps) {
           <h1 className="font-semibold">Saldo</h1>
           <p>-</p>
           {/* Nomor Telepon */}
-          <h1>+62 {wallet.nomor_wallet}</h1>
+          <h1>+62 {wallet?.nomor_wallet}</h1>
         </div>
 
         {/* Border Pembatas */}
@@ -66,7 +63,7 @@ export default function Hero({user, wallet, session}: HeroProps) {
           <div className="flex items-center gap-x-[3px] ml-[16px] font-semibold text-white">
             <h1 className="text-[21px]">Rp</h1>
             <h1 className={`text-[25px] ${showSaldo ? "" : "hidden"}`}>
-              {/* {wallet.saldo.toLocaleString("id-ID")} */}
+              {wallet?.saldo.toLocaleString("id-ID")}
             </h1>
             <h1 className={`text-[25px] tracking-wide ${showSaldo ? " hidden" : ""}`}>
               &bull;&bull;&bull;&bull;&bull;&bull;
@@ -110,45 +107,4 @@ export default function Hero({user, wallet, session}: HeroProps) {
       </div>
     </div>
   );
-}
-
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-  if (!session?.user) {
-    // User is not authenticated, redirect to login page or show an error
-    return {
-      redirect: {
-        destination: "/customer/login",
-        permanent: false,
-      },
-    };
-  } else {
-    
-  const user: User = await fetch(
-    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
-  ).then((res) => res.json());
-
-  // If user have null number redirect to index to add number
-  const wallet: Wallet = await fetch(
-    `http://localhost:3000/api/get?type=wallet&email=${session?.user.email}`
-  ).then((res) => res.json());
-
-  if (wallet.nomor_wallet === "null") {
-    return {
-      redirect: {
-        destination: "/ewallet/index",
-        permanent: false,
-      },
-    };
-  } 
-
-  return {
-    props: {
-      user,
-      wallet,
-      session,
-    },
-  };
-}
 }

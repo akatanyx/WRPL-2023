@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Wallet } from "@/pages/interface";
 import { useWallet } from "@/hooks/useWallet";
 
 export default function EwalletComponent () {

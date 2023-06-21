@@ -18,6 +18,7 @@ export default function Profil_sel() {
     jam_buka = "Belum diisi",
     jam_tutup = "Belum diisi",
   } = merchant || {};
+  
   return (
     <div className="font-poppins bg-[#E89005] max-h-screen">
       <Header_w_notif>{namaToko}</Header_w_notif>
