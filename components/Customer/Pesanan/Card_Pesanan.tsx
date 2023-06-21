@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Tag_Makanan from "../Resto/Tag_Makanan";
-import { Menu } from "@/pages/merchant/index";
+import { Menu } from "@/pages/interface";
 interface CartItemProps {
   cartItem: {
     _id: string;

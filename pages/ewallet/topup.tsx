@@ -1,33 +1,40 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import router from 'next/router';
-import Image from 'next/image';
+import { useState } from "react";
+import Link from "next/link";
+import router from "next/router";
+import Image from "next/image";
+import { User } from "../interface";
+import { getSession } from "next-auth/react";
 
-export default function Topup() {
-  const [selectedAmount, setSelectedAmount] = useState('');
+interface TopUpProps {
+  user: User;
+}
+
+export default function Topup({ user }: TopUpProps) {
+  console.log(user);
+  const [selectedAmount, setSelectedAmount] = useState("");
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedAmount(event.target.value.replace(/\D/,''));
+    setSelectedAmount(event.target.value.replace(/\D/, ""));
   };
 
   const handleButtonClick = (amount: number) => {
     setSelectedAmount(amount.toString());
   };
 
-  let id_wallet = "1"; //hardcode -> id wallet user saat ini
-
   const handleConfirm = async () => {
     const saldoBaru = parseInt(selectedAmount);
-    const response = await fetch('/api/updatewallet?type=add', {
-      method: 'PUT',
+    const response = await fetch("/api/putwallet?type=addsaldo", {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ idwallet:id_wallet, saldo: saldoBaru }),
+      body: JSON.stringify({ id_user: user._id, saldo: saldoBaru }),
     });
     if (response.ok) {
-      router.push('/ewallet/hero');
+      alert("Topup berhasil")
+      router.push("/ewallet/hero");
     } else {
+      alert("Topup gagal")
       console.error(response);
     }
   };
@@ -53,66 +60,96 @@ export default function Topup() {
           placeholder="0"
         />
       </div>
-      
-        {/* Border Pembatas */}
-        <div className="border border-opacity-25 border-black w-[290px] mx-auto mt-[7px] mb-[23px]"></div>
 
-        {/* Pilihan Topup */}
-        <div className="w-[290px] grid grid-cols-2 gap-x-[10px] gap-y-[13px] mx-auto">
-            {/* 10K */}
-            <button
-            className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
-                selectedAmount === '10000' ? 'bg-blue-500 text-white' : ''
-            }`}
-            onClick={() => handleButtonClick(10000)}
-            >
-            <h1 className="font-semibold text-[21px] text-[#118EEA]">Rp10.000</h1>
-            </button>
+      {/* Border Pembatas */}
+      <div className="border border-opacity-25 border-black w-[290px] mx-auto mt-[7px] mb-[23px]"></div>
 
-            {/* 25K */}
-            <button
-            className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
-                selectedAmount === '25000' ? 'bg-blue-500 text-white' : ''
-            }`}
-            onClick={() => handleButtonClick(25000)}
-            >
-            <h1 className="font-semibold text-[21px] text-[#118EEA]">Rp25.000</h1>
-            </button>
-
-            {/* 50K */}
-            <button
-            className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
-                selectedAmount === '50000' ? 'bg-blue-500 text-white' : ''
-            }`}
-            onClick={() => handleButtonClick(50000)}
-            >
-            <h1 className="font-semibold text-[21px] text-[#118EEA]">Rp50.000</h1>
-            </button>
-
-            {/* 100K */}
-            <button
-            className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
-                selectedAmount === '100000' ? 'bg-blue-500 text-white' : ''
-            }`}
-            onClick={() => handleButtonClick(100000)}
-            >
-            <h1 className="font-semibold text-[21px] text-[#118EEA]">Rp100.000</h1>
-            </button>
-        </div>
-
-        {/* Konfirmasi */}
-        <button onClick={handleConfirm} className="w-[290px] h-[60px] mt-[98px] rounded-lg mx-auto
-                            flex justify-center items-center bg-[#118EEA]">
-            <h1 className="font-semibold text-[19px] text-white">Konfirmasi</h1>
+      {/* Pilihan Topup */}
+      <div className="w-[290px] grid grid-cols-2 gap-x-[10px] gap-y-[13px] mx-auto">
+        {/* 10K */}
+        <button
+          className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
+            selectedAmount === "10000" ? "bg-blue-500 text-white" : ""
+          }`}
+          onClick={() => handleButtonClick(10000)}
+        >
+          <h1 className="font-semibold text-[21px] text-[#118EEA]">Rp10.000</h1>
         </button>
 
-        {/* Kembali */}
-        <Link href='/ewallet/hero'>
-            <div className="w-[290px] h-[60px] mt-[14px] rounded-lg mx-auto
-                                flex justify-center items-center border-[#118EEA] border">
-                <h1 className="font-semibold text-[19px] text-[#118EEA]">kembali</h1>
-            </div>
-        </Link>
+        {/* 25K */}
+        <button
+          className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
+            selectedAmount === "25000" ? "bg-blue-500 text-white" : ""
+          }`}
+          onClick={() => handleButtonClick(25000)}
+        >
+          <h1 className="font-semibold text-[21px] text-[#118EEA]">Rp25.000</h1>
+        </button>
+
+        {/* 50K */}
+        <button
+          className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
+            selectedAmount === "50000" ? "bg-blue-500 text-white" : ""
+          }`}
+          onClick={() => handleButtonClick(50000)}
+        >
+          <h1 className="font-semibold text-[21px] text-[#118EEA]">Rp50.000</h1>
+        </button>
+
+        {/* 100K */}
+        <button
+          className={`w-[140px] h-[95px] border-[#118EEA] border rounded-lg flex justify-center items-center ${
+            selectedAmount === "100000" ? "bg-blue-500 text-white" : ""
+          }`}
+          onClick={() => handleButtonClick(100000)}
+        >
+          <h1 className="font-semibold text-[21px] text-[#118EEA]">
+            Rp100.000
+          </h1>
+        </button>
+      </div>
+
+      {/* Konfirmasi */}
+      <button
+        onClick={handleConfirm}
+        className="w-[290px] h-[60px] mt-[98px] rounded-lg mx-auto
+                            flex justify-center items-center bg-[#118EEA]"
+      >
+        <h1 className="font-semibold text-[19px] text-white">Konfirmasi</h1>
+      </button>
+
+      {/* Kembali */}
+      <Link href="/ewallet/hero">
+        <div
+          className="w-[290px] h-[60px] mt-[14px] rounded-lg mx-auto
+                                flex justify-center items-center border-[#118EEA] border"
+        >
+          <h1 className="font-semibold text-[19px] text-[#118EEA]">kembali</h1>
+        </div>
+      </Link>
     </div>
-    )
+  );
+}
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const user: User = await fetch(
+    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+  ).then((res) => res.json());
+
+  return {
+    props: {
+      user,
+    },
+  };
 }

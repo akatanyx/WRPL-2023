@@ -12,23 +12,14 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getSession } from "next-auth/react";
-import { connectToDatabase } from "../mongodb";
-import { Wallet, Menu, CartItem } from "../interface";
-interface User {
-  _id: { $oid: string };
-  nama: string;
-  email: string;
-  nomor_hp: string;
-  imgURL: string;
-  password: string;
-  address: string;
-  roles: string[];
-}
-
+import { Wallet, CartItem } from "../interface";
 interface PesananProps {
   cartItems: CartItem[];
   wallet: Wallet;
   user: User;
+}
+interface User {
+  _id: string;
 }
 
 export default function Pesanan({
@@ -37,6 +28,8 @@ export default function Pesanan({
   user,
 }: PesananProps) {
   console.log("cartItems", initialCartItems);
+  console.log("wallet", wallet);
+  console.log("user", user);
   const router = useRouter();
   const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
 
@@ -155,13 +148,13 @@ export default function Pesanan({
     if (totalHarga + deliPrice + appPrice > saldo) {
       alert("Saldo tidak cukup");
     } else {
-      const response = await fetch("/api/updatewallet?type=sub", {
+      const response = await fetch("/api/putwallet?type=subsaldo", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id_user: user._id.toString(),
+          id_user: user._id,
           total: totalHarga + deliPrice + appPrice,
         }),
       });
@@ -413,21 +406,20 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const db = await connectToDatabase();
-  const userData = await db
-    .collection("users")
-    .findOne({ email: session?.user.email });
-  const user = JSON.parse(JSON.stringify(userData));
+  const userData = await fetch(
+    `http://localhost:3000/api/get?type=user&email=${session.user.email}`
+  );
+  const user:User = await userData.json();
 
   const cartData = await fetch(
-    `http://localhost:3000/api/searchcart?id_user=${userData?._id.toString()}`
+    `http://localhost:3000/api/getcart?email=${session.user.email}`
   );
-  const cartItems = await cartData.json();
+  const cartItems: CartItem = await cartData.json();
 
   const walletData = await fetch(
-    `http://localhost:3000/api/searchwallet?email=${session.user.email}`
+    `http://localhost:3000/api/get?type=wallet&email=${session.user.email}`
   );
-  const wallet = await walletData.json();
+  const wallet: Wallet = await walletData.json();
 
   return {
     props: {

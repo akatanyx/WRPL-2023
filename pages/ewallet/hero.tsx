@@ -133,7 +133,7 @@ export async function getServerSideProps(context: any) {
       // User doesn't have the wallet role, redirect to signup wallet page
       return {
         redirect: {
-          destination: "/ewallet/landing",
+          destination: "/ewallet",
           permanent: false,
         },
       };

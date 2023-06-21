@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
-import Tag_Makanan from '../Resto/Tag_Makanan';
-import { Merchant } from '@/pages/merchant';
+import { Merchant } from '@/pages/interface';
 
 interface CardRestoNearYouProps {
   merchantItem: Merchant;

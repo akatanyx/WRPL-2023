@@ -12,16 +12,14 @@ export default function WalletLandingPage({ user }: { user: any }) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const response = await fetch("/api/signup?type=wallet", {
-      method: "POST",
+    const response = await fetch("/api/putwallet?type=addphone", {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id_user: user?._id,
         nomor_wallet: phoneNumber,
-        saldo: 0,
-        pin: "123456",
       }),
     });
 
@@ -116,11 +114,12 @@ export async function getServerSideProps(context: any) {
     `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
   ).then((res) => res.json());
 
-  // Check if user already has a wallet
+  // If user have assigned phone number to the wallet, redirect to hero page
   const wallet: Wallet = await fetch(
     `http://localhost:3000/api/get?type=wallet&email=${session?.user.email}`
   ).then((res) => res.json());
-  if (wallet.id_user) {
+
+  if (wallet.nomor_wallet !== "") {
     return {
       redirect: {
         destination: "/ewallet/hero",

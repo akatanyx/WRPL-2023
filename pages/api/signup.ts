@@ -1,6 +1,4 @@
-import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../mongodb";
-import bcrypt from "bcrypt";
 
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
@@ -15,17 +13,6 @@ export default async function handler(req: any, res: any) {
       let data = {};
 
       switch (type) {
-        case "user":
-          data = {
-            nama: req.body.nama,
-            email: req.body.email,
-            nomor_hp: req.body.nomor_hp,
-            imgURL: req.body.imgURL,
-            password: await bcrypt.hash(req.body.password, 10),
-            address: req.body.address,
-            roles: ["customer"],
-          };
-          break;
         case "driver":
           data = {
             id_user: req.body.id_user,
@@ -73,20 +60,17 @@ export default async function handler(req: any, res: any) {
           data = {
             id_user: req.body.id_user,
             nomor_wallet: req.body.nomor_wallet,
-            saldo: req.body.saldo,
-            pin: await bcrypt.hash(req.body.pin, 10),
+            saldo: 0,
+            pin: "",
           };
           break;
-        case "riwayat":
+        case "order":
           data = {
             id_user: req.body.id_user,
-            id_menu: req.body.id_menu,
-            id_driver: req.body.id_driver,
-            id_merchant: req.body.id_merchant,
-            jumlah: req.body.jumlah,
-            total_harga: req.body.total_harga,
-            status: req.body.status,
+            id_cart: req.body.id_cart,
             tanggal: req.body.tanggal,
+            status: req.body.status,
+            total_harga: req.body.total_harga,
           };
           break;
         default:
@@ -112,8 +96,6 @@ export default async function handler(req: any, res: any) {
 
 function getTypeCollectionName(type: string): string {
   switch (type) {
-    case "user":
-      return "users";
     case "driver":
       return "drivers";
     case "merchant":

@@ -62,7 +62,7 @@ interface HeroProps {
 }
 
 export default function hero({ wallet, user, cart }: HeroProps) {
-  console.log("wallet", wallet, "user", user);
+  console.log("wallet", wallet, "user", user, "cart", cart);
   // const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
   // const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
   // const totalQty = HitungQtyCart(cartItems);
@@ -87,7 +87,7 @@ export default function hero({ wallet, user, cart }: HeroProps) {
       <SearchPage />
 
       {/* Lets Cash Ewallet */}
-      {/* <Ewallet ewallet={wallet} /> */}
+      <Ewallet ewallet={wallet} />
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -271,25 +271,20 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const wallet: Wallet = await fetch(
     `http://localhost:3000/api/get?type=wallet&email=${session.user.email}`
   ).then((res) => res.json());
-  if (wallet) {
-    const user: User = await fetch(
-      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
-    ).then((res) => res.json());
-    const cartItems: CartItem = await fetch(
-      `http://localhost:3000/api/searchcart?email=${session?.user.email}`
-    ).then((res) => res.json());
-    return {
-      props: {  
-        wallet,
-        user,
-        cartItems,
-      },
-    };
-  } else {
-    return {
-      props: {
-        wallet: null,
-      },
-    };
-  }
+
+  const user: User = await fetch(
+    `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+  ).then((res) => res.json());
+
+  const cart: CartItem[] = await fetch(
+    `http://localhost:3000/api/getcart?email=${session?.user.email}`
+  ).then((res) => res.json());
+
+  return {
+    props: {
+      wallet,
+      user,
+      cart,
+    },
+  };
 }

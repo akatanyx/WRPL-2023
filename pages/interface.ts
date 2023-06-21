@@ -50,6 +50,12 @@ export interface Driver {
   jenis_motor: string;
   imgURL_driver: string;
 }
+export interface Cart {
+  _id: string;
+  id_user: string;
+  id_menu: string;
+  jumlah: number;  
+}
 
 export interface CartItem {
   _id: string;
@@ -57,4 +63,14 @@ export interface CartItem {
   id_menu: string;
   jumlah: number;
   menuItems: Menu;
+}
+
+export interface Order {
+  _id: string;
+  id_user: string;
+  id_cart: string;
+  tanggal: Date;
+  status: string;
+  total_harga: number;
+  alamat: string;
 }

@@ -5,7 +5,7 @@ import C_Header from "@/components/Customer/C_Header";
 import React from "react";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../mongodb";
-import { Merchant } from "../merchant";
+import { Merchant } from "../interface";
 interface RestoNearProps {
   merchants: Merchant[];
 }
@@ -43,27 +43,14 @@ export async function getServerSideProps(context: any) {
       },
     };
   } else {
-    // User is authenticated, check their roles in the database
-    const db = await connectToDatabase();
-    const collection = db.collection("users");
-    const user = await collection.findOne({ email: session.user.email });
+    // User is authenticated
 
-    if (!user || !user.roles.includes("merchant")) {
-      // User doesn't have the merchant role, redirect to signup merchant page
-      return {
-        redirect: {
-          destination: "/signup_merchant",
-          permanent: false,
-        },
-      };
-    }
-
-    // User has the merchant role get the merchant data
-    const merchantCollection = db.collection("merchants");
-    const merchant = await merchantCollection.find({}); // TODO: filter by location
+    const merchants = await fetch(
+      `http://localhost:3000/api/getcollection?type=merchants`
+    ).then((res) => res.json());
     return {
       props: {
-        merchants: JSON.parse(JSON.stringify(merchant)),
+        merchants,
       },
     };
   }
