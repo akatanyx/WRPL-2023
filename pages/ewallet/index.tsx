@@ -49,10 +49,10 @@ export default function WalletLandingPage() {
         Daftar ke LetsCash sekarang dengan memasukkan nomor telepon anda
       </h1>
 
-      {/* Submit Nomor Telepon */}
-      <div className="w-[90%] mt-[31px] mx-[20px] flex justify-center item-center md:mx-auto">
-        <img src="/e_landing_bendera.svg" />
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        {/* Submit Nomor Telepon */}
+        <div className="w-[90%] mt-[31px] mx-[20px] flex justify-center item-center md:mx-auto">
+          <img src="/e_landing_bendera.svg" />
           {/* Agar bisa auto muncul tanda "-" */}
           <PatternFormat
             format="+62 (###)-####-####"
@@ -62,21 +62,21 @@ export default function WalletLandingPage() {
             allowEmptyFormatting
             mask="-"
           />
-        </form>
-      </div>
+        </div>
 
-      {/* Border Pembatas */}
-      <div className="border-2 border-[#D9D9D9] w-[290px] mx-auto mt-[9px]"></div>
+        {/* Border Pembatas */}
+        <div className="border-2 border-[#D9D9D9] w-[290px] mx-auto mt-[9px]"></div>
 
-      {/* Apply */}
-      <button
-        className="w-[290px] h-[53px] rounded-lg bg-[#118EEA] 
-                                flex justify-center items-center mx-auto mt-[29px]"
-      >
-        <h1 className="text-white font-semibold text-[19px]">
-          Daftar Sekarang
-        </h1>
-      </button>
+        {/* Apply */}
+        <button
+          className="w-[290px] h-[53px] rounded-lg bg-[#118EEA] 
+        flex justify-center items-center mx-auto mt-[29px]"
+        >
+          <h1 className="text-white font-semibold text-[19px]">
+            Daftar Sekarang
+          </h1>
+        </button>
+      </form>
     </div>
   );
 }

@@ -61,7 +61,7 @@ export default function Hero() {
           <h1 className="font-semibold">Saldo</h1>
           <p>-</p>
           {/* Nomor Telepon */}
-          <h1>+62 {wallet?.nomor_wallet}</h1>
+          <h1>{wallet?.nomor_wallet.split(" ")[1]}</h1>
         </div>
 
         {/* Border Pembatas */}
