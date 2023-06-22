@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import bcrypt from "bcrypt";
 
 interface PINEntryFormProps {
   onSubmit: (pin: string) => void;

@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import router from "next/router";
 import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
-import bcrypt from "bcrypt";
 import PINEntryForm from "@/components/PINEntryForm";
 import Head from "next/head";
-import { useWallet } from "@/hooks/useWallet";
 
 export default function Topup() {
   const user = useUser();
-  const wallet = useWallet();
   const [selectedAmount, setSelectedAmount] = useState("");
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,21 +38,25 @@ export default function Topup() {
 
   const [isPINValid, setIsPINValid] = useState(false);
 
-  const ValidatePIN = async (pin: any) => {
+  const ValidatePIN = async (pin: string) => {
     try {
-      if (wallet) {
-        if (await bcrypt.compare(pin, wallet.pin)) {
-          setIsPINValid(true);
-        } else {
-          setIsPINValid(false);
-          // Display an error message or perform any other desired action.
-          console.log("Invalid PIN");
-        }
+      const result = await fetch("/api/validatepin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id_user: user?._id, pin: pin }),
+      });
+
+      if (result.ok) {
+        setIsPINValid(true);
+      } else if (result.status === 401){
+        setIsPINValid(false);
+        console.log("Invalid PIN");
       } else {
-        alert("wallet belum dibuat");
+        console.error("Error validating PIN:", result);
       }
     } catch (error) {
-      // Handle any errors that occurred during the API call
       console.error("Error validating PIN:", error);
     }
   };
