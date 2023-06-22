@@ -2,7 +2,6 @@ import Head from "next/head";
 import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
 import Popup_diskon from "@/components/Customer/Pesanan/Popup_Diskon_pesanan";
-import Popup_Pin from "@/components/Customer/Pesanan/Popup_Pin";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -11,7 +10,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getSession } from "next-auth/react";
 import { Wallet, CartItem } from "../interface";
 import { useUser } from "@/hooks/useUser";
 import { useWallet } from "@/hooks/useWallet";
@@ -30,9 +28,6 @@ export default function Pesanan() {
   const wallet = useWallet();
   const cart = useCartItem();
 
-  console.log("cartItems", cart);
-  console.log("wallet", wallet);
-  console.log("user", user);
   const router = useRouter();
   const [cartItems, setCartItems] = useState<CartItem[] | null | undefined>(cart);
 

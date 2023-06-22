@@ -17,7 +17,7 @@ import cardKategoriItems from "./datas/kategori";
 import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
-import { CardBestRestoProps, CardKategoriProps, CardRestoNear, CartItem, User, Wallet } from "../interface";
+import { CardBestRestoProps, CardKategoriProps, CardRestoNear } from "../interface";
 import { useUser } from "@/hooks/useUser";
 import { useWallet } from "@/hooks/useWallet";
 

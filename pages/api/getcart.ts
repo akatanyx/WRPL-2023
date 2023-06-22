@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   const db = await connectToDatabase();
   const email = req.query.email;
-  const user = await db.collection("users").findOne({ email });
+  const user = await db.collection("users").findOne({ email: email });
 
   if (user) {
     try {

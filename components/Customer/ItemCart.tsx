@@ -1,7 +1,6 @@
 import { useCartItem } from "@/hooks/useCartItem";
 import { CartItem } from "@/pages/interface";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function ItemCart() {
   const cart = useCartItem();
