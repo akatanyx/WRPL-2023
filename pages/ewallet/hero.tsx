@@ -18,14 +18,9 @@ export default function Hero() {
   };
 
   useEffect(() => {
-    if(wallet?.nomor_wallet === null) {
+    if(wallet?.nomor_wallet === "") {
+      alert("Kamu belum punya nomor HP yang terdaftar")
       router.push("/ewallet")
-    }
-  }, [wallet])
-
-  useEffect(() => {
-    if(wallet?.pin === null) {
-      router.push("/ewallet/pin")
     }
   }, [wallet])
 

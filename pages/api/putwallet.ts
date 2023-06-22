@@ -48,8 +48,8 @@ export default async function handler(req: any, res: any) {
       const cursor = await collection.updateOne(
         { id_user: id_user },
         {
-          // $set: { pin: await bcrypt.hash(pin,10) },
-          $set: { pin: pin },
+          $set: { pin: await bcrypt.hash(pin,10) },
+          // $set: { pin: pin },
         }
       );
       const results = cursor.acknowledged;

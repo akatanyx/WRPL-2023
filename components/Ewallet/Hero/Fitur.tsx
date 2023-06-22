@@ -38,10 +38,10 @@ export default function Fitur_ewallet() {
         </div>
       </Link>
 
-      <Link href="/ewallet/security">
+      <Link href="/ewallet/pin">
         <div className="flex-col text-center">
           <img src="/e_hero_fitur_security.svg" alt="" />
-          <h1 className="mt-[6px]">Security</h1>
+          <h1 className="mt-[6px]">Pin</h1>
         </div>
       </Link>
 

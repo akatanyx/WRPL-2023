@@ -29,7 +29,6 @@ export interface Wallet {
   id_user: string;
   nomor_wallet: string;
   saldo: number;
-  pin: string;
 }
 
 export interface Menu {

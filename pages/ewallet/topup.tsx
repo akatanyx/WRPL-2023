@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import PINEntryForm from "@/components/PINEntryForm";
 import Head from "next/head";
-import bcrypt from "bcrypt";
 
 export default function Topup() {
   const user = useUser();

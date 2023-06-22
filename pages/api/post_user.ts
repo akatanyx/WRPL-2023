@@ -30,12 +30,13 @@ export default async function handler(req: any, res: any) {
       res.status(400).json({ message: "Error, User has not been added" });
     } else {
       // Insert wallet to database
-      resultInsertWallet = await db.collection("wallets").insertOne({
-        id_user: user._id.toString(),
-        nomor_wallet: "null",
+      const data = {
+        id_user: user._id,
         saldo: 0,
-        pin: "null",
-      });
+        nomor_wallet: "",
+        pin: null,
+      }
+      resultInsertWallet = await db.collection("wallets").insertOne(data);
     }
 
     res.status(201).json({

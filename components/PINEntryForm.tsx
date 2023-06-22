@@ -34,7 +34,7 @@ const PINEntryForm = ({ onSubmit }: PINEntryFormProps) => {
   return (
     <div className="font-poppins">
       <h1 className="font-semibold text-[25px] text-center mt-[49px]">
-        Buat PIN Baru
+        Masukkan PIN
       </h1>
 
       <div className="flex w-[263px] justify-between mx-auto mt-[31px]">
@@ -50,11 +50,6 @@ const PINEntryForm = ({ onSubmit }: PINEntryFormProps) => {
           </svg>
         ))}
       </div>
-
-      <h1 className="hidden text-15 text-[#E8505B] text-center mt-[17px]">
-        PIN salah, silakan coba lagi.
-      </h1>
-
       <div
         className="text-[#118EEA] text-[39px] w-[227px] mx-auto mt-[58px] 
                                 grid grid-cols-3 grid-rows-3 gap-y-[21px] gap-x-[76px]"

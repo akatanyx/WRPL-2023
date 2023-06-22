@@ -43,7 +43,7 @@ export default function Pin() {
   return (
     <div className="font-poppins">
       <h1 className="font-semibold text-[25px] text-center mt-[49px]">
-        Buat PIN Baru
+        Buat/Ubah PIN
       </h1>
 
       <div className="flex w-[263px] justify-between mx-auto mt-[31px]">
