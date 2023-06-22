@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import PINEntryForm from "@/components/PINEntryForm";
 import Head from "next/head";
+import bcrypt from "bcrypt";
 
 export default function Topup() {
   const user = useUser();
@@ -52,9 +53,10 @@ export default function Topup() {
         setIsPINValid(true);
       } else if (result.status === 401){
         setIsPINValid(false);
-        console.log("Invalid PIN");
+        alert("Invalid PIN");
       } else {
-        console.error("Error validating PIN:", result);
+        alert("Error validating PIN");
+        console.error(result);
       }
     } catch (error) {
       console.error("Error validating PIN:", error);

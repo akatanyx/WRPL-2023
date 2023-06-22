@@ -7,8 +7,7 @@ export default async function handler(req: any, res: any) {
     const db = await connectToDatabase();
     const collection = db.collection("wallets");
     const cursor = await collection.findOne({ id_user: id_user });
-    // const results = await bcrypt.compare(pin, cursor?.pin);
-    const results: boolean = pin === cursor?.pin;
+    const results = await bcrypt.compare(pin, cursor?.pin);
     if (results) {
       res.status(200).json({ message: "Pin is correct" });
     } else {
