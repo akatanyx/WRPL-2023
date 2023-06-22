@@ -1,4 +1,5 @@
 import { connectToDatabase } from "../mongodb";
+import bcrypt from "bcrypt";
 
 export default async function handler(req: any, res: any) {
   try {
@@ -40,13 +41,14 @@ export default async function handler(req: any, res: any) {
       );
       const results = cursor.acknowledged;
       res.status(200).json(results);
-    } else if (req.method === "PUT" && req.query.type === "editpin") {
+    } else if (req.method === "PUT" && req.query.type === "addpin") {
       const { id_user, pin } = req.body;
 
       // Menambahkan pin e-wallet
       const cursor = await collection.updateOne(
         { id_user: id_user },
         {
+          // $set: { pin: await bcrypt.hash(pin,10) },
           $set: { pin: pin },
         }
       );

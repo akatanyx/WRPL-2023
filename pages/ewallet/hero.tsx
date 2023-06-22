@@ -23,6 +23,12 @@ export default function Hero() {
     }
   }, [wallet])
 
+  useEffect(() => {
+    if(wallet?.pin === null) {
+      router.push("/ewallet/pin")
+    }
+  }, [wallet])
+
   return (
     <div className="font-poppins">
       {/* Akun */}
