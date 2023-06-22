@@ -1,5 +1,5 @@
 import Header_w_notif from "@/components/Merchant/Header_w_notif"
-import List_Menu from "@/components/Merchant/Rincian_Pes/list_Menu"
+import List_Menu from "@/components/Merchant/Rincian_Pes/List_Menu"
 import Navbar_driver from "@/components/Driver/Navbar_driver";
 
 import Link from 'next/link'

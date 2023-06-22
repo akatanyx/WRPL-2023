@@ -1,21 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Tag_Makanan from "../Resto/Tag_Makanan";
-
-export interface CartItemProps {
+import { Menu } from "@/pages/interface";
+interface CartItemProps {
   cartItem: {
     _id: string;
-    menuId: string;
+    id_user: string;
+    id_menu: string;
     jumlah: number;
-    menuItems: {
-      nama: string;
-      harga: number;
-      desk: string;
-      tag: string;
-      kategori: string;
-      rating: string;
-      imgURL: string;
-    };
+    menuItems: Menu;
   };
   onUpdateJumlah: (itemId: string, newJumlah: number) => void;
 }
@@ -42,7 +35,7 @@ const Card_Pesanan:React.FC<CartItemProps> = ({ cartItem, onUpdateJumlah }) => {
       <div className="flex shadow-lg w-[314px] rounded-lg md:w-full relative">
         {/* Foto Makanan */}
         <img
-          src={cartItem.menuItems.imgURL}
+          src={cartItem.menuItems.imgURL_menu}
           alt=""
           className="rounded-lg px-4 py-[19px] w-[130px] h-[130px]"
         />
@@ -57,7 +50,7 @@ const Card_Pesanan:React.FC<CartItemProps> = ({ cartItem, onUpdateJumlah }) => {
 
           {/* Masih belum bisa break-words */}
           <h1 className="break-words font-semibold text-[15px] font-poppins">
-            {cartItem.menuItems.nama}
+            {cartItem.menuItems.nama_menu}
           </h1>
           <p className="text-mobile text-[#838080] font-poppins break-words">
             {cartItem.menuItems.desk}
@@ -67,10 +60,10 @@ const Card_Pesanan:React.FC<CartItemProps> = ({ cartItem, onUpdateJumlah }) => {
           {/* Belum bisa apply diskon hidden*/}
           <div className="flex items-center gap-x-2">
             <h1 className="font-poppins text-[12px] font-semibold">
-              {cartItem.menuItems.harga}
+              {cartItem.menuItems.harga_menu}
             </h1>
             <p className="font-poppins font-semibold text-[10px] text-[#838080] line-through">
-              {cartItem.menuItems.harga * 1.8}
+              {cartItem.menuItems.harga_menu * 1.8}
             </p>
           </div>
 

@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Tag_Makanan_Popup from "./Tag_Makanan_Popup";
 import router from "next/router";
+import { Menu } from "@/pages/merchant/index";
 
-const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
+interface PopUpAddCartProps {
+  menu: Menu;
+  closeModal: () => void;
+  userId: string;
+}
+
+const Popup_addcart = ({ menu, userId, closeModal }: PopUpAddCartProps) => {
   const [jumlah, setJumlah] = useState(1);
 
   const handleReduceJumlah = () => {
     if (jumlah > 1) {
       setJumlah(jumlah - 1);
+    } else {
+      closeModal();
     }
   };
 
@@ -15,7 +24,7 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
     setJumlah(jumlah + 1);
   };
 
-  // Masukkan ke database cart
+  // Handle tambah menu ke cart
   const handleAddToCart = async (e: any) => {
     e.preventDefault();
     const response = await fetch("/api/signup?type=cart", {
@@ -23,7 +32,7 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ menuId, jumlah }),
+      body: JSON.stringify({ id_user: userId, id_menu: menu._id, jumlah }),
     });
     if (response.ok) {
       router.push("/customer/pesanan");
@@ -32,12 +41,8 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
     }
   };
 
-  // Masih gatau cara masukin ke database cart variabel jumlahnya
   return (
     <>
-      {/* <div onClick={closeModal} className="z-20 absolute h-[300vh] left-0 right-0
-            top-0 
-            bg-black bg-opacity-10 backdrop-blur-sm"></div> */}
       <div
         onClick={closeModal}
         className="absolute z-20 h-[350vh] w-[100vw]
@@ -55,10 +60,10 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
           className="bg-[#EC7505] rounded-t-lg w-full h-[68px] translate-y-[10px]
               text-white font-poppins font-semibold text-[24px] flex justify-center items-center"
         >
-          {nama}
+          {menu.nama_menu}
         </h1>
 
-        <img src={imgURL} alt="" className="w-screen z-20" />
+        <img src={menu.imgURL_menu} alt="" className="w-screen z-20" />
 
         <div className="bg-white w-full rounded-b-lg pt-4">
           {/* Tag Makanan */}
@@ -75,7 +80,7 @@ const Popup_addcart = ({ nama, desk, imgURL, menuId, closeModal }: any) => {
           {/* Deskripsi Makanan */}
           <div className="mt-[21px] ml-[27px] mr-[39px]">
             <p className="font-poppins text-[16px] text-black text-opacity-50">
-              {desk}
+              {menu.desk}
             </p>
           </div>
 

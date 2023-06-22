@@ -1,10 +1,14 @@
-import { signIn, SignInResponse } from "next-auth/react";
+import { getSession, signIn, SignInResponse } from "next-auth/react";
+import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const route = useRouter();
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
@@ -17,16 +21,19 @@ export default function Login() {
       redirect: false,
     })) as SignInResponse;
 
-    if (result?.error) {
-      alert("Invalid email or password");
+    if (result.error) {
+      alert("Gagal login");
+      console.error(result.error);
     } else {
-      // Redirect the user to the home page or any other page of your choice
-      window.location.href = "/customer/hero";
+      route.push("/customer/hero");
     }
   };
 
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
       {/* Navigasi Back To Index */}
       <div className="m-[27px]">
         <Link href="/customer">
@@ -43,80 +50,84 @@ export default function Login() {
 
       {/* Login */}
       <div className="flex flex-col mx-[37px] mt-6 gap-y-3 md:items-center">
-        <h1 className="font-poppins font-bold text-[24px]">Login</h1>
+        <div className="font-poppins font-bold text-[24px]">Login</div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-5 mt-1">
           {/* Email */}
-          <div >
-            <input
+          <input
             className=" border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
-            placeholder="Email" 
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+            placeholder="Email"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
           {/* Password */}
-          <div
-            
-          >
-            <input
+          <input
             className="border border-[#9A9A9A] rounded-lg w-72 h-[53px] font-poppins text-[19px] p-3 px-4 text-[#838080] focus:outline-none"
             placeholder="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
           <div className="flex items-center text-center px-1 w-72 justify-between">
             {/* Remember me */}
             <div className="flex">
               <input type="checkbox" className="mr-2 rounded-lg" />
-              <p className="font-poppins text-[12px]">Remember me</p>
+              <div className="font-poppins text-[12px]">Remember me</div>
             </div>
 
             {/* Forgot password */}
-            <div className="">
-              <Link href="/customer/forgot_password">
-                <p className="font-poppins text-[12px] font-medium text-[#EC7505]">
-                  Forget password?
-                </p>
-              </Link>
-            </div>
+            <Link href="/customer/forgot_password">
+              <div className="font-poppins text-[12px] font-medium text-[#EC7505]">
+                Forget password?
+              </div>
+            </Link>
           </div>
 
           {/* Button Login */}
-            <button
-              type="submit"
-              value="Login"
-              className="flex justify-center items-center w-[290px] h-[53px] 
+          <button
+            type="submit"
+            value="Login"
+            className="flex justify-center items-center w-[290px] h-[53px] 
               bg-[#EC7505] rounded-lg shadow-lg mt-[19px]"
-            >
-              <h1
-                className="text-white font-semibold font-poppins text-[19px]"
-              >
-                Login
-              </h1>
-            </button>
+          >
+            <div className="text-white font-semibold font-poppins text-[19px]">
+              Login
+            </div>
+          </button>
         </form>
 
         {/* tidak punya akun */}
         <div className="flex flex-row justify-center font-poppins">
-          <h2 className="text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="/customer/signup">
+          <Link href="/customer/signup">
+            <div className="text-sm">
+              Don&apos;t have an account?{" "}
               <button>
                 <h1 className="font-bold text-sm">SIGN UP</h1>
               </button>
-            </Link>
-          </h2>
+            </div>
+          </Link>
         </div>
-
-        <div className="mb-[58px]"/>
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (session?.user) {
+    // User is authenticated, redirect to hero page
+    return {
+      redirect: {
+        destination: "/customer/hero",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 }

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CardBestRestoProps } from '@/pages/customer/hero'
+import { CardBestRestoProps } from '@/pages/interface'
 
 export default function Card_Best ({namaResto, gambarResto}: CardBestRestoProps) {
     return (

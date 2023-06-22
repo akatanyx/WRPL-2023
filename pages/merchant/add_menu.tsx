@@ -9,8 +9,7 @@ import M_Navbar from "@/components/Merchant/M_Navbar";
 import Axios from "axios";
 import Image from "next/image";
 
-export default function Add_menu({ images }:any) {
-  const imgURL = "";
+export default function Add_menu() {
   const [nama, setNama] = useState("");
   const [harga, setHarga] = useState("");
   const [desk, setDesk] = useState("");
@@ -23,14 +22,10 @@ export default function Add_menu({ images }:any) {
   const HandleSubmit = async (event: any) => {
     // Membuat formdata untuk upload image
     const formData = new FormData();
-    {
-      /* Jika image true maka masukkan ke formdata
-  dan tambahkan preset upload cloudinary*/
-    }
     if (imageSelected) {
       formData.append("file", imageSelected);
       formData.append("upload_preset", "prema_upload123");
-      formData.append("folder", "Letseat");
+      formData.append("folder", "Letseat/Merchant/Menu");
     }
     Axios.post(
       `https://api.cloudinary.com/v1_1/prema-cloud/image/upload`,

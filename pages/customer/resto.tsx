@@ -4,25 +4,17 @@ import Link from "next/link";
 import Dropdown_Makanan from "@/components/Customer/Resto/Dropdown_Makanan";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import ItemCart from "@/components/Customer/ItemCart";
+import { Menu } from "../interface";
+import { useMerchant } from "@/hooks/useMerchant";
 
-interface Post {
-  _id: string;
-  nama: string;
-  desk: string;
-  harga: number;
-  imgURL: string;
-}
-
-interface PostsProps {
-  posts: Post[];
-}
-
-export default function Resto( {posts}: PostsProps ) {
+export default function Resto({ menus }: { menus: Menu[] }) {
+  const merchant = useMerchant();
+  if (merchant == null) return null;
   return (
     <>
-      {/* Tolong ubah tittle sesuai nama resto */}
+      {/* Nama resto */}
       <Head>
-        <title>Resto</title>
+        <title>{merchant.nama_resto}</title>
       </Head>
 
       {/* Back and Share Button */}
@@ -63,21 +55,25 @@ export default function Resto( {posts}: PostsProps ) {
             >
               {/* Logo Resto */}
               <img
-                src="/icon_c_resto_logo.svg"
+                src={merchant.imgURL_resto}
                 className="w-[144px] h-[144px] rounded-xl 
                     translate-y-6
                     "
               />
 
               {/* Nama Resto */}
-              <h1 className="pt-7 font-bold text-xl w-[200px] text-center
-                            whitespace-nowrap overflow-hidden overflow-ellipsis">
-                Anteiku Coffee
+              <h1
+                className="pt-7 font-bold text-xl w-[200px] text-center
+                            whitespace-nowrap overflow-hidden overflow-ellipsis"
+              >
+                {merchant.nama_resto}
               </h1>
               {/* Alamat Resto */}
-              <p className="text-[#8F8D8D] font-medium text-[12px] w-[200px] text-center
-                            whitespace-nowrap overflow-hidden overflow-ellipsis">
-                Jl. LohaLohe No.178
+              <p
+                className="text-[#8F8D8D] font-medium text-[12px] w-[200px] text-center
+                            whitespace-nowrap overflow-hidden overflow-ellipsis"
+              >
+                {merchant.alamat_resto}
               </p>
 
               {/* Rating dan Jarak */}
@@ -85,6 +81,8 @@ export default function Resto( {posts}: PostsProps ) {
                 className="mt-1  px-5 items-end -translate-x-1 w-[256px] 
                     flex justify-center gap-x-5"
               >
+                {/* Pinginnnya Tambahin deskripsi resto */}
+
                 {/* Rating */}
                 <div className="flex items-end">
                   <img
@@ -100,6 +98,11 @@ export default function Resto( {posts}: PostsProps ) {
                   <p className="font-semibold text-[13px]">300</p>
                 </div>
               </div>
+              <div className="text-[8px] flex gap-x-4">
+                <div>
+                  Open: {merchant.jam_buka} - {merchant.jam_tutup}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -109,20 +112,28 @@ export default function Resto( {posts}: PostsProps ) {
       <div className="rounded-t-xl w-full -translate-y-28 ">
         <div className="py-2 text-white">a</div>
         <div className="mb-[13px] mt-[25px] mx-[22px] m">
-          <Dropdown_Makanan posts={posts}>Promo Hari Ini</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Promo Hari Ini
+          </Dropdown_Makanan>
+        </div>
+
+        {/* <div className="my-[13px] mx-[22px]">
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Best Seller
+          </Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan posts={posts}>Best Seller</Dropdown_Makanan>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Makanan
+          </Dropdown_Makanan>
         </div>
 
         <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan posts={posts}>Makanan</Dropdown_Makanan>
-        </div>
-
-        <div className="my-[13px] mx-[22px]">
-          <Dropdown_Makanan posts={posts}>Minuman</Dropdown_Makanan>
-        </div>
+          <Dropdown_Makanan menus={menus} userId={merchant.id_user}>
+            Minuman
+          </Dropdown_Makanan>
+        </div> */}
       </div>
 
       {/* Navbar */}
@@ -131,20 +142,19 @@ export default function Resto( {posts}: PostsProps ) {
       </div>
 
       {/* Item Cart */}
-      <ItemCart totalItem={1} totalPrice={15000} />
- 
-      
+      <ItemCart />
     </>
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=menus");
-  const posts: Post[] = await res.json();
+export async function getServerSideProps(context: any) {
+  // const menusData = await fetch(`http://localhost:3000/api/getmenu_resto?id_resto=${id_resto}`); //seharusnya menu hanya untuk resto tertentu saja, belum tahu cara ambil id resto dari page sebelumnya
+  const menusData = await fetch("http://localhost:3000/api/getcollection?type=menus") // fetch menu milik semua resto
+  const menus = await menusData.json();
 
   return {
     props: {
-      posts,
+      menus,
     },
   };
 }

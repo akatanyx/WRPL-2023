@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { CardFavoritFoodProps } from "@/pages/customer/hero";
+import { CardFavoritFoodProps } from "@/pages/interface";
 
 export default function Card_Favorit({namaFood, gambarFood, resto, hargaFood, kategoriFood, ratingFood}: CardFavoritFoodProps) {
   return (

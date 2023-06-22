@@ -17,89 +17,13 @@ import cardKategoriItems from "./datas/kategori";
 import cardBestRestosItems from "./datas/bestrestos";
 import cardRestoNearItems from "./datas/restonear";
 import cardFavoritItems from "./datas/makananfavorit";
-import cartItem from "./pesanan"
-interface MenuItem {
-  _id: string;
-  nama: string;
-  desk: string;
-  harga: number;
-  imgURL: string;
-}
+import { CardBestRestoProps, CardKategoriProps, CardRestoNear } from "../interface";
+import { useUser } from "@/hooks/useUser";
+import { useWallet } from "@/hooks/useWallet";
 
-interface WalletItem {
-  id_wallet: string;
-  saldo: number;
-  no_telp: string;
-  nama: string;
-}
-
-interface CartItem {
-  _id: string;
-  menuId: string;
-  jumlah: number;
-  menuItems: {
-    nama: string;
-    harga: number;
-    desk: string;
-    tag: string;
-    kategori: string;
-    rating: string;
-    imgURL: string;
-  };
-}
-
-export type CardKategoriProps = {
-  id: string;
-  namaKategori: string;
-  gambarKategori: string;
-};
-
-export type CardBestRestoProps = {
-  id: string;
-  namaResto: string;
-  gambarResto: string;
-};
-
-export type CardRestoNearProps = {
-  id: string;
-  namaResto: string;
-  gambarResto: string;
-  alamatResto: string;
-  jarakResto: string;
-  ratingResto: string;
-};
-
-export type CardFavoritFoodProps = {
-  id: string;
-  namaFood: string;
-  gambarFood: string;
-  resto: string;
-  hargaFood: string;
-  kategoriFood: string;
-  ratingFood: string;
-};
-
-type User = {
-  id: string;
-  nama: string;
-  email: string;
-  phone: number | null;
-  alamat: string;
-  imgURL: string;
-};
-
-export default function hero({ users, wallets, cartItems}: any) {
-  //Hardcoded, biar cepet
-  const wallet = wallets.filter((wallet: WalletItem) => wallet.id_wallet === "1");
-  const saldo: number = wallet[0].saldo;
-
-  const user:User[] = users.filter((user: User) => user.nama === "Billy Fahd Qodama");
-  const imgURL:string = user[0].imgURL;
-
-  const HitungQtyCart = (cart:CartItem[]) => cart.reduce((qty, item) => qty + item.jumlah, 0);
-  const HitungHargaCart = (cart:CartItem[]) => cart.reduce((total, item) => total + item.jumlah * item.menuItems.harga, 35000);
-  const totalQty = HitungQtyCart(cartItems);
-  const totalHarga = HitungHargaCart(cartItems);
+export default function Hero() {
+  const user = useUser();
+  const wallet = useWallet();
 
   return (
     <>
@@ -108,7 +32,7 @@ export default function hero({ users, wallets, cartItems}: any) {
       </Head>
 
       {/* Header */}
-      <Landing_Header imgURL={imgURL}/>
+      <Landing_Header />
 
       {/* Alamat Pembeli */}
       <Alamat />
@@ -120,7 +44,7 @@ export default function hero({ users, wallets, cartItems}: any) {
       <SearchPage />
 
       {/* Lets Cash Ewallet */}
-      <Ewallet saldo={saldo} />
+      <Ewallet />
 
       {/* Promo */}
       <div className="rounded-lg px-[15px] mt-6 md:w-2/4 md:mx-auto lg:w-1/3 lg:mx-auto">
@@ -186,19 +110,23 @@ export default function hero({ users, wallets, cartItems}: any) {
           </div>
 
           <div className=" flex flex-wrap gap-y-[18px]">
-            {cardFavoritItems.map((item, index:number) => index < 2 && (
-              <div key={item.id}>
-                <Card_Favorit
-                  id={item.id}
-                  namaFood={item.namaFood}
-                  gambarFood={item.gambarFood}
-                  resto={item.resto}
-                  hargaFood={item.hargaFood}
-                  kategoriFood={item.kategoriFood}
-                  ratingFood={item.ratingFood}
-                />
-              </div>
-))}
+            {cardFavoritItems.map(
+              // Batas 2 item
+              (item, index: number) =>
+                index < 2 && (
+                  <div key={item.id}>
+                    <Card_Favorit
+                      id={item.id}
+                      namaFood={item.namaFood}
+                      gambarFood={item.gambarFood}
+                      resto={item.resto}
+                      hargaFood={item.hargaFood}
+                      kategoriFood={item.kategoriFood}
+                      ratingFood={item.ratingFood}
+                    />
+                  </div>
+                )
+            )}
           </div>
         </div>
 
@@ -266,16 +194,9 @@ export default function hero({ users, wallets, cartItems}: any) {
           </div>
 
           <div className="flex flex-wrap gap-x-[18px] gap-y-[18px] justify-between">
-            {cardRestoNearItems.map((item: CardRestoNearProps) => (
+            {cardRestoNearItems.map((item: CardRestoNear) => (
               <div key={item.id}>
-                <Card_Resto_Near
-                  id={item.id}
-                  namaResto={item.namaResto}
-                  gambarResto={item.gambarResto}
-                  jarakResto={item.jarakResto}
-                  ratingResto={item.ratingResto}
-                  alamatResto={item.alamatResto}
-                />
+                <Card_Resto_Near item={item} />
               </div>
             ))}
           </div>
@@ -283,7 +204,7 @@ export default function hero({ users, wallets, cartItems}: any) {
       </div>
 
       {/* Item Cart */}
-      <ItemCart totalItem={totalQty} totalPrice={totalHarga} />
+      <ItemCart />
 
       {/* Navbar */}
       <div>
@@ -291,23 +212,4 @@ export default function hero({ users, wallets, cartItems}: any) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const resUsers = await fetch("http://localhost:3000/api/posts?type=users");
-  const users: User[] = await resUsers.json();
-
-  const resWallets = await fetch("http://localhost:3000/api/posts?type=wallets");
-  const wallets: WalletItem[] = await resWallets.json();
-
-  const resCarts = await fetch("http://localhost:3000/api/searchcart");
-  const cartItems: CartItem[] = await resCarts.json();
-
-  return {
-    props: {
-      users,
-      wallets,
-      cartItems,
-    },
-  };
 }

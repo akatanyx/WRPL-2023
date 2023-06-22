@@ -2,11 +2,11 @@ import { connectToDatabase } from "../mongodb";
 
 // API untuk read data dari database
 export default async function handler(req: any, res: any) {
-  const collectionName:string = req.query.type as string;
-  let client;
+  const collectionName:string = req.query.type;
+  let db;
   try {
-    client = await connectToDatabase();
-    const collection = client.collection(collectionName);
+    db = await connectToDatabase();
+    const collection = db.collection(collectionName);
     const result = await collection.find().toArray();
     res.status(200).json(result);
   } catch (error) {

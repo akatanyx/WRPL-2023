@@ -9,7 +9,7 @@ const M_Navbar = () => {
             <div className="flex justify-between w-full transform origin-top">
                 <ul >
                     <Link
-                        href="/merchant/merchant_dashboard"
+                        href="/merchant/landing_merchant"
                         className= {router.pathname === '/merchant/merchant_dashboard' ? 'p-2 flex flex-col items-center justify-center' : 
                             'grayscale p-2 flex flex-col items-center justify-center hover:grayscale-0'} 
                     >

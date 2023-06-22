@@ -3,43 +3,40 @@ import { useRouter } from "next/router";
 
 import Axios from "axios";
 import Image from "next/image";
-import Link from "next/link";
 import C_Navbar from "@/components/Customer/Landing/C_Navbar";
 import Header_w_notif from "@/components/Merchant/Header_w_notif";
+import { getSession } from "next-auth/react";
+import { User } from "../interface";
 
-type User = {
-  _id: string;
-  nama: string;
-  email: string;
-  phone: number;
-  imgURL: string;
-  alamat: string;
-};
+export default function EditProfilePage({ user }: { user: User }) {
+  const name = user?.nama;
+  const phone = user?.nomor_hp?.toString() || "";
+  const email = user?.email || "";
+  const imgURL = user?.imgURL || "/m_profil_pp.svg";
+  const address = user?.alamat || "";
 
-type UserProps = {
-  users: User[];
-};
-
-export default function EditProfilePage({ users }: UserProps) {
-  const user: User[] = users.filter(
-    (user: User) => user.nama === "Billy Fahd Qodama"
-  );
   const [imageSelected, setImageSelected] = useState<File | undefined>();
-  const [phone, setphone] = useState(user[0].phone?.toString() || "");
-  const [alamat, setAlamat] = useState(user[0].alamat ? user[0].alamat : "");
-  const [email, setEmail] = useState(user[0].email || "");
-  const userId: string = user[0]._id;
-  const imgURL: string = user[0].imgURL;
+  const [updatedName, setUpdatedName] = useState(name);
+  const [updatedPhone, setUpdatedPhone] = useState(phone);
+  const [updatedEmail, setUpdatedEmail] = useState(email);
+  const [updatedAddress, setUpdatedAddress] = useState(address);
 
   const router = useRouter();
 
-  const HandleUpdateProfile = async (imgURL: string) => {
+  const HandleUpdateProfile = async (updatedImgURL: string) => {
     const response = await fetch("/api/updateprofil?type=customer", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId, imgURL, phone, email, alamat }),
+      body: JSON.stringify({
+        id: user?._id,
+        imgURL: updatedImgURL,
+        nama: updatedName,
+        nomor_hp: updatedPhone,
+        email: updatedEmail,
+        alamat: updatedAddress,
+      }),
     });
     if (response.ok) {
       router.push("/customer/profil");
@@ -76,46 +73,35 @@ export default function EditProfilePage({ users }: UserProps) {
 
   return (
     <>
-      <div className="font-poppins bg-[#E89005] max-h-screen">
-        <Header_w_notif>Ahmad Santoso</Header_w_notif>
-        <form onSubmit={HandleSubmit} method="POST" action="/">
+      <form onSubmit={HandleSubmit}>
+        <div className="font-poppins bg-[#E89005] max-h-screen">
+          <Header_w_notif>{user?.nama}</Header_w_notif>
           <div className="mt-[254px] bg-white">
             {/* Content */}
             <div
               className="w-[294px] h-[635px] -translate-y-[210px] bg-white mx-auto 
-                                rounded-[23px] shadow-lg relative"
+                                rounded-[23px] pt-[17px] shadow-lg relative"
             >
               {/* Logout Button */}
               <button className="absolute right-0 translate-x-6 -translate-y-6">
                 <img src="/m_profil_logout.svg" alt="" />
               </button>
 
-              <div className="md:flex md:justify-center items-center h-130px pt-[17px]">
+              <div className="flex-column h-[130px]">
                 {/* Menampilkan preview gambar sebelum di upload */}
                 <label htmlFor="file-input">
-                  {imageSelected ? (
-                    <>
-                      <Image
-                        src={URL.createObjectURL(imageSelected)}
-                        alt="Profile Pic"
-                        width={130}
-                        height={130}
-                        className="mx-auto h-[130px] rounded-full border border-gray-100 shadow-sm"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      {/* Gambar berlaku sebagai tombol input karena 'htmlFor' mmerujuk ke id input */}
-                      <Image
-                        src={imgURL}
-                        priority
-                        alt="Profile Pic"
-                        width={130}
-                        height={130}
-                        className="mx-auto h-[130px] rounded-full border border-gray-100 shadow-sm"
-                      />
-                    </>
-                  )}
+                  <Image
+                    src={
+                      imageSelected
+                        ? URL.createObjectURL(imageSelected)
+                        : imgURL
+                    }
+                    priority
+                    alt="Profile Pic"
+                    width={130}
+                    height={130}
+                    className="mx-auto h-[130px] rounded-full border object-none border-gray-100 shadow-sm"
+                  />
                 </label>
                 {/* Mengatur input file tombol asli hidden */}
                 <input
@@ -134,7 +120,14 @@ export default function EditProfilePage({ users }: UserProps) {
               {/* Nama*/}
               <div className="flex flex-col justify-center items-center mt-[17px]">
                 {/* Nama Customer */}
-                <h1 className="font-semibold text-[21px]">{user[0].nama}</h1>
+                <input
+                  className="font-semibold text-center text-[21px]"
+                  placeholder={name}
+                  type="text"
+                  id="name"
+                  value={updatedName}
+                  onChange={(e) => setUpdatedName(e.target.value)}
+                />
               </div>
 
               {/* Border Pembatas */}
@@ -146,15 +139,11 @@ export default function EditProfilePage({ users }: UserProps) {
                   <img src="/m_profil_telepon.svg" alt="" />
                   <input
                     className="border border-[#9A9A9A] rounded-lg w-64  h-8 px-2 text-[14px] text-[#838080] focus:outline-none"
-                    placeholder={
-                      user[0].phone == null
-                        ? ""
-                        : user[0].phone.toString()
-                    }
-                    type="telepon"
+                    placeholder={phone}
+                    type="number"
                     id="telepon"
-                    value={phone}
-                    onChange={(e) => setphone(e.target.value)}
+                    value={updatedPhone}
+                    onChange={(e) => setUpdatedPhone(e.target.value)}
                   />
                 </div>
 
@@ -163,11 +152,11 @@ export default function EditProfilePage({ users }: UserProps) {
                   <img src="/m_profil_email.svg" alt="" />
                   <input
                     className="border border-[#9A9A9A] rounded-lg w-64  h-8 px-2 text-[14px] text-[#838080] focus:outline-none"
-                    placeholder={user[0].email == null ? "" : email}
+                    placeholder={email}
                     type="email"
                     id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={updatedEmail}
+                    onChange={(e) => setUpdatedEmail(e.target.value)}
                   />
                 </div>
 
@@ -176,13 +165,11 @@ export default function EditProfilePage({ users }: UserProps) {
                   <img src="/b_profil_alamat.svg" alt="" />
                   <input
                     className="border border-[#9A9A9A] rounded-lg w-64  h-8 px-2 text-[14px] text-[#838080] focus:outline-none"
-                    placeholder={
-                      user[0].alamat == null ? "" : user[0].alamat
-                    }
-                    type="alamat"
+                    placeholder={address}
+                    type="text"
                     id="alamat"
-                    value={alamat ? alamat : ""}
-                    onChange={(e) => setAlamat(e.target.value)}
+                    value={updatedAddress}
+                    onChange={(e) => setUpdatedAddress(e.target.value)}
                   />
                 </div>
               </div>
@@ -193,26 +180,38 @@ export default function EditProfilePage({ users }: UserProps) {
                             flex justify-center items-center mt-[25px]
                             "
               >
-                <h1 className="text-white text-lg font-semibold">Selesai</h1>
+                <h1 className="text-white text-lg font-semibold">Update</h1>
               </button>
             </div>
           </div>
-        </form>
 
-        {/* Navbar */}
-        <C_Navbar />
-      </div>
+          {/* Navbar */}
+          <C_Navbar />
+        </div>
+      </form>
     </>
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=users");
-  const users: User[] = await res.json();
-
-  return {
-    props: {
-      users,
-    },
-  };
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  if (!session?.user) {
+    // User is not authenticated, redirect to login page or show an error
+    return {
+      redirect: {
+        destination: "/customer/login",
+        permanent: false,
+      },
+    };
+  } else {
+    // User is authenticated, check their roles in the database
+    const user:User = await fetch(
+      `http://localhost:3000/api/get?type=user&email=${session?.user.email}`
+    ).then((res) => res.json());
+    return {
+      props: {
+        user,
+      },
+    };
+  }
 }

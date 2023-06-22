@@ -1,7 +1,9 @@
+import { getSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
+import router from "next/router";
 
-export default function c_landing () {
+export default function C_landing () {
     return (
         <>
             <Head>

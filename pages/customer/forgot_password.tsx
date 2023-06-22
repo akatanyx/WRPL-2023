@@ -4,7 +4,6 @@ import Head from 'next/head'
 export default function forgot_password () {
     return (
         <>
-
             <Head>
                 <title>Forgot Password</title>
             </Head>

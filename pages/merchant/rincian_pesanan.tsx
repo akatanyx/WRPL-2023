@@ -1,5 +1,5 @@
 import Header_w_notif from "@/components/Merchant/Header_w_notif"
-import List_Menu from "@/components/Merchant/Rincian_Pes/list_Menu"
+import List_Menu from "@/components/Merchant/Rincian_Pes/List_Menu"
 
 import Link from 'next/link'
 
@@ -10,7 +10,7 @@ export default function rincian_pesanan () {
                 Anteiku
             </Header_w_notif>
 
-            <Link href="/merchant/merchant_dashboard">
+            <Link href="/merchant/landing_merchant">
                 <div className="bg-[#EC7505] w-screen flex gap-x-3 pl-5 py-3 rounded-b-md">
                     <img src="/m_rincian_arrowback.svg" alt="" />
                     <h1 className="font-semibold text-lg text-white">
@@ -76,7 +76,7 @@ export default function rincian_pesanan () {
                             flex justify-center items-center mt-3
             ">
                 <h1 className="text-[#EC7505] text-[20px] font-semibold">
-                    Terima Pesanan
+                    Tolak Pesanan
                 </h1>
             </button>
         </div>

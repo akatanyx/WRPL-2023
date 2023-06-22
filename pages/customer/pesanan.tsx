@@ -2,7 +2,6 @@ import Head from "next/head";
 import C_Header from "@/components/Customer/C_Header";
 import Card_Pesanan from "@/components/Customer/Pesanan/Card_Pesanan";
 import Popup_diskon from "@/components/Customer/Pesanan/Popup_Diskon_pesanan";
-import Popup_Pin from "@/components/Customer/Pesanan/Popup_Pin";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -11,62 +10,87 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface CartItem {
-  _id: string;
-  menuId: string;
-  jumlah: number;
-  menuItems: {
-    nama: string;
-    harga: number;
-    desk: string;
-    tag: string;
-    kategori: string;
-    rating: string;
-    imgURL: string;
-  };
-}
+import { Wallet, CartItem } from "../interface";
+import { useUser } from "@/hooks/useUser";
+import { useWallet } from "@/hooks/useWallet";
+import { useCartItem } from "@/hooks/useCartItem";
 interface PesananProps {
   cartItems: CartItem[];
+  wallet: Wallet;
+  user: User;
+}
+interface User {
+  _id: string;
 }
 
-export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>(
-    () => initialCartItems
-  );
-  const handleUpdateJumlah = (itemId: string, newJumlah: number) => {
-    // Update di frontend (instan)
-    const updatedItems = cartItems.map((item) => {
-      if (item._id === itemId) {
-        return { ...item, jumlah: newJumlah };
-      }
-      return item;
-    });
-    setCartItems(updatedItems);
-    // Buat delay API request untuk Efisiensi
-    setTimeout(async () => {
-      try {
-        // API untuk update jumlah cart
-        await fetch(`/api/updatecart`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ itemId: itemId, jumlah: newJumlah }),
-        });
-        toast.success("Berhasil update cart di database.");
-      } catch (error) {
-        console.error("Gagal update cart di database:", error);
-        toast.error("Gagal update cart");
-      }
-    }, 1000); // Delay 1 detik
+export default function Pesanan() {
+  const user = useUser();
+  const wallet = useWallet();
+  const cart = useCartItem();
+
+  const router = useRouter();
+  const [cartItems, setCartItems] = useState<CartItem[] | null | undefined>(cart);
+
+  const handleUpdateJumlah = (cartItemId: string, newJumlah: number) => {
+    // Update jumlah cart di frontend (instan)
+    if (newJumlah === 0) {
+      // Hapus item jika jumlahnya 0
+      const updatedItems = cartItems?.filter((item) => item._id !== cartItemId);
+      setCartItems(updatedItems);
+
+      // Update jumlah cart di backend (delay 1 detik)
+      setTimeout(async () => {
+        try {
+          // API untuk update jumlah cart
+          await fetch(`/api/updatecart`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cartItemId: cartItemId, jumlah: newJumlah }),
+          });
+          toast.success("Berhasil menghapus item dari cart.");
+          // // Refresh the page
+          // router.reload();
+        } catch (error) {
+          console.error("Gagal menghapus item dari cart:", error);
+          toast.error("Gagal menghapus item dari cart");
+        }
+      }, 1000); // Delay 1 detik
+    } else {
+      const updatedItems = cartItems?.map((item) => {
+        if (item._id === cartItemId) {
+          return { ...item, jumlah: newJumlah };
+        }
+        return item;
+      });
+      setCartItems(updatedItems);
+
+      // Update jumlah cart di backend (delay 1 detik)
+      setTimeout(async () => {
+        try {
+          // API untuk update jumlah cart
+          await fetch(`/api/updatecart`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cartItemId: cartItemId, jumlah: newJumlah }),
+          });
+          toast.success("Berhasil update cart di database.");
+        } catch (error) {
+          console.error("Gagal update cart di database:", error);
+          toast.error("Gagal update cart");
+        }
+      }, 1000); // Delay 1 detik
+    }
   };
 
   const calculateTotalPrice = (): number => {
     let totalPrice = 0;
 
-    cartItems.forEach((item) => {
-      const itemPrice = Number(item.menuItems.harga) * item.jumlah;
+    cartItems?.forEach((item) => {
+      const itemPrice = Number(item.menuItems.harga_menu) * item.jumlah;
       totalPrice += itemPrice;
     });
 
@@ -76,7 +100,7 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
   const [totalHarga, setTotalHarga] = useState(calculateTotalPrice());
   const deliPrice = 30000;
   const appPrice = 5000;
-  let saldo = 1000000;
+  const saldo = wallet?.saldo || 0;
 
   const className =
     calculateTotalPrice() + deliPrice + appPrice > saldo
@@ -118,21 +142,17 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
     setIsPopupVisible(true);
   };
 
-  const router = useRouter();
   const handlePay = async () => {
     if (totalHarga + deliPrice + appPrice > saldo) {
       alert("Saldo tidak cukup");
     } else {
-      // API untuk update saldo
-      let id_wallet = "1"; //hardcode -> id wallet user saat ini
-
-      const response = await fetch("/api/updatewallet?type=sub", {
+      const response = await fetch("/api/putwallet?type=subsaldo", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idwallet: id_wallet,
+          id_user: user?._id,
           total: totalHarga + deliPrice + appPrice,
         }),
       });
@@ -196,7 +216,7 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
           {/* Border Pembatas */}
           <div className="border-2 border-[#D9D9D9] w-[318px] mx-auto mt-[9px]"></div>
 
-          {cartItems.map((item) => (
+          {cartItems?.map((item) => (
             <Card_Pesanan
               key={item._id}
               cartItem={item}
@@ -213,6 +233,7 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
             md:flex md:mx-auto
             "
           >
+            {/* Mekanisme Promo */}
             <Image
               src={
                 appliedVoucher !== ""
@@ -244,12 +265,12 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
             <div className="rounded-b-lg ml-[17px] shadow-lg">
               {/* Biaya Menu */}
               <div className="pt-[9px]">
-                {cartItems.map((item) => (
+                {cartItems?.map((item) => (
                   <div key={item._id}>
                     {/* Nama Menu dan Jumlah Menu */}
                     <div className="flex justify-between w-[281px]">
                       <h1 className="text-[#7C3D02] font-medium text-[16px]  ">
-                        {item.menuItems.nama}
+                        {item.menuItems.nama_menu}
                       </h1>
                       <p className="text-[#7C3D02] font-medium text-[16px]">
                         x {item.jumlah}
@@ -257,7 +278,7 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
                     </div>
                     {/* Harga Menu Total */}
                     <p className="text-[#E4740B] font-semibold text-[14px] -translate-y-1">
-                      {item.menuItems.harga * item.jumlah}
+                      {item.menuItems.harga_menu * item.jumlah}
                     </p>
                   </div>
                 ))}
@@ -350,32 +371,23 @@ export default function Pesanan({ cartItems: initialCartItems }: PesananProps) {
           </div>
 
           {/* Pay Button */}
-          <button
-            onClick={handlePay}
-            className=" bg-[#EC7505] w-[172px] h-[56px]
+          <Link href="/customer/pembayaran_berhasil">
+            <button
+              onClick={handlePay}
+              className=" bg-[#EC7505] w-[172px] h-[56px]
             rounded-lg mt-[34px] mx-auto
             flex justify-center items-center 
             "
-          >
-            <h1 className="font-poppins text-white font-bold text-[24px]">
-              Bayar
-            </h1>
-          </button>
+            >
+              <h1 className="font-poppins text-white font-bold text-[24px]">
+                Bayar
+              </h1>
+            </button>
+          </Link>
 
           <div className="mb-16" />
         </div>
       )}
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/searchcart");
-  const cartItems: CartItem[] = await response.json();
-
-  return {
-    props: {
-      cartItems,
-    },
-  };
 }

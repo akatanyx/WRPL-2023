@@ -1,30 +1,28 @@
 import Transaksi_terakhir from "@/components/Ewallet/Hero/Transaksi_terakhir";
-import Fitur_ewallet from "@/components/Ewallet/Hero/fitur";
+import Fitur_ewallet from "@/components/Ewallet/Hero/Fitur";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useUser } from "@/hooks/useUser";
+import { useWallet } from "@/hooks/useWallet";
+import { useRouter } from "next/router";
 
-interface Wallet {
-  id_wallet: string;
-  saldo: number;
-  no_telp: string;
-  nama: string;
-}
-
-interface WalletProps {
-  wallets: Wallet[];
-}
-
-
-export default function Hero({ wallets }: WalletProps) {
+export default function Hero() {
+  const router = useRouter();
+  const user = useUser();
+  const wallet = useWallet();
   const [showSaldo, setShowSaldo] = useState(true);
 
   const toggleSaldo = () => {
     setShowSaldo(!showSaldo);
   };
-  //User id = 1 = wallet id
-  const wallet = wallets.filter((wallet) => wallet.id_wallet === "1");
-  const saldo = wallet[0].saldo;
+
+  useEffect(() => {
+    if(wallet?.nomor_wallet === "") {
+      alert("Kamu belum punya nomor HP yang terdaftar")
+      router.push("/ewallet")
+    }
+  }, [wallet])
 
   return (
     <div className="font-poppins">
@@ -36,10 +34,12 @@ export default function Hero({ wallets }: WalletProps) {
         <div className="flex-col justify-center ml-[17px]">
           {/* Nama*/}
           <div className="flex">
-          <h1 className="font-medium text-[#263238] text-[17px] w-[100px] 
-                          whitespace-nowrap overflow-hidden overflow-ellipsis">
-            Halo, {wallet[0].nama}!
-          </h1>
+            <h1
+              className="font-medium text-[#263238] text-[17px] w-[100px] 
+                          whitespace-nowrap overflow-hidden overflow-ellipsis"
+            >
+              Halo, {user?.nama.split(" ")[1]}!
+            </h1>
 
             <img src="/e_hero_centang.svg" className=" w-[20px]" />
           </div>
@@ -62,7 +62,7 @@ export default function Hero({ wallets }: WalletProps) {
           <h1 className="font-semibold">Saldo</h1>
           <p>-</p>
           {/* Nomor Telepon */}
-          <h1>{wallet[0].no_telp}</h1>
+          <h1>{wallet?.nomor_wallet.split(" ")[1]}</h1>
         </div>
 
         {/* Border Pembatas */}
@@ -73,9 +73,13 @@ export default function Hero({ wallets }: WalletProps) {
           <div className="flex items-center gap-x-[3px] ml-[16px] font-semibold text-white">
             <h1 className="text-[21px]">Rp</h1>
             <h1 className={`text-[25px] ${showSaldo ? "" : "hidden"}`}>
-              {saldo.toLocaleString()}
+              {wallet?.saldo.toLocaleString("id-ID")}
             </h1>
-            <h1 className={`text-[25px] tracking-wide ${showSaldo ? " hidden" : ""}`}>
+            <h1
+              className={`text-[25px] tracking-wide ${
+                showSaldo ? " hidden" : ""
+              }`}
+            >
               &bull;&bull;&bull;&bull;&bull;&bull;
             </h1>
           </div>
@@ -117,15 +121,4 @@ export default function Hero({ wallets }: WalletProps) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/posts?type=wallets");
-  const wallets: Wallet[] = await res.json();
-
-  return {
-    props: {
-      wallets,
-    },
-  };
 }

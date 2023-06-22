@@ -2,16 +2,18 @@ import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../mongodb";
 
 export default async function handler(req: any, res: any) {
-  if (req.method === "PUT" && req.query.type === "customer") {
-    const { userId, nama, imgURL, phone, email, alamat } = req.body;
+  if (req.method === "PUT") {
+    const { id, roles } = req.body;
     const db = await connectToDatabase();
-    const collection = db.collection("users"); // nama databasenya users ... bukan customer
+    const collection = db.collection("users"); 
 
-    // Mengganti profil customer
-    const userID = new ObjectId(userId)
+    // Menambah role customer
+    const userID = new ObjectId(id);
     const cursor = await collection.updateOne(
       { _id: userID },
-      { $set: { imgURL: imgURL, phone: phone, email: email, 'alamat':alamat} }
+      {
+        $addToSet: { roles: { $each: [roles] } },
+      }
     );
 
     const results = await cursor;

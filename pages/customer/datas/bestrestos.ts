@@ -1,4 +1,4 @@
-import { CardBestRestoProps } from "../hero";
+import { CardBestRestoProps } from "@/pages/interface";
 
 const cardBestRestoItems:CardBestRestoProps[] = [
     {

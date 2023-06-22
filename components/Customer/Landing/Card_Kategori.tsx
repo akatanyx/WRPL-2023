@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CardKategoriProps } from '@/pages/customer/hero'
+import { CardKategoriProps } from '@/pages/interface'
 
 export default function Card_Kategori ({namaKategori, gambarKategori}: CardKategoriProps) {
     return (
