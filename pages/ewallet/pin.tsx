@@ -7,7 +7,6 @@ export default function Pin() {
   const user = useUser();
   const router = useRouter();
   const [pin, setPin] = useState(["", "", "", "", "", ""]);
-  console.log(pin);
 
   const handleButtonClick = (value: any) => {
     const newPin = [...pin];
@@ -33,10 +32,10 @@ export default function Pin() {
     });
 
     if (response.ok) {
-      alert("Pin berhasil ditambahkan");
+      alert("Pin berhasil ditambahkan/diubah");
       router.push("/ewallet/hero");
     } else {
-      alert("Pin gagal ditambahkan");
+      alert("Pin gagal ditambahkan/diubah");
       console.error(response);
     }
   };
@@ -60,11 +59,6 @@ export default function Pin() {
           </svg>
         ))}
       </div>
-
-      <h1 className="hidden text-15 text-[#E8505B] text-center mt-[17px]">
-        PIN salah, silakan coba lagi.
-      </h1>
-
       <div
         className="text-[#118EEA] text-[39px] w-[227px] mx-auto mt-[58px] 
                                 grid grid-cols-3 grid-rows-3 gap-y-[21px] gap-x-[76px]"
