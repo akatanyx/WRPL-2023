@@ -18,7 +18,7 @@ export default function Card_Resto_Near({ item }: CardRestoNearProps) {
             className="font-poppins font-semibold text-[14px] text-center mt-1
                         "
           >
-            id={item.id} nama={item.namaResto}
+            nama={item.namaResto}
           </h1>
 
           <div className="flex px-5 justify-evenly items-center -translate-x-1">
